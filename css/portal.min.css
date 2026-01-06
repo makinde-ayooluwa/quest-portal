@@ -1,0 +1,39 @@
+:root {
+  --quest-yellow: #fec511;
+  --quest-green: #5aac7b;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+.text-green {
+  color: var(--quest-green);
+}
+
+.text-yellow {
+  color: var(--quest-yellow);
+}
+
+.bg-grad {
+  background: linear-gradient(90deg, var(--quest-green), var(--quest-yellow));
+}
+
+.btn-grad {
+  background: linear-gradient(90deg, var(--quest-green), var(--quest-yellow));
+}
+
+.btn-grad:hover {
+  background: linear-gradient(90deg, var(--quest-yellow), var(--quest-green));
+}
+
+.bg-yellow {
+  background: var(--quest-yellow);
+}
+
+.bg-green {
+  background: var(--quest-green);
+}
+* {
+  font-family: Montserrat;
+}

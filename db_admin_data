@@ -1,0 +1,7 @@
+<?php
+include "student_includes/db.inc.php";
+$password = password_hash("victorvictor",PASSWORD_BCRYPT,['cost'=>10]);
+$sql = " INSERT INTO staffs (fullname,email,gender,phone,pwd,staff_role,staff_status,account_verification) VALUES ('Makinde Ayooluwa','makindeayooluwa604@gmail.com','Male','07047618656','$password','Admin','Active','Verified')";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+echo "Admin data successfully added";

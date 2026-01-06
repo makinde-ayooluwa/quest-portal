@@ -1,0 +1,81 @@
+<?php
+
+include "student_includes/db.inc.php";
+
+$sql = "
+INSERT INTO
+    classes_names_only(class_name)
+VALUES
+    (\"Primary One\");
+
+
+
+INSERT INTO
+    classes_names_only(class_name)
+VALUES
+    (\"Primary Two\");
+
+
+
+INSERT INTO
+    classes_names_only(class_name)
+VALUES
+    (\"Primary Three\");
+
+
+
+INSERT INTO
+    classes_names_only(class_name)
+VALUES
+    (\"Primary Four\");
+
+
+INSERT INTO
+    classes_names_only(class_name)
+VALUES
+    (\"Primary Five\");
+
+
+INSERT INTO
+    classes_names_only(class_name)
+VALUES
+    (\"Primary Six\");
+
+
+INSERT INTO
+    classes_names_only(class_name)
+VALUES
+    (\"JSS1\");
+
+
+INSERT INTO
+    classes_names_only(class_name)
+VALUES
+    (\"JSS2\");
+
+
+INSERT INTO
+    classes_names_only(class_name)
+VALUES
+    (\"JSS3\");
+
+
+INSERT INTO
+    classes_names_only(class_name)
+VALUES
+    (\"SSS1\");
+
+
+INSERT INTO
+    classes_names_only(class_name)
+VALUES
+    (\"SSS2\");
+
+INSERT INTO
+    classes_names_only(class_name)
+VALUES
+    (\"SSS3\");
+    ";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+echo "Database classes names created successfully." . PHP_EOL;

@@ -1,0 +1,54 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">Tab 0 Content</div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Tab 1 Content</div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Tab 2 Content</div>
+          </div>
+
+
+
+
+
+          <!--PHP MAILER-->
+
+          require 'vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+require 'vendor/phpmailer/phpmailer/src/Exception.php';
+require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+$mail = new PHPMailer(true); // true enables exceptions for error handling
+$mail->isSMTP();
+$mail->Host       = 'smtp.gmail.com'; // Or your SMTP server host
+$mail->SMTPAuth   = true;
+$mail->Username   = 'makindeayooluwa604@gmail.com';
+$mail->Password   = 'lirw zgkb kegs xyat'; // Use an app password for Gmail
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // or PHPMailer::ENCRYPTION_SMTPS
+$mail->Port       = 587; // or 465 for SMTPS
+$mail->setFrom('makindeayooluwa604@gmail.com', 'Makinde Ayooluwa');
+$mail->addAddress('makindeayooluwa42@gmail.com', 'Makinde Ayooluwa');
+// Optional: addReplyTo, addCC, addBCC
+$mail->isHTML(true); // Set email format to HTML
+$mail->Subject = 'Subject of your email';
+$mail->Body    = 'This is the <b>HTML body</b> of the email.';
+$mail->AltBody = 'This is the plain text body for non-HTML mail clients.';
+//$mail->addAttachment('/vendor/phpmailer/docs/README.md', 'document.pdf');
+try {
+    $mail->send();
+    echo 'Message has been sent';
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
