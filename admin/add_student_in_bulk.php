@@ -31,7 +31,7 @@ try {
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }*/
-// include "admin_includes/autoloader.inc.php";
+include "admin_includes/autoloader.inc.php";
 include "admin_includes/db.inc.php";
 include "admin_includes/admin.inc.php";
 include "admin_includes/email_utils.php";
