@@ -27,14 +27,16 @@ class Admin
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getVerifiedStudents($pdo){
+    public function getVerifiedStudents($pdo)
+    {
         $query = "SELECT * FROM students WHERE account_verification = 'Verified'";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getUnverifiedStudents($pdo){
+    public function getUnverifiedStudents($pdo)
+    {
         $query = "SELECT * FROM students WHERE account_verification = 'Not verified'";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
@@ -73,20 +75,20 @@ class Admin
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    private function studentExists($pdo, $data)
+    {
+        $query = "SELECT admission_number FROM students WHERE admission_number = :admission_number OR email = :email;";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":admission_number", $data["admission_number"]);
+        $stmt->bindParam(":email", $data["email"]);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function addStudent($pdo, $studentData)
     {
 
-        function get($pdo, $data)
-        {
-            $query = "SELECT admission_number FROM students WHERE admission_number = :admission_number OR email = :email;";
-            $stmt = $pdo->prepare($query);
-            $stmt->bindParam(":admission_number", $data["admission_number"]);
-            $stmt->bindParam(":email", $data["email"]);
-            $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-
-        if (get($pdo, $studentData)) {
+        if ($this->studentExists($pdo, $studentData)) {
             return false;
         } else {
             $query = "INSERT INTO students(fullname,email,admission_number,class) VALUES (:fullname,:email,:admission_number,:class)";
@@ -98,6 +100,11 @@ class Admin
             $stmt->execute();
             return true;
         }
+    }
+
+    public function addStudentsInBulk($pdo, $excel_data)
+    {
+        
     }
 
     public function addClass($pdo, $class_name, $mentor_name, $class_status)
@@ -488,13 +495,14 @@ class Admin
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function deleteSupportRequest($pdo, $id){
+    public function deleteSupportRequest($pdo, $id)
+    {
         $sql = "DELETE FROM supports WHERE id = :id;";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(":id",$id);
-        if($stmt->execute()){
+        $stmt->bindParam(":id", $id);
+        if ($stmt->execute()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -550,16 +558,17 @@ class Admin
 }
 
 
-class AdminSetup {
+class AdminSetup
+{
 
     public $pdo;
     public $data;
 
-    public function __construct($pdo,$data){
+    public function __construct($pdo, $data)
+    {
 
         $this->pdo = $pdo;
         $this->data = $data;
-
     }
 
     /*$data = [
@@ -570,45 +579,45 @@ class AdminSetup {
     ]; */
 
 
-    public function staffGotten(){
+    public function staffGotten()
+    {
 
         $sql = "SELECT * FROM staffs WHERE email = :email AND portal_code = :portal_code";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(":email",$this->data["email"]);
-        $stmt->bindParam(":portal_code",$this->data["portal_code"]);
+        $stmt->bindParam(":email", $this->data["email"]);
+        $stmt->bindParam(":portal_code", $this->data["portal_code"]);
         $stmt->execute();
-        if($stmt->fetch(PDO::FETCH_ASSOC)){
+        if ($stmt->fetch(PDO::FETCH_ASSOC)) {
             return true;
-        }else{
+        } else {
             return false;
         }
-
     }
 
-    public function errorHandler(){
+    public function errorHandler()
+    {
 
-        if(empty($this->data["portal_code"]) || empty($this->data["email"])|| empty($this->data["picture"])|| empty($this->data["password"])){
+        if (empty($this->data["portal_code"]) || empty($this->data["email"]) || empty($this->data["picture"]) || empty($this->data["password"])) {
             return true;
-        }elseif(!$this->staffGotten()){
+        } elseif (!$this->staffGotten()) {
             return true;
-        }else{
+        } else {
             return false;
         }
-
     }
 
-    public function run(){
-        if($this->errorHandler()){
+    public function run()
+    {
+        if ($this->errorHandler()) {
             return false;
-        }else{
+        } else {
             $run = $this->pdo->prepare("UPDATE staffs SET picture = :picture,pwd = :pwd,account_verification = 'Verified' WHERE email = :email AND portal_code = :portal_code AND staff_role = 'Admin'");
-            $run->bindParam(":picture",$this->data["picture_path"]);
-            $run->bindParam(":pwd",$this->data["hashedPassword"]);
-            $run->bindParam(":email",$this->data["email"]);
-            $run->bindParam(":portal_code",$this->data["portal_code"]);
+            $run->bindParam(":picture", $this->data["picture_path"]);
+            $run->bindParam(":pwd", $this->data["hashedPassword"]);
+            $run->bindParam(":email", $this->data["email"]);
+            $run->bindParam(":portal_code", $this->data["portal_code"]);
             $run->execute();
             return true;
         }
     }
-
 }

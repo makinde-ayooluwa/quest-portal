@@ -38,37 +38,15 @@ include "admin_includes/email_utils.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fullname = $_POST['fullname'];
-    $dob = $_POST['dob'];
-    $gender = $_POST['gender'];
     $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $address = $_POST['address'];
     $admission_number = $_POST['admission_number'];
     $class = $_POST['class'];
-    $admission_date = $_POST['admission_date'];
-    $father_name = $_POST['father_name'];
-    $father_email = $_POST['father_email'];
-    $father_phone = $_POST['father_phone'];
-    $mother_name = $_POST['mother_name'];
-    $mother_email = $_POST['mother_email'];
-    $mother_phone = $_POST['mother_phone'];
 
     $studentData = [
         'fullname' => $fullname,
-        /*'dob' => $dob,
-        'gender' => $gender,*/
         'email' => $email,
-        /*'phone' => $phone,
-        'address' => $address,*/
         'admission_number' => $admission_number,
-        'class' => $class,
-        /*'admission_date' => $admission_date,
-        'father_name' => $father_name,
-        'father_email' => $father_email,
-        'father_phone' => $father_phone,
-        'mother_name' => $mother_name,
-        'mother_email' => $mother_email,
-        'mother_phone' => $mother_phone*/
+        'class' => $class
     ];
 
     if (empty($fullname) ||empty($email) || empty($admission_number) || empty($class)) {

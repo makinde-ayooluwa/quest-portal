@@ -107,11 +107,72 @@ include "admin_includes/admin.inc.php";
             </div>
         </form>
         <div class="add-options">
-            <div class="container d-flex justify-content-center">
-                <input type="file" accept=".xlsx" id="student-excel-file">
-                <button>Add bulk students</button>
+            <div class="container">
+                <h1 class="pt-3 h6 text-primary">Add students dynamically with an excel file</h1>
+                <input class="form-control" type="file" accept=".xlsx" id="excel_file_input" placeholder="Choose an excel file">
+                <button class="btn btn-success" id="upload_btn">Add Students</button>
             </div>
         </div>
+        <script>
+            let selectedFile = null;
+
+            // Listen for file selection
+            document.getElementById('excel_file_input').addEventListener('change', function(e) {
+                const files = e.target.files;
+                if (files && files[0]) {
+                    selectedFile = files[0]; // Store the selected file
+                    console.log('File selected:', selectedFile.name);
+                }
+            }, false);
+
+            // Listen for button click to process and send the file
+            document.getElementById('upload_btn').addEventListener('click', function() {
+                if (!selectedFile) {
+                    alert('Please select an Excel file first.');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, {
+                        type: 'array'
+                    });
+
+                    // Get the first worksheet
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+
+                    // Convert worksheet to JSON objects
+                    const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+                    // Optional: display in console
+                    console.log(jsonData);
+
+                    // Convert JSON to string for sending
+                    const jsonString = JSON.stringify(jsonData);
+
+                    // Create FormData and append the JSON string
+                    const formData = new FormData();
+                    formData.append('excel_data', jsonString);
+
+                    // Send to PHP backend
+                    fetch('add_student_in_bulk.php', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.text())
+                        .then(data => {
+                            console.log('Server response:', data);
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                };
+
+                reader.readAsArrayBuffer(selectedFile); // Read the Excel file
+            });
+        </script>
     </div>
     <script>
         // client-side quick validation to improve UX
