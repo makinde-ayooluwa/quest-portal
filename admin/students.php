@@ -386,12 +386,24 @@ try {
     </script>
     <script>
         // Excel dynamic addition with the following params : [fullname,email,class,admission_number]
-        async function AddNewStudents() {
+        function addStudents(){
             fetch("https://opensheet.elk.sh/17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o/Sheet1")
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                fetch("add_student_in_bulk.php", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(res => res.json())
+                    .then(result => console.log(result))
+                    .catch(err => console.error(err));
+            });
         }
-
-        // Call ONCE (not interval)
-        AddNewStudents();
+        addStudents();
     </script>
 </body>
 

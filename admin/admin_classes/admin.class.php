@@ -102,10 +102,7 @@ class Admin
         }
     }
 
-    public function addStudentsInBulk($pdo, $excel_data)
-    {
-        
-    }
+    
 
     public function addClass($pdo, $class_name, $mentor_name, $class_status)
     {

@@ -80,7 +80,56 @@ include "admin_includes/email_utils.php";
 // }
 
 
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
+    $students = json_decode(file_get_contents("php://input"), true);
+
+    if (!is_array($students)) {
+        echo json_encode(["status" => "error", "message" => "Invalid data"]);
+        exit;
+    }
+
+    $added = 0;
+
+    $results = [];
+
+    foreach ($students as $data) {
+
+        $result = [
+            "email" => $data['email'] ?? null,
+            "status" => "pending",
+            "message" => ""
+        ];
+
+        if ($admin->addStudent($pdo, [
+            "fullname"=> $data["fullname"],
+            "email"=> $data["email"],
+            "admission_number"=> $data["admission_number"],
+            "class"=> $data["class"]
+        ])) {
+            try {
+                $emailUtils = new EmailUtils();
+                $emailUtils->sendStudentSetupEmail($data['email'], $data['fullname'], $data['admission_number']);
+                $result['status'] = "success";
+                $result['message'] = "Email sent successfully";
+            } catch (Exception $e) {
+                $result['status'] = "error";
+                $result['message'] = $e->getMessage();
+            }
+        }
+
+        $results[] = $result;
+    }
+
+    // Echo **once** at the end
+    echo json_encode([
+        "status" => "completed",
+        "results" => $results
+    ]);
 }
 
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    echo json_encode(["status" => "error", "message" => "Invalid request"]);
+    exit;
+}
