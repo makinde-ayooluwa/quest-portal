@@ -29,7 +29,7 @@ $availableAssignments = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!--Fonts-->
     <link rel="stylesheet" href="css/fonts.min.css">
     <!--Favicon-->
-    <link rel="shortcut icon" href="assets/images/Quest logo.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/images/quest.jpg" type="image/x-icon">
     <!--Styles-->
     <link rel="stylesheet" href="bootstrap5/bootstrap-5.3.8-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">

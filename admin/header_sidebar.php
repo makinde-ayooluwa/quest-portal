@@ -195,7 +195,7 @@
                      class="fas fa-user-graduate me-2"></i>Students Management</a></li>
          <div class="collapse" id="studentManagement">
              <li><a class="text-primary" href="students.php"><i class="bi bi-people me-2"></i>View all students</a></li>
-             <li><a class="text-primary" href="add_student.php"><i class="bi bi-plus me-2"></i>Add student</a></li>
+             <!-- <li><a class="text-primary" href="add_student.php"><i class="bi bi-plus me-2"></i>Add student</a></li> -->
              <li><a class="text-primary" href="support_requests.php"><i class="bi bi-headset me-2"></i>Support Requests</a></li>
              <!--<li><a class="text-primary" href="add_class.php"><i class="bi bi-plus me-2"></i>Add class</a></li>
             <li><a href="edit_student.php"><i class="bi bi-pencil me-2"></i>Edit student</a></li>

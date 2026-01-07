@@ -3,7 +3,7 @@
 <!--Fonts-->
 <link rel="stylesheet" href="css/fonts.min.css">
 <!--Favicon-->
-<link rel="shortcut icon" href="assets/images/Quest logo.jpg" type="image/x-icon">
+<link rel="shortcut icon" href="assets/images/quest.jpg" type="image/x-icon">
 <link rel="stylesheet" href="css/portal.min.css">
 <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">

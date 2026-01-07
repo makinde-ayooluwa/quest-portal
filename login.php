@@ -329,7 +329,7 @@ try {
         }
     </style>
     <div class="real-header">
-        <img src="assets/images/Quest logo.jpg" alt="Quest Portal Logo" style="width: 80px; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+        <img src="assets/images/quest.jpg" alt="Quest Portal Logo" style="width: 80px; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
     </div>
     <div class="container form-container card rounded-3">
         <div class="my-2">

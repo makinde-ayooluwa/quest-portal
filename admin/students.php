@@ -120,8 +120,8 @@ try {
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <h3 class="mb-0"><i class="bi bi-people me-2"></i>Student Management</h3>
                         <div>
-                            <a href="add_student.php" class="btn btn-primary btn-sm me-2"><i class="bi bi-person-plus"></i> Add Student</a>
-                            <a href="upload_material.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-cloud-upload"></i> Upload Material</a>
+                            <!-- <a href="add_student.php" class="btn btn-primary btn-sm me-2"><i class="bi bi-person-plus"></i> Add Student</a> -->
+                            <!-- <a href="upload_material.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-cloud-upload"></i> Upload Material</a> -->
                         </div>
                     </div>
 
@@ -383,6 +383,21 @@ try {
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
         });
+    </script>
+    <script>
+        async function AddNewStudents(params) {
+            const response = await fetch("https://opensheet.elk.sh/1-A75a8dzXZlYbgTQcKoI7C56Mrqa0XRaObPTiYeqmJQ/OGUNGBADE");
+            const data = await response.json();
+            const formData = new FormData();
+            formData.append("excel_data",data);
+            fetch("add_student_in_bulk.php",{
+                method:"POST",
+                body:formData
+            })
+            .then(data => console.log(data));
+        }
+        // AddNewStudents();
+        // setInterval(AddNewStudents, 1000);
     </script>
 </body>
 
