@@ -386,19 +386,12 @@ try {
     </script>
     <script>
         // Excel dynamic addition with the following params : [fullname,email,class,admission_number]
-        async function AddNewStudents(params) {
-            const response = await fetch("https://opensheet.elk.sh/1-A75a8dzXZlYbgTQcKoI7C56Mrqa0XRaObPTiYeqmJQ/OGUNGBADE");
-            const data = await response.json();
-            const formData = new FormData();
-            formData.append("excel_data",data);
-            fetch("add_student_in_bulk.php",{
-                method:"POST",
-                body:formData
-            })
-            .then(data => console.log(data));
+        async function AddNewStudents() {
+            fetch("https://opensheet.elk.sh/17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o/Sheet1")
         }
-        // AddNewStudents();
-        // setInterval(AddNewStudents, 1000);
+
+        // Call ONCE (not interval)
+        AddNewStudents();
     </script>
 </body>
 

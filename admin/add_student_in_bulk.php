@@ -79,32 +79,8 @@ include "admin_includes/email_utils.php";
 //     }
 // }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $excel_data = isset($_POST["excel_data"]) ? $_POST["excel_data"] : null;
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    foreach (json_decode($excel_data, true) as $data) {
-        $fullname = $data["fullname"];
-        $email = $data["email"];
-        $admission_number = $data["admission_number"];
-        $class = $data["class"];
-        if ($admin->addStudent($pdo, [
-            "fullname" => $fullname,
-            "email" => $email,
-            "admission_number" => $admission_number,
-            "class" => $class
-        ])) {
-            $emailUtils = new EmailUtils();
-            $emailSent = $emailUtils->sendStudentSetupEmail(
-                $data['email'],
-                $data['fullname'],
-                $data['admission_number']
-            );
-            if ($emailSent) {
-                echo 'Students successfully added and setup email sent successfully';
-            }
-        } else {
-            echo 'Error';
-        }
-    }
 }
+
