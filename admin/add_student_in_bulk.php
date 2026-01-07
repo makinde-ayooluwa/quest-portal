@@ -36,65 +36,46 @@ include "admin_includes/db.inc.php";
 include "admin_includes/admin.inc.php";
 include "admin_includes/email_utils.php";
 
-//if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     $fullname = $_POST['fullname'];
-//     $email = $_POST['email'];
-//     $admission_number = $_POST['admission_number'];
-//     $class = $_POST['class'];
-
-//     $studentData = [
-//         'fullname' => $fullname,
-//         'email' => $email,
-//         'admission_number' => $admission_number,
-//         'class' => $class
-//     ];
-
-//     if (empty($fullname) ||empty($email) || empty($admission_number) || empty($class)) {
-//         unset($_SESSION["success"]);
-//         $_SESSION["error"] = "Fill out all required fields";
-//         header("Location: add_student.php");
-//     } else {
-//         if (!$admin->addStudent($pdo, $studentData)) {
-//             unset($_SESSION["success"]);
-//             $_SESSION["error"] = "Error occured while adding student. Student may exist before";
-//             header("Location: add_student.php");
-//         } else {
-//             unset($_SESSION["error"]);
-
-//             // Send setup email to student
-//             $emailUtils = new EmailUtils();
-//             $emailSent = $emailUtils->sendStudentSetupEmail(
-//                 $studentData['email'],
-//                 $studentData['fullname'],
-//                 $studentData['admission_number']
-//             );
-
-//             if ($emailSent) {
-//                 $_SESSION["success"] = "Student added successfully and setup email sent";
-//             } else {
-//                 $_SESSION["success"] = "Student added successfully, but email could not be sent";
-//             }
-//             header("Location: add_student.php");
-//         }
-//     }
-// }
-
-
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $students = json_decode(file_get_contents("php://input"), true);
+    $studentsFromSheet = json_decode(file_get_contents("php://input"), true);
 
-    if (!is_array($students)) {
+    if (!is_array($studentsFromSheet)) {
         echo json_encode(["status" => "error", "message" => "Invalid data"]);
         exit;
     }
 
-    $added = 0;
+    // 1️⃣ Fetch current admission_numbers from DB
+    $currentStudents = $pdo->query("SELECT admission_number FROM students")->fetchAll(PDO::FETCH_COLUMN);
 
+    // Normalize current students as strings
+    $currentStudents = array_map('trim', $currentStudents);
+
+    // Normalize new admissions from sheet as strings
+    $newAdmissionNumbers = array_map(function ($s) {
+        return trim($s['admission_number']);
+    }, $studentsFromSheet);
+
+    // Now compute deletions
+    $toDelete = array_diff($currentStudents, $newAdmissionNumbers);
+    // 3️⃣ Delete students removed from spreadsheet
+
+    if (!empty($toDelete)) {
+        $placeholders = rtrim(str_repeat('?,', count($toDelete)), ',');
+        $stmt = $pdo->prepare("DELETE FROM students WHERE admission_number IN ($placeholders)");
+        $stmt->execute(array_values($toDelete)); // Use array_values to avoid issues with keys
+    }
+
+
+    // 4️⃣ Add new students and send emails
     $results = [];
 
-    foreach ($students as $data) {
+    foreach ($studentsFromSheet as $data) {
+
+        $admission = $data['admission_number'];
+
+        // Skip if already exists
+        if (in_array($admission, $currentStudents)) continue;
 
         $result = [
             "email" => $data['email'] ?? null,
@@ -103,33 +84,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ];
 
         if ($admin->addStudent($pdo, [
-            "fullname"=> $data["fullname"],
-            "email"=> $data["email"],
-            "admission_number"=> $data["admission_number"],
-            "class"=> $data["class"]
+            "fullname" => $data["fullname"],
+            "email" => $data["email"],
+            "admission_number" => $admission,
+            "class" => $data["class"]
         ])) {
             try {
                 $emailUtils = new EmailUtils();
-                $emailUtils->sendStudentSetupEmail($data['email'], $data['fullname'], $data['admission_number']);
+                $emailUtils->sendStudentSetupEmail($data['email'], $data['fullname'], $admission);
                 $result['status'] = "success";
                 $result['message'] = "Email sent successfully";
             } catch (Exception $e) {
                 $result['status'] = "error";
                 $result['message'] = $e->getMessage();
             }
+        } else {
+            $result['status'] = "error";
+            $result['message'] = "Failed to add student";
         }
 
         $results[] = $result;
     }
 
-    // Echo **once** at the end
+    // Return results and summary
     echo json_encode([
         "status" => "completed",
+        "added" => count($results),
+        "deleted" => count($toDelete),
         "results" => $results
     ]);
-}
-
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+} else {
     echo json_encode(["status" => "error", "message" => "Invalid request"]);
     exit;
 }
