@@ -300,7 +300,7 @@
              data.staff.forEach(staff => {
                  const item = document.createElement('div');
                  item.className = 'search-item';
-                 item.innerHTML = `<a href="edit_staff.php?id=${staff.id}"><i class="bi bi-person-badge me-2"></i>${highlightText(staff.fullname, query)} <small class="text-muted">(${staff.staff_role})</small></a>`;
+                 item.innerHTML = `<a href="view_staff.php?id=${staff.id}"><i class="bi bi-person-badge me-2"></i>${highlightText(staff.fullname, query)} <small class="text-muted">(${staff.staff_role})</small></a>`;
                  searchResults.appendChild(item);
              });
          }
