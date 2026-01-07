@@ -385,6 +385,7 @@ try {
         });
     </script>
     <script>
+        // Excel dynamic addition with the following params : [fullname,email,class,admission_number]
         async function AddNewStudents(params) {
             const response = await fetch("https://opensheet.elk.sh/1-A75a8dzXZlYbgTQcKoI7C56Mrqa0XRaObPTiYeqmJQ/OGUNGBADE");
             const data = await response.json();
