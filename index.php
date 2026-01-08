@@ -12,7 +12,7 @@ define("STUDENT_DATA", $studentData);
 <html lang="en">
 
 <head>
-    <title>Quest Schools - Student Portal</title>
+    <title> <?php echo $studentData['fullname'] ?> | Quest Schools - Student Portal</title>
     <?php include "head.php" ?>
     <style>
         .form-container {
@@ -71,7 +71,6 @@ define("STUDENT_DATA", $studentData);
                                             echo count($staffs);
                                             ?>
                                         </b></span>
-                                    <span><i class="bi bi-bar-chart-line me-2"></i>Attendance: <b>97%</b></span>
                                 </div>
                             </div>
                         </div>

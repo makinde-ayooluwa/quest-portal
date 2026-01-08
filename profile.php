@@ -176,15 +176,7 @@ include "student_includes/student.inc.php";
                 </div>
             </div>
         </div>
-        <h4 class="mt-4 mb-3">Academic Summary</h4>
-        <div class="row mb-3">
-            <div class="col-md-4 mb-2">
-                <!--<span class="info-label">Current GPA:</span> 4.2-->
-            </div>
-            <div class="col-md-4 mb-2">
-                <span class="info-label">Attendance:</span> 97%
-            </div>
-        </div>
+        
         <!--<h4 class="mt-4 mb-3">Quick Actions</h4>
         <div class="d-flex flex-wrap gap-2">
             <a href="result.php" class="btn btn-success"><i class="bi bi-bar-chart me-1"></i>View Results</a>

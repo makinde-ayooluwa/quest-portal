@@ -83,7 +83,7 @@ Teacher is verified
                 <div class="mb-2">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" id="password" class="form-control" name="pwd">
-                </div>
+                <!-- </div>
                 <div class="mb-3" id="password_requirement">
                     <ul>
                         <li id="digit">Must have at least one digit</li>
@@ -91,8 +91,8 @@ Teacher is verified
                         <li id="lower">Must have at least one lowercase letter</li>
                         <li id="length">Must be a minimum of 8 length</li>
                     </ul>
-                </div>
-                <script>
+                </div> -->
+                <!-- <script>
                 const password = document.querySelector("form input#password");
                 const requirements = document.querySelector("form #password_requirement ul");
                 password.addEventListener("input", function() {
@@ -121,7 +121,7 @@ Teacher is verified
                         requirements.querySelector("li#length").style.color = "green";
                     }
                 });
-                </script>
+                </script> -->
                 <div class="mb-3 px-3">
                     <div class="d-flex justify-content-end">
                         <input type="submit" name="submit" class="btn btn-sm px-3 py-1 btn-success"

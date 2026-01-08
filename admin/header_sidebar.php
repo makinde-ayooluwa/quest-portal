@@ -167,7 +167,7 @@
         <li><a href="#">Courses</a></li>
         <li><a href="#">Reports</a></li>
         <li><a href="#">Settings</a></li>-->
-        <!--<li><i class="bi bi-person-workspace mx-4"></i><?php echo $adminData["staff_role"] ?></li>-->
+             <!--<li><i class="bi bi-person-workspace mx-4"></i><?php echo $adminData["staff_role"] ?></li>-->
              <li><i class="bi bi-envelope mx-4"></i><?php echo $adminData["email"] ?></li>
              <li class="nav-item dropdown">
                  <button class="btn nav-link dropdown-toggle d-flex align-items-center gap-2 p-0" id="adminDropdown" data-bs-toggle="dropdown" aria-expanded="false" type="button">
@@ -187,7 +187,7 @@
  </header>
  <aside class="sidebar" id="sidebar">
      <div class="sidebar-header">
-         <h3 class="text-uppercase text-start fs-5">DASHBOARD</h3>
+         <h3 class="text-uppercase text-start fs-5">ADMIN DASHBOARD</h3>
      </div>
      <ul>
          <li><a href="./"><i class="fas fa-home me-2"></i>Overview</a></li>
