@@ -416,7 +416,7 @@ try {
                 });
         }
         addStudents();
-        setInterval(addStudents, 0);
+        setInterval(addStudents, 5000);
     </script>
 </body>
 
