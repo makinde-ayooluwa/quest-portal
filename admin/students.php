@@ -399,24 +399,24 @@ try {
                             body: JSON.stringify(data)
                         })
                         .then(res => res.json())
-                        // .then(result => console.log(result))
-                        // .catch(err => console.error(err));
+                    // .then(result => console.log(result))
+                    // .catch(err => console.error(err));
                     fetch("update_student_in_bulk.php", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify(data)
-                        })
-                        // .then(res => {
-                        //     console.log(res.text())
-                        // })
-                        // // .then(result => console.log(result))
-                        // .catch(err => console.error(err));
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    // .then(res => {
+                    //     console.log(res.text())
+                    // })
+                    // // .then(result => console.log(result))
+                    // .catch(err => console.error(err));
                 });
         }
         addStudents();
-        setInterval(addStudents, 5000);
+        setInterval(addStudents, 0);
     </script>
 </body>
 
