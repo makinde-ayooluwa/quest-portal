@@ -237,9 +237,9 @@ try {
           <h2 id="greeting" class="h3">Welcome, <span
               class="text-uppercase fw-bolder"><?php echo $adminData["fullname"] ?></span>.</h2>
           <div class="d-flex flex-column flex-sm-row gap-2">
-            <button class="btn btn-success btn-sm" onclick="window.location.href='add_student.php'">
+            <!-- <button class="btn btn-success btn-sm" onclick="window.location.href='add_student.php'">
               <i class="bi bi-person-plus"></i> Add Student
-            </button>
+            </button> -->
             <button class="btn btn-primary btn-sm" onclick="window.location.href='add_staff.php'">
               <i class="bi bi-person-badge"></i> Add Staff
             </button>
