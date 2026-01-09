@@ -360,7 +360,7 @@ if ($id && getId($pdo, $id)) {
                                 <div class="stats-card info">
                                     <div class="d-flex align-items-center">
                                         <div class="flex-grow-1">
-                                            <h3 class="mb-0"><?php echo $classStats['total_submissions'] ?? 0; ?></h3>
+                                            <h3 class="mb-0"><?php echo $classStats['total_submissions'] ; ?></h3>
                                             <small class="text-muted">Submissions</small>
                                         </div>
                                         <i class="bi bi-upload fs-1 opacity-75"></i>
