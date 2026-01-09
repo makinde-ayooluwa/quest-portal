@@ -167,7 +167,7 @@ if (!isset($_GET["id"])) {
                                         <div class="d-flex align-items-center justify-content-between mb-3">
                                             <h5 class="mb-0">Students</h5>
                                             <div>
-                                                <a href="add_student.php" class="btn btn-sm btn-success">Add Student</a>
+                                                <!-- <a href="add_student.php" class="btn btn-sm btn-success">Add Student</a> -->
                                                 <a href="students.php" class="btn btn-sm btn-outline-secondary ms-2">View All Students</a>
                                             </div>
                                         </div>
@@ -181,7 +181,7 @@ if (!isset($_GET["id"])) {
                                                 <h6 class="mt-3">No students in <?php echo htmlspecialchars($className, ENT_QUOTES); ?></h6>
                                                 <p class="small text-muted">You can add a student to this class</p>
                                                 <div class="mt-3">
-                                                    <a href="add_student.php" class="btn btn-primary btn-sm">Add Student</a>
+                                                    <!-- <a href="add_student.php" class="btn btn-primary btn-sm">Add Student</a> -->
                                                 </div>
                                             </div>
                                         <?php else: ?>
