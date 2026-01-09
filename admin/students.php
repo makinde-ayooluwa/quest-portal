@@ -391,8 +391,6 @@ try {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
-                    const formData = new FormData();
-                    formData.append("class_name",data.class);
                     fetch("add_student_in_bulk.php", {
                             method: "POST",
                             headers: {
@@ -411,12 +409,15 @@ try {
                         body: JSON.stringify(data)
                     })
                     fetch("add_class_names.php", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: formData
-                    })
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                "data": data
+                            })
+                        })
+                        .then(res => console.log(res.text()))
                     // .then(res => {
                     //     console.log(res.text())
                     // })

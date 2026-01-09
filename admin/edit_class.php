@@ -309,7 +309,7 @@ if ($id && getId($pdo, $id)) {
                         <div class="col-lg-9">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h1 class="mb-0"><?php echo htmlspecialchars($classData['class_name']); ?> Class</h1>
+                                    <h1 class="mb-0"><?php echo htmlspecialchars($classData['class_name']); ?></h1>
                                     <p class="mb-0 opacity-75">Class Management Dashboard</p>
                                 </div>
                                 <div class="text-end">

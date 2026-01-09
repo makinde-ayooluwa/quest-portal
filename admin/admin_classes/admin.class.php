@@ -102,27 +102,25 @@ class Admin
         }
     }
 
-    
+    private function classExists($pdo, $class_name)
+    {
+        $query = "SELECT class_name FROM classes_names_only WHERE class_name = :class_name";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':class_name', $class_name);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     public function addClass($pdo, $class_name)
     {
-        function classExists($pdo, $class_name)
-        {
-            $query = "SELECT * FROM classes_names_only WHERE class_name = :class_name";
-            $stmt = $pdo->prepare($query);
-            $stmt->bindParam(':class_name', $class_name);
-            $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-        if (classExists($pdo, $class_name)) {
-            $_SESSION['error'] = "Class with this name already exists.";
-            header("Location: add_class.php");
-            exit();
+        if ($this->classExists($pdo, $class_name)) {
+            return false;
         } else {
             $query = "INSERT INTO classes_names_only (class_name) VALUES (:class_name)";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(':class_name', $class_name);
             $stmt->execute();
+            return true;
         }
     }
 
