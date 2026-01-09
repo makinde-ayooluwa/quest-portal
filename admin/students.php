@@ -390,7 +390,9 @@ try {
             fetch("https://opensheet.elk.sh/17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o/Sheet1")
                 .then(res => res.json())
                 .then(data => {
-                    // console.log(data)
+                    console.log(data)
+                    const formData = new FormData();
+                    formData.append("class_name",data.class);
                     fetch("add_student_in_bulk.php", {
                             method: "POST",
                             headers: {
@@ -407,6 +409,13 @@ try {
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify(data)
+                    })
+                    fetch("add_class_names.php", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: formData
                     })
                     // .then(res => {
                     //     console.log(res.text())

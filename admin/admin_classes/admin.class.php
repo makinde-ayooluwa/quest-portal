@@ -104,22 +104,13 @@ class Admin
 
     
 
-    public function addClass($pdo, $class_name, $mentor_name, $class_status)
+    public function addClass($pdo, $class_name)
     {
         function classExists($pdo, $class_name)
         {
-            $query = "SELECT * FROM classes WHERE class_name = :class_name";
+            $query = "SELECT * FROM classes_names_only WHERE class_name = :class_name";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(':class_name', $class_name);
-            $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-
-        function staffAssigned($pdo, $staff_name)
-        {
-            $query = "SELECT * FROM classes WHERE mentor_assigned = :mentor_assigned";
-            $stmt = $pdo->prepare($query);
-            $stmt->bindParam(':mentor_assigned', $staff_name);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
@@ -128,11 +119,9 @@ class Admin
             header("Location: add_class.php");
             exit();
         } else {
-            $query = "INSERT INTO classes (class_name, mentor_name, class_status) VALUES (:class_name, :mentor_name, :class_status)";
+            $query = "INSERT INTO classes_names_only (class_name) VALUES (:class_name)";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(':class_name', $class_name);
-            $stmt->bindParam(':mentor_name', $mentor_name);
-            $stmt->bindParam(':class_status', $class_status);
             $stmt->execute();
         }
     }
