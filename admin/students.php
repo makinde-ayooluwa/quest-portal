@@ -117,6 +117,9 @@ $classes = $admin->getClasses($pdo);
                             <button type="submit" class="btn btn-sm btn-primary">Apply</button>
                             <div class="ms-auto text-muted small">Select rows and choose an action</div>
                         </div>
+                        <div class="d-flex align-items-center justify-content-start">
+                            <button class="btn" type="button" onclick="outputStudents()">Refresh</button>
+                        </div>
 
                         <div class="table-responsive" style="overflow-x:scroll;">
                             <table class="table table-striped table-hover align-middle mb-0">
@@ -385,19 +388,22 @@ $classes = $admin->getClasses($pdo);
                                     <i class="bi bi-eye"></i>
                                 </a>
 
-                                <button type="button" 
+                                <!--<button type="button" 
                                         class="btn btn-sm btn-outline-success p-1 me-1 promote-btn"
                                         data-id="${student.id}">
                                     <i class="bi bi-arrow-up-circle"></i>
-                                </button>
+                                </button>-->
 
-                                <button class="btn btn-sm btn-outline-danger p-1"
+                                <!--<button type="button"
+                                 class="btn btn-sm btn-outline-danger p-1"
                                         data-bs-toggle="modal"
                                         data-bs-target="#modal_${student.id}">
                                     <i class="bi bi-trash"></i>
-                                </button>
+                                </button>-->
                             </td>
                         </tr>
+
+                        <!-- Promote Modal -->
 
                         <!-- Delete Modal -->
                         <div class="modal fade" id="modal_${student.id}" tabindex="-1">
@@ -434,7 +440,6 @@ $classes = $admin->getClasses($pdo);
             outputStudents();
 
             setInterval(addStudents, 3000);
-            setInterval(outputStudents, 3000);
         });
     </script>
 </body>

@@ -75,8 +75,8 @@ try {
                 <div>
                     <a href="students.php" class="btn btn-sm btn-outline-secondary">&larr; Back</a>
                     <!--<a href="edit_student.php?id=<?php //echo e($student['id']); ?>" class="btn btn-sm btn-primary ms-2">Edit</a>-->
-                        <button type="button" class="btn btn-sm btn-success ms-2" data-bs-toggle="modal" data-bs-target="#promoteModal">Promote / Demote</button>
-                    <button type="button" class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                        <!-- <button type="button" class="btn btn-sm btn-success ms-2" data-bs-toggle="modal" data-bs-target="#promoteModal">Promote / Demote</button>
+                    <button type="button" class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button> -->
                 </div>
             </div>
 
