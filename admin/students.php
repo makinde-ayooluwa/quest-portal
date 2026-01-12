@@ -434,6 +434,8 @@ $classes = $admin->getClasses($pdo);
                 addStudents();
                 setInterval(addStudents(), 3000);
             }) {
+            addStudents();
+            setInterval(addStudents(), 3000);
             outputStudents();
             setInterval(outputStudents(), 0);
         }
