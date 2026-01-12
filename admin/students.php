@@ -309,8 +309,8 @@ include "admin_includes/admin.inc.php";
                             body: JSON.stringify(data)
                         })
                         .then(res => res.json())
-                    .then(result => console.log(result))
-                    .catch(err => console.error(err));
+                        .then(result => console.log(result))
+                        .catch(err => console.error(err));
                     fetch("update_student_in_bulk.php", {
                         method: "POST",
                         headers: {
@@ -328,18 +328,20 @@ include "admin_includes/admin.inc.php";
                             })
                         })
                         .then(res => console.log(res.text()))
-                    .then(res => {
-                        console.log(res.text())
-                    })
-                    .then(result => console.log(result))
-                    .catch(err => console.error(err));
+                        .then(res => {
+                            console.log(res.text())
+                        })
+                        .then(result => console.log(result))
+                        .catch(err => console.error(err));
                 });
         }
+
         function outputStudents() {
-            const studentsTable = document.getElementById("studentsTable");
+
             fetch("ajax_data_for_students.php")
                 .then(res => res.json())
                 .then(data => {
+                    const studentsTable = document.getElementById("studentsTable");
                     studentsTable.innerHTML = ""; // clear table first
 
                     if (!data || data.length === 0) {
@@ -347,7 +349,7 @@ include "admin_includes/admin.inc.php";
                         <tr>
                             <td colspan="9" class="text-center py-4">No students found.</td>
                         </tr>`;
-                        
+
                     }
 
                     let html = "";
