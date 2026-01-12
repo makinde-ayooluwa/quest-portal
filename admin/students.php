@@ -3,34 +3,7 @@ session_start();
 include "admin_includes/autoloader.inc.php";
 include "admin_includes/db.inc.php";
 include "admin_includes/admin.inc.php";
-// Pagination setup (server-side)
-$perPage = 10;
-$page = isset($_GET['page']) && is_numeric($_GET['page']) && (int)$_GET['page'] > 0 ? (int)$_GET['page'] : 1;
-$offset = ($page - 1) * $perPage;
 
-try {
-    $countStmt = $pdo->query("SELECT COUNT(*) FROM students");
-    $totalStudents = (int)$countStmt->fetchColumn();
-
-    $stmt = $pdo->prepare("SELECT * FROM students ORDER BY added_on ASC LIMIT :offset, :perpage");
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-    $stmt->bindValue(':perpage', $perPage, PDO::PARAM_INT);
-    $stmt->execute();
-    $studentsPaged = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    error_log('Students pagination error: ' . $e->getMessage());
-    $studentsPaged = [];
-    $totalStudents = 0;
-}
-
-// Fetch classes for promotion dropdown
-try {
-    $classStmt = $pdo->query("SELECT class_name FROM classes_names_only ORDER BY class_name ASC");
-    $classes = $classStmt->fetchAll(PDO::FETCH_COLUMN);
-} catch (PDOException $e) {
-    error_log('Fetch classes error: ' . $e->getMessage());
-    $classes = [];
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -130,7 +103,7 @@ try {
                             <input class="form-control me-2" type="search" placeholder="Search students by name, email or admission number" aria-label="Search" id="studentSearch">
                             <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
                         </form>
-                        <div class="text-end text-muted small">Showing <?php echo is_array($studentsPaged) ? count($studentsPaged) : 0; ?> students</div>
+                        <div class="text-end text-muted small">Showing <?php echo count($admin->getStudents($pdo)) ?> students</div>
                     </div>
 
                     <form id="bulkActionsForm" method="post" action="bulk_student_actions.php">
@@ -161,74 +134,11 @@ try {
                                     </tr>
                                 </thead>
                                 <tbody id="studentsTable">
-                                    <?php if (empty($studentsPaged)) { ?>
-                                        <tr>
-                                            <td colspan="8" class="text-center py-4">No students found.</td>
-                                        </tr>
-                                        <?php } else {
-                                        foreach ($studentsPaged as $student) {
-                                        ?>
-                                            <tr>
-                                                <td><input type="checkbox" name="selected_ids[]" value="<?php echo $student['id']; ?>" class="rowCheckbox"></td>
-                                                <td><img src="<?php echo htmlspecialchars('../' . $student['picture']); ?>" alt="<?php echo htmlspecialchars($student['fullname']); ?>" class="student-photo"></td>
-                                                <td><?php echo htmlspecialchars($student['fullname']); ?></td>
-                                                <td><?php echo htmlspecialchars($student['class']); ?></td>
-                                                <td><?php echo htmlspecialchars($student['email']); ?></td>
-                                                <td><?php echo htmlspecialchars($student['phone']); ?></td>
-                                                <td><?php echo htmlspecialchars($student['admission_number']); ?></td>
-                                                <td><?php if ($student['account_verification'] == 'Not verified') {
-                                                        echo '<span class="badge bg-danger">Not verified</span>';
-                                                    } else {
-                                                        echo '<span class="badge bg-success">Verified</span>';
-                                                    } ?></td>
-                                                <td>
-                                                    <a href="view_student.php?id=<?php echo $student['id']; ?>" class="btn btn-sm btn-outline-primary p-1 me-1" aria-label="View profile"><i class="bi bi-eye"></i></a>
-                                                    <button type="button" class="btn btn-sm btn-outline-success me-1 p-1 promote-btn" data-id="<?php echo $student['id']; ?>" aria-label="Promote / Demote student"><i class="bi bi-arrow-up-circle"></i></button>
-                                                    <button class="btn btn-sm p-1 btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modal_<?php echo $student['id'] ?>" aria-label="Delete student"><i class="bi bi-trash"></i></button>
-                                                </td>
-                                            </tr>
-                                            <!-- Modal for delete confirmation -->
-                                            <div class="modal fade" id="modal_<?php echo $student['id'] ?>" tabindex="-1" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Confirm Deletion</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p class="text-danger fs-6">Are you sure you want to delete <strong><?php echo strtoupper(htmlspecialchars($student['fullname'])); ?></strong>?</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                            <a href="delete_student.php?id=<?php echo $student['id'] ?>" class="btn btn-danger">Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                    <?php }
-                                    } ?>
+
                                 </tbody>
                             </table>
                         </div>
-                        <!-- Pagination -->
-                        <?php
-                        $totalPages = (int)ceil($totalStudents / $perPage);
-                        if ($totalPages > 1) {
-                        ?>
-                            <nav class="mt-3">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item <?php echo $page <= 1 ? 'disabled' : ''; ?>">
-                                        <a class="page-link" href="?page=<?php echo $page - 1; ?>">Previous</a>
-                                    </li>
-                                    <?php for ($p = 1; $p <= $totalPages; $p++) { ?>
-                                        <li class="page-item <?php echo $p == $page ? 'active' : ''; ?>"><a class="page-link" href="?page=<?php echo $p; ?>"><?php echo $p; ?></a></li>
-                                    <?php } ?>
-                                    <li class="page-item <?php echo $page >= $totalPages ? 'disabled' : ''; ?>">
-                                        <a class="page-link" href="?page=<?php echo $page + 1; ?>">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        <?php } ?>
+                    </form>
                 </div>
                 <!-- Promote Modal -->
                 <div class="modal fade" id="promoteModal" tabindex="-1" aria-hidden="true">
@@ -399,8 +309,8 @@ try {
                             body: JSON.stringify(data)
                         })
                         .then(res => res.json())
-                    // .then(result => console.log(result))
-                    // .catch(err => console.error(err));
+                    .then(result => console.log(result))
+                    .catch(err => console.error(err));
                     fetch("update_student_in_bulk.php", {
                         method: "POST",
                         headers: {
@@ -418,15 +328,112 @@ try {
                             })
                         })
                         .then(res => console.log(res.text()))
-                    // .then(res => {
-                    //     console.log(res.text())
-                    // })
-                    // // .then(result => console.log(result))
-                    // .catch(err => console.error(err));
+                    .then(res => {
+                        console.log(res.text())
+                    })
+                    .then(result => console.log(result))
+                    .catch(err => console.error(err));
                 });
         }
-        addStudents();
-        setInterval(addStudents(), 0);
+        function outputStudents() {
+            const studentsTable = document.getElementById("studentsTable");
+            fetch("ajax_data_for_students.php")
+                .then(res => res.json())
+                .then(data => {
+                    studentsTable.innerHTML = ""; // clear table first
+
+                    if (!data || data.length === 0) {
+                        studentsTable.innerHTML = `
+                        <tr>
+                            <td colspan="9" class="text-center py-4">No students found.</td>
+                        </tr>`;
+                        
+                    }
+
+                    let html = "";
+
+                    data.forEach(student => {
+                        html += `
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="selected_ids[]" value="${student.id}" class="rowCheckbox">
+                            </td>
+
+                            <td>
+                                <img src="../${student.picture}" alt="${student.fullname}" class="student-photo">
+                            </td>
+
+                            <td>${student.fullname}</td>
+                            <td>${student.class}</td>
+                            <td>${student.email}</td>
+                            <td>${student.phone}</td>
+                            <td>${student.admission_number}</td>
+
+                            <td>
+                                ${
+                                    student.account_verification === "Verified"
+                                        ? '<span class="badge bg-success">Verified</span>'
+                                        : '<span class="badge bg-warning text-dark">Unverified</span>'
+                                }
+                            </td>
+
+                            <td class="text-nowrap">
+                                <a href="view_student.php?id=${student.id}" 
+                                class="btn btn-sm btn-outline-primary p-1 me-1">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+
+                                <button type="button" 
+                                        class="btn btn-sm btn-outline-success p-1 me-1 promote-btn"
+                                        data-id="${student.id}">
+                                    <i class="bi bi-arrow-up-circle"></i>
+                                </button>
+
+                                <button class="btn btn-sm btn-outline-danger p-1"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modal_${student.id}">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Delete Modal -->
+                        <div class="modal fade" id="modal_${student.id}" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Confirm Deletion</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="text-danger">
+                                            Are you sure you want to delete 
+                                            <strong>${student.fullname.toUpperCase()}</strong>?
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <a href="delete_student.php?id=${student.id}" class="btn btn-danger">
+                                            Delete
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    });
+
+                    studentsTable.innerHTML = html;
+                    console.log(data);
+                })
+        }
+        // outputStudents();
+        // addStudents();
+        // setInterval(addStudents, 0);
+        // if (addStudents) {
+        //     outputStudents();
+        // }
+        console("Yikes")
     </script>
 </body>
 
