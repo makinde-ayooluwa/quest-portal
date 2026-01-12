@@ -435,7 +435,7 @@ include "admin_includes/admin.inc.php";
         // if (addStudents) {
         //     outputStudents();
         // }
-        console("Yikes")
+        console.log("Yikes");
     </script>
 </body>
 
