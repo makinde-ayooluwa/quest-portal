@@ -429,16 +429,13 @@ $classes = $admin->getClasses($pdo);
                     console.log(data);
                 })
         }
-
-        if (() => {
-                addStudents();
-                setInterval(addStudents(), 3000);
-            }) {
+        document.addEventListener("DOMContentLoaded", () => {
             addStudents();
-            setInterval(addStudents(), 3000);
             outputStudents();
-            setInterval(outputStudents(), 0);
-        }
+
+            setInterval(addStudents, 3000);
+            setInterval(outputStudents, 3000);
+        });
     </script>
 </body>
 
