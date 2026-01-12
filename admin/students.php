@@ -309,8 +309,8 @@ $classes = $admin->getClasses($pdo);
                             body: JSON.stringify(data)
                         })
                         .then(res => res.json())
-                        .then(result => console.log(result))
-                        .catch(err => console.error(err));
+                    // .then(result => console.log(result))
+                    // .catch(err => console.error(err));
                     fetch("update_student_in_bulk.php", {
                         method: "POST",
                         headers: {
@@ -328,11 +328,11 @@ $classes = $admin->getClasses($pdo);
                             })
                         })
                         .then(res => console.log(res.text()))
-                        .then(res => {
-                            console.log(res.text())
-                        })
-                        .then(result => console.log(result))
-                        .catch(err => console.error(err));
+                    // .then(res => {
+                    //     console.log(res.text())
+                    // })
+                    // .then(result => console.log(result))
+                    // .catch(err => console.error(err));
                 });
         }
 
@@ -429,10 +429,14 @@ $classes = $admin->getClasses($pdo);
                     console.log(data);
                 })
         }
-        outputStudents();
-        setInterval(outputStudents(), 0);
-        addStudents();
-        setInterval(addStudents, 0);
+
+        if (() => {
+                addStudents();
+                setInterval(addStudents(), 3000);
+            }) {
+            outputStudents();
+            setInterval(outputStudents(), 0);
+        }
     </script>
 </body>
 

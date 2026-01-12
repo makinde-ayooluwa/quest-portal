@@ -85,10 +85,23 @@ class Admin
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    private function addStudentErrors($data)
+    {
+        if (empty($data["fullname"]) || empty($data["email"]) || empty($data["class"]) || empty($data["admission_number"])) {
+            return true;
+        } elseif (filter_var(trim($data["email"]), FILTER_VALIDATE_EMAIL) == false) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function addStudent($pdo, $studentData)
     {
-
-        if ($this->studentExists($pdo, $studentData)) {
+        if ($this->addStudentErrors($studentData)) {
+            return false;
+        } elseif ($this->studentExists($pdo, $studentData)) {
             return false;
         } else {
             $query = "INSERT INTO students(fullname,email,admission_number,class) VALUES (:fullname,:email,:admission_number,:class)";
