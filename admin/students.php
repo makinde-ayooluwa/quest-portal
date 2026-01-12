@@ -3,7 +3,7 @@ session_start();
 include "admin_includes/autoloader.inc.php";
 include "admin_includes/db.inc.php";
 include "admin_includes/admin.inc.php";
-
+$classes = $admin->getClasses($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -152,7 +152,7 @@ include "admin_includes/admin.inc.php";
                                 <div class="mb-2">Select destination class:</div>
                                 <select id="promoteClassSelect" class="form-select">
                                     <?php foreach ($classes as $c) {
-                                        echo '<option value="' . htmlspecialchars($c) . '">' . htmlspecialchars($c) . '</option>';
+                                        echo '<option value="' . htmlspecialchars($c["class_name"]) . '">' . htmlspecialchars($c["class_name"]) . '</option>';
                                     } ?>
                                 </select>
                             </div>
@@ -375,7 +375,7 @@ include "admin_includes/admin.inc.php";
                                 ${
                                     student.account_verification === "Verified"
                                         ? '<span class="badge bg-success">Verified</span>'
-                                        : '<span class="badge bg-warning text-dark">Unverified</span>'
+                                        : '<span class="badge bg-danger text-dark">Not verified</span>'
                                 }
                             </td>
 
@@ -429,13 +429,12 @@ include "admin_includes/admin.inc.php";
                     console.log(data);
                 })
         }
-        // outputStudents();
-        // addStudents();
-        // setInterval(addStudents, 0);
-        // if (addStudents) {
-        //     outputStudents();
-        // }
-        console.log("Yikes");
+        outputStudents();
+        addStudents();
+        setInterval(addStudents, 0);
+        if (addStudents) {
+            outputStudents();
+        }
     </script>
 </body>
 
