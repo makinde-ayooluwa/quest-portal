@@ -375,7 +375,7 @@ $classes = $admin->getClasses($pdo);
                                 ${
                                     student.account_verification === "Verified"
                                         ? '<span class="badge bg-success">Verified</span>'
-                                        : '<span class="badge bg-danger text-dark">Not verified</span>'
+                                        : '<span class="badge bg-danger text-white">Not verified</span>'
                                 }
                             </td>
 
@@ -430,11 +430,9 @@ $classes = $admin->getClasses($pdo);
                 })
         }
         outputStudents();
+        setInterval(outputStudents(), 0);
         addStudents();
         setInterval(addStudents, 0);
-        if (addStudents) {
-            outputStudents();
-        }
     </script>
 </body>
 
