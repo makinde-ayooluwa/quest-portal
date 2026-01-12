@@ -30,7 +30,7 @@ class EmailUtils {
             $this->mail->addAddress($studentEmail, $studentName);
 
             $this->mail->Subject = 'Quest Schools - Student Portal Setup';
-            $setupLink = "http://localhost/quest-portal/setup.php?admission_number=" . $admissionNumber;
+            $setupLink = "http://localhost/quest-portal/setup.php?admission_number=" . urlencode($admissionNumber);
 
             $this->mail->Body = "
             <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\">
