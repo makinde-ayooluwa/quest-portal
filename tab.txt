@@ -52,3 +52,53 @@ try {
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
+
+
+
+
+
+
+
+///////////////////////////
+
+
+//////////////Results
+const sheetId = "YOUR_SHEET_ID_HERE"; // your Google Sheet ID
+const sheetName = "Sheet1"; // sheet name
+
+fetch(`https://opensheet.elk.sh/${sheetId}/${sheetName}`)
+  .then(res => res.json())
+  .then(data => {
+    const rows = data.slice(2); // skip first 2 rows if they are headers
+
+    // Extract all subject names and terms from headers dynamically
+    const headers = Object.keys(data[0]).filter(h => h !== "NAME" && h !== "Fullname");
+
+    // Group headers by subject
+    const subjectsMap = {};
+    headers.forEach(header => {
+      const parts = header.split(" "); // assumes headers like "Mathematics 1st"
+      const term = parts.pop(); // last part is the term
+      const subject = parts.join(" "); // rest is the subject name
+      if (!subjectsMap[subject]) subjectsMap[subject] = [];
+      subjectsMap[subject].push({ term, headerName: header });
+    });
+
+    const students = rows.map(row => {
+      const student = { Fullname: row.NAME || row.Fullname || "", subjects: [] };
+
+      // For each subject, collect term scores
+      for (const [subjectName, termColumns] of Object.entries(subjectsMap)) {
+        const subjectObj = { name: subjectName };
+        termColumns.forEach(tc => {
+          subjectObj[tc.term] = row[tc.headerName];
+        });
+        student.subjects.push(subjectObj);
+      }
+
+      return student;
+    });
+
+    console.log(JSON.stringify(students, null, 2));
+  })
+  .catch(err => console.error("Error fetching sheet:", err));

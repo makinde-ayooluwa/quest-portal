@@ -107,7 +107,7 @@ $classes = $admin->getClasses($pdo);
                     </div>
 
                     <form id="bulkActionsForm" method="post" action="bulk_student_actions.php">
-                        <div class="d-flex align-items-center gap-2 mb-2">
+                        <!-- <div class="d-flex align-items-center gap-2 mb-2">
                             <select name="action" id="bulkActionSelect" class="form-select form-select-sm" style="width:220px">
                                 <option value="">Bulk actions</option>
                                 <option value="delete">Delete selected</option>
@@ -116,16 +116,16 @@ $classes = $admin->getClasses($pdo);
                             <input type="hidden" name="promote_to" id="promoteToInput" value="">
                             <button type="submit" class="btn btn-sm btn-primary">Apply</button>
                             <div class="ms-auto text-muted small">Select rows and choose an action</div>
-                        </div>
+                        </div> -->
                         <div class="d-flex align-items-center justify-content-start">
                             <button class="btn" type="button" onclick="outputStudents()">Refresh</button>
                         </div>
 
                         <div class="table-responsive" style="overflow-x:scroll;">
-                            <table class="table table-striped table-hover align-middle mb-0">
+                            <table class="table table-striped table-bordered table-hover align-middle mb-0">
                                 <thead class="table-light">
                                     <tr>
-                                        <th style="width:40px"><!--<input type="checkbox" id="selectAll">--></th>
+                                        <!--<th style="width:40px"><input type="checkbox" id="selectAll"></th>-->
                                         <th style="width:64px">Photo</th>
                                         <th>Name</th>
                                         <th>Class</th>
@@ -136,7 +136,7 @@ $classes = $admin->getClasses($pdo);
                                         <th style="width:120px">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody id="studentsTable">
+                                <tbody style="overflow-y: scroll;" id="studentsTable">
 
                                 </tbody>
                             </table>
@@ -303,7 +303,7 @@ $classes = $admin->getClasses($pdo);
             fetch("https://opensheet.elk.sh/17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o/Sheet1")
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     fetch("add_student_in_bulk.php", {
                             method: "POST",
                             headers: {
@@ -330,7 +330,7 @@ $classes = $admin->getClasses($pdo);
                                 "data": data
                             })
                         })
-                        .then(res => console.log(res.text()))
+                        // .then(res => console.log(res.text()))
                     // .then(res => {
                     //     console.log(res.text())
                     // })
@@ -360,9 +360,9 @@ $classes = $admin->getClasses($pdo);
                     data.forEach(student => {
                         html += `
                         <tr>
-                            <td>
+                            <!--<td>
                                 <input type="checkbox" name="selected_ids[]" value="${student.id}" class="rowCheckbox">
-                            </td>
+                            </td>-->
 
                             <td>
                                 <img src="../${student.picture}" alt="${student.fullname}" class="student-photo">
@@ -432,7 +432,7 @@ $classes = $admin->getClasses($pdo);
                     });
 
                     studentsTable.innerHTML = html;
-                    console.log(data);
+                    // console.log(data);
                 })
         }
         document.addEventListener("DOMContentLoaded", () => {
