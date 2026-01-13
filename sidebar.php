@@ -61,6 +61,7 @@
         background: #fff;
         z-index: 20;
         position: fixed;
+        width: 250px;
     }
 
     [closed-sidebar] {
@@ -83,7 +84,7 @@
         background: rgba(115, 115, 115, 0.1);
     }
 
-    @media(min-width:992px) {
+    /* @media(min-width: 2000px) {
         .toggler-parent {
             display: none;
         }
@@ -92,8 +93,13 @@
             left: 0%;
             position: fixed;
         }
-    }
-
+    } */
+    @media(max-width: 1024px)
+{
+    .toggler-parent {
+            display: block;
+        }
+}
     * {
         font-family: Montserrat;
     }
