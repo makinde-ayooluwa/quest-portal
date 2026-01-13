@@ -68,10 +68,21 @@ include "student_includes/student.inc.php";
     <div class="profile-card">
         <div class="profile-header d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-                <img src="<?php
+                <img data-bs-toggle="modal"
+                    data-bs-target="#profile-image"
+                    src="<?php
                             echo $studentData['picture'];
                             // Example: echo "SS2A";
                             ?>" alt="Student Avatar" class="profile-avatar me-3">
+                <div id="profile-image" class="modal fade">
+                    <div class="modal-dialog">
+                        <img width="100%"
+                            src="<?php
+                                    echo $studentData['picture'];
+                                    // Example: echo "SS2A";
+                                    ?>" alt="Student Avatar" class="">
+                    </div>
+                </div>
                 <div>
                     <h2 class="mb-0">
                         <?php
@@ -176,7 +187,7 @@ include "student_includes/student.inc.php";
                 </div>
             </div>
         </div>
-        
+
         <!--<h4 class="mt-4 mb-3">Quick Actions</h4>
         <div class="d-flex flex-wrap gap-2">
             <a href="result.php" class="btn btn-success"><i class="bi bi-bar-chart me-1"></i>View Results</a>

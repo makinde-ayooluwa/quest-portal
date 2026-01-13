@@ -198,11 +198,11 @@ tailwind.min.css">-->
                             ?>
                             " alt="Profile" width="32"
                                 class="rounded-circle me-2 border">
-                            <span>
+                            <!-- <span>
                                 <?php
-                                echo $studentData["fullname"];
+                                //echo $studentData["fullname"];
                                 ?>
-                            </span>
+                            </span> -->
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                             <li><a class="dropdown-item" href="profile.php"><i class="bi bi-person me-2"></i>My Profile</a></li>
