@@ -311,7 +311,7 @@ $classes = $admin->getClasses($pdo);
                             },
                             body: JSON.stringify(data)
                         })
-                        .then(res => res.json())
+                        // .then(res => res.json())
                     // .then(result => console.log(result))
                     // .catch(err => console.error(err));
                     fetch("update_student_in_bulk.php", {
