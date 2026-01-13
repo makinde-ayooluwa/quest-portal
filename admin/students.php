@@ -144,7 +144,7 @@ $classes = $admin->getClasses($pdo);
                     </form>
                 </div>
                 <!-- Promote Modal -->
-                <div class="modal fade" id="promoteModal" tabindex="-1" aria-hidden="true">
+                <!-- <div class="modal fade" id="promoteModal" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-sm modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -154,9 +154,9 @@ $classes = $admin->getClasses($pdo);
                             <div class="modal-body">
                                 <div class="mb-2">Select destination class:</div>
                                 <select id="promoteClassSelect" class="form-select">
-                                    <?php foreach ($classes as $c) {
+                                    <?php /*foreach ($classes as $c) {
                                         echo '<option value="' . htmlspecialchars($c["class_name"]) . '">' . htmlspecialchars($c["class_name"]) . '</option>';
-                                    } ?>
+                                    }*/ ?>
                                 </select>
                             </div>
                             <div class="modal-footer">
@@ -165,7 +165,7 @@ $classes = $admin->getClasses($pdo);
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <script>
                     // Simple search/filter for students table
                     document.querySelector('.students-card form').addEventListener('input', function(e) {
@@ -322,15 +322,15 @@ $classes = $admin->getClasses($pdo);
                         body: JSON.stringify(data)
                     })
                     fetch("add_class_names.php", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                "data": data
-                            })
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            "data": data
                         })
-                        // .then(res => console.log(res.text()))
+                    })
+                    // .then(res => console.log(res.text()))
                     // .then(res => {
                     //     console.log(res.text())
                     // })
@@ -388,7 +388,7 @@ $classes = $admin->getClasses($pdo);
                                     <i class="bi bi-eye"></i>
                                 </a>
 
-                                <!--<button type="button" 
+                                <!--<button type="button"
                                         class="btn btn-sm btn-outline-success p-1 me-1 promote-btn"
                                         data-id="${student.id}">
                                     <i class="bi bi-arrow-up-circle"></i>
@@ -406,7 +406,7 @@ $classes = $admin->getClasses($pdo);
                         <!-- Promote Modal -->
 
                         <!-- Delete Modal -->
-                        <div class="modal fade" id="modal_${student.id}" tabindex="-1">
+                        <!--<div class="modal fade" id="modal_${student.id}" tabindex="-1">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -427,7 +427,7 @@ $classes = $admin->getClasses($pdo);
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     `;
                     });
 

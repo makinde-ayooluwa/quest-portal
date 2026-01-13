@@ -116,7 +116,7 @@
          border-bottom: 1px solid #dee2e6;
      }
 
-     @media (max-width: 991px) {
+     @media (max-width: 769px) {
          .sidebar {
              transform: translateX(-100%);
              position: fixed;
@@ -137,6 +137,10 @@
              display: inline-block;
          }
 
+
+     }
+
+     @media(max-width:992px) {
          .search-container {
              display: none;
          }

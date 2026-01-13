@@ -4,14 +4,15 @@ require_once 'student_includes/autoloader.inc.php';
 require_once 'student_includes/db.inc.php';
 
 include "student_includes/student.inc.php";
-function fetchResults($pdo,$studentData){
-    $sql = "SELECT * FROM results WHERE student_admission_number = :admission_number";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(":admission_number",$studentData["admission_number"]);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+function fetchResults($pdo, $studentData)
+{
+  $sql = "SELECT * FROM results WHERE student_admission_number = :admission_number";
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindParam(":admission_number", $studentData["admission_number"]);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-$studentResult = fetchResults($pdo,$studentData);
+$studentResult = fetchResults($pdo, $studentData);
 
 
 
@@ -181,46 +182,48 @@ $studentResult = fetchResults($pdo,$studentData);
             </div>
             <div class="mb-4">
               <h4 class="mb-3">Academic Results</h4>
-              <table class="table table-bordered result-table">
-                <thead class="table-dark">
-                  <tr>
-                    <th>Term</th>
-                    <th>Download</th>
-                    <th>Date Uploaded</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  if(empty($studentResult)){
-                    ?>
+              <div class="table-responsive" style="overflow-x: scroll;">
+                <table class="table table-bordered result-table" style="width: 100vw;">
+                  <thead class="table-dark">
                     <tr>
-                      <td colspan="3" class="text-center py-4">
-                        <i class="bi bi-file-earmark-x fs-2 text-muted mb-2"></i>
-                        <div>No results yet. Check back later</div>
-                      </td>
+                      <th>Term</th>
+                      <th>Download</th>
+                      <th>Date Uploaded</th>
                     </tr>
+                  </thead>
+                  <tbody>
                     <?php
-                  }
-                  foreach($studentResult as $result){
+                    if (empty($studentResult)) {
                     ?>
-                    <tr>
-                      <td class="fw-bold">
-                        <?php echo htmlspecialchars($result["academic_term"]) ?>
-                      </td>
-                      <td>
-                        <a class="btn btn-sm btn-success" href="assets/uploads/results/<?php echo htmlspecialchars($result["result_file"]) ?>" download>
-                          <i class="bi bi-download me-1"></i>Download
-                        </a>
-                      </td>
-                      <td>
-                        <?php echo date('M j, Y', strtotime($result["added_on"])) ?>
-                      </td>
-                    </tr>
+                      <tr>
+                        <td colspan="3" class="text-center py-4">
+                          <i class="bi bi-file-earmark-x fs-2 text-muted mb-2"></i>
+                          <div>No results yet. Check back later</div>
+                        </td>
+                      </tr>
                     <?php
-                  }
-                  ?>
-                </tbody>
-              </table>
+                    }
+                    foreach ($studentResult as $result) {
+                    ?>
+                      <tr>
+                        <td class="fw-bold">
+                          <?php echo htmlspecialchars($result["academic_term"]) ?>
+                        </td>
+                        <td>
+                          <a class="btn btn-sm btn-success" href="assets/uploads/results/<?php echo htmlspecialchars($result["result_file"]) ?>" download>
+                            <i class="bi bi-download me-1"></i>Download
+                          </a>
+                        </td>
+                        <td>
+                          <?php echo date('M j, Y', strtotime($result["added_on"])) ?>
+                        </td>
+                      </tr>
+                    <?php
+                    }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             <!-- Assignment Performance Section -->

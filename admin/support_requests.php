@@ -347,8 +347,18 @@ $support_stats = $admin->getSupportStats($pdo);
                 <span class="badge bg-primary"><?php echo count($support_requests); ?> requests</span>
             </div>
 
-            <div class="table-responsive">
-                <table class="table table-hover">
+            <div class="table-responsive" style="overflow-x: scroll;">
+                <style>
+                    .support-table{
+                        width: 100vw;
+                    }
+                    @media(min-width:992px){
+                        .support-table{
+                            width: 100%;
+                        }
+                    }
+                </style>
+                <table class="table table-hover support-table">
                     <thead>
                         <tr>
                             <!--<th>ID</th>-->

@@ -42,7 +42,7 @@ tailwind.min.css">-->
             <!-- Left: Logo or Brand -->
             <a class="navbar-brand d-flex align-items-center" href="./">
                 <img src="assets/images/quest.jpg" alt="Quest Logo" width="40" class="me-0">
-                <span class="fw-bold text-green">QUEST SCHOOLS' PORTAL</span>
+                <!-- <span class="fw-bold text-green"></span> -->
             </a>
             <!-- Center: Search -->
             <form class="d-none d-md-flex mx-auto" style="max-width: 350px;">

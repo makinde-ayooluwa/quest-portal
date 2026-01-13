@@ -81,7 +81,7 @@ include "admin_includes/admin.inc.php"; // sets $adminData and other dashboard v
                 </div>
                 <div class="flex-grow-1">
                     <h3 class="mb-1"><?php echo htmlspecialchars($adminData['fullname'] ?? 'Administrator'); ?></h3>
-                    <p class="text-muted mb-1"><?php echo htmlspecialchars($adminData['email'] ?? ''); ?></p>
+                    <!-- <p class="text-muted mb-1"><?php // echo htmlspecialchars($adminData['email'] ?? ''); ?></p> -->
                     <p class="mb-1"><span class="badge bg-primary"><?php echo htmlspecialchars($adminData['staff_role'] ?? 'Admin'); ?></span></p>
                     <div class="mt-3">
                         <a href="#editProfileModal" data-bs-toggle="modal" class="btn btn-outline-primary me-1"><i class="bi bi-pencil"></i> Edit Profile</a>

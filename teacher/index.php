@@ -206,9 +206,9 @@ $assignments = array_unique($assignments, SORT_REGULAR); // Remove duplicates if
                         <button class="btn btn-light btn-sm" onclick="window.location.href='post_assignment.php'">
                             <i class="bi bi-plus-circle"></i> Post Assignment
                         </button>
-                        <button class="btn btn-light btn-sm" onclick="window.location.href='manage_results.php'">
+                        <!-- <button class="btn btn-light btn-sm" onclick="window.location.href='manage_results.php'">
                             <i class="bi bi-upload"></i> Upload Result
-                        </button>
+                        </button> -->
                         <button class="btn btn-light btn-sm" onclick="window.location.href='view_class.php'">
                             <i class="bi bi-eye"></i> View Classes
                         </button>

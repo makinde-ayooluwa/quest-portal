@@ -201,11 +201,11 @@
             <li><a class="text-primary" href="view_assignments.php"><i class="bi bi-list me-2"></i>View Assignments</a></li>
             <li><a class="text-primary" href="post_assignment.php"><i class="bi bi-plus me-2"></i>Post New</a></li>
         </div>
-        <li><a href="manage_results.php"><i class="fas fa-file-earmark-text me-2"></i>Results</a></li>
+        <!-- <li><a href="manage_results.php"><i class="fas fa-file-earmark-text me-2"></i>Results</a></li> -->
         <li data-bs-toggle="collapse" data-bs-target="#studentManagement"><a href="javascript:;"><i class="fas fa-users me-2"></i>Students</a></li>
         <div class="collapse" id="studentManagement">
             <li><a class="text-primary" href="view_students.php"><i class="bi bi-people me-2"></i>View Students</a></li>
-            <li><a class="text-primary" href="manage_results.php"><i class="bi bi-upload me-2"></i>Upload Result</a></li>
+            <!-- <li><a class="text-primary" href="manage_results.php"><i class="bi bi-upload me-2"></i>Upload Result</a></li> -->
         </div>
     </ul>
     <div class="sidebar-header">
