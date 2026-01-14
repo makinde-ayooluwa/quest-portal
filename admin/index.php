@@ -214,18 +214,18 @@ try {
   <?php include "header_sidebar.php" ?>
   <?php
   if (isset($_SESSION["error"])) {
-    ?>
+  ?>
     <script>
       toastr.error("<?php echo $_SESSION["error"] ?>", "Error!");
     </script>
-    <?php
+  <?php
     unset($_SESSION["error"]);
   } elseif (isset($_SESSION["success"])) {
-    ?>
+  ?>
     <script>
       toastr.success("<?php echo $_SESSION["success"] ?>", "Success!")
     </script>
-    <?php
+  <?php
     unset($_SESSION["success"]);
   }
   ?>
@@ -299,10 +299,10 @@ try {
             </div>
             <?php
             if ($admin->getUnverifiedStudents($pdo)) {
-              ?>
+            ?>
               <span
                 class="badge m-0 bg-danger rounded-pill"><?php echo count($admin->getUnverifiedStudents($pdo)) ?></span>
-              <?php
+            <?php
             }
             ?>
           </div>
@@ -321,9 +321,9 @@ try {
             </div>
             <?php
             if ($admin->getUnverifiedStaffs($pdo)) {
-              ?>
+            ?>
               <span class="badge m-0 bg-danger rounded-pill"><?php echo count($admin->getUnverifiedStaffs($pdo)) ?></span>
-              <?php
+            <?php
             }
             ?>
           </div>
@@ -387,7 +387,7 @@ try {
                       <tr>
                         <td colspan="6" class="text-center py-4">No classes found.</td>
                       </tr>
-                    <?php } else {
+                      <?php } else {
                       $i = 1;
                       foreach ($classes as $class) {
                         $cname = $class['class_name'];
@@ -427,7 +427,7 @@ try {
                         $studentCount = (int) $sStmt->fetchColumn();
 
                         $status = isset($class['class_status']) ? $class['class_status'] : '';
-                        ?>
+                      ?>
                         <tr data-class-name="<?php echo htmlspecialchars(strtolower($cname)); ?>"
                           data-mentors="<?php echo htmlspecialchars(implode(',', $mentorNames)); ?>">
                           <td><?php echo $i++; ?></td>
@@ -435,12 +435,12 @@ try {
                           <td><?php echo implode('', $mentorHtml); ?></td>
                           <td><b class="fs-5"><?php echo $studentCount; ?></b></td>
                           <td><?php if ($status === 'Active') {
-                            echo '<span class="badge bg-success">Active</span>';
-                          } elseif ($status) {
-                            echo '<span class="badge bg-secondary">' . htmlspecialchars($status) . '</span>';
-                          } else {
-                            echo '<span class="badge bg-light text-dark">-</span>';
-                          } ?></td>
+                                echo '<span class="badge bg-success">Active</span>';
+                              } elseif ($status) {
+                                echo '<span class="badge bg-secondary">' . htmlspecialchars($status) . '</span>';
+                              } else {
+                                echo '<span class="badge bg-light text-dark">-</span>';
+                              } ?></td>
                           <td>
                             <a href="edit_class.php?id=<?php echo $class['id']; ?>" class="btn btn-sm btn-primary"
                               title="Edit"><i class="bi bi-pencil"></i></a>
@@ -448,16 +448,16 @@ try {
                               class="btn btn-sm btn-outline-secondary ms-1" title="View"><i class="bi bi-eye"></i></a>
                           </td>
                         </tr>
-                      <?php }
+                    <?php }
                     } ?>
                   </tbody>
                 </table>
               </div>
             </div>
             <script>
-              document.getElementById('classSearch')?.addEventListener('input', function (e) {
+              document.getElementById('classSearch')?.addEventListener('input', function(e) {
                 const q = e.target.value.toLowerCase();
-                document.querySelectorAll('#classesTable tbody tr').forEach(function (row) {
+                document.querySelectorAll('#classesTable tbody tr').forEach(function(row) {
                   const name = row.getAttribute('data-class-name') || '';
                   const mentors = row.getAttribute('data-mentors') || '';
                   row.style.display = (name.includes(q) || mentors.includes(q)) ? '' : 'none';
@@ -475,8 +475,8 @@ try {
                       <div class="activity-item d-flex align-items-start mb-3 pb-3 border-bottom">
                         <div class="activity-icon me-3">
                           <i class="bi bi-circle-fill text-<?php
-                          echo $activity['user_type'] === 'admin' ? 'primary' : ($activity['user_type'] === 'staff' ? 'success' : 'info');
-                          ?>"></i>
+                                                            echo $activity['user_type'] === 'admin' ? 'primary' : ($activity['user_type'] === 'staff' ? 'success' : 'info');
+                                                            ?>"></i>
                         </div>
                         <div class="activity-content flex-grow-1">
                           <div class="d-flex justify-content-between align-items-start">
@@ -512,8 +512,8 @@ try {
                       <div class="notification-item d-flex align-items-start mb-3 pb-3 border-bottom">
                         <div class="notification-icon me-3">
                           <i class="bi bi-circle-fill text-<?php
-                          echo $notification['type'] === 'error' ? 'danger' : ($notification['type'] === 'warning' ? 'warning' : 'info');
-                          ?>"></i>
+                                                            echo $notification['type'] === 'error' ? 'danger' : ($notification['type'] === 'warning' ? 'warning' : 'info');
+                                                            ?>"></i>
                         </div>
                         <div class="notification-content flex-grow-1">
                           <div class="d-flex justify-content-between align-items-start">
@@ -588,7 +588,7 @@ try {
             <div class="card-body">
               <h5 class="card-title"><i class="bi bi-person-lines-fill me-2"></i>Student Management</h5>
               <ul class="mb-0">
-                <li>Add, edit, and track student records across schools.</li>
+                <!-- <li>Add, edit, and track student records across schools.</li> -->
                 <li>View student profiles and academic history.</li>
                 <li>Search and filter by class, school, or status.</li>
               </ul>
@@ -620,8 +620,10 @@ try {
                 <li>Share resources with students and staff.</li>
                 <li>Manage downloadable content and access.</li>
               </ul>
-              <a href="upload_material.php" class="btn btn-info btn-sm mt-2"><i class="bi bi-cloud-upload"></i> Upload
-                Material</a>
+              <button class="btn btn-info btn-sm mt-2" disabled>
+                <a href="upload_material.php"><i class="bi bi-cloud-upload"></i> Upload
+                  Material</a>
+              </button>
             </div>
           </div>
         </div>
@@ -645,326 +647,326 @@ try {
   <?php include "footer.php" ?>
   <script>
     // Prevent right-click context menu
-    document.addEventListener('contextmenu', function (e) {
+    document.addEventListener('contextmenu', function(e) {
       e.preventDefault();
     });
 
     // Intro System Functions
-    // let currentCard = null;
-    // let currentSectionParent = null;
+    let currentCard = null;
+    let currentSectionParent = null;
 
-    // function pauseTimeout() {
-    //   clearTimeout(introTimeout);
-    // }
+    function pauseTimeout() {
+      clearTimeout(introTimeout);
+    }
 
-    // function resumeTimeout() {
-    //   introTimeout = setTimeout(function() {
-    //     nextIntro();
-    //   }, 8000);
-    // }
+    function resumeTimeout() {
+      introTimeout = setTimeout(function() {
+        nextIntro();
+      }, 8000);
+    }
 
-    // function sections() {
-    //   return [{
-    //       "title": "Navigation Header",
-    //       "functions": [
-    //         "Contains the QUEST logo and branding",
-    //         "Global search bar for finding students, staff, and classes",
-    //         "Admin profile dropdown with account options"
-    //       ],
-    //       "parent": document.querySelector("header"),
-    //       "parentLocation": document.querySelector("header").getBoundingClientRect()
-    //     },
-    //     {
-    //       "title": "Sidebar Navigation",
-    //       "functions": [
-    //         "Collapsible menu with dashboard sections",
-    //         "Quick access to Students, Staff, and System Management",
-    //         "Profile section with account settings"
-    //       ],
-    //       "parent": document.querySelector("#sidebar"),
-    //       "parentLocation": document.querySelector("#sidebar").getBoundingClientRect()
-    //     },
-    //     {
-    //       "title": "Sidebar Toggle",
-    //       "functions": [
-    //         "Hamburger menu button to show/hide sidebar on mobile",
-    //         "Responsive design for smaller screens"
-    //       ],
-    //       "parent": document.querySelector("#sidebarToggle"),
-    //       "parentLocation": document.querySelector("#sidebarToggle").getBoundingClientRect()
-    //     },
-    //     {
-    //       "title": "Welcome Greeting",
-    //       "functions": [
-    //         "Personalized welcome message with admin name",
-    //         "Quick overview of the dashboard"
-    //       ],
-    //       "parent": document.querySelector("#greeting"),
-    //       "parentLocation": document.querySelector("#greeting").getBoundingClientRect()
-    //     },
-    //     {
-    //       "title": "Quick Actions Panel",
-    //       "functions": [
-    //         "Add new students, staff, notifications, and events",
-    //         "Access common administrative tasks quickly"
-    //       ],
-    //       "parent": document.querySelector(".quick-actions"),
-    //       "parentLocation": document.querySelector(".quick-actions").getBoundingClientRect()
-    //     },
-    //     {
-    //       "title": "Statistics Cards",
-    //       "functions": [
-    //         "View total students, staff, classes, and system health",
-    //         "Monitor key metrics and notifications"
-    //       ],
-    //       "parent": document.querySelector(".stats"),
-    //       "parentLocation": document.querySelector(".stats").getBoundingClientRect()
-    //     },
-    //     {
-    //       "title": "Classes Table",
-    //       "functions": [
-    //         "Search and filter classes by name or teacher",
-    //         "View class details, student counts, and status",
-    //         "Edit or view individual classes"
-    //       ],
-    //       "parent": document.querySelector("#classes"),
-    //       "parentLocation": document.querySelector("#classes").getBoundingClientRect()
-    //     },
-    //     {
-    //       "title": "Admin Features",
-    //       "functions": [
-    //         "Manage students, staff, attendance, and content",
-    //         "Access various administrative tools and reports"
-    //       ],
-    //       "parent": document.querySelectorAll("section")[document.querySelectorAll("section").length - 1],
-    //       "parentLocation": document.querySelectorAll("section")[document.querySelectorAll("section").length - 1].getBoundingClientRect()
-    //     }
-    //   ];
-    // }
+    function sections() {
+      return [{
+          "title": "Navigation Header",
+          "functions": [
+            "Contains the QUEST logo and branding",
+            "Global search bar for finding students, staff, and classes",
+            "Admin profile dropdown with account options"
+          ],
+          "parent": document.querySelector("header"),
+          "parentLocation": document.querySelector("header").getBoundingClientRect()
+        },
+        {
+          "title": "Sidebar Navigation",
+          "functions": [
+            "Collapsible menu with dashboard sections",
+            "Quick access to Students, Staff, and System Management",
+            "Profile section with account settings"
+          ],
+          "parent": document.querySelector("#sidebar"),
+          "parentLocation": document.querySelector("#sidebar").getBoundingClientRect()
+        },
+        {
+          "title": "Sidebar Toggle",
+          "functions": [
+            "Hamburger menu button to show/hide sidebar on mobile",
+            "Responsive design for smaller screens"
+          ],
+          "parent": document.querySelector("#sidebarToggle"),
+          "parentLocation": document.querySelector("#sidebarToggle").getBoundingClientRect()
+        },
+        {
+          "title": "Welcome Greeting",
+          "functions": [
+            "Personalized welcome message with admin name",
+            "Quick overview of the dashboard"
+          ],
+          "parent": document.querySelector("#greeting"),
+          "parentLocation": document.querySelector("#greeting").getBoundingClientRect()
+        },
+        {
+          "title": "Quick Actions Panel",
+          "functions": [
+            "Add new students, staff, notifications, and events",
+            "Access common administrative tasks quickly"
+          ],
+          "parent": document.querySelector(".quick-actions"),
+          "parentLocation": document.querySelector(".quick-actions").getBoundingClientRect()
+        },
+        {
+          "title": "Statistics Cards",
+          "functions": [
+            "View total students, staff, classes, and system health",
+            "Monitor key metrics and notifications"
+          ],
+          "parent": document.querySelector(".stats"),
+          "parentLocation": document.querySelector(".stats").getBoundingClientRect()
+        },
+        {
+          "title": "Classes Table",
+          "functions": [
+            "Search and filter classes by name or teacher",
+            "View class details, student counts, and status",
+            "Edit or view individual classes"
+          ],
+          "parent": document.querySelector("#classes"),
+          "parentLocation": document.querySelector("#classes").getBoundingClientRect()
+        },
+        {
+          "title": "Admin Features",
+          "functions": [
+            "Manage students, staff, attendance, and content",
+            "Access various administrative tools and reports"
+          ],
+          "parent": document.querySelectorAll("section")[document.querySelectorAll("section").length - 1],
+          "parentLocation": document.querySelectorAll("section")[document.querySelectorAll("section").length - 1].getBoundingClientRect()
+        }
+      ];
+    }
 
-    // function displayCard(index) {
-    //   let section = sections()[index];
-    //   let card = document.createElement("div");
-    //   card.className = "info-card";
-    //   card.id = "info-card-" + index;
+    function displayCard(index) {
+      let section = sections()[index];
+      let card = document.createElement("div");
+      card.className = "info-card";
+      card.id = "info-card-" + index;
 
-    //   // Get fresh bounding rect after scrolling
-    //   let rect = section.parent.getBoundingClientRect();
+      // Get fresh bounding rect after scrolling
+      let rect = section.parent.getBoundingClientRect();
 
-    //   // Calculate position to avoid overflow
-    //   let cardWidth = 300;
-    //   let cardHeight = 200; // Approximate min height
-    //   let top = rect.top + window.scrollY + 10;
-    //   let left = rect.left + rect.width + 10;
+      // Calculate position to avoid overflow
+      let cardWidth = 300;
+      let cardHeight = 200; // Approximate min height
+      let top = rect.top + window.scrollY + 10;
+      let left = rect.left + rect.width + 10;
 
-    //   // Adjust left if it would overflow right edge
-    //   if (left + cardWidth > window.innerWidth + window.scrollX) {
-    //     left = rect.left - cardWidth + 500;
-    //   }
+      // Adjust left if it would overflow right edge
+      if (left + cardWidth > window.innerWidth + window.scrollX) {
+        left = rect.left - cardWidth + 500;
+      }
 
-    //   // Adjust top if it would overflow bottom edge
-    //   if (top + cardHeight > window.innerHeight + window.scrollY) {
-    //     top = rect.top + window.scrollY - cardHeight - 10;
-    //   }
+      // Adjust top if it would overflow bottom edge
+      if (top + cardHeight > window.innerHeight + window.scrollY) {
+        top = rect.top + window.scrollY - cardHeight - 10;
+      }
 
-    //   card.style.top = top + "px";
-    //   card.style.left = left + "px";
+      card.style.top = top + "px";
+      card.style.left = left + "px";
 
-    //   // Scroll the page to the card's position
-    //   window.scrollTo({
-    //     top: top - 50,
-    //     behavior: 'smooth'
-    //   });
+      // Scroll the page to the card's position
+      window.scrollTo({
+        top: top - 50,
+        behavior: 'smooth'
+      });
 
-    //   let title = document.createElement("h4");
-    //   title.innerText = section.title;
-    //   card.appendChild(title);
+      let title = document.createElement("h4");
+      title.innerText = section.title;
+      card.appendChild(title);
 
-    //   let funcList = document.createElement("ul");
-    //   section.functions.forEach(function(func) {
-    //     let funcItem = document.createElement("li");
-    //     funcItem.innerText = func;
-    //     funcList.appendChild(funcItem);
-    //   });
-    //   card.appendChild(funcList);
+      let funcList = document.createElement("ul");
+      section.functions.forEach(function(func) {
+        let funcItem = document.createElement("li");
+        funcItem.innerText = func;
+        funcList.appendChild(funcItem);
+      });
+      card.appendChild(funcList);
 
-    //   let btnContainer = document.createElement("div");
-    //   btnContainer.style.textAlign = "right";
+      let btnContainer = document.createElement("div");
+      btnContainer.style.textAlign = "right";
 
-    //   let skipBtn = document.createElement("button");
-    //   skipBtn.className = "skip-btn";
-    //   skipBtn.innerText = "Skip Intro";
-    //   skipBtn.onclick = function() {
-    //     skipIntro();
-    //   };
-    //   btnContainer.appendChild(skipBtn);
+      let skipBtn = document.createElement("button");
+      skipBtn.className = "skip-btn";
+      skipBtn.innerText = "Skip Intro";
+      skipBtn.onclick = function() {
+        skipIntro();
+      };
+      btnContainer.appendChild(skipBtn);
 
-    //   let nextBtn = document.createElement("button");
-    //   nextBtn.className = "next-btn";
-    //   nextBtn.innerText = index === sections().length - 1 ? "Finish" : "Next";
-    //   nextBtn.onclick = function() {
-    //     nextIntro();
-    //   };
-    //   btnContainer.appendChild(nextBtn);
+      let nextBtn = document.createElement("button");
+      nextBtn.className = "next-btn";
+      nextBtn.innerText = index === sections().length - 1 ? "Finish" : "Next";
+      nextBtn.onclick = function() {
+        nextIntro();
+      };
+      btnContainer.appendChild(nextBtn);
 
-    //   card.appendChild(btnContainer);
+      card.appendChild(btnContainer);
 
-    //   document.body.appendChild(card);
-    //   card.style.display = "block";
+      document.body.appendChild(card);
+      card.style.display = "block";
 
-    //   // Ensure the entire card is visible by scrolling into view if necessary
-    //   card.scrollIntoView({
-    //     behavior: 'smooth',
-    //     block: 'nearest',
-    //     inline: 'nearest'
-    //   });
+      // Ensure the entire card is visible by scrolling into view if necessary
+      card.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'nearest'
+      });
 
-    //   // Store current card and section for timeout management
-    //   currentCard = card;
-    //   currentSectionParent = section.parent;
+      // Store current card and section for timeout management
+      currentCard = card;
+      currentSectionParent = section.parent;
 
-    //   // Add hover event listeners to pause/resume timeout on the info card and highlighted element
-    //   card.addEventListener('mouseenter', pauseTimeout);
-    //   card.addEventListener('mouseleave', resumeTimeout);
+      // Add hover event listeners to pause/resume timeout on the info card and highlighted element
+      card.addEventListener('mouseenter', pauseTimeout);
+      card.addEventListener('mouseleave', resumeTimeout);
 
-    //   // Also add to the highlighted parent element
-    //   section.parent.addEventListener('mouseenter', pauseTimeout);
-    //   section.parent.addEventListener('mouseleave', resumeTimeout);
-    // }
+      // Also add to the highlighted parent element
+      section.parent.addEventListener('mouseenter', pauseTimeout);
+      section.parent.addEventListener('mouseleave', resumeTimeout);
+    }
 
-    // function completeIntro() {
-    //   // Clear timeout
-    //   clearTimeout(introTimeout);
+    function completeIntro() {
+      // Clear timeout
+      clearTimeout(introTimeout);
 
-    //   // Remove event listeners from current card and section
-    //   if (currentCard) {
-    //     currentCard.removeEventListener('mouseenter', pauseTimeout);
-    //     currentCard.removeEventListener('mouseleave', resumeTimeout);
-    //   }
-    //   if (currentSectionParent) {
-    //     currentSectionParent.removeEventListener('mouseenter', pauseTimeout);
-    //     currentSectionParent.removeEventListener('mouseleave', resumeTimeout);
-    //   }
+      // Remove event listeners from current card and section
+      if (currentCard) {
+        currentCard.removeEventListener('mouseenter', pauseTimeout);
+        currentCard.removeEventListener('mouseleave', resumeTimeout);
+      }
+      if (currentSectionParent) {
+        currentSectionParent.removeEventListener('mouseenter', pauseTimeout);
+        currentSectionParent.removeEventListener('mouseleave', resumeTimeout);
+      }
 
-    //   // Remove all highlights
-    //   sections().forEach(function(sec) {
-    //     sec.parent.classList.remove("highlight");
-    //   });
+      // Remove all highlights
+      sections().forEach(function(sec) {
+        sec.parent.classList.remove("highlight");
+      });
 
-    //   // Hide all cards
-    //   for (let i = 0; i < sections().length; i++) {
-    //     let card = document.getElementById("info-card-" + i);
-    //     if (card) {
-    //       card.style.display = "none";
-    //     }
-    //   }
+      // Hide all cards
+      for (let i = 0; i < sections().length; i++) {
+        let card = document.getElementById("info-card-" + i);
+        if (card) {
+          card.style.display = "none";
+        }
+      }
 
-    //   // Mark as shown
-    //   localStorage.setItem('introShown', 'true');
-    // }
+      // Mark as shown
+      localStorage.setItem('introShown', 'true');
+    }
 
-    // let currentIntroIndex = 0;
-    // let introTimeout;
+    let currentIntroIndex = 0;
+    let introTimeout;
 
-    // function introduce() {
-    //   if (currentIntroIndex < sections().length) {
-    //     // Highlight the current section
-    //     let section = sections()[currentIntroIndex];
-    //     section.parent.classList.add("highlight");
+    function introduce() {
+      if (currentIntroIndex < sections().length) {
+        // Highlight the current section
+        let section = sections()[currentIntroIndex];
+        section.parent.classList.add("highlight");
 
-    //     // Scroll to the section
-    //     section.parent.scrollIntoView({
-    //       behavior: 'smooth',
-    //       block: 'center'
-    //     });
+        // Scroll to the section
+        section.parent.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
 
-    //     // Display the card
-    //     displayCard(currentIntroIndex);
+        // Display the card
+        displayCard(currentIntroIndex);
 
-    //     // Auto-advance after 8 seconds
-    //     introTimeout = setTimeout(function() {
-    //       nextIntro();
-    //     }, 8000);
-    //   } else {
-    //     // Intro finished, remove highlights
-    //     sections().forEach(function(sec) {
-    //       sec.parent.classList.remove("highlight");
-    //     });
-    //     localStorage.setItem('introShown', 'true');
-    //   }
-    // }
+        // Auto-advance after 8 seconds
+        introTimeout = setTimeout(function() {
+          nextIntro();
+        }, 8000);
+      } else {
+        // Intro finished, remove highlights
+        sections().forEach(function(sec) {
+          sec.parent.classList.remove("highlight");
+        });
+        localStorage.setItem('introShown', 'true');
+      }
+    }
 
-    // function nextIntro() {
-    //   // Clear timeout
-    //   clearTimeout(introTimeout);
+    function nextIntro() {
+      // Clear timeout
+      clearTimeout(introTimeout);
 
-    //   // Remove event listeners from current card and section
-    //   if (currentCard) {
-    //     currentCard.removeEventListener('mouseenter', pauseTimeout);
-    //     currentCard.removeEventListener('mouseleave', resumeTimeout);
-    //   }
-    //   if (currentSectionParent) {
-    //     currentSectionParent.removeEventListener('mouseenter', pauseTimeout);
-    //     currentSectionParent.removeEventListener('mouseleave', resumeTimeout);
-    //   }
+      // Remove event listeners from current card and section
+      if (currentCard) {
+        currentCard.removeEventListener('mouseenter', pauseTimeout);
+        currentCard.removeEventListener('mouseleave', resumeTimeout);
+      }
+      if (currentSectionParent) {
+        currentSectionParent.removeEventListener('mouseenter', pauseTimeout);
+        currentSectionParent.removeEventListener('mouseleave', resumeTimeout);
+      }
 
-    //   // Remove highlight from current section
-    //   if (currentIntroIndex < sections().length) {
-    //     sections()[currentIntroIndex].parent.classList.remove("highlight");
-    //   }
+      // Remove highlight from current section
+      if (currentIntroIndex < sections().length) {
+        sections()[currentIntroIndex].parent.classList.remove("highlight");
+      }
 
-    //   // Hide current card
-    //   let currentCardElement = document.getElementById("info-card-" + currentIntroIndex);
-    //   if (currentCardElement) {
-    //     currentCardElement.style.display = "none";
-    //   }
+      // Hide current card
+      let currentCardElement = document.getElementById("info-card-" + currentIntroIndex);
+      if (currentCardElement) {
+        currentCardElement.style.display = "none";
+      }
 
-    //   // Move to next
-    //   currentIntroIndex++;
-    //   introduce();
-    // }
+      // Move to next
+      currentIntroIndex++;
+      introduce();
+    }
 
-    // function skipIntro() {
-    //   // Clear timeout
-    //   clearTimeout(introTimeout);
+    function skipIntro() {
+      // Clear timeout
+      clearTimeout(introTimeout);
 
-    //   // Remove event listeners from current card and section
-    //   if (currentCard) {
-    //     currentCard.removeEventListener('mouseenter', pauseTimeout);
-    //     currentCard.removeEventListener('mouseleave', resumeTimeout);
-    //   }
-    //   if (currentSectionParent) {
-    //     currentSectionParent.removeEventListener('mouseenter', pauseTimeout);
-    //     currentSectionParent.removeEventListener('mouseleave', resumeTimeout);
-    //   }
+      // Remove event listeners from current card and section
+      if (currentCard) {
+        currentCard.removeEventListener('mouseenter', pauseTimeout);
+        currentCard.removeEventListener('mouseleave', resumeTimeout);
+      }
+      if (currentSectionParent) {
+        currentSectionParent.removeEventListener('mouseenter', pauseTimeout);
+        currentSectionParent.removeEventListener('mouseleave', resumeTimeout);
+      }
 
-    //   // Remove all highlights
-    //   sections().forEach(function(sec) {
-    //     sec.parent.classList.remove("highlight");
-    //   });
+      // Remove all highlights
+      sections().forEach(function(sec) {
+        sec.parent.classList.remove("highlight");
+      });
 
-    //   // Hide all cards
-    //   for (let i = 0; i < sections().length; i++) {
-    //     let card = document.getElementById("info-card-" + i);
-    //     if (card) {
-    //       card.style.display = "none";
-    //     }
-    //   }
+      // Hide all cards
+      for (let i = 0; i < sections().length; i++) {
+        let card = document.getElementById("info-card-" + i);
+        if (card) {
+          card.style.display = "none";
+        }
+      }
 
-    //   // Mark as shown
-    //   localStorage.setItem('introShown', 'true');
-    // }
+      // Mark as shown
+      localStorage.setItem('introShown', 'true');
+    }
 
-    // // Check if intro should be shown
-    // document.addEventListener("DOMContentLoaded", function() {
-    //   if (!localStorage.getItem('introShown')) {
-    //     setTimeout(function() {
-    //       introduce();
-    //     }, 1000); // Delay to ensure page is fully loaded
-    //   }
-    // });
+    // Check if intro should be shown
+    document.addEventListener("DOMContentLoaded", function() {
+      if (!localStorage.getItem('introShown')) {
+        setTimeout(function() {
+          introduce();
+        }, 1000); // Delay to ensure page is fully loaded
+      }
+    });
 
-    // // Reset intro on page unload (simulate closing/reopening)
+    // Reset intro on page unload (simulate closing/reopening)
     // window.addEventListener('beforeunload', function() {
     //   localStorage.removeItem('introShown');
     // });

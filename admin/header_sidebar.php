@@ -116,7 +116,7 @@
          border-bottom: 1px solid #dee2e6;
      }
 
-     @media (max-width: 769px) {
+     @media (max-width: 1024px) {
          .sidebar {
              transform: translateX(-100%);
              position: fixed;
@@ -273,7 +273,7 @@
 
      // Optional: Close sidebar when clicking outside on mobile
      document.addEventListener('click', function(event) {
-         if (window.innerWidth <= 991) {
+         if (window.innerWidth <= 1024) {
              if (!sidebar.contains(event.target) && !sidebarToggle.contains(event.target)) {
                  sidebar.classList.remove('active');
              }
