@@ -346,16 +346,17 @@ $classes = $admin->getClasses($pdo);
                 .then(data => {
                     const studentsTable = document.getElementById("studentsTable");
                     studentsTable.innerHTML = ""; // clear table first
+                    let html = "";
 
-                    if (!data || data.length === 0) {
-                        studentsTable.innerHTML = `
+                    if (!data || data.length < 1 || data.length == 0) {
+                        html = `
                         <tr>
                             <td colspan="9" class="text-center py-4">No students found.</td>
                         </tr>`;
 
                     }
 
-                    let html = "";
+                    
 
                     data.forEach(student => {
                         html += `
