@@ -140,7 +140,7 @@
 
      }
 
-     @media(max-width:992px) {
+     @media(max-width:1024px) {
          .search-container {
              display: none;
          }
