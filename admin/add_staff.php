@@ -147,7 +147,7 @@ unset($_SESSION['success']);
 
                     <div class="d-flex justify-content-end gap-2 mt-4">
                         <a href="staff_management.php" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Cancel</a>
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Add Staff/Mentor</button>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Add Staff</button>
                     </div>
                 </form>
             </div>
