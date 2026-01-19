@@ -179,7 +179,6 @@ if (!isset($_GET["id"])) {
                                                     <path d="M3 21c0-3.866 3.582-7 9-7s9 3.134 9 7" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
                                                 <h6 class="mt-3">No students in <?php echo htmlspecialchars($className, ENT_QUOTES); ?></h6>
-                                                <p class="small text-muted">You can add a student to this class</p>
                                                 <div class="mt-3">
                                                     <!-- <a href="add_student.php" class="btn btn-primary btn-sm">Add Student</a> -->
                                                 </div>
