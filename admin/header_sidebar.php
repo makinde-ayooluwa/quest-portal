@@ -175,7 +175,7 @@
              <li><i class="bi bi-envelope mx-4"></i><?php echo $adminData["email"] ?></li>
              <li class="nav-item dropdown">
                  <button class="btn nav-link dropdown-toggle d-flex align-items-center gap-2 p-0" id="adminDropdown" data-bs-toggle="dropdown" aria-expanded="false" type="button">
-                     <img src="<?php echo htmlspecialchars($adminData["picture"] ?? 'assets/images/quest.jpg'); ?>" alt="Profile Picture" class="rounded-circle" width="40">
+                     <img src="<?php echo htmlspecialchars($adminData["picture"] ?? 'assets/images/quest.jpg'); ?>" alt="Profile Picture" class="rounded-circle" width="30">
                      <span class="d-none d-md-inline text-white ms-2"><?php echo htmlspecialchars($adminData["fullname"] ?? 'Admin'); ?></span>
                  </button>
                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
