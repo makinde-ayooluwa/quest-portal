@@ -44,9 +44,7 @@ include "student_includes/student.inc.php";
             padding-bottom: 1rem;
         }
 
-        .edit-btn {
-            float: right;
-        }
+        
 
         .info-label {
             font-weight: 500;
@@ -101,7 +99,7 @@ include "student_includes/student.inc.php";
                     </span></p>-->
                 </div>
             </div>
-            <a href="./profile_edit.php" class="btn btn-primary edit-btn"><i class="bi bi-pencil me-1"></i></a>
+            <a href="./profile_edit.php" class="btn btn-white border"><i class="bi bi-pencil-fill text-primary"></i></a>
         </div>
         <h4 class="mt-4 mb-3">Personal Details</h4>
         <div class="row mb-3">

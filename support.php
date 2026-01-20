@@ -225,8 +225,8 @@ include "student_includes/student.inc.php";
                                     <option value="">Select Topic</option>
                                     <option value="assignment">📝 Assignment Issue</option>
                                     <option value="result">📊 Result/Grade Query</option>
-                                    <option value="attendance">📅 Attendance Concern</option>
-                                    <option value="scholarship">🎓 Scholarship/Program</option>
+                                    <!-- <option value="attendance">📅 Attendance Concern</option> -->
+                                    <!-- <option value="scholarship">🎓 Scholarship/Program</option> -->
                                     <option value="profile">👤 Profile Update</option>
                                     <option value="technical">💻 Technical Problem</option>
                                     <option value="other">❓ Other</option>
@@ -298,7 +298,8 @@ include "student_includes/student.inc.php";
                     </div> -->
                     <div class="faq-item">
                         <strong>How do I reset my password?</strong>
-                        <div class="mt-2">Click the "forgot password" link in the login page and follow the steps</div>
+                        <div class="mt-2">Click the "forgot password" link in the login page and follow the other steps.
+                        </div>
                     </div>
                     <!-- <div class="faq-item">
                         <strong>How can I view my attendance records?</strong>
