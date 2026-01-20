@@ -163,18 +163,18 @@ include "student_includes/student.inc.php";
 <body>
     <?php
     if (isset($_SESSION["error"])) {
-    ?>
+        ?>
         <script>
             toastr.error("<?php echo $_SESSION["error"] ?>", "Error!");
         </script>
-    <?php
+        <?php
         unset($_SESSION["error"]);
     } elseif (isset($_SESSION["success"])) {
-    ?>
+        ?>
         <script>
             toastr.success("<?php echo $_SESSION["success"] ?>", "Success!");
         </script>
-    <?php
+        <?php
         unset($_SESSION["success"]);
     }
     ?>
@@ -184,7 +184,8 @@ include "student_includes/student.inc.php";
             <div class="row">
                 <div class="col-12 text-center">
                     <h1 class="display-4 mb-3"><i class="bi bi-headset me-3"></i>Support & Help Desk</h1>
-                    <p class="lead mb-0">We're here to help! Get assistance with any issues or questions you may have.</p>
+                    <p class="lead mb-0">We're here to help! Get assistance with any issues or questions you may have.
+                    </p>
                 </div>
             </div>
         </div>
@@ -218,7 +219,8 @@ include "student_includes/student.inc.php";
                     <form action="support_request.php" method="post">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="topic" class="form-label fw-bold">Topic <span class="text-danger">*</span></label>
+                                <label for="topic" class="form-label fw-bold">Topic <span
+                                        class="text-danger">*</span></label>
                                 <select class="form-select" id="topic" name="topic" required>
                                     <option value="">Select Topic</option>
                                     <option value="assignment">📝 Assignment Issue</option>
@@ -240,12 +242,17 @@ include "student_includes/student.inc.php";
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="subject" class="form-label fw-bold">Subject <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Brief description of your issue" required>
+                            <label for="subject" class="form-label fw-bold">Subject <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="subject" name="subject"
+                                placeholder="Brief description of your issue" required>
                         </div>
                         <div class="mb-3">
-                            <label for="message" class="form-label fw-bold">Describe Your Issue <span class="text-danger">*</span></label>
-                            <textarea class="form-control" id="message" name="message" rows="4" placeholder="Please provide detailed information about your issue..." required></textarea>
+                            <label for="message" class="form-label fw-bold">Describe Your Issue <span
+                                    class="text-danger">*</span></label>
+                            <textarea class="form-control" id="message" name="message" rows="4"
+                                placeholder="Please provide detailed information about your issue..."
+                                required></textarea>
                         </div>
                         <div class="row">
                             <!-- <div class="col-md-6 mb-3">
@@ -254,7 +261,8 @@ include "student_includes/student.inc.php";
                             </div> -->
                             <div class="col-md-6 mb-3">
                                 <label for="phone" class="form-label fw-bold">Phone Number (Optional)</label>
-                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                                <input type="tel" class="form-control" id="phone" name="phone"
+                                    placeholder="+1 (555) 123-4567">
                             </div>
                         </div>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -276,24 +284,26 @@ include "student_includes/student.inc.php";
                     <h4 class="mb-4"><i class="bi bi-info-circle me-2"></i>Frequently Asked Questions</h4>
                     <div class="faq-item">
                         <strong>How do I download my assignments?</strong>
-                        <div class="mt-2">Go to the Assignments page and click the download button next to each assignment.</div>
+                        <div class="mt-2">Go to the Assignments page and click the download button next to each
+                            assignment.</div>
                     </div>
                     <div class="faq-item">
                         <strong>How can I update my profile information?</strong>
-                        <div class="mt-2">Visit your Profile page and click the "Edit Profile" button to update your details.</div>
+                        <div class="mt-2">Visit your Profile page and click the "Blue Pencil" button to update your
+                            details.</div>
                     </div>
-                    <div class="faq-item">
+                    <!-- <div class="faq-item">
                         <strong>Who do I contact for scholarship queries?</strong>
                         <div class="mt-2">Use this support form and select "Scholarship/Program" as your topic, or contact your school admin.</div>
-                    </div>
+                    </div> -->
                     <div class="faq-item">
                         <strong>How do I reset my password?</strong>
-                        <div class="mt-2">Contact support with your registered email and request a password reset.</div>
+                        <div class="mt-2">Click the "forgot password" link in the login page and follow the steps</div>
                     </div>
-                    <div class="faq-item">
+                    <!-- <div class="faq-item">
                         <strong>How can I view my attendance records?</strong>
                         <div class="mt-2">Go to your Profile page and navigate to the Attendance section.</div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- Contact Information -->
@@ -336,12 +346,12 @@ include "student_includes/student.inc.php";
 
     <script>
         // Prevent right-click context menu
-        document.addEventListener('contextmenu', function(e) {
+        document.addEventListener('contextmenu', function (e) {
             e.preventDefault();
         });
 
         // Form validation enhancement
-        document.querySelector('form').addEventListener('submit', function(e) {
+        document.querySelector('form').addEventListener('submit', function (e) {
             const topic = document.getElementById('topic').value;
             const subject = document.getElementById('subject').value.trim();
             const message = document.getElementById('message').value.trim();
