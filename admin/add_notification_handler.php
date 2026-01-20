@@ -8,9 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title']);
     $message = trim($_POST['message']);
     $type = $_POST['type'];
-    $user_type = $_POST['user_type'];
+    // $user_type = $_POST['user_type'];
 
-    if (empty($title) || empty($message) || empty($type) || empty($user_type)) {
+    if (empty($title) || empty($message) || empty($type)) {
         $_SESSION['error'] = "All fields are required.";
         header("Location: add_notification.php");
         exit();
@@ -18,9 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Insert notification into database
     $user_id = $adminData['id']; // Get admin's ID
-    $query = "INSERT INTO notifications (user_type, user_id, title, message, type) VALUES (:user_type, :user_id, :title, :message, :type)";
+    $query = "INSERT INTO notifications ( user_id, title, message, type) VALUES ( :user_id, :title, :message, :type)";
     $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':user_type', $user_type);
+    // $stmt->bindParam(':user_type', $user_type);
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $stmt->bindParam(':title', $title);
     $stmt->bindParam(':message', $message);

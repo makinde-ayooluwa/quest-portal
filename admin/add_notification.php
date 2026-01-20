@@ -44,18 +44,18 @@ include "admin_includes/admin.inc.php";
 <body>
     <?php include "header_sidebar.php" ?>
     <?php if (isset($_SESSION['error'])) { ?>
-            <script>
-                toastr.error("<?php echo $_SESSION["error"] ?>","Error!");
-            </script>
+        <script>
+            toastr.error("<?php echo $_SESSION["error"] ?>", "Error!");
+        </script>
         <?php
         unset($_SESSION['error']);
-     } else if (isset($_SESSION['success'])) { ?>
+    } else if (isset($_SESSION['success'])) { ?>
             <script>
-                toastr.success("<?php echo $_SESSION["success"] ?>","Success!");
+                toastr.success("<?php echo $_SESSION["success"] ?>", "Success!");
             </script>
-        <?php
-        unset($_SESSION['success']);
-         } ?>
+            <?php
+            unset($_SESSION['success']);
+    } ?>
 
     <div class="add-card">
         <h2 class="mb-4 text-center"><i class="bi bi-bell me-2"></i>Add New Notification</h2>
@@ -78,14 +78,14 @@ include "admin_includes/admin.inc.php";
                         <option value="success">Success</option>
                     </select>
                 </div>
-                <div class="col-md-12 mb-2">
+                <!-- <div class="col-md-12 mb-2">
                     <label class="form-label">User Type</label>
                     <select class="form-select" name="user_type" required>
                         <option value="admin">Admin</option>
                         <option value="staff">Staff</option>
                         <option value="student">Student</option>
                     </select>
-                </div>
+                </div> -->
             </div>
             <div class="d-flex justify-content-end gap-2 mt-4">
                 <a href="./" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Cancel</a>
@@ -97,7 +97,7 @@ include "admin_includes/admin.inc.php";
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
     <script>
         // Prevent right-click context menu
-        document.addEventListener('contextmenu', function(e) {
+        document.addEventListener('contextmenu', function (e) {
             e.preventDefault();
         });
     </script>
