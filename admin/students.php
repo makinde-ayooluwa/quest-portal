@@ -118,7 +118,7 @@ $classes = $admin->getClasses($pdo);
                             <div class="ms-auto text-muted small">Select rows and choose an action</div>
                         </div> -->
                         <div class="d-flex align-items-center justify-content-start">
-                            <button class="btn border rounded-circle fw-bolder" title="Refresh students table" type="button" onclick="outputStudents()"><i class="bi bi-arrow-clockwise"></i></button>
+                            <button class="btn border btn-outline-success rounded-circle fw-bolder" title="Refresh students table" type="button" onclick="outputStudents()"><i class="bi bi-arrow-clockwise"></i></button>
                         </div>
 
                         <div class="table-responsive" style="overflow-x:scroll;">
