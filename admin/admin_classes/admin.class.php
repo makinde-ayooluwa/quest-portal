@@ -77,7 +77,7 @@ class Admin
 
     private function studentExists($pdo, $data)
     {
-        $query = "SELECT admission_number FROM students WHERE admission_number = :admission_number OR email = :email;";
+        $query = "SELECT email, admission_number FROM students WHERE admission_number = :admission_number OR email = :email;";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":admission_number", $data["admission_number"]);
         $stmt->bindParam(":email", $data["email"]);
