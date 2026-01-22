@@ -19,6 +19,18 @@ if (!isset($_SESSION["admin"])) {
 
 <body>
     <?php include "header_sidebar.php" ?>
+    <?php
+    if (isset($_SESSION["success"])) {
+        echo "
+    <script>toastr.success('{$_SESSION["success"]}', 'Success!');</script>";
+        unset($_SESSION["success"]);
+    } elseif (isset($_SESSION["error"])) {
+        echo "
+    <script>toastr.error('{$_SESSION["error"]}', 'Error!');</script>";
+        unset($_SESSION["error"]);
+    }
+
+    ?>
     <div class="main container-fluid">
         <div class="row">
             <!-- Space Left -->
@@ -26,17 +38,17 @@ if (!isset($_SESSION["admin"])) {
             <!-- Main Content -->
             <div class="col-md-9">
                 <style>
-                .uploadCard {
-                    border-radius: 14px;
-                    box-shadow: 0 1px 1px rgb(0, 0, 0, 0.2)
-                }
+                    .uploadCard {
+                        border-radius: 14px;
+                        box-shadow: 0 1px 1px rgb(0, 0, 0, 0.2)
+                    }
                 </style>
                 <div class="uploadCard my-5">
                     <div class="container p-3">
                         <h1 class="text-start text-primary h3">Upload Results</h1>
                         <div class="uploadForm">
                             <div class="form">
-                                <form action="javascript:void(0);" method="post">
+                                <form action="result_upload_handler.php" method="post">
                                     <div class="container">
                                         <div class="row">
                                             <!-- 
@@ -44,7 +56,8 @@ if (!isset($_SESSION["admin"])) {
                                             -->
                                             <div class="col-md-6">
                                                 <!-- Student Select -->
-                                                <div class="students rounded" style="box-shadow: 0 1px 1px rgb(0, 0, 0, 0.2)">
+                                                <div class="students rounded"
+                                                    style="box-shadow: 0 1px 1px rgb(0, 0, 0, 0.2)">
                                                     <input type="hidden" id="student_admission_number"
                                                         name="student_admission">
                                                     <div class="studentsSearch">
@@ -53,24 +66,24 @@ if (!isset($_SESSION["admin"])) {
                                                         <div class="table-responsive"
                                                             style="overflow-y: scroll; height: 300px">
                                                             <div class="studentResults p-3 border rounded text-center">
-<style>
-    .selected{
-        border: 3px solid blue
-    }
-</style>
+                                                                <style>
+                                                                    .selected {
+                                                                        border: 3px solid blue
+                                                                    }
+                                                                </style>
                                                             </div>
                                                         </div>
                                                         <script>
-                                                        let studentSearch = document.querySelector(".studentsSearch");
-                                                        let searchInput = studentSearch.querySelector("input");
-                                                        let studentResults = studentSearch.querySelector(
-                                                            ".studentResults");
+                                                            let studentSearch = document.querySelector(".studentsSearch");
+                                                            let searchInput = studentSearch.querySelector("input");
+                                                            let studentResults = studentSearch.querySelector(
+                                                                ".studentResults");
 
-                                                        fetch("ajax_data_for_students.php")
-                                                            .then(res => res.json())
-                                                            .then(data => {
-                                                                data.forEach(student => {
-                                                                    studentResults.innerHTML += `
+                                                            fetch("ajax_data_for_students.php")
+                                                                .then(res => res.json())
+                                                                .then(data => {
+                                                                    data.forEach(student => {
+                                                                        studentResults.innerHTML += `
                                                                         <div onclick="inputAdmission(this)" class="d-flex justify-content-between student-card rounded align-items-center" style="box-shadow: 0 1px 1px rgb(0,0,0,0.2)" id="${student.admission_number}">
                                                                             <div class="d-grid">
                                                                                 <img class="rounded-circle" width="70" src="../${student.picture}">
@@ -82,24 +95,24 @@ if (!isset($_SESSION["admin"])) {
                                                                                 <small>${student.admission_number}</small>
                                                                             </div>
                                                                         </div>`;
-                                                                })
+                                                                    })
 
-                                                                searchInput.addEventListener("input", function() {
-                                                                    const query = searchInput.value
-                                                                        .toLowerCase();
-                                                                    studentResults.innerHTML = "";
-
-                                                                    if (query === "") {
+                                                                    searchInput.addEventListener("input", function () {
+                                                                        const query = searchInput.value
+                                                                            .toLowerCase();
                                                                         studentResults.innerHTML = "";
-                                                                    }
 
-                                                                    data.forEach(student => {
+                                                                        if (query === "") {
+                                                                            studentResults.innerHTML = "";
+                                                                        }
 
-                                                                        if (student.fullname
-                                                                            .toLowerCase().includes(
-                                                                                query)) {
-                                                                            studentResults
-                                                                                .innerHTML += `
+                                                                        data.forEach(student => {
+
+                                                                            if (student.fullname
+                                                                                .toLowerCase().includes(
+                                                                                    query)) {
+                                                                                studentResults
+                                                                                    .innerHTML += `
                                                                                     <div onclick="inputAdmission(this)" class="d-flex justify-content-between border student-card rounded align-items-center" id="${student.admission_number}">
                                                                                         <div class="d-grid">
                                                                                             <img class="rounded-circle" width="70" src="../${student.picture}">
@@ -112,24 +125,24 @@ if (!isset($_SESSION["admin"])) {
                                                                                         </div>
                                                                                     </div>
                                                                                 `;
-                                                                        }
+                                                                            }
+                                                                        });
                                                                     });
-                                                                });
 
-                                                            });
+                                                                });
                                                         </script>
                                                         <script>
-                                                            function inputAdmission(element){
+                                                            function inputAdmission(element) {
                                                                 const input = document.querySelector("#student_admission_number");
                                                                 input.value = element.id;
                                                                 const cards = document.querySelectorAll(".studentResults .student-card");
-                                                                for(i = 0; i <cards.length; i ++){
+                                                                for (i = 0; i < cards.length; i++) {
                                                                     cards.item(i).classList.remove("selected");
-                                                                    if(cards.item(i).id == input.value){
+                                                                    if (cards.item(i).id == input.value) {
                                                                         cards.item(i).classList.add("selected");
                                                                     }
                                                                 }
-                                                                
+
                                                             }
                                                         </script>
                                                     </div>
@@ -154,7 +167,7 @@ if (!isset($_SESSION["admin"])) {
                                         </div>
                                         <div class="row mt-3">
                                             <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn btn-outline-success">Upload
+                                                <button type="submit" class="btn btn-outline-success">Upload
                                                     Result</button>
                                             </div>
                                         </div>

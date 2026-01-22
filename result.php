@@ -178,7 +178,8 @@ $studentResult = fetchResults($pdo, $studentData);
                 <p class="mb-0 text-muted">Name: <strong><?php echo $studentData["fullname"] ?></strong></p>
                 <p class="mb-0 text-muted">Class: <strong><?php echo $studentData["class"] ?></strong></p>
               </div>
-              <img src="<?php echo $studentData["picture"] ?>" alt="Student Avatar" width="60" class="rounded-circle border">
+              <img src="<?php echo $studentData["picture"] ?>" alt="Student Avatar" width="60"
+                class="rounded-circle border">
             </div>
             <div class="mb-4">
               <h4 class="mb-3">Academic Results</h4>
@@ -187,38 +188,36 @@ $studentResult = fetchResults($pdo, $studentData);
                   <thead class="table-dark">
                     <tr>
                       <th>Term</th>
-                      <th>Download</th>
+                      <th>Actions</th>
                       <th>Date Uploaded</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
                     if (empty($studentResult)) {
-                    ?>
+                      ?>
                       <tr>
                         <td colspan="3" class="text-center py-4">
                           <i class="bi bi-file-earmark-x fs-2 text-muted mb-2"></i>
                           <div>No results yet. Check back later</div>
                         </td>
                       </tr>
-                    <?php
+                      <?php
                     }
                     foreach ($studentResult as $result) {
-                    ?>
+                      ?>
                       <tr>
                         <td class="fw-bold">
                           <?php echo htmlspecialchars($result["academic_term"]) ?>
                         </td>
                         <td>
-                          <a class="btn btn-sm btn-success" href="assets/uploads/results/<?php echo htmlspecialchars($result["result_file"]) ?>" download>
-                            <i class="bi bi-download me-1"></i>Download
-                          </a>
+                          <button class="btn btn-sm btn-success"><i class="bi bi-eye me-3"></i>View</button>
                         </td>
                         <td>
                           <?php echo date('M j, Y', strtotime($result["added_on"])) ?>
                         </td>
                       </tr>
-                    <?php
+                      <?php
                     }
                     ?>
                   </tbody>
@@ -268,7 +267,9 @@ $studentResult = fetchResults($pdo, $studentData);
                   <div class="card border-info">
                     <div class="card-body text-center">
                       <i class="bi bi-graph-up fs-2 text-info mb-2"></i>
-                      <h5 class="card-title"><?php echo $performance['avg_grade'] ? number_format($performance['avg_grade'], 1) : 'N/A'; ?></h5>
+                      <h5 class="card-title">
+                        <?php echo $performance['avg_grade'] ? number_format($performance['avg_grade'], 1) : 'N/A'; ?>
+                      </h5>
                       <p class="card-text small text-muted">Average Grade</p>
                     </div>
                   </div>
@@ -331,7 +332,8 @@ $studentResult = fetchResults($pdo, $studentData);
                             <?php endif; ?>
                           </td>
                           <td>
-                            <span class="badge bg-<?php echo $submission['status'] === 'graded' ? 'primary' : 'secondary'; ?>">
+                            <span
+                              class="badge bg-<?php echo $submission['status'] === 'graded' ? 'primary' : 'secondary'; ?>">
                               <?php echo ucfirst($submission['status']); ?>
                             </span>
                           </td>
@@ -369,7 +371,7 @@ $studentResult = fetchResults($pdo, $studentData);
         </script>-->
         <script>
           // Prevent right-click context menu
-          document.addEventListener('contextmenu', function(e) {
+          document.addEventListener('contextmenu', function (e) {
             e.preventDefault();
           });
         </script>

@@ -552,6 +552,29 @@ class Admin
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    private function resultError($data): bool
+    {
+        return empty($data["academic_term"])
+            || empty($data["student_admission_number"])
+            || empty($data["result_file"]);
+    }
+
+    public function uploadResult($pdo, array $data): bool
+    {
+        // validate data
+        if ($this->resultError($data)) {
+            return false;
+        }
+        $query = "INSERT INTO results (academic_term, student_admission_number, result_file) VALUES (:academic_term, :student_admission, :result_file)";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":academic_term", $data["academic_term"]);
+        $stmt->bindParam(":student_admission", $data["student_admission_number"]);
+        $stmt->bindParam(":result_file", $data["result_file"]);
+        $stmt->execute();
+        // if validation passes, continue (DB insert goes here)
+        return true;
+    }
 }
 
 
