@@ -560,20 +560,28 @@ class Admin
             || empty($data["result_file"]);
     }
 
-    private function resultExists($pdo, $data){
-        $query = "SELECT academic_term FROM results WHERE academic_term = :academic_term AND student_admission_number = :admission";
+    private function resultExists($pdo, $data)
+    {
+        $query = "SELECT 1 FROM results 
+              WHERE academic_term = :academic_term 
+              AND student_admission_number = :admission 
+              LIMIT 1";
+
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(":academic_term",$data["academic_term"]);
-        $stmt->bindParam(":admission",$data["student_admission_number"]);
-        return $stmt->execute();
+        $stmt->bindParam(":academic_term", $data["academic_term"]);
+        $stmt->bindParam(":admission", $data["student_admission_number"]);
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0;
     }
+
 
     public function uploadResult($pdo, array $data): bool
     {
         // validate data
         if ($this->resultError($data)) {
             return false;
-        }elseif($this->resultExists($pdo, $data)){
+        } elseif ($this->resultExists($pdo, $data)) {
             return false;
         }
         $query = "INSERT INTO results (academic_term, student_admission_number, result_file) VALUES (:academic_term, :student_admission, :result_file)";
