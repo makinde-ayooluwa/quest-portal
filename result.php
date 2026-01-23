@@ -184,11 +184,10 @@ $studentResult = fetchResults($pdo, $studentData);
             <div class="mb-4">
               <h4 class="mb-3">Academic Results</h4>
               <div class="table-responsive" style="overflow-x: scroll;">
-                <table class="table table-bordered result-table" style="width: 100vw;">
+                <table class="table table-bordered result-table">
                   <thead class="table-dark">
                     <tr>
                       <th>Term</th>
-                      <th>Actions</th>
                       <th>Date Uploaded</th>
                     </tr>
                   </thead>
@@ -211,9 +210,6 @@ $studentResult = fetchResults($pdo, $studentData);
                           <?php echo htmlspecialchars($result["academic_term"]) ?>
                         </td>
                         <td>
-                          <button class="btn btn-sm btn-success"><i class="bi bi-eye me-3"></i>View</button>
-                        </td>
-                        <td>
                           <?php echo date('M j, Y', strtotime($result["added_on"])) ?>
                         </td>
                       </tr>
@@ -222,6 +218,9 @@ $studentResult = fetchResults($pdo, $studentData);
                     ?>
                   </tbody>
                 </table>
+              </div>
+              <div class="container d-flex justify-content-end">
+                <a href="view_result.php" class="btn btn-primary m-3 p-2"><i class="bi bi-eye me-3"></i> View All</a>
               </div>
             </div>
 
