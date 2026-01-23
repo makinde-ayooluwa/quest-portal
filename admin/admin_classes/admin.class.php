@@ -593,6 +593,39 @@ class Admin
         // if validation passes, continue (DB insert goes here)
         return true;
     }
+
+    public function getAllResults($pdo)
+    {
+        $query = "SELECT r.*, s.fullname as student_name, s.class as student_class
+                  FROM results r
+                  LEFT JOIN students s ON r.student_admission_number = s.admission_number
+                  ORDER BY r.uploaded_at DESC";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function updateResult($pdo, $id, $data)
+    {
+        if (empty($data["academic_term"]) || empty($data["result_file"])) {
+            return false;
+        }
+
+        $query = "UPDATE results SET academic_term = :academic_term, result_file = :result_file WHERE id = :id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":academic_term", $data["academic_term"]);
+        $stmt->bindParam(":result_file", $data["result_file"]);
+        $stmt->bindParam(":id", $id);
+        return $stmt->execute();
+    }
+
+    public function deleteResult($pdo, $id)
+    {
+        $query = "DELETE FROM results WHERE id = :id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":id", $id);
+        return $stmt->execute();
+    }
 }
 
 

@@ -1,4 +1,4 @@
-# TODO: Redesign admin/upload_result.php
+# TODO: Admin Results Management System
 
 ## Tasks
 - [x] Update HTML structure to centered card-based design similar to add_student.php
@@ -7,3 +7,11 @@
 - [x] Add responsiveness and accessibility improvements
 - [x] Ensure all input names remain unchanged for backend compatibility
 - [x] Test functionality and responsiveness
+
+## New Tasks: Results Management
+- [x] Add CRUD methods to admin.class.php (getAllResults, updateResult, deleteResult)
+- [ ] Create admin/manage_results.php with table display, edit/delete modals
+- [ ] Create update_result_handler.php for handling result updates
+- [ ] Create delete_result_handler.php for handling result deletions
+- [ ] Update admin/header_sidebar.php to add "Manage Results" navigation link
+- [ ] Test CRUD operations and responsive design
