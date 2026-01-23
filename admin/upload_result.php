@@ -136,7 +136,7 @@ if (!isset($_SESSION["admin"])) {
             </div>
 
             <div class="d-flex justify-content-end gap-2">
-                <a href="./" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Cancel</a>
+                <a href="./manage_results.php" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Cancel</a>
                 <button type="submit" class="btn btn-grad"><i class="bi bi-upload me-1"></i> Upload Result</button>
             </div>
         </form>
