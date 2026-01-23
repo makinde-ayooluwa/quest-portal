@@ -94,9 +94,15 @@
             position: fixed;
         }
     }
-    @media(min-width: 1205px){
+    @media(min-width:1205px){
         .sidebar{
             width: 250px;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .sidebar {
+            left: -100% !important;
         }
     }
 
