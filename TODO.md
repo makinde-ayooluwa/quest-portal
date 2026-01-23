@@ -10,8 +10,8 @@
 
 ## New Tasks: Results Management
 - [x] Add CRUD methods to admin.class.php (getAllResults, updateResult, deleteResult)
-- [ ] Create admin/manage_results.php with table display, edit/delete modals
-- [ ] Create update_result_handler.php for handling result updates
-- [ ] Create delete_result_handler.php for handling result deletions
-- [ ] Update admin/header_sidebar.php to add "Manage Results" navigation link
-- [ ] Test CRUD operations and responsive design
+- [x] Create admin/manage_results.php with table display, edit/delete modals
+- [x] Create update_result_handler.php for handling result updates
+- [x] Create delete_result_handler.php for handling result deletions
+- [x] Update admin/header_sidebar.php to add "Manage Results" navigation link
+- [x] Test CRUD operations and responsive design

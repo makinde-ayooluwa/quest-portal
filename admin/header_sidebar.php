@@ -168,12 +168,6 @@
                 style="display: none; z-index: 1050; max-height: 300px; overflow-y: auto; width: 100%;"></div>
         </div>
         <ul class="nav-links d-none d-md-flex">
-            <!--<li><a href="#">Dashboard</a></li>
-        <li><a href="#">Students Management</a></li>
-        <li><a href="#">Courses</a></li>
-        <li><a href="#">Reports</a></li>
-        <li><a href="#">Settings</a></li>-->
-            <!--<li><i class="bi bi-person-workspace mx-4"></i><?php echo $adminData["staff_role"] ?></li>-->
             <li><i class="bi bi-envelope mx-4"></i><?php echo $adminData["email"] ?></li>
             <li class="nav-item dropdown">
                 <button class="btn nav-link dropdown-toggle d-flex align-items-center gap-2 p-0" id="adminDropdown"
@@ -206,13 +200,10 @@
                     class="fas fa-user-graduate me-2"></i>Students Management</a></li>
         <div class="collapse" id="studentManagement">
             <li><a class="text-primary" href="students.php"><i class="bi bi-people me-2"></i>View all students</a></li>
-            <li><a class="text-primary" href="upload_result.php"><i class="bi bi-clipboard-check me-2"></i>Upload
-                    Result</a></li>
+            <li><a class="text-primary" href="manage_results.php"><i class="bi bi-clipboard-check me-2"></i>Manage
+                    Results</a></li>
             <li><a class="text-primary" href="support_requests.php"><i class="bi bi-headset me-2"></i>Support
                     Requests</a></li>
-            <!--<li><a class="text-primary" href="add_class.php"><i class="bi bi-plus me-2"></i>Add class</a></li>
-            <li><a href="edit_student.php"><i class="bi bi-pencil me-2"></i>Edit student</a></li>
-        <li><a href="#"><i class="bi bi-trash me-2"></i>Remove student</a></li>--- IGNORE --->
         </div>
         <li data-bs-toggle="collapse" data-bs-target="#staffManagement"><a href="javascript:;"><i
                     class="fas fa-book me-2"></i>Staffs Management</a></li>
@@ -230,10 +221,6 @@
             </li>
             <li><a class="text-primary" href="add_event.php"><i class="bi bi-calendar-event me-2"></i>Add Event</a></li>
         </div>
-        <!--<li><a href="reports_and_analytics.php"><i class="fas fa-calendar-check me-2"></i>Reports & Analytics</a></li>
-        <li><a href="academic_records_upload.php"><i class="fas fa-chart-line me-2"></i>Academic Records Upload</a></li>
-        <li><a href="data_and_attendance_tracking.php"><i class="fas fa-users-cog me-2"></i>Data & Attendance Tracking</a></li>
-        <li><a href="#"><i class="fas fa-users-cog me-2"></i>System Settings</a></li>-->
     </ul>
     <div class="sidebar-header">
         <h3 class="text-uppercase text-start fs-5">PROFILE</h3>
@@ -245,34 +232,7 @@
             <li><a class="text-primary" href="profile.php"><i class="bi bi-person-circle"></i>View profile</a></li>
             <li><a class="text-primary" href="login.php"><i class="bi bi-box-arrow-left"></i>Login</a></li>
             <li><a class="text-primary" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a></li>
-            <!--
-             <li><a class="text-primary" href="add_class.php"><i class="bi bi-plus me-2"></i>Add class</a></li>
-             <li><a href="edit_student.php"><i class="bi bi-pencil me-2"></i>Edit student</a></li>
-             <li><a href="#"><i class="bi bi-trash me-2"></i>Remove student</a></li>--- IGNORE-->
         </div>
-        <!--<li data-bs-toggle="collapse" data-bs-target="#studentManagement"><a href="javascript:;"><i
-                     class="fas fa-user-graduate me-2"></i>Manage Students</a></li>
-         <div class="collapse" id="studentManagement">
-             <li><a class="text-primary" href="students.php"><i class="bi bi-people me-2"></i>View all students</a></li>
-             <li><a class="text-primary" href="add_student.php"><i class="bi bi-plus me-2"></i>Add student</a></li>
-             <li><a class="text-primary" href="add_class.php"><i class="bi bi-plus me-2"></i>Add class</a></li>
-            <li><a href="edit_student.php"><i class="bi bi-pencil me-2"></i>Edit student</a></li>
-        <li><a href="#"><i class="bi bi-trash me-2"></i>Remove student</a></li>--- IGNORE 
-         </div>
-         <li data-bs-toggle="collapse" data-bs-target="#staffManagement"><a href="javascript:;"><i class="fas fa-book me-2"></i>Staff & Mentor Management</a></li>
-         <div class="collapse" id="staffManagement">
-             <li><a class="text-primary" href="staff_management.php"><i class="bi bi-people me-2"></i>View all staffs</a></li>
-             <li><a class="text-primary" href="add_staff.php"><i class="bi bi-plus me-2"></i>Add staff</a></li>
-         </div>
-         <li data-bs-toggle="collapse" data-bs-target="#systemManagement"><a href="javascript:;"><i class="fas fa-cogs me-2"></i>System Management</a></li>
-         <div class="collapse" id="systemManagement">
-             <li><a class="text-primary" href="add_notification.php"><i class="bi bi-bell me-2"></i>Add Notification</a></li>
-            <li><a class="text-primary" href="upload_material.php"><i class="bi bi-upload me-2"></i>Upload Materials</a></li>
-             <li><a class="text-primary" href="add_event.php"><i class="bi bi-calendar-event me-2"></i>Add Event</a></li>
-         </div><li><a href="reports_and_analytics.php"><i class="fas fa-calendar-check me-2"></i>Reports & Analytics</a></li>
-        <li><a href="academic_records_upload.php"><i class="fas fa-chart-line me-2"></i>Academic Records Upload</a></li>
-        <li><a href="data_and_attendance_tracking.php"><i class="fas fa-users-cog me-2"></i>Data & Attendance Tracking</a></li>
-        <li><a href="#"><i class="fas fa-users-cog me-2"></i>System Settings</a></li>-->
     </ul>
 </aside>
 <script>

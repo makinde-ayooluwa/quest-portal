@@ -599,7 +599,7 @@ class Admin
         $query = "SELECT r.*, s.fullname as student_name, s.class as student_class
                   FROM results r
                   LEFT JOIN students s ON r.student_admission_number = s.admission_number
-                  ORDER BY r.uploaded_at DESC";
+                  ORDER BY r.added_on DESC";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

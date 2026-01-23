@@ -88,13 +88,38 @@ $studentResult = fetchResults($pdo, $studentData);
                 margin-left: 250px;
             }
         }
+
+        @media (max-width: 991px) {
+            .container-fluid {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            .result-iframe {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .result-iframe {
+                height: 300px;
+            }
+            .result-header {
+                padding: 0.75rem;
+            }
+            .result-header h5 {
+                font-size: 1rem;
+            }
+            .result-header small {
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body>
     <?php include "header.php"; ?>
     <?php include "sidebar.php"; ?>
 
-    <div class="container-fluid px-4 py-4 main-content">
+    <div class="container-fluid px-2 px-md-4 py-4 main-content">
         <div class="row">
             <div class="col-12">
                 <div class="d-flex align-items-center justify-content-between mb-4">
