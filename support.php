@@ -292,13 +292,17 @@ include "student_includes/student.inc.php";
                         <div class="mt-2">Visit your Profile page and click the "Blue Pencil" button to update your
                             details.</div>
                     </div>
-                    <!-- <div class="faq-item">
-                        <strong>Who do I contact for scholarship queries?</strong>
-                        <div class="mt-2">Use this support form and select "Scholarship/Program" as your topic, or contact your school admin.</div>
-                    </div> -->
+                    <div class="faq-item">
+                        <strong>How do I change my password</strong>
+                        <div class="mt-2">In your dashboard, click on your image by the top-right part of your header, and "choose change password" from the dropdown</div>
+                    </div>
+                    <div class="faq-item">
+                        <strong>How do I change my profile picture.</strong>
+                        <div class="mt-2">In your dashboard, click on your image by the top-right part of your header, and choose "change profile picture" from the dropdown</div>
+                    </div>
                     <div class="faq-item">
                         <strong>How do I reset my password?</strong>
-                        <div class="mt-2">Click the "forgot password" link in the login page and follow the other steps.
+                        <div class="mt-2">If logged in, sign-out and click the "forgot password" link in the login page and follow the other steps.
                         </div>
                     </div>
                     <!-- <div class="faq-item">

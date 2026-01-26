@@ -56,14 +56,14 @@ include "student_includes/student.inc.php";
     if (isset($_SESSION["error"])) {
     ?>
         <script>
-            toastr.error("<?php echo $_SESSION["error"] ?>","Error!");
+            toastr.error("<?php echo $_SESSION["error"] ?>", "Error!");
         </script>
     <?php
         unset($_SESSION["error"]);
     } elseif (isset($_SESSION["success"])) {
     ?>
         <script>
-            toastr.success("<?php echo $_SESSION["success"] ?>","Success!");
+            toastr.success("<?php echo $_SESSION["success"] ?>", "Success!");
         </script>
     <?php
     }
@@ -98,92 +98,67 @@ include "student_includes/student.inc.php";
             </script>
             <div class="row mb-3">
                 <div class="col-md-6 mb-2">
-                    <label class="form-label">Full Name</label>
-                    <input name="fullname" type="text" class="form-control" value="<?php
-                                                                                    echo $studentData['fullname'];
-                                                                                    // Example: echo "John Doe";
-                                                                                    ?>">
-                </div>
-                <!--<div class="col-md-6 mb-2">
-                    <label class="form-label">Date of Birth</label>
-                    <input name="dob" type="date" class="form-control" value="<?php
-                                                                                //echo $studentData['dob'];
-                                                                                // Example: echo "2008-05-14";
-                                                                                ?>">
-                </div>-->
-                <div class="col-md-6 mb-2">
                     <label class="form-label">Gender</label>
                     <select name="gender" class="form-select">
                         <option selected><?php echo $studentData['gender']; ?></option>
-                        <option>Female</option>
+                        <option><?php
+                                switch ($studentData['gender']) {
+                                    case "Male":
+                                        echo "Female";
+                                        break;
+                                    case "Female":
+                                        echo "Male";
+                                        break;
+                                }
+                                ?></option>
                         <option>Other</option>
                     </select>
-                </div>
-                <div class="col-md-6 mb-2">
-                    <label class="form-label">Email</label>
-                    <input name="email" type="email" class="form-control" value="<?php echo $studentData['email']; ?>">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label class="form-label">Phone</label>
                     <input name="phone" type="tel" class="form-control" value="<?php echo $studentData['phone']; ?>">
                 </div>
-                <!--<div class="col-md-6 mb-2">
-                    <label class="form-label">Profile Image(Optional)</label>
-                    <input name="picture" type="file" class="form-control">
-                </div>-->
                 <div class="col-md-12 mb-2">
                     <label class="form-label">Address</label>
-                    <input name="home_address" type="text" class="form-control" value="<?php echo $studentData['home_address']; ?>">
+                    <input name="home_address" type="text" class="form-control"
+                        value="<?php echo $studentData['home_address']; ?>">
                 </div>
             </div>
             <h4 class="section-title">Parent/Guardian Information</h4>
             <div class="row mb-3">
                 <div class="col-md-6 mb-2">
                     <label class="form-label">Father's Name</label>
-                    <input name="father_name" type="text" class="form-control" value="<?php echo $studentData['father_name']; ?>">
+                    <input name="father_name" type="text" class="form-control"
+                        value="<?php echo $studentData['father_name']; ?>">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label class="form-label">Father's Phone</label>
-                    <input name="father_phone" type="tel" class="form-control" value="<?php echo $studentData['father_phone']; ?>">
+                    <input name="father_phone" type="tel" class="form-control"
+                        value="<?php echo $studentData['father_phone']; ?>">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label class="form-label">Father's Email</label>
-                    <input name="father_email" type="email" class="form-control" value="<?php echo $studentData['father_email']; ?>">
+                    <input name="father_email" type="email" class="form-control"
+                        value="<?php echo $studentData['father_email']; ?>">
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 mb-2">
                     <label class="form-label">Mother's Name</label>
-                    <input name="mother_name" type="text" class="form-control" value="<?php echo $studentData['mother_name']; ?>">
+                    <input name="mother_name" type="text" class="form-control"
+                        value="<?php echo $studentData['mother_name']; ?>">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label class="form-label">Mother's Phone</label>
-                    <input name="mother_phone" type="tel" class="form-control" value="<?php echo $studentData['mother_phone']; ?>">
+                    <input name="mother_phone" type="tel" class="form-control"
+                        value="<?php echo $studentData['mother_phone']; ?>">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label class="form-label">Mother's Email</label>
-                    <input name="mother_email" type="email" class="form-control" value="<?php echo $studentData['mother_email']; ?>">
+                    <input name="mother_email" type="email" class="form-control"
+                        value="<?php echo $studentData['mother_email']; ?>">
                 </div>
             </div>
-            <!--<h4 class="section-title">Academic Summary</h4>
-            <div class="row mb-3">
-                <div class="col-md-4 mb-2">
-                    <label class="form-label">Current GPA</label>
-                    <input type="text" class="form-control" value="4.2">
-                </div>
-                <div class="col-md-4 mb-2">
-                    <label class="form-label">Attendance (%)</label>
-                    <input type="text" class="form-control" value="97">
-                </div>
-                <div class="col-md-4 mb-2">
-                    <label class="form-label">Scholarship Status</label>
-                    <select class="form-select">
-                        <option selected>Awarded</option>
-                        <option>Not Awarded</option>
-                        <option>Pending</option>
-                    </select>
-                </div>
-            </div>-->
             <div class="modal fade" id="confirmModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -196,19 +171,21 @@ include "student_includes/student.inc.php";
                             <p>For your account security, password is required to make changes in your profile.</p>
                             <div class="mb-3">
                                 <label class="form-label">Password</label>
-                                <input name="password" type="password" class="form-control" required>
+                                <input autofocus name="password" type="password" class="form-control" required>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Save Changes</button>
+                            <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Save
+                                Changes</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="d-flex justify-content-end gap-2 mt-4">
                 <a href="profile.php" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Cancel</a>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#confirmModal" class="btn btn-success"><i class="bi bi-save"></i> Save Changes</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#confirmModal" class="btn btn-success"><i
+                        class="bi bi-save"></i> Save Changes</button>
             </div>
         </form>
     </div>

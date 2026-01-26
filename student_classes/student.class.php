@@ -24,16 +24,12 @@ class Student
 
         $databaseData = $this->getStudent($pdo, $data["email"]);
         if (password_verify($data["pwd"], $databaseData["pwd"])) {
-            $query = "UPDATE students SET
-            fullname = :fullname,
-              email = :email, gender = :gender, phone = :phone,
+            $query = "UPDATE students SET gender = :gender, phone = :phone,
         home_address = :home_address,father_name = :father_name,
         father_phone = :father_phone,father_email = :father_email,
         mother_name = :mother_name,mother_phone = :mother_phone,
         mother_email = :mother_email WHERE id = :id";
             $stmt = $pdo->prepare($query);
-            $stmt->bindParam(":fullname", $data["fullname"]);
-            $stmt->bindParam(":email", $data["email"]);
             $stmt->bindParam(":gender", $data["gender"]);
             $stmt->bindParam(":phone", $data["phone"]);
             $stmt->bindParam(":home_address", $data["home_address"]);
