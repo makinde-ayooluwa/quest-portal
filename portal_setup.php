@@ -9,7 +9,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $picture = $_FILES['picture'];
     $pwd = $_POST['password'];
+    $confirm_pwd = $_POST['confirm_password'];
     $admission_number = isset($_GET["admission_number"]) ? $_GET["admission_number"] : $_POST["admission_number"];
+
+    // Validate password confirmation
+    if ($pwd !== $confirm_pwd) {
+        $_SESSION["error"] = "Passwords do not match. Please try again.";
+        header("Location: setup.php?admission_number=$admission_number");
+        exit();
+    }
+
     $hashedPwd = password_hash($pwd, PASSWORD_BCRYPT, ["cost" => 10]);
     $target_dir = "assets/images/";
     $target_file = $target_dir . basename($_FILES["picture"]["name"]);
@@ -40,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         SETUP->setup($pdo, $data);
         header("Location: login.php");
     } else {
-        $_SESSION["error"] = "Error occured";
+        $_SESSION["error"] = "All required fields must be filled.";
         header("Location: setup.php?admission_number=$admission_number");
     }
 }

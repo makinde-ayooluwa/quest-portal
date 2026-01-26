@@ -154,9 +154,66 @@ if ($block_reason !== "") {
             </div>
         </div>
         <script>
-            // Prevent right-click context menu
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
+            document.addEventListener('DOMContentLoaded', function() {
+                // Prevent right-click context menu
+                document.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+
+                // Password toggle functionality
+                const togglePassword = document.getElementById('toggle-password');
+                const toggleConfirmPassword = document.getElementById('toggle-confirm-password');
+
+                if (togglePassword) {
+                    togglePassword.addEventListener('click', function() {
+                        const passwordInput = document.getElementById('password');
+                        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                        passwordInput.setAttribute('type', type);
+                        this.classList.toggle('fa-eye');
+                        this.classList.toggle('fa-eye-slash');
+                    });
+                }
+
+                if (toggleConfirmPassword) {
+                    toggleConfirmPassword.addEventListener('click', function() {
+                        const confirmPasswordInput = document.getElementById('confirm_password');
+                        const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                        confirmPasswordInput.setAttribute('type', type);
+                        this.classList.toggle('fa-eye');
+                        this.classList.toggle('fa-eye-slash');
+                    });
+                }
+
+                // Real-time password matching validation
+                const passwordInput = document.getElementById('password');
+                const confirmPasswordInput = document.getElementById('confirm_password');
+                const errorText = document.getElementById('password-error');
+
+                if (confirmPasswordInput && errorText) {
+                    confirmPasswordInput.addEventListener('input', function() {
+                        const password = passwordInput ? passwordInput.value : '';
+                        const confirmPassword = this.value;
+
+                        if (confirmPassword && password !== confirmPassword) {
+                            errorText.style.display = 'block';
+                        } else {
+                            errorText.style.display = 'none';
+                        }
+                    });
+                }
+
+                if (passwordInput && errorText) {
+                    passwordInput.addEventListener('input', function() {
+                        const confirmPassword = confirmPasswordInput ? confirmPasswordInput.value : '';
+                        const errorText = document.getElementById('password-error');
+
+                        if (confirmPassword && this.value !== confirmPassword) {
+                            errorText.style.display = 'block';
+                        } else {
+                            errorText.style.display = 'none';
+                        }
+                    });
+                }
             });
         </script>
     </body>
@@ -341,6 +398,31 @@ try {
             .row.mb-3 .col-md-12:last-child {
                 margin-bottom: 0;
             }
+
+            .password-container {
+                position: relative;
+            }
+
+            .password-toggle {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                color: var(--quest-green);
+                font-size: 18px;
+            }
+
+            .password-toggle:hover {
+                color: var(--quest-yellow);
+            }
+
+            .error-text {
+                color: #dc3545;
+                font-size: 14px;
+                margin-top: 5px;
+                display: none;
+            }
         </style>
     </head>
 
@@ -521,7 +603,21 @@ try {
                                 <i class="fas fa-key"></i>
                                 Password
                             </label>
-                            <input type="password" class="form-control" placeholder="Password" id="password" name="password">
+                            <div class="password-container">
+                                <input type="password" class="form-control" placeholder="Password" id="password" name="password">
+                                <i class="fas fa-eye-slash password-toggle" id="toggle-password"></i>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirm_password" class="form-label">
+                                <i class="fas fa-key"></i>
+                                Confirm Password
+                            </label>
+                            <div class="password-container">
+                                <input type="password" class="form-control" placeholder="Confirm Password" id="confirm_password" name="confirm_password">
+                                <i class="fas fa-eye password-toggle" id="toggle-confirm-password"></i>
+                            </div>
+                            <div class="error-text" id="password-error">Passwords do not match.</div>
                         </div>
                     </div>
 
@@ -538,6 +634,47 @@ try {
             // Prevent right-click context menu
             document.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
+            });
+
+            // Password toggle functionality
+            document.getElementById('toggle-password').addEventListener('click', function() {
+                const passwordInput = document.getElementById('password');
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+
+            document.getElementById('toggle-confirm-password').addEventListener('click', function() {
+                const confirmPasswordInput = document.getElementById('confirm_password');
+                const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPasswordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+
+            // Real-time password matching validation
+            document.getElementById('confirm_password').addEventListener('input', function() {
+                const password = document.getElementById('password').value;
+                const confirmPassword = this.value;
+                const errorText = document.getElementById('password-error');
+
+                if (confirmPassword && password !== confirmPassword) {
+                    errorText.style.display = 'block';
+                } else {
+                    errorText.style.display = 'none';
+                }
+            });
+
+            document.getElementById('password').addEventListener('input', function() {
+                const confirmPassword = document.getElementById('confirm_password').value;
+                const errorText = document.getElementById('password-error');
+
+                if (confirmPassword && this.value !== confirmPassword) {
+                    errorText.style.display = 'block';
+                } else {
+                    errorText.style.display = 'none';
+                }
             });
         </script>
     </body>
