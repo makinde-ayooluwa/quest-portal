@@ -28,34 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // Handle image upload
-    /*$fullImagePath = "assets/images/no-picture.jpg"; // default
-    if (
-        isset($_FILES['picture']) &&
-        $_FILES['picture']['error'] === UPLOAD_ERR_OK &&
-        $_FILES['picture']['name'] !== ''
-    ) {
-        $target_dir = "assets/images/";
-        $file_name = basename($_FILES['picture']['name']);
-        $target_file = $target_dir . $file_name;
-
-        // Optional: validate file type
-        $allowed_types = ['image/jpeg', 'image/png', 'image/jpg'];
-        if (in_array($_FILES['picture']['type'], $allowed_types)) {
-            if (move_uploaded_file($_FILES['picture']['tmp_name'], $target_file)) {
-                $fullImagePath = $target_file;
-            } else {
-                $_SESSION['error'] = "Failed to upload image.";
-                header("Location: add_staff.php");
-                exit();
-            }
-        } else {
-            $_SESSION['error'] = "Invalid image format. Only JPG and PNG allowed.";
-            header("Location: add_staff.php");
-            exit();
-        }
-    }*/
-
     // Save to database
     if (!$admin->addStaff(
         $pdo,

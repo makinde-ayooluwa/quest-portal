@@ -78,14 +78,6 @@ include "admin_includes/admin.inc.php";
                         <option value="success">Success</option>
                     </select>
                 </div>
-                <!-- <div class="col-md-12 mb-2">
-                    <label class="form-label">User Type</label>
-                    <select class="form-select" name="user_type" required>
-                        <option value="admin">Admin</option>
-                        <option value="staff">Staff</option>
-                        <option value="student">Student</option>
-                    </select>
-                </div> -->
             </div>
             <div class="d-flex justify-content-end gap-2 mt-4">
                 <a href="./" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Cancel</a>
