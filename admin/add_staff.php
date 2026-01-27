@@ -19,35 +19,70 @@ unset($_SESSION['success']);
     <title>Add Staff/Mentor - Quest Schools Admin</title>
     <?php include "head.php" ?>
     <style>
-        :root { --card-max-width: 920px; }
-        * { font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
-        body { background: #f8f9fa; }
+        :root {
+            --card-max-width: 920px;
+        }
+
+        * {
+            font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        }
+
+        body {
+            background: #f8f9fa;
+        }
 
         .add-card {
             max-width: var(--card-max-width);
             margin: 3rem auto;
             background: #fff;
             border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
             padding: 1.5rem;
         }
 
         /* Make form controls full-width and responsive */
-        .add-card .form-control, .add-card .form-select { width: 100%; }
+        .add-card .form-control,
+        .add-card .form-select {
+            width: 100%;
+        }
 
-        .form-section-title { margin-top: .25rem; margin-bottom: .75rem; font-weight:600; }
+        .form-section-title {
+            margin-top: .25rem;
+            margin-bottom: .75rem;
+            font-weight: 600;
+        }
 
-        .btn-grad { background: linear-gradient(90deg,#0d6efd 60%, #198754 100%); color:#fff; border:none; }
-        .btn-grad:hover { filter: brightness(0.95); }
+        .btn-grad {
+            background: linear-gradient(90deg, #0d6efd 60%, #198754 100%);
+            color: #fff;
+            border: none;
+        }
+
+        .btn-grad:hover {
+            filter: brightness(0.95);
+        }
 
         /* Prevent accidental horizontal overflow from long labels or inputs */
-        html, body { overflow-x: hidden; }
+        html,
+        body {
+            overflow-x: hidden;
+        }
 
         @media (max-width: 576px) {
-            .add-card { margin: 1rem; padding: 1rem; }
-            :root { --card-max-width: 100%; }
-            .d-flex.gap-2 { flex-direction: column-reverse; }
+            .add-card {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            :root {
+                --card-max-width: 100%;
+            }
+
+            .d-flex.gap-2 {
+                flex-direction: column-reverse;
+            }
         }
+
         /* Page-local header fix: make header fixed on this page so it sticks reliably */
         header.position-sticky {
             position: fixed !important;
@@ -56,8 +91,11 @@ unset($_SESSION['success']);
             right: 0;
             z-index: 1030;
         }
+
         /* push main content below header to avoid overlap (header ~56px tall) */
-        .main-content { padding-top: 72px; }
+        .main-content {
+            padding-top: 72px;
+        }
     </style>
 </head>
 
@@ -161,7 +199,7 @@ unset($_SESSION['success']);
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
     <script>
         // Show queued flash messages after toastr is available
-        (function(){
+        (function() {
             const flashNode = document.getElementById('flash-data');
             if (flashNode) {
                 const err = flashNode.dataset.error || '';
@@ -171,7 +209,9 @@ unset($_SESSION['success']);
             }
 
             // Prevent right-click context menu
-            document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
         })();
 
         // Basic client-side validation before submit
@@ -185,14 +225,46 @@ unset($_SESSION['success']);
             const staff_status = this.querySelector('select[name="staff_status"]').value;
             const portal_code = this.querySelector('input[name="portal_code"]').value.trim();
             const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!fullname) { e.preventDefault(); toastr.error('Full name is required.'); return false; }
-            if (!emailRe.test(email)) { e.preventDefault(); toastr.error('Please enter a valid email address.'); return false; }
-            if (!role) { e.preventDefault(); toastr.error('Please select a role.'); return false; }
-            if (!phone) { e.preventDefault(); toastr.error('Phone is required.'); return false; }
-            if (!gender) { e.preventDefault(); toastr.error('Gender is required.'); return false; }
-            if (!employment_date) { e.preventDefault(); toastr.error('Employment date is required.'); return false; }
-            if (!staff_status) { e.preventDefault(); toastr.error('Staff status is required.'); return false; }
-            if (!portal_code) { e.preventDefault(); toastr.error('Portal code is required.'); return false; }
+            if (!fullname) {
+                e.preventDefault();
+                toastr.error('Full name is required.');
+                return false;
+            }
+            if (!emailRe.test(email)) {
+                e.preventDefault();
+                toastr.error('Please enter a valid email address.');
+                return false;
+            }
+            if (!role) {
+                e.preventDefault();
+                toastr.error('Please select a role.');
+                return false;
+            }
+            if (!phone) {
+                e.preventDefault();
+                toastr.error('Phone is required.');
+                return false;
+            }
+            if (!gender) {
+                e.preventDefault();
+                toastr.error('Gender is required.');
+                return false;
+            }
+            if (!employment_date) {
+                e.preventDefault();
+                toastr.error('Employment date is required.');
+                return false;
+            }
+            if (!staff_status) {
+                e.preventDefault();
+                toastr.error('Staff status is required.');
+                return false;
+            }
+            if (!portal_code) {
+                e.preventDefault();
+                toastr.error('Portal code is required.');
+                return false;
+            }
             return true;
         });
     </script>
