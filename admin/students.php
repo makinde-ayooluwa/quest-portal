@@ -299,44 +299,47 @@ $classes = $admin->getClasses($pdo);
     </script>
     <script>
         // Excel dynamic addition with the following params : [fullname,email,class,admission_number]
-        function addStudents() {
-            fetch("https://opensheet.elk.sh/17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o/Sheet1")
-                .then(res => res.json())
-                .then(data => {
-                    // console.log(data)
-                    fetch("add_student_in_bulk.php", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify(data)
-                        })
-                        // .then(res => res.json())
-                    // .then(result => console.log(result))
-                    // .catch(err => console.error(err));
-                    fetch("update_student_in_bulk.php", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(data)
-                    })
-                    fetch("add_class_names.php", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            "data": data
-                        })
-                    })
-                    // .then(res => console.log(res.text()))
-                    // .then(res => {
-                    //     console.log(res.text())
-                    // })
-                    // .then(result => console.log(result))
-                    // .catch(err => console.error(err));
+        async function addStudents() {
+            try {
+                const sheetRes = await fetch(
+                    `https://opensheet.elk.sh/17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o/Sheet1`
+                );
+
+                const data = await sheetRes.json();
+
+                // 1️⃣ Add students
+                await fetch("add_student_in_bulk.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
                 });
+
+                // 2️⃣ Update students
+                await fetch("update_student_in_bulk.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                // 3️⃣ Add class names
+                await fetch("add_class_names.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        data
+                    })
+                });
+
+                console.log(`✅ ${sheet} processed successfully`);
+            } catch (error) {
+                console.error(`❌ Error processing ${sheet}`, error);
+            }
         }
 
         function outputStudents() {
@@ -356,7 +359,7 @@ $classes = $admin->getClasses($pdo);
 
                     }
 
-                    
+
 
                     data.forEach(student => {
                         html += `
