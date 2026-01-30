@@ -302,7 +302,7 @@ $classes = $admin->getClasses($pdo);
 
         async function addStudents() {
             const sheetId = "17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o";
-            const sheets = ["Sheet1", "Sheet2"];
+            const sheets = ["SSS3", "SSS2"];
             let data = [];
 
             try {
