@@ -320,7 +320,6 @@ $classes = $admin->getClasses($pdo);
                 });
 
                 console.log("ALL DATA:", data); // ✅ now correct
-
                 // 1️⃣ Add students
                 await fetch("add_student_in_bulk.php", {
                     method: "POST",
