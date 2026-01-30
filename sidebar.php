@@ -102,7 +102,10 @@
 
     @media (max-width: 991px) {
         .sidebar {
-            left: -100% !important;
+            left: -100%;
+        }
+        .sidebar:not([closed-sidebar]) {
+            left: 0;
         }
     }
 
@@ -148,7 +151,7 @@
     window.addEventListener("resize", updateSidebarState);
     updateSidebarState();
 
-    const button = document.querySelector(".toggler-parent button");
+    const button = document.querySelector(".toggler-parent");
     button.addEventListener("click", function() {
         sidebar.toggleAttribute("closed-sidebar");
     });
