@@ -299,13 +299,27 @@ $classes = $admin->getClasses($pdo);
     </script>
     <script>
         // Excel dynamic addition with the following params : [fullname,email,class,admission_number]
+
         async function addStudents() {
+            const sheetId = "17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o";
+            const sheets = ["Sheet1", "Sheet2"];
+            let data = [];
+
             try {
-                const sheetRes = await fetch(
-                    `https://opensheet.elk.sh/17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o/Sheet1`
+                // fetch all sheets and wait
+                const requests = sheets.map(sheet =>
+                    fetch(`https://opensheet.elk.sh/${sheetId}/${sheet}`)
+                    .then(res => res.json())
                 );
 
-                const data = await sheetRes.json();
+                const results = await Promise.all(requests);
+
+                // merge all sheets into one array
+                results.forEach(sheetData => {
+                    data = data.concat(sheetData);
+                });
+
+                console.log("ALL DATA:", data); // ✅ now correct
 
                 // 1️⃣ Add students
                 await fetch("add_student_in_bulk.php", {
@@ -336,9 +350,9 @@ $classes = $admin->getClasses($pdo);
                     })
                 });
 
-                console.log(`✅ ${sheet} processed successfully`);
+                console.log("✅ All sheets processed successfully");
             } catch (error) {
-                console.error(`❌ Error processing ${sheet}`, error);
+                console.error("❌ Error:", error);
             }
         }
 
