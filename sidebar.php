@@ -64,6 +64,7 @@
     }
 
     [closed-sidebar] {
+        transition: all 0.5s ease-in-out;
         overflow: hidden;
         left: -100%;
     }
@@ -105,6 +106,7 @@
             left: -100%;
         }
         .sidebar:not([closed-sidebar]) {
+            transition: all 0.5s ease-in-out;
             left: 0;
         }
     }
