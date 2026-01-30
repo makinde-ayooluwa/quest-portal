@@ -308,7 +308,7 @@ $classes = $admin->getClasses($pdo);
             try {
                 // fetch all sheets and wait
                 const requests = sheets.map(sheet =>
-                    fetch(`https://opensheet.elk.sh/${sheetId}/${sheet}`)
+                    fetch(`https://opensheet.elk.sh/${sheetId}/${sheet}!A1:Z`)
                     .then(res => res.json())
                 );
 
