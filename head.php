@@ -26,3 +26,8 @@
         e.preventDefault();
     });
 </script>
+<style>
+    * {
+        font-family: Montserrat, sans-serif;
+    }
+</style>

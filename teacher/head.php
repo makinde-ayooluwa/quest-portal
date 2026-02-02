@@ -48,6 +48,6 @@
     }
 
     * {
-        font-family: Montserrat;
+        font-family: Montserrat, sans-serif;
     }
 </style>

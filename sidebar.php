@@ -58,6 +58,8 @@
     }
 
     .sidebar {
+        overflow-y: scroll;
+        height: calc(100vh - 72px);
         background: #fff;
         z-index: 20;
         position: fixed;
