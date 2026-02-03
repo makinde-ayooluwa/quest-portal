@@ -286,6 +286,10 @@ try {
           transform: translateY(-2px);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
+
+        .col-md {
+          grid-template-rows: auto;
+        }
       </style>
       <!-- Stats Cards with Notifications -->
       <div class="stats row mb-4">
@@ -293,22 +297,16 @@ try {
           <div class="d-flex justify-content-between align-items-start">
             <div>
               <h3><i class="bi bi-people-fill px-3"></i>Total Students</h3>
-              <h1 class="fs-2">
-                <?php echo count($students); ?>
-              </h1>
+              <canvas id="verificationChart"></canvas>
             </div>
             <?php
-            if ($admin->getUnverifiedStudents($pdo)) {
+            if ($admin->getStudents($pdo)) {
             ?>
               <span
-                class="badge m-0 bg-danger rounded-pill"><?php echo count($admin->getUnverifiedStudents($pdo)) ?></span>
+                class="badge m-0 bg-danger rounded-pill"><?php echo count($admin->getStudents($pdo)) ?></span>
             <?php
             }
             ?>
-          </div>
-          <div class="progress mt-3">
-            <div class="progress-bar bg-success"
-              style="width: <?php echo min((count($students) / 100) * 100, 100); ?>%;"></div>
           </div>
         </div>
         <div class="stat-card col-md">
@@ -970,6 +968,57 @@ try {
     // window.addEventListener('beforeunload', function() {
     //   localStorage.removeItem('introShown');
     // });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById("verificationChart");
+    const chart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Verified', 'Not Verified'],
+        datasets: [{
+          data: [0, 0], // start empty
+          backgroundColor: ['green', 'red'],
+          hoverOffset: 20
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Student Verification Rate'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const value = context.raw;
+                return `${label}: ${value} students`;
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // ✅ Fetch function that updates the chart
+    function fetchData() {
+      fetch('get_student_verification.php')
+        .then(response => response.json())
+        .then(data => {
+          chart.data.datasets[0].data = [data.verified, data.unverified];
+          chart.update();
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }
+
+    // Initial fetch
+    fetchData();
+
+    // Refresh every 5 seconds
+    setInterval(fetchData, 5000);
   </script>
 </body>
 
