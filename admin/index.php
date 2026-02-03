@@ -240,9 +240,9 @@ try {
             <!-- <button class="btn btn-success btn-sm" onclick="window.location.href='add_student.php'">
               <i class="bi bi-person-plus"></i> Add Student
             </button> -->
-            <button class="btn btn-primary btn-sm" onclick="window.location.href='add_staff.php'">
+            <!-- <button class="btn btn-primary btn-sm" onclick="window.location.href='add_staff.php'">
               <i class="bi bi-person-badge"></i> Add Staff
-            </button>
+            </button> -->
             <button class="btn btn-warning btn-sm" onclick="window.location.href='add_notification.php'">
               <i class="bi bi-bell"></i> Add Notification
             </button>
@@ -309,7 +309,7 @@ try {
             ?>
           </div>
         </div>
-        <div class="stat-card col-md">
+        <!-- <div class="stat-card col-md">
           <div class="d-flex justify-content-between align-items-start">
             <div>
               <h3><i class="bi bi-people-fill px-3"></i>Total Staffs</h3>
@@ -329,8 +329,8 @@ try {
             <div class="progress-bar bg-primary" style="width: <?php echo min((count($staffs) / 50) * 100, 100); ?>%;">
             </div>
           </div>
-        </div>
-        <div class="stat-card col-md">
+        </div> -->
+        <!-- <div class="stat-card col-md">
           <h3><i class="bi bi-house-door-fill px-3"></i>Total Classes</h3>
           <h1 class="fs-2">
             <?php echo count($classes); ?>
@@ -339,7 +339,7 @@ try {
             <div class="progress-bar bg-warning" style="width: <?php echo min((count($classes)) * 100, 100); ?>%;">
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- System Health Card -->
         <div class="stat-card col-md">
           <h3><i class="bi bi-shield-check px-3"></i>System Health</h3>
@@ -604,11 +604,11 @@ try {
                 <li>Generate assessment and attendance reports.</li>
                 <li>Track academic progress and trends.</li>
               </ul>
-              <button class="btn btn-warning btn-sm mt-2" disabled><i class="bi bi-upload"></i> Upload Results</button>
+              <a class="btn btn-warning btn-sm mt-2" href="manage_results.php"><i class="bi bi-upload"></i> Upload Results</a>
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4">
+        <!-- <div class="col-md-6 col-lg-4">
           <div class="card h-100 shadow-sm">
             <div class="card-body">
               <h5 class="card-title"><i class="bi bi-journal-richtext me-2"></i>Content & Resource Distribution
@@ -624,8 +624,8 @@ try {
               </button>
             </div>
           </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
+        </div> -->
+        <!-- <div class="col-md-6 col-lg-4">
           <div class="card h-100 shadow-sm">
             <div class="card-body">
               <h5 class="card-title"><i class="bi bi-award-fill me-2"></i>Scholarship Tracking</h5>
@@ -638,7 +638,7 @@ try {
                 Applications</button>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </section>
   </main>

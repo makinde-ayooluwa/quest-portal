@@ -227,7 +227,7 @@ define("STUDENT_DATA", $studentData);
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 mb-4">
+                    <!-- <div class="col-md-6 col-lg-4 mb-4">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body">
                                 <h5 class="card-title"><i class="bi bi-book me-2"></i>Assignments &amp; Materials</h5>
@@ -240,8 +240,8 @@ define("STUDENT_DATA", $studentData);
                                     Materials</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mb-4">
+                    </div> -->
+                    <!-- <div class="col-md-6 col-lg-4 mb-4">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body">
                                 <h5 class="card-title"><i class="bi bi-award me-2"></i>Scholarship/Program Status</h5>
@@ -253,7 +253,7 @@ define("STUDENT_DATA", $studentData);
                                     Status</button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-6 col-lg-4 mb-4">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body">
@@ -261,8 +261,8 @@ define("STUDENT_DATA", $studentData);
                                 <ul>
                                     <li>Receive updates on exams, events, competitions</li>
                                 </ul>
-                                <button class="btn btn-secondary btn-sm mt-2" disabled><i class="bi bi-bell"></i> View
-                                    Notifications</button>
+                                <a class="btn btn-secondary btn-sm mt-2" href="notifications.php"><i class="bi bi-bell"></i> View
+                                    Notifications</a>
                             </div>
                         </div>
                     </div>

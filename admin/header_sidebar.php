@@ -159,7 +159,7 @@
         <div class="search-container flex-grow-1 mx-3" style="max-width: 400px;">
             <div class="input-group">
                 <input type="text" class="form-control" id="globalSearch"
-                    placeholder="Search students, staff, classes..." autocomplete="off">
+                    placeholder="Search students, classes..." autocomplete="off">
                 <button class="btn btn-outline-light" type="button" id="searchBtn">
                     <i class="fas fa-search"></i>
                 </button>
@@ -205,20 +205,20 @@
             <li><a class="text-primary" href="support_requests.php"><i class="bi bi-headset me-2"></i>Support
                     Requests</a></li>
         </div>
-        <li data-bs-toggle="collapse" data-bs-target="#staffManagement"><a href="javascript:;"><i
+        <!-- <li data-bs-toggle="collapse" data-bs-target="#staffManagement"><a href="javascript:;"><i
                     class="fas fa-book me-2"></i>Staffs Management</a></li>
         <div class="collapse" id="staffManagement">
             <li><a class="text-primary" href="staff_management.php"><i class="bi bi-people me-2"></i>View all staffs</a>
             </li>
             <li><a class="text-primary" href="add_staff.php"><i class="bi bi-plus me-2"></i>Add staff</a></li>
-        </div>
+        </div> -->
         <li data-bs-toggle="collapse" data-bs-target="#systemManagement"><a href="javascript:;"><i
                     class="fas fa-cogs me-2"></i>System Management</a></li>
         <div class="collapse" id="systemManagement">
             <li><a class="text-primary" href="add_notification.php"><i class="bi bi-bell me-2"></i>Add Notification</a>
             </li>
-            <li><a class="text-primary" href="upload_material.php"><i class="bi bi-upload me-2"></i>Upload Materials</a>
-            </li>
+            <!-- <li><a class="text-primary" href="upload_material.php"><i class="bi bi-upload me-2"></i>Upload Materials</a>
+            </li> -->
             <li><a class="text-primary" href="add_event.php"><i class="bi bi-calendar-event me-2"></i>Add Event</a></li>
         </div>
     </ul>
@@ -246,7 +246,7 @@
     });
 
     // Optional: Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function (event) {
+    document.addEventListener('click', function(event) {
         if (window.innerWidth <= 1024) {
             if (!sidebar.contains(event.target) && !sidebarToggle.contains(event.target)) {
                 sidebar.classList.remove('active');
@@ -273,7 +273,7 @@
             });
         }
 
-        if (data.staff && data.staff.length > 0) {
+        /*if (data.staff && data.staff.length > 0) {
             searchResults.innerHTML += '<div class="search-category">Staff</div>';
             data.staff.forEach(staff => {
                 const item = document.createElement('div');
@@ -281,7 +281,7 @@
                 item.innerHTML = `<a href="view_staff.php?id=${staff.id}"><i class="bi bi-person-badge me-2"></i>${highlightText(staff.fullname, query)} <small class="text-muted">(${staff.staff_role})</small></a>`;
                 searchResults.appendChild(item);
             });
-        }
+        }*/
 
         if (data.classes && data.classes.length > 0) {
             searchResults.innerHTML += '<div class="search-category">Classes</div>';
@@ -304,13 +304,13 @@
         }
 
         fetch('search_handler.php', {
-            method: 'POST',
-            credentials: 'same-origin', // send cookies so PHP session is available
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'query=' + encodeURIComponent(query)
-        })
+                method: 'POST',
+                credentials: 'same-origin', // send cookies so PHP session is available
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'query=' + encodeURIComponent(query)
+            })
             .then(response => {
                 if (!response.ok) {
                     if (response.status === 401) {
@@ -342,32 +342,32 @@
 
 
     // Search input event listeners
-    globalSearch.addEventListener('input', function () {
+    globalSearch.addEventListener('input', function() {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
             performSearch(this.value);
         }, 300);
     });
 
-    globalSearch.addEventListener('focus', function () {
+    globalSearch.addEventListener('focus', function() {
         if (this.value.length >= 2) {
             performSearch(this.value);
         }
     });
 
-    searchBtn.addEventListener('click', function () {
+    searchBtn.addEventListener('click', function() {
         performSearch(globalSearch.value);
     });
 
     // Close search results when clicking outside
-    document.addEventListener('click', function (event) {
+    document.addEventListener('click', function(event) {
         if (!globalSearch.contains(event.target) && !searchResults.contains(event.target) && !searchBtn.contains(event.target)) {
             searchResults.style.display = 'none';
         }
     });
 
     // Handle Enter key
-    globalSearch.addEventListener('keypress', function (event) {
+    globalSearch.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
             event.preventDefault();
             performSearch(this.value);
@@ -377,8 +377,8 @@
     // Programmatic fallback for dropdown toggles
     // In some environments the data-api may not initialize (or JS errors stop it). This ensures dropdowns still work.
     try {
-        document.querySelectorAll('[data-bs-toggle="dropdown"]').forEach(function (toggle) {
-            toggle.addEventListener('click', function (e) {
+        document.querySelectorAll('[data-bs-toggle="dropdown"]').forEach(function(toggle) {
+            toggle.addEventListener('click', function(e) {
                 // Prevent default anchor behavior
                 if (e) e.preventDefault();
                 // Use Bootstrap's Dropdown API if available
