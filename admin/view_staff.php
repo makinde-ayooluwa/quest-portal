@@ -102,31 +102,21 @@ function e($v)
                     <a href="staff_management.php" class="btn btn-sm btn-outline-secondary">&larr; Back</a>
                     <!-- <a href="edit_staff.php?id=<?php //echo e($staff['id']); 
                                                     ?>" class="btn btn-sm btn-primary ms-2">Edit</a> -->
-                    <?php if ($staff['staff_role'] === 'Teacher'): ?>
-                        <button type="button" class="btn btn-sm btn-warning ms-2" data-bs-toggle="modal" data-bs-target="#promoteModal">Promote to Admin</button>
-                    <?php endif; ?>
-                    <?php if ($staff["staff_role"] !== 'Admin') {
-                    ?>
+                    <?php
+                    if ($adminData["staff_role"] == "head admin") {
+                        if ($staff['staff_role'] !== 'admin') { ?>
+                            <button type="button" class="btn btn-sm btn-warning ms-2" data-bs-toggle="modal" data-bs-target="#promoteModal">Promote to Admin</button>
+                        <?php } ?>
                         <button type="button" class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                     <?php
                     }
-
                     ?>
                 </div>
             </div>
 
             <div class="row g-4">
                 <div class="col-md-4 text-center">
-                    <img src="<?php //echo $staff["staff_role"] == 'Teacher' ?  :  e($staff['picture']);
-                                switch ($staff["staff_role"]) {
-                                    case "Teacher":
-                                        echo "../teacher/" . e($staff["picture"]);
-                                        break;
-                                    case "Admin":
-                                        echo "../admin/" . e($staff["picture"]);
-                                        break;
-                                }
-                                ?>" alt="<?php echo e($staff['fullname']); ?>" class="profile-photo mb-3">
+                    <img src="<?php echo e($staff["picture"]); ?>" alt="<?php echo e($staff['fullname']); ?>" class="profile-photo mb-3">
                     <h5 class="mb-0"><?php echo e($staff['fullname']); ?></h5>
                     <div class="text-muted small">Portal Code: <?php echo e($staff['portal_code']); ?></div>
                 </div>
@@ -134,7 +124,7 @@ function e($v)
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <div class="kv">Role</div>
-                            <div class="kvv"><?php echo e($staff['staff_role']); ?></div>
+                            <div class="kvv"><?php echo strtoupper(e($staff['staff_role'])); ?></div>
                         </div>
                         <div class="col-sm-6">
                             <div class="kv">Email</div>

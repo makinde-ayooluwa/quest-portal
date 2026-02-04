@@ -67,6 +67,7 @@ try {
     }
 
     .stat-card {
+      width: 90%;
       background: #fff;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -295,7 +296,7 @@ try {
         }
       </style>
       <!-- Stats Cards with Notifications -->
-      <div class="stats row mb-4">
+      <div class="stats row justify-content-center mb-4">
         <div class="stat-card col-md-6 col-lg">
           <div class="d-flex justify-content-between align-items-start">
             <div>
@@ -1002,7 +1003,7 @@ try {
           plugins: {
             title: {
               display: true,
-              text: `${ctx.title.toLocaleUpperCase()} Verification Rate`
+              text: `${ctx.title.toLocaleUpperCase()} VERIFICATION RATE`
             },
             tooltip: {
               callbacks: {
