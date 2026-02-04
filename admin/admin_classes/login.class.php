@@ -8,7 +8,7 @@ class Login {
     }
     public function getAdmin($pdo, $email, $password)
     {
-        $query = "SELECT * FROM staffs WHERE staff_role = 'Admin' AND email = :email;";
+        $query = "SELECT * FROM staffs WHERE email = :email;";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();

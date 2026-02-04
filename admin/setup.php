@@ -18,10 +18,6 @@ elseif (/*$admin->getSpecificAdmin($pdo, $_GET["id"]) && */$admin->getSpecificAd
 ?>
     Page blocked
 <?php
-} elseif ($admin->getSpecificAdmin($pdo, $_GET["portal_code"])["staff_role"] !== "Admin") {
-?>
-    Page blocked
-<?php
 } elseif ($admin->getSpecificAdmin($pdo, $_GET["portal_code"])["account_verification"] == "Verified") {
 ?>
     Admin is verified

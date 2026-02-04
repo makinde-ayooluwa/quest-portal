@@ -205,22 +205,34 @@
             <li><a class="text-primary" href="support_requests.php"><i class="bi bi-headset me-2"></i>Support
                     Requests</a></li>
         </div>
-        <!-- <li data-bs-toggle="collapse" data-bs-target="#staffManagement"><a href="javascript:;"><i
-                    class="fas fa-book me-2"></i>Staffs Management</a></li>
-        <div class="collapse" id="staffManagement">
-            <li><a class="text-primary" href="staff_management.php"><i class="bi bi-people me-2"></i>View all staffs</a>
-            </li>
-            <li><a class="text-primary" href="add_staff.php"><i class="bi bi-plus me-2"></i>Add staff</a></li>
-        </div> -->
-        <li data-bs-toggle="collapse" data-bs-target="#systemManagement"><a href="javascript:;"><i
-                    class="fas fa-cogs me-2"></i>System Management</a></li>
-        <div class="collapse" id="systemManagement">
-            <li><a class="text-primary" href="add_notification.php"><i class="bi bi-bell me-2"></i>Add Notification</a>
-            </li>
-            <!-- <li><a class="text-primary" href="upload_material.php"><i class="bi bi-upload me-2"></i>Upload Materials</a>
+        <?php
+        if ($adminData["staff_role"] == "head admin") {
+        ?>
+            <li data-bs-toggle="collapse" data-bs-target="#staffManagement"><a href="javascript:;"><i
+                        class="fas fa-book me-2"></i>Staffs Management</a></li>
+            <div class="collapse" id="staffManagement">
+                <li><a class="text-primary" href="staff_management.php"><i class="bi bi-people me-2"></i>View all staffs</a>
+                </li>
+                <li><a class="text-primary" href="add_staff.php"><i class="bi bi-plus me-2"></i>Add staff</a></li>
+            </div>
+        <?php
+        }
+        ?>
+        <?php
+        if ($adminData["staff_role"] == "head admin") {
+        ?>
+            <li data-bs-toggle="collapse" data-bs-target="#systemManagement"><a href="javascript:;"><i
+                        class="fas fa-cogs me-2"></i>System Management</a></li>
+            <div class="collapse" id="systemManagement">
+                <li><a class="text-primary" href="add_notification.php"><i class="bi bi-bell me-2"></i>Add Notification</a>
+                </li>
+                <!-- <li><a class="text-primary" href="upload_material.php"><i class="bi bi-upload me-2"></i>Upload Materials</a>
             </li> -->
-            <li><a class="text-primary" href="add_event.php"><i class="bi bi-calendar-event me-2"></i>Add Event</a></li>
-        </div>
+                <li><a class="text-primary" href="add_event.php"><i class="bi bi-calendar-event me-2"></i>Add Event</a></li>
+            </div>
+        <?php
+        }
+        ?>
     </ul>
     <div class="sidebar-header">
         <h3 class="text-uppercase text-start fs-5">PROFILE</h3>

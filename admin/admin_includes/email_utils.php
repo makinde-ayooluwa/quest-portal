@@ -70,15 +70,9 @@ class EmailUtils {
             $this->mail->clearAddresses();
             $this->mail->addAddress($staffEmail, $staffName);
 
-            if (strtolower($staffRole) === 'admin') {
                 $this->mail->Subject = 'Quest Schools - Admin Portal Setup';
                 $setupLink = "http://localhost/quest-portal/admin/setup.php?portal_code=" . urlencode($portalCode);
-                $roleMessage = 'as an Administrator';
-            } elseif(strtolower($staffRole) === 'teacher') {
-                $this->mail->Subject = 'Quest Schools - Teacher Portal Setup';
-                $setupLink = "http://localhost/quest-portal/teacher/setup.php?portal_code=" . urlencode($portalCode);
-                $roleMessage = 'as Teacher (' . $staffRole . ')';
-            }
+                $roleMessage = 'as ' + $staffRole;
 
             $this->mail->Body = "
             <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\">

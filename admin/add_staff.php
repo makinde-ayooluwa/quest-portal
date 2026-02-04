@@ -147,8 +147,8 @@ unset($_SESSION['success']);
                             <label class="form-label">Role</label>
                             <select class="form-select" name="role" required>
                                 <option value="">Select</option>
-                                <option value="Teacher">Teacher</option>
-                                <option value="Admin">Admin Staff</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="admin">Admin</option>
                             </select>
                         </div>
                         <!-- Assigned Class removed per request -->

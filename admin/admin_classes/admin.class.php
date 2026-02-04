@@ -12,7 +12,7 @@ class Admin
 
     public function adminData($pdo, $email)
     {
-        $query = "SELECT * FROM staffs WHERE staff_role = 'Admin' AND email = :email;";
+        $query = "SELECT * FROM staffs WHERE email = :email;";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":email", $email);
         $stmt->execute();
@@ -205,7 +205,7 @@ class Admin
 
     public function getSpecificAdmin($pdo, $portal_code)
     {
-        $query = "SELECT * FROM staffs WHERE portal_code = :portal_code AND staff_role = 'Admin'";
+        $query = "SELECT * FROM staffs WHERE portal_code = :portal_code";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":portal_code", $portal_code);
         $stmt->execute();
@@ -682,7 +682,7 @@ class AdminSetup
         if ($this->errorHandler()) {
             return false;
         } else {
-            $run = $this->pdo->prepare("UPDATE staffs SET picture = :picture,pwd = :pwd,account_verification = 'Verified' WHERE email = :email AND portal_code = :portal_code AND staff_role = 'Admin'");
+            $run = $this->pdo->prepare("UPDATE staffs SET picture = :picture,pwd = :pwd,account_verification = 'Verified' WHERE email = :email AND portal_code = :portal_code");
             $run->bindParam(":picture", $this->data["picture_path"]);
             $run->bindParam(":pwd", $this->data["hashedPassword"]);
             $run->bindParam(":email", $this->data["email"]);

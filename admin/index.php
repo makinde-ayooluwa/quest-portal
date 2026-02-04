@@ -240,9 +240,15 @@ try {
             <!-- <button class="btn btn-success btn-sm" onclick="window.location.href='add_student.php'">
               <i class="bi bi-person-plus"></i> Add Student
             </button> -->
-            <!-- <button class="btn btn-primary btn-sm" onclick="window.location.href='add_staff.php'">
-              <i class="bi bi-person-badge"></i> Add Staff
-            </button> -->
+            <?php
+            if ($adminData["staff_role"] == "head admin") {
+            ?>
+              <button class="btn btn-primary btn-sm" onclick="window.location.href='add_staff.php'">
+                <i class="bi bi-person-badge"></i> Add Staff
+              </button>
+            <?php
+            }
+            ?>
             <button class="btn btn-warning btn-sm" onclick="window.location.href='add_notification.php'">
               <i class="bi bi-bell"></i> Add Notification
             </button>
@@ -360,109 +366,115 @@ try {
           </div>
         </div>
         <div class="stat-card col-md-12" id="classes">
-          <section class="mt-4">
-            <h2>Classes</h2>
-            <div class="card p-3 mb-3">
-              <div class="d-flex mb-3 align-items-center gap-2">
-                <input id="classSearch" class="form-control form-control-sm"
-                  placeholder="Search classes by name or teacher">
-                <div class="ms-auto text-muted small">Showing <?php echo count($classes); ?> classes</div>
-              </div>
-              <div class="table-responsive">
-                <table id="classesTable" class="table table-hover table-bordered align-middle">
-                  <thead class="table-dark">
-                    <tr>
-                      <th style="width:48px">#</th>
-                      <th>Class Name</th>
-                      <th style="width:260px">Teacher(s)</th>
-                      <th style="width:120px">Students</th>
-                      <th style="width:120px">Status</th>
-                      <th style="width:140px">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php if (empty($classes)) { ?>
+          <?php
+          if ($adminData["staff_role"] == "head admin") {
+          ?>
+            <section class="mt-4">
+              <h2>Classes</h2>
+              <div class="card p-3 mb-3">
+                <div class="d-flex mb-3 align-items-center gap-2">
+                  <input id="classSearch" class="form-control form-control-sm"
+                    placeholder="Search classes by name or teacher">
+                  <div class="ms-auto text-muted small">Showing <?php echo count($classes); ?> classes</div>
+                </div>
+                <div class="table-responsive">
+                  <table id="classesTable" class="table table-hover table-bordered align-middle">
+                    <thead class="table-dark">
                       <tr>
-                        <td colspan="6" class="text-center py-4">No classes found.</td>
+                        <th style="width:48px">#</th>
+                        <th>Class Name</th>
+                        <th style="width:260px">Teacher(s)</th>
+                        <th style="width:120px">Students</th>
+                        <th style="width:120px">Status</th>
+                        <th style="width:140px">Actions</th>
                       </tr>
-                      <?php } else {
-                      $i = 1;
-                      foreach ($classes as $class) {
-                        $cname = $class['class_name'];
-                        // get class rows to find mentors
-                        $stmt = $pdo->prepare('SELECT * FROM classes WHERE class_name = :class_name');
-                        $stmt->bindValue(':class_name', $cname);
-                        $stmt->execute();
-                        $classRows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                        $mentorNames = [];
-                        foreach ($classRows as $r) {
-                          if (!empty($r['mentor_name']))
-                            $mentorNames[] = $r['mentor_name'];
-                        }
-                        $mentorNames = array_values(array_unique($mentorNames));
-
-                        // resolve mentor displays
-                        $mentorHtml = [];
-                        foreach ($mentorNames as $mn) {
-                          // try to find staff by email
-                          $s = $pdo->prepare('SELECT fullname,picture FROM staffs WHERE email = :email LIMIT 1');
-                          $s->bindValue(':email', $mn);
-                          $s->execute();
-                          $staff = $s->fetch(PDO::FETCH_ASSOC);
-                          if ($staff) {
-                            $pic = htmlspecialchars($staff['picture'] ?? '');
-                            $mentorHtml[] = '<div class="d-flex align-items-center mb-1"><img src="' . $pic . '" width="36" height="36" class="rounded-circle me-2" alt="">' . htmlspecialchars($staff['fullname']) . '</div>';
-                          } else {
-                            $mentorHtml[] = '<div class="mb-1">' . htmlspecialchars($mn) . '</div>';
-                          }
-                        }
-
-                        // student count
-                        $sStmt = $pdo->prepare('SELECT COUNT(*) FROM students WHERE class = :class');
-                        $sStmt->bindValue(':class', $cname);
-                        $sStmt->execute();
-                        $studentCount = (int) $sStmt->fetchColumn();
-
-                        $status = isset($class['class_status']) ? $class['class_status'] : '';
-                      ?>
-                        <tr data-class-name="<?php echo htmlspecialchars(strtolower($cname)); ?>"
-                          data-mentors="<?php echo htmlspecialchars(implode(',', $mentorNames)); ?>">
-                          <td><?php echo $i++; ?></td>
-                          <td><?php echo htmlspecialchars($cname); ?></td>
-                          <td><?php echo implode('', $mentorHtml); ?></td>
-                          <td><b class="fs-5"><?php echo $studentCount; ?></b></td>
-                          <td><?php if ($status === 'Active') {
-                                echo '<span class="badge bg-success">Active</span>';
-                              } elseif ($status) {
-                                echo '<span class="badge bg-secondary">' . htmlspecialchars($status) . '</span>';
-                              } else {
-                                echo '<span class="badge bg-light text-dark">-</span>';
-                              } ?></td>
-                          <td>
-                            <a href="edit_class.php?id=<?php echo $class['id']; ?>" class="btn btn-sm btn-primary"
-                              title="Edit"><i class="bi bi-pencil"></i></a>
-                            <a href="view_class.php?id=<?php echo $class['id']; ?>"
-                              class="btn btn-sm btn-outline-secondary ms-1" title="View"><i class="bi bi-eye"></i></a>
-                          </td>
+                    </thead>
+                    <tbody>
+                      <?php if (empty($classes)) { ?>
+                        <tr>
+                          <td colspan="6" class="text-center py-4">No classes found.</td>
                         </tr>
-                    <?php }
-                    } ?>
-                  </tbody>
-                </table>
+                        <?php } else {
+                        $i = 1;
+                        foreach ($classes as $class) {
+                          $cname = $class['class_name'];
+                          // get class rows to find mentors
+                          $stmt = $pdo->prepare('SELECT * FROM classes WHERE class_name = :class_name');
+                          $stmt->bindValue(':class_name', $cname);
+                          $stmt->execute();
+                          $classRows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                          $mentorNames = [];
+                          foreach ($classRows as $r) {
+                            if (!empty($r['mentor_name']))
+                              $mentorNames[] = $r['mentor_name'];
+                          }
+                          $mentorNames = array_values(array_unique($mentorNames));
+
+                          // resolve mentor displays
+                          $mentorHtml = [];
+                          foreach ($mentorNames as $mn) {
+                            // try to find staff by email
+                            $s = $pdo->prepare('SELECT fullname,picture FROM staffs WHERE email = :email LIMIT 1');
+                            $s->bindValue(':email', $mn);
+                            $s->execute();
+                            $staff = $s->fetch(PDO::FETCH_ASSOC);
+                            if ($staff) {
+                              $pic = htmlspecialchars($staff['picture'] ?? '');
+                              $mentorHtml[] = '<div class="d-flex align-items-center mb-1"><img src="' . $pic . '" width="36" height="36" class="rounded-circle me-2" alt="">' . htmlspecialchars($staff['fullname']) . '</div>';
+                            } else {
+                              $mentorHtml[] = '<div class="mb-1">' . htmlspecialchars($mn) . '</div>';
+                            }
+                          }
+
+                          // student count
+                          $sStmt = $pdo->prepare('SELECT COUNT(*) FROM students WHERE class = :class');
+                          $sStmt->bindValue(':class', $cname);
+                          $sStmt->execute();
+                          $studentCount = (int) $sStmt->fetchColumn();
+
+                          $status = isset($class['class_status']) ? $class['class_status'] : '';
+                        ?>
+                          <tr data-class-name="<?php echo htmlspecialchars(strtolower($cname)); ?>"
+                            data-mentors="<?php echo htmlspecialchars(implode(',', $mentorNames)); ?>">
+                            <td><?php echo $i++; ?></td>
+                            <td><?php echo htmlspecialchars($cname); ?></td>
+                            <td><?php echo implode('', $mentorHtml); ?></td>
+                            <td><b class="fs-5"><?php echo $studentCount; ?></b></td>
+                            <td><?php if ($status === 'Active') {
+                                  echo '<span class="badge bg-success">Active</span>';
+                                } elseif ($status) {
+                                  echo '<span class="badge bg-secondary">' . htmlspecialchars($status) . '</span>';
+                                } else {
+                                  echo '<span class="badge bg-light text-dark">-</span>';
+                                } ?></td>
+                            <td>
+                              <a href="edit_class.php?id=<?php echo $class['id']; ?>" class="btn btn-sm btn-primary"
+                                title="Edit"><i class="bi bi-pencil"></i></a>
+                              <a href="view_class.php?id=<?php echo $class['id']; ?>"
+                                class="btn btn-sm btn-outline-secondary ms-1" title="View"><i class="bi bi-eye"></i></a>
+                            </td>
+                          </tr>
+                      <?php }
+                      } ?>
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </div>
-            <script>
-              document.getElementById('classSearch')?.addEventListener('input', function(e) {
-                const q = e.target.value.toLowerCase();
-                document.querySelectorAll('#classesTable tbody tr').forEach(function(row) {
-                  const name = row.getAttribute('data-class-name') || '';
-                  const mentors = row.getAttribute('data-mentors') || '';
-                  row.style.display = (name.includes(q) || mentors.includes(q)) ? '' : 'none';
+              <script>
+                document.getElementById('classSearch')?.addEventListener('input', function(e) {
+                  const q = e.target.value.toLowerCase();
+                  document.querySelectorAll('#classesTable tbody tr').forEach(function(row) {
+                    const name = row.getAttribute('data-class-name') || '';
+                    const mentors = row.getAttribute('data-mentors') || '';
+                    row.style.display = (name.includes(q) || mentors.includes(q)) ? '' : 'none';
+                  });
                 });
-              });
-            </script>
-          </section>
+              </script>
+            </section>
+          <?php
+          }
+          ?>
           <section class="mt-4">
             <h2><i class="bi bi-activity me-2"></i>Recent Activities</h2>
             <div class="card">
