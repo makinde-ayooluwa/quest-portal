@@ -153,7 +153,6 @@ unset($_SESSION['success']);
                                 <option value="admin">Admin</option>
                             </select>
                         </div>
-                        <!-- Assigned Class removed per request -->
                     </div>
 
                     <h5 class="form-section-title">Employment & Status</h5>
