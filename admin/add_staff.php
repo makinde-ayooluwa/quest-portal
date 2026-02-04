@@ -107,8 +107,8 @@ unset($_SESSION['success']);
             <div class="add-card" role="region" aria-labelledby="addStaffHeading">
                 <div class="d-flex align-items-start justify-content-between mb-3">
                     <div>
-                        <h2 id="addStaffHeading" class="mb-1"><i class="bi bi-person-plus me-2"></i>Add Staff / Mentor</h2>
-                        <small class="text-muted">Create staff accounts and assign roles</small>
+                        <h2 id="addStaffHeading" class="mb-1"><i class="bi bi-person-plus me-2"></i>Add User</h2>
+                        <small class="text-muted">Create user accounts and assign roles</small>
                     </div>
                 </div>
 
@@ -177,7 +177,7 @@ unset($_SESSION['success']);
 
                     <div class="d-flex justify-content-end gap-2 mt-4">
                         <a href="staff_management.php" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Cancel</a>
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Add Staff</button>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Add User</button>
                     </div>
                 </form>
             </div>
