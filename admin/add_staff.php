@@ -147,6 +147,7 @@ unset($_SESSION['success']);
                             <label class="form-label">Role</label>
                             <select class="form-select" name="role" required>
                                 <option value="">Select</option>
+                                <option value="teacher">Teacher</option>
                                 <option value="retention officer">Retention Officer</option>
                                 <option value="assessment officer">Assessment Officer</option>
                                 <option value="admin">Admin</option>
