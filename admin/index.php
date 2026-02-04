@@ -237,9 +237,6 @@ try {
           <h2 id="greeting" class="h3">Welcome, <span
               class="text-uppercase fw-bolder"><?php echo $adminData["fullname"] ?></span>.</h2>
           <div class="d-flex flex-column flex-sm-row gap-2">
-            <!-- <button class="btn btn-success btn-sm" onclick="window.location.href='add_student.php'">
-              <i class="bi bi-person-plus"></i> Add Student
-            </button> -->
             <?php
             if ($adminData["staff_role"] == "head admin") {
             ?>
@@ -299,11 +296,11 @@ try {
       </style>
       <!-- Stats Cards with Notifications -->
       <div class="stats row mb-4">
-        <div class="stat-card col-md">
+        <div class="stat-card col-md-6 col-lg">
           <div class="d-flex justify-content-between align-items-start">
             <div>
               <h3><i class="bi bi-people-fill px-3"></i>Total Students</h3>
-              <canvas id="verificationChart"></canvas>
+              <canvas id="studentsVerificationChart"></canvas>
             </div>
             <?php
             if ($admin->getStudents($pdo)) {
@@ -315,28 +312,22 @@ try {
             ?>
           </div>
         </div>
-        <!-- <div class="stat-card col-md">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <h3><i class="bi bi-people-fill px-3"></i>Total Staffs</h3>
-              <h1 class="fs-2">
-                <?php echo count($staffs); ?>
-              </h1>
-            </div>
-            <?php
-            if ($admin->getUnverifiedStaffs($pdo)) {
-            ?>
-              <span class="badge m-0 bg-danger rounded-pill"><?php echo count($admin->getUnverifiedStaffs($pdo)) ?></span>
-            <?php
-            }
-            ?>
-          </div>
-          <div class="progress mt-3">
-            <div class="progress-bar bg-primary" style="width: <?php echo min((count($staffs) / 50) * 100, 100); ?>%;">
+        <?php
+        if ($adminData['staff_role'] == "head admin") {
+        ?>
+          <div class="stat-card col-md-6 col-lg">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h3><i class="bi bi-people-fill px-3"></i>Total Staffs</h3>
+                <canvas id="staffsVerificationChart"></canvas>
+              </div>
+              <span class="badge m-0 bg-danger rounded-pill"><?php echo count($admin->getStaffs($pdo)) ?></span>
             </div>
           </div>
-        </div> -->
-        <!-- <div class="stat-card col-md">
+        <?php
+        }
+        ?>
+        <!-- <div class="stat-card col-md-6 col-lg">
           <h3><i class="bi bi-house-door-fill px-3"></i>Total Classes</h3>
           <h1 class="fs-2">
             <?php echo count($classes); ?>
@@ -984,53 +975,65 @@ try {
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    const ctx = document.getElementById("verificationChart");
-    const chart = new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: ['Verified', 'Not Verified'],
-        datasets: [{
-          data: [0, 0], // start empty
-          backgroundColor: ['green', 'red'],
-          hoverOffset: 20
-        }]
+    const ctxs = [{
+      title:"students",
+        name: document.getElementById("studentsVerificationChart"),
+        verification_data_url: "get_student_verification.php"
       },
-      options: {
-        responsive: true,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Student Verification Rate'
-          },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                const label = context.label || '';
-                const value = context.raw;
-                return `${label}: ${value} students`;
+      {
+        title:"staffs",
+        name: document.getElementById("staffsVerificationChart"),
+        verification_data_url: "get_staffs_verification.php"
+      }
+    ];
+    ctxs.map(ctx => {
+      const chart = new Chart(ctx.name, {
+        type: 'pie',
+        data: {
+          labels: ['Verified', 'Not Verified'],
+          datasets: [{
+            data: [0, 0], // start empty
+            backgroundColor: ['green', 'red'],
+            hoverOffset: 20
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: `${ctx.title.toLocaleUpperCase()} Verification Rate`
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const label = context.label || '';
+                  const value = context.raw;
+                  return `${label}: ${value} ${ctx.title}`;
+                }
               }
             }
           }
         }
+      });
+
+      // ✅ Fetch function that updates the chart
+      function fetchData() {
+        fetch(ctx.verification_data_url)
+          .then(response => response.json())
+          .then(data => {
+            chart.data.datasets[0].data = [data.verified, data.unverified];
+            chart.update();
+          })
+          .catch(error => console.error('Error fetching data:', error));
       }
-    });
 
-    // ✅ Fetch function that updates the chart
-    function fetchData() {
-      fetch('get_student_verification.php')
-        .then(response => response.json())
-        .then(data => {
-          chart.data.datasets[0].data = [data.verified, data.unverified];
-          chart.update();
-        })
-        .catch(error => console.error('Error fetching data:', error));
-    }
+      // Initial fetch
+      fetchData();
 
-    // Initial fetch
-    fetchData();
-
-    // Refresh every 5 seconds
-    setInterval(fetchData, 5000);
+      // Refresh every 5 seconds
+      setInterval(fetchData, 5000);
+    })
   </script>
 </body>
 
