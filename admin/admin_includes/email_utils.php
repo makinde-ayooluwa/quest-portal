@@ -72,7 +72,7 @@ class EmailUtils {
 
                 $this->mail->Subject = 'Quest Schools - Admin Portal Setup';
                 $setupLink = "http://localhost/quest-portal/admin/setup.php?portal_code=" . urlencode($portalCode);
-                $roleMessage = 'as ' + $staffRole;
+                $roleMessage = 'as ' . $staffRole;
 
             $this->mail->Body = "
             <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\">

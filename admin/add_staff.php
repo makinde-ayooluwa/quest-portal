@@ -147,7 +147,8 @@ unset($_SESSION['success']);
                             <label class="form-label">Role</label>
                             <select class="form-select" name="role" required>
                                 <option value="">Select</option>
-                                <option value="teacher">Teacher</option>
+                                <option value="retention officer">Retention Officer</option>
+                                <option value="assessment officer">Assessment Officer</option>
                                 <option value="admin">Admin</option>
                             </select>
                         </div>
@@ -159,15 +160,6 @@ unset($_SESSION['success']);
                         <div class="col-sm-6 mb-3">
                             <label class="form-label">Employment Date</label>
                             <input type="date" class="form-control" name="employment_date" required>
-                        </div>
-                        <div class="col-sm-6 mb-3">
-                            <label class="form-label">Status</label>
-                            <select class="form-select" name="staff_status" required>
-                                <option value="">Select</option>
-                                <option value="Active">Active</option>
-                                <option value="Pending">Pending</option>
-                                <option value="Inactive">Inactive</option>
-                            </select>
                         </div>
                     </div>
 

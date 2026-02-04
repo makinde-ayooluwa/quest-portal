@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $class = $_POST['assigned_class'] ?? 'None';
     $subject = $_POST['subjects'] ?? 'None';
     $employment_date = $_POST['employment_date'];
-    $staff_status = $_POST['staff_status'];
+    $staff_status = 'active';
 
     // Validate required fields
     if (

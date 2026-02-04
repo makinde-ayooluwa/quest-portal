@@ -132,32 +132,10 @@ include "admin_includes/admin.inc.php";
                                 ?>
                                     <tr>
                                         <td>
-                                            <img width="48" class="rounded-circle border border-1" src="<?php
-                                                                                                        if ($row["staff_role"] == 'Teacher') {
-                                                                                                            echo "../teacher/" . $row["picture"];
-                                                                                                        } elseif ($row["staff_role"] == 'Admin') {
-                                                                                                            echo $row["picture"];
-                                                                                                        }
-
-                                                                                                        ?>" alt="">
+                                            <img width="48" class="rounded-circle border border-1" src="<?php echo $row["picture"]; ?>" alt="">
                                         </td>
                                         <td><?php echo $row["fullname"] ?>
-                                            <?php
-                                            if ($row["staff_role"] == "Mentor") {
-                                            ?>
-                                                <span class="mentor-badge ms-2"><?php echo $row["staff_role"] ?></span>
-                                            <?php
-                                            } elseif ($row["staff_role"] == "Admin") {
-                                            ?>
-                                                <span class="admin-badge ms-2"><?php echo $row["staff_role"] ?></span>
-                                            <?php
-                                            } elseif ($row["staff_role"] == "Teacher") {
-                                            ?>
-                                                <span class="teacher-badge ms-2"><?php echo $row["staff_role"] ?></span>
-                                            <?php
-                                            }
-                                            ?>
-
+                                            <span class="badge bg-primary ms-2"><?php echo strtoupper($row["staff_role"]) ?></span>
                                         </td>
                                         <td>
                                             <?php echo $row["email"]  ?>
@@ -183,14 +161,16 @@ include "admin_includes/admin.inc.php";
                                         </td>
                                         <td>
                                             <?php
-                                            if ($row["staff_role"] == "Admin") {
+                                            if ($row["staff_role"] == "head admin") {
                                             ?>
+                                                <?php
+                                            } elseif ($adminData["staff_role"] == "head admin") {
+                                                if ($row["staff_role"] == "admin" || $row["staff_role"] == "retention officer" || $row["staff_role"] == "assessment officer" || $row["staff_role"] == "teacher") {
+                                                ?>
+                                                    <a title="View Staff" href="view_staff.php?id=<?php echo $row["id"] ?>" class="btn btn-sm btn-outline-info me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="bi bi-eye"></i></a>
+                                                    <button title="Delete Staff" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal_for_staff_<?php echo $row["id"] ?>" aria-label="Delete"><i class="bi bi-trash"></i></button>
                                             <?php
-                                            } elseif ($row["staff_role"] == "Teacher") {
-                                            ?>
-                                                <a title="View Staff" href="view_staff.php?id=<?php echo $row["id"] ?>" class="btn btn-sm btn-outline-info me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="bi bi-eye"></i></a>
-                                                <button title="Delete Staff" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal_for_staff_<?php echo $row["id"] ?>" aria-label="Delete"><i class="bi bi-trash"></i></button>
-                                            <?php
+                                                }
                                             }
                                             ?>
 
