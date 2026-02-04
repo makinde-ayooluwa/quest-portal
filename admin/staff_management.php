@@ -8,7 +8,7 @@ include "admin_includes/admin.inc.php";
 <html lang="en">
 
 <head>
-    <title>Staff & Mentor Management - Quest Schools</title>
+    <title>Users Management - Quest Schools</title>
     <?php include "head.php" ?>
     <style>
         * {

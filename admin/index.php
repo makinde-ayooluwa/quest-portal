@@ -242,7 +242,7 @@ try {
             if ($adminData["staff_role"] == "head admin") {
             ?>
               <button class="btn btn-primary btn-sm" onclick="window.location.href='add_staff.php'">
-                <i class="bi bi-person-badge"></i> Add Staff
+                <i class="bi bi-person-badge"></i> Add User
               </button>
             <?php
             }

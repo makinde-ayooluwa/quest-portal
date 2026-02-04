@@ -209,7 +209,7 @@
         if ($adminData["staff_role"] == "head admin") {
         ?>
             <li data-bs-toggle="collapse" data-bs-target="#staffManagement"><a href="javascript:;"><i
-                        class="fas fa-book me-2"></i>Users Management</a></li>
+                        class="bi bi-people-fill me-2"></i>Users Management</a></li>
             <div class="collapse" id="staffManagement">
                 <li><a class="text-primary" href="staff_management.php"><i class="bi bi-people me-2"></i>View all users</a>
                 </li>
