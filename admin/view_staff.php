@@ -103,7 +103,12 @@ function e($v)
                     <!-- <a href="edit_staff.php?id=<?php //echo e($staff['id']); 
                                                     ?>" class="btn btn-sm btn-primary ms-2">Edit</a> -->
                     <?php
-                    if ($adminData["staff_role"] == "head admin") {
+                    if($staff["staff_role"] == "head admin"){
+                        ?>
+                        
+                        <?php
+                    }
+                    elseif ($adminData["staff_role"] == "head admin") {
                         if ($staff['staff_role'] !== 'admin') { ?>
                             <button type="button" class="btn btn-sm btn-warning ms-2" data-bs-toggle="modal" data-bs-target="#promoteModal">Promote to Admin</button>
                         <?php } ?>
