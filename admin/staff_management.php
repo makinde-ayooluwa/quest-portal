@@ -85,7 +85,7 @@ include "admin_includes/admin.inc.php";
                     <div class="row mb-3">
                         <div class="col-md-8">
                             <form class="d-flex" id="staffSearchForm">
-                                <input class="form-control me-2" type="search" placeholder="Search staff/mentor by name, email..." aria-label="Search" id="staffSearchInput">
+                                <input class="form-control me-2" type="search" placeholder="Search user by name, role, email..." aria-label="Search" id="staffSearchInput">
                                 <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
                             </form>
                         </div>
