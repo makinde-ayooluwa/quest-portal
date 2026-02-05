@@ -105,7 +105,6 @@ function e($v)
                     <?php
                     if ($staff["staff_role"] == "head admin") {
                     ?>
-
                     <?php
                     } elseif ($adminData["staff_role"] == "head admin") {
                     ?>
