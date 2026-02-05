@@ -24,6 +24,7 @@ if ($staff_id <= 0) {
 }
 
 try {
+    $role = $_POST["role"] ?? "";
     // First, verify the staff exists and is a Teacher
     $stmt = $pdo->prepare('SELECT fullname, email, staff_role FROM staffs WHERE id = :id LIMIT 1');
     $stmt->bindValue(':id', $staff_id, PDO::PARAM_INT);
@@ -36,15 +37,9 @@ try {
         exit();
     }
 
-    if ($staff['staff_role'] !== 'Teacher') {
-        $_SESSION['error'] = 'Only Teachers can be promoted to Admin.';
-        header('Location: staff_management.php');
-        exit();
-    }
-
     // Update the staff role to Admin
     $updateStmt = $pdo->prepare('UPDATE staffs SET staff_role = :role WHERE id = :id');
-    $updateStmt->bindValue(':role', 'Admin', PDO::PARAM_STR);
+    $updateStmt->bindValue(':role', $role, PDO::PARAM_STR);
     $updateStmt->bindValue(':id', $staff_id, PDO::PARAM_INT);
     $updateStmt->execute();
 
@@ -58,7 +53,7 @@ try {
         // Note: We don't set an error session here as the promotion was successful
     }
 
-    $_SESSION['success'] = $staff['fullname'] . ' has been successfully promoted to Admin.';
+    $_SESSION['success'] = $staff['fullname'] . ' has been successfully promoted to ' . strtoupper($role) . ".";
     header('Location: view_staff.php?id=' . $staff_id);
     exit();
 

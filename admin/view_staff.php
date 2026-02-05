@@ -103,14 +103,13 @@ function e($v)
                     <!-- <a href="edit_staff.php?id=<?php //echo e($staff['id']); 
                                                     ?>" class="btn btn-sm btn-primary ms-2">Edit</a> -->
                     <?php
-                    if($staff["staff_role"] == "head admin"){
-                        ?>
-                        
+                    if ($staff["staff_role"] == "head admin") {
+                    ?>
+
                         <?php
-                    }
-                    elseif ($adminData["staff_role"] == "head admin") {
+                    } elseif ($adminData["staff_role"] == "head admin") {
                         if ($staff['staff_role'] !== 'admin') { ?>
-                            <!-- <button type="button" class="btn btn-sm btn-warning ms-2" data-bs-toggle="modal" data-bs-target="#promoteModal">Promote</button> -->
+                            <button type="button" class="btn btn-sm btn-warning ms-2" data-bs-toggle="modal" data-bs-target="#promoteModal">Promote / Demote</button>
                         <?php } ?>
                         <button type="button" class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                     <?php
@@ -166,20 +165,27 @@ function e($v)
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="promoteModalLabel">Confirm Promotion</h5>
+                    <h5 class="modal-title" id="promoteModalLabel">Confirm Promotion / Demotion</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to promote <strong><?php echo e($staff['fullname']); ?></strong> from Teacher to Admin?</p>
-                    <p class="text-muted small">This will change their role and may affect their access permissions.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
-                    <form method="post" action="promote_staff_handler.php" style="display: inline;">
+                <form method="post" action="promote_staff_handler.php" style="display: inline;">
+                    <div class="modal-body">
+                        <p>Are you sure you want to promote / demote <strong><?php echo e($staff['fullname']); ?></strong></p>
+                        <p class="text-muted small">This will change their role and may affect their access permissions.</p>
+                        <select name="role" id="" class="form-select">
+                            <option value="teacher">Teacher</option>
+                            <option value="admin">Admin</option>
+                            <option value="retention officer">Retention Officer</option>
+                            <option value="assessment officer">Asessment Officer</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+
                         <input type="hidden" name="staff_id" value="<?php echo e($staff['id']); ?>">
-                        <button type="submit" class="btn btn-warning btn-sm">Yes, promote</button>
-                    </form>
-                </div>
+                        <button type="submit" class="btn btn-warning btn-sm">Promote / Demote</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
