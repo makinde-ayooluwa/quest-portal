@@ -319,7 +319,7 @@ try {
           <div class="stat-card col-md-6 col-lg">
             <div class="d-flex justify-content-between align-items-start">
               <div>
-                <h3><i class="bi bi-people-fill px-3"></i>Total Staffs</h3>
+                <h3><i class="bi bi-people-fill px-3"></i>Total Users</h3>
                 <canvas id="staffsVerificationChart"></canvas>
               </div>
               <span class="badge m-0 bg-danger rounded-pill"><?php echo count($admin->getStaffs($pdo)) ?></span>
@@ -977,18 +977,18 @@ try {
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     const ctxs = [{
-      title:"students",
-        name: document.getElementById("studentsVerificationChart"),
+        title: "students",
+        ctx: document.getElementById("studentsVerificationChart"),
         verification_data_url: "get_student_verification.php"
       },
       {
-        title:"staffs",
-        name: document.getElementById("staffsVerificationChart"),
+        title: "users",
+        ctx: document.getElementById("staffsVerificationChart"),
         verification_data_url: "get_staffs_verification.php"
       }
     ];
     ctxs.map(ctx => {
-      const chart = new Chart(ctx.name, {
+      const chart = new Chart(ctx.ctx, {
         type: 'pie',
         data: {
           labels: ['Verified', 'Not Verified'],
