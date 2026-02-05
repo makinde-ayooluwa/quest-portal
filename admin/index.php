@@ -307,7 +307,7 @@ try {
             if ($admin->getStudents($pdo)) {
             ?>
               <span
-                class="badge m-0 bg-danger rounded-pill"><?php echo count($admin->getStudents($pdo)) ?></span>
+                class="badge m-0 bg-primary rounded-pill"><?php echo count($admin->getStudents($pdo)) ?></span>
             <?php
             }
             ?>
@@ -322,7 +322,7 @@ try {
                 <h3><i class="bi bi-people-fill px-3"></i>Total Users</h3>
                 <canvas id="staffsVerificationChart"></canvas>
               </div>
-              <span class="badge m-0 bg-danger rounded-pill"><?php echo count($admin->getStaffs($pdo)) ?></span>
+              <span class="badge m-0 bg-primary rounded-pill"><?php echo count($admin->getStaffs($pdo)) ?></span>
             </div>
           </div>
         <?php
