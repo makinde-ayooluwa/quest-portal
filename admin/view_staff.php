@@ -106,11 +106,10 @@ function e($v)
                     if ($staff["staff_role"] == "head admin") {
                     ?>
 
-                        <?php
+                    <?php
                     } elseif ($adminData["staff_role"] == "head admin") {
-                        if ($staff['staff_role'] !== 'admin') { ?>
-                            <button type="button" class="btn btn-sm btn-warning ms-2" data-bs-toggle="modal" data-bs-target="#promoteModal">Promote / Demote</button>
-                        <?php } ?>
+                    ?>
+                        <button type="button" class="btn btn-sm btn-warning ms-2" data-bs-toggle="modal" data-bs-target="#promoteModal">Promote / Demote</button>
                         <button type="button" class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                     <?php
                     }
