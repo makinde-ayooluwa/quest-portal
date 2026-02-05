@@ -296,7 +296,7 @@ try {
         }
       </style>
       <!-- Stats Cards with Notifications -->
-      <div class="stats row justify-content-center mb-4">
+      <div class="stats row gap-2 justify-content-center mb-4">
         <div class="stat-card col-md-6 col-lg">
           <div class="d-flex justify-content-between align-items-start">
             <div>

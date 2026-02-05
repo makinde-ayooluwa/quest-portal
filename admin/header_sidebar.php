@@ -173,7 +173,7 @@
                 <button class="btn nav-link dropdown-toggle d-flex align-items-center gap-2 p-0" id="adminDropdown"
                     data-bs-toggle="dropdown" aria-expanded="false" type="button">
                     <img src="<?php echo htmlspecialchars($adminData["picture"] ?? 'assets/images/quest.jpg'); ?>"
-                        alt="Profile Picture" class="rounded-circle" width="30">
+                        alt="Profile Picture" class="rounded-circle" width="25">
                     <span
                         class="d-none d-md-inline text-white ms-2"><?php echo htmlspecialchars($adminData["fullname"] ?? 'Admin'); ?></span>
                 </button>
@@ -192,7 +192,7 @@
 </header>
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <h3 class="text-uppercase text-start fs-5">ADMIN DASHBOARD</h3>
+        <h3 class="text-uppercase text-start fs-5">DASHBOARD</h3>
     </div>
     <ul>
         <li><a href="./"><i class="fas fa-home me-2"></i>Overview</a></li>
