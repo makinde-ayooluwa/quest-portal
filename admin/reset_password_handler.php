@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Update password in staffs table for admin
-    $update_stmt = $conn->prepare("UPDATE staffs SET pwd = ? WHERE email = ? AND staff_role = 'Admin'");
+    $update_stmt = $conn->prepare("UPDATE staffs SET pwd = ? WHERE email = ?");
     $update_stmt->bind_param("ss", $hashed_password, $email);
 
     if ($update_stmt->execute()) {

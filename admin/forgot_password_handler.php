@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Check if admin email exists
-    $stmt = $conn->prepare("SELECT id FROM staffs WHERE email = ? AND staff_role = 'Admin'");
+    $stmt = $conn->prepare("SELECT id FROM staffs WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();

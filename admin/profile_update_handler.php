@@ -63,7 +63,7 @@ if (isset($_FILES['picture']) && $_FILES['picture']['error'] === UPLOAD_ERR_OK) 
 }
 
 try {
-    $query = "UPDATE staffs SET fullname = :fullname, phone = :phone, picture = :picture WHERE email = :email AND staff_role = 'Admin'";
+    $query = "UPDATE staffs SET fullname = :fullname, phone = :phone, picture = :picture WHERE email = :email";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':fullname', $fullname);
     $stmt->bindParam(':phone', $phone);

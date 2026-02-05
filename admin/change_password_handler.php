@@ -27,7 +27,7 @@ if ($new !== $confirm) {
 }
 
 // Fetch current password hash for admin
-$query = "SELECT pwd FROM staffs WHERE email = :email AND staff_role = 'Admin' LIMIT 1";
+$query = "SELECT pwd FROM staffs WHERE email = :email LIMIT 1";
 $stmt = $pdo->prepare($query);
 $stmt->bindParam(':email', $adminData['email']);
 $stmt->execute();
@@ -63,7 +63,7 @@ if (!$verified) {
 $newHash = password_hash($new, PASSWORD_BCRYPT, ['cost' => 10]);
 
 try {
-    $update = "UPDATE staffs SET pwd = :pwd WHERE email = :email AND staff_role = 'Admin'";
+    $update = "UPDATE staffs SET pwd = :pwd WHERE email = :email";
     $uStmt = $pdo->prepare($update);
     $uStmt->bindParam(':pwd', $newHash);
     $uStmt->bindParam(':email', $adminData['email']);
