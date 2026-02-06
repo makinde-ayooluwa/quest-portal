@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
         if(mentorIsPresent($pdo,$mentorEmail,$className)){
-            $_SESSION["error"] = "The selected teacher is already assigned to this class";
+            $_SESSION["error"] = "The selected staff is already assigned to this class";
         }else{
             $query = "INSERT INTO classes(class_name,mentor_email) VALUES (:class_name,:mentor_email);";
         $stmt = $pdo->prepare($query);

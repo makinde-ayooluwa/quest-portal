@@ -75,8 +75,9 @@ try {
       text-align: center;
     }
 
-    body[data-theme='dark'] .stat-card{
-background: #000;
+    body[data-theme='dark'] .stat-card,
+    #quick-actions .card {
+      background: #000;
       box-shadow: 0 2px 8px rgba(255, 255, 255, 0.6);
       color: #fff;
     }
@@ -253,10 +254,10 @@ background: #000;
             <?php
             }
             ?>
-            <button class="btn btn-warning btn-sm" onclick="window.location.href='add_notification.php'">
+            <button class="btn btn-warning text-white btn-sm" onclick="window.location.href='add_notification.php'">
               <i class="bi bi-bell"></i> Add Notification
             </button>
-            <button class="btn btn-info btn-sm" onclick="window.location.href='add_event.php'">
+            <button class="btn btn-info text-white btn-sm" onclick="window.location.href='add_event.php'">
               <i class="bi bi-calendar-event"></i> Add Event
             </button>
           </div>
@@ -278,7 +279,8 @@ background: #000;
           }
         }
 
-        .quick-actions {
+        .quick-actions,
+        #quick-actions .action-card {
           background: #fff;
           border-radius: 12px;
           padding: 1.5rem;
@@ -300,12 +302,15 @@ background: #000;
         .col-md {
           grid-template-rows: auto;
         }
+
         /* Quick Actions Dark Mode */
-        body[data-theme='dark'] .quick-actions{
+        body[data-theme='dark'] .quick-actions,
+        body[data-theme='dark'] #quick-actions .action-card {
           background: #000;
           color: #fff;
           box-shadow: 0 4px 15px rgba(225, 225, 225, 0.6);
         }
+
         /* Quick Actions Dark Mode Enabled */
       </style>
       <!-- Stats Cards with Notifications -->
@@ -376,15 +381,69 @@ background: #000;
           ?>
             <section class="mt-4">
               <h2>Classes</h2>
-              <div class="card p-3 mb-3">
+              <style>
+                .classes-card {
+                  border: 1px solid;
+                  border-radius: 5px;
+                  border-color: #000;
+                }
+
+                body[data-theme='dark'] .classes-card {
+                  border-color: #fff;
+                }
+
+                #classSearch {
+                  background: transparent;
+                  border-color: #000;
+                }
+
+                body[data-theme='dark'] #classSearch {
+                  color: #fff;
+                  border-color: #fff;
+                }
+
+                body[data-theme='dark'] #classSearch::placeholder {
+                  color: white;
+                }
+              </style>
+              <div class="classes-card p-3 mb-3">
                 <div class="d-flex mb-3 align-items-center gap-2">
                   <input id="classSearch" class="form-control form-control-sm"
                     placeholder="Search classes by name or teacher">
-                  <div class="ms-auto text-muted small">Showing <?php echo count($classes); ?> classes</div>
+                  <div class="ms-auto text-danger small">Showing <?php echo count($classes); ?> classes</div>
                 </div>
                 <div class="table-responsive">
-                  <table id="classesTable" class="table table-hover table-bordered align-middle">
-                    <thead class="table-dark">
+                  <!-- <table id="classesTable" class="table table-hover table-bordered align-middle"> -->
+                  <table id="classesTable">
+                    <style>
+                      #classesTable {
+                        width: 100%;
+                      }
+
+                      #classesTable,
+                      #classesTable thead,
+                      #classesTable tbody,
+                      #classesTable tr,
+                      #classesTable th,
+                      #classesTable td {
+                        border: 1px solid;
+                        border-collapse: collapse;
+                        padding: 7.5px;
+                        border-color: #000;
+                      }
+
+                      body[data-theme='dark'] #classesTable,
+                      body[data-theme='dark'] #classesTable thead,
+                      body[data-theme='dark'] #classesTable tbody,
+                      body[data-theme='dark'] #classesTable tr,
+                      body[data-theme='dark'] #classesTable th,
+                      body[data-theme='dark'] #classesTable td {
+                        border-color: #fff;
+                        background: #000;
+                        color: #fff;
+                      }
+                    </style>
+                    <thead>
                       <tr>
                         <th style="width:48px">#</th>
                         <th>Class Name</th>
@@ -482,8 +541,26 @@ background: #000;
           ?>
           <section class="mt-4">
             <h2><i class="bi bi-activity me-2"></i>Recent Activities</h2>
-            <div class="card">
-              <div class="card-body">
+            <style>
+              .activities-card,
+              .notifications-card,
+              .events-card {
+                box-shadow: 0 2px 2px rgb(0, 0, 0, 0.2);
+                width: 90%;
+                justify-self: center;
+                border-radius: 12px;
+                padding: 10px;
+              }
+
+              body[data-theme='dark'] .activities-card,
+              body[data-theme='dark'] .notifications-card,
+              body[data-theme='dark'] .events-card {
+                box-shadow: 0 2px 2px rgb(255, 255, 255, 0.6);
+                color: #fff;
+              }
+            </style>
+            <div class="activities-card">
+              <div class="activities-card-body">
                 <?php if (isset($recentActivities) && !empty($recentActivities)): ?>
                   <div class="activity-feed">
                     <?php foreach ($recentActivities as $activity): ?>
@@ -510,7 +587,7 @@ background: #000;
                     <?php endforeach; ?>
                   </div>
                 <?php else: ?>
-                  <p class="text-muted mb-0">No recent activities to display.</p>
+                  <p class="mb-0">No recent activities to display.</p>
                 <?php endif; ?>
               </div>
             </div>
@@ -519,8 +596,8 @@ background: #000;
           <!-- Notifications Section -->
           <section class="mt-4">
             <h2><i class="bi bi-bell me-2"></i>Recent Notifications</h2>
-            <div class="card">
-              <div class="card-body">
+            <div class="notifications-card">
+              <div class="notifications-card-body">
                 <?php if (isset($notifications) && !empty($notifications)): ?>
                   <div class="notification-feed">
                     <?php foreach ($notifications as $notification): ?>
@@ -546,7 +623,7 @@ background: #000;
                     <?php endforeach; ?>
                   </div>
                 <?php else: ?>
-                  <p class="text-muted mb-0">No recent notifications.</p>
+                  <p class="mb-0">No recent notifications.</p>
                 <?php endif; ?>
               </div>
             </div>
@@ -555,8 +632,8 @@ background: #000;
           <!-- Upcoming Events Section -->
           <section class="mt-4">
             <h2><i class="bi bi-calendar-event me-2"></i>Upcoming Events</h2>
-            <div class="card">
-              <div class="card-body">
+            <div class="events-card">
+              <div class="events-card-body">
                 <?php if (isset($upcomingEvents) && !empty($upcomingEvents)): ?>
                   <div class="event-feed">
                     <?php foreach ($upcomingEvents as $event): ?>
@@ -586,7 +663,7 @@ background: #000;
                     <?php endforeach; ?>
                   </div>
                 <?php else: ?>
-                  <p class="text-muted mb-0">No upcoming events.</p>
+                  <p class="mb-0">No upcoming events.</p>
                 <?php endif; ?>
               </div>
             </div>
@@ -596,11 +673,11 @@ background: #000;
     </section>
 
     <section class="mt-4">
-      <h2>Admin Features</h2>
-      <div class="row g-4">
+      <h2 class="text-danger">Quick Actions</h2>
+      <div class="row g-4" id="quick-actions">
         <div class="col-md-6 col-lg-4">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
+          <div class="action-card h-100">
+            <div class="action-card-body">
               <h5 class="card-title"><i class="bi bi-person-lines-fill me-2"></i>Student Management</h5>
               <ul class="mb-0">
                 <!-- <li>Add, edit, and track student records across schools.</li> -->
@@ -612,8 +689,8 @@ background: #000;
           </div>
         </div>
         <div class="col-md-6 col-lg-4">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
+          <div class="action-card h-100">
+            <div class="action-card-body">
               <h5 class="card-title"><i class="bi bi-calendar-check-fill me-2"></i>Attendance & Academic
                 Monitoring</h5>
               <ul class="mb-0">

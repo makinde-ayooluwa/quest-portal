@@ -1,5 +1,10 @@
 <style>
+    * {
+        transition: all 0.5s ease-in-out;
+    }
+
     .settingsButton {
+        z-index: 20;
         position: fixed;
         left: 95%;
         top: 60%;
@@ -28,7 +33,7 @@
         border-color: #000;
     }
 
-    body[data-theme='dark'] #mode-select{
+    body[data-theme='dark'] #mode-select {
         background: #000;
         color: #fff;
         border-color: #fff;
@@ -95,7 +100,7 @@
             <div class="p-2">
                 <h3>Settings</h3>
                 <style>
-                    .button{
+                    .button {
                         border: none;
                         background: transparent;
                     }
