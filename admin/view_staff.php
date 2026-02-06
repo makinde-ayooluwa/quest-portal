@@ -174,7 +174,7 @@ function e($v)
                             <option value="teacher">Teacher</option>
                             <option value="admin">Admin</option>
                             <option value="retention officer">Retention Officer</option>
-                            <option value="assessment officer">Asessment Officer</option>
+                            <option value="assessment officer">Assessment Officer</option>
                         </select>
                     </div>
                     <div class="modal-footer">

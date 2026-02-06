@@ -4,10 +4,11 @@ $email = isset($_SESSION["admin"]) ? $_SESSION["admin"] : "";
 
 // auth.php
 
-function checkAdmin() {
+function checkAdmin()
+{
 
     // List pages that should NOT be redirected
-    $excluded_pages = ['setup.php','setup_handler.php','forgot_password.php','forgot_password_handler.php','reset_password.php','reset_password_handler.php'];
+    $excluded_pages = ['setup.php', 'setup_handler.php', 'forgot_password.php', 'forgot_password_handler.php', 'reset_password.php', 'reset_password_handler.php'];
 
     $current_page = basename($_SERVER['PHP_SELF']);
 
