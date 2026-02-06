@@ -72,6 +72,7 @@ function e($v)
 </head>
 
 <body>
+    <?php include "settings.php" ?>
     <?php include 'header_sidebar.php'; ?>
 
     <?php

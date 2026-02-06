@@ -171,6 +171,8 @@ $results = $admin->getAllResults($pdo);
 </head>
 
 <body>
+    <?php include "settings.php" ?>
+
     <?php include "header_sidebar.php" ?>
 
     <?php if (isset($_SESSION['error'])) { ?>
@@ -226,7 +228,7 @@ $results = $admin->getAllResults($pdo);
                                     <td>
                                         <div class="student-info">
                                             <img src="../<?php echo htmlspecialchars($result['picture'] ?? 'assets/images/quest.jpg'); ?>"
-                                                 alt="Student" class="student-avatar">
+                                                alt="Student" class="student-avatar">
                                             <div class="student-details">
                                                 <h6><?php echo htmlspecialchars($result['student_name'] ?? 'Unknown Student'); ?></h6>
                                                 <small><?php echo htmlspecialchars($result['student_admission_number']); ?> | <?php echo htmlspecialchars($result['student_class'] ?? 'N/A'); ?></small>
@@ -236,18 +238,18 @@ $results = $admin->getAllResults($pdo);
                                     <td><?php echo htmlspecialchars($result['academic_term']); ?></td>
                                     <td>
                                         <a href="<?php echo htmlspecialchars($result['result_file']); ?>"
-                                           target="_blank" class="result-link">
+                                            target="_blank" class="result-link">
                                             <i class="bi bi-link-45deg me-1"></i>View Result
                                         </a>
                                     </td>
                                     <td><?php echo date('M d, Y', strtotime($result['added_on'])); ?></td>
                                     <td>
                                         <button class="btn-action btn-edit me-2"
-                                                onclick="editResult(<?php echo $result['id']; ?>, '<?php echo addslashes($result['academic_term']); ?>', '<?php echo addslashes($result['result_file']); ?>')">
+                                            onclick="editResult(<?php echo $result['id']; ?>, '<?php echo addslashes($result['academic_term']); ?>', '<?php echo addslashes($result['result_file']); ?>')">
                                             <i class="bi bi-pencil me-1"></i>Edit
                                         </button>
                                         <button class="btn-action btn-delete"
-                                                onclick="deleteResult(<?php echo $result['id']; ?>, '<?php echo addslashes($result['student_name'] ?? 'Unknown Student'); ?>')">
+                                            onclick="deleteResult(<?php echo $result['id']; ?>, '<?php echo addslashes($result['student_name'] ?? 'Unknown Student'); ?>')">
                                             <i class="bi bi-trash me-1"></i>Delete
                                         </button>
                                     </td>

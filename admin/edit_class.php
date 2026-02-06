@@ -298,6 +298,7 @@ if ($id && getId($pdo, $id)) {
         <?php
     } else {
         $_SESSION["class_id"] = $id;
+        include "settings.php";
         include "header_sidebar.php";
         ?>
 

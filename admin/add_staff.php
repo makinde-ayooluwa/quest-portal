@@ -100,6 +100,7 @@ unset($_SESSION['success']);
 </head>
 
 <body>
+    <?php include "settings.php" ?>
     <?php include "header_sidebar.php" ?>
 
     <main class="main-content">

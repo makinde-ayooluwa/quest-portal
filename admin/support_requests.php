@@ -229,6 +229,8 @@ $support_stats = $admin->getSupportStats($pdo);
 </head>
 
 <body>
+    <?php include "settings.php" ?>
+
     <?php include "header_sidebar.php" ?>
 
     <div class="main-content" style="margin-left: 220px; padding: 20px;">

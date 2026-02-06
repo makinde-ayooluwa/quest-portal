@@ -42,6 +42,7 @@ include "admin_includes/admin.inc.php";
 </head>
 
 <body>
+    <?php include "settings.php" ?>
     <?php include "header_sidebar.php" ?>
     <?php if (isset($_SESSION['error'])) { ?>
         <script>

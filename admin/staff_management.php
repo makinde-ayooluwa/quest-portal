@@ -69,6 +69,7 @@ include "admin_includes/admin.inc.php";
 </head>
 
 <body>
+    <?php include "settings.php" ?>
     <?php include "header_sidebar.php" ?>
     <div class="container-fluid">
         <div class="row">

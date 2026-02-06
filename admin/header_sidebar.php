@@ -68,8 +68,21 @@
         transition: transform 0.3s ease;
         z-index: 1040;
         overflow-y: scroll;
-        border-top: 1px solid black;
+        border-top: 1px solid;
+        border-top-color: #000;
     }
+
+    /* Dark Mode Sidebar */
+    body[data-theme='dark'] .sidebar{
+        background: #000;
+        color: #fff;
+        border-top-color: #fff;
+    }
+
+    body[data-theme='dark'] .sidebar ul li a{
+        color: #fff;
+    }
+    /* Sidebar Dark Mode Ends */
 
     .sidebar ul {
         list-style: none;

@@ -263,6 +263,7 @@ if (!$support_request) {
 </head>
 
 <body>
+    <?php include "settings.php" ?>
     <?php include "header_sidebar.php" ?>
 
     <div class="main-content" style="margin-left: 220px; padding: 20px; transition: margin-left 0.3s ease;">

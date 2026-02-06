@@ -40,6 +40,7 @@ include "admin_includes/admin.inc.php"; // sets $adminData and other dashboard v
 </head>
 
 <body>
+    <?php include "settings.php" ?>
     <?php include "header_sidebar.php"; ?>
 
     <div class="container-fluid">
