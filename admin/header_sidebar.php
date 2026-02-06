@@ -77,6 +77,7 @@
         background: #000;
         color: #fff;
         border-top-color: #fff;
+        box-shadow: 0 2px 2px rgb(255, 255, 255);
     }
 
     body[data-theme='dark'] .sidebar ul li a{
@@ -164,7 +165,7 @@
         color: #000;
     }
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1251px) {
         .sidebar {
             transform: translateX(-100%);
             position: fixed;

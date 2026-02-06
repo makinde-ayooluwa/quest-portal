@@ -8,6 +8,33 @@
         box-shadow: 0 2px 2px rgb(0, 0, 0, 0.2);
     }
 
+    body[data-theme='dark'] .settingsButton {
+        box-shadow: 2px 2px 2px rgb(255, 255, 255, 0.5);
+        background: #000;
+        color: #fff;
+    }
+
+    body[data-theme='dark'] .settingsPage .settings {
+        background: #000;
+        color: #fff;
+        box-shadow: 0 1px 1px rgb(255, 255, 255);
+        border-color: #fff;
+    }
+
+    #mode-select {
+        background: #fff;
+        color: #000;
+        border: 2px solid;
+        border-color: #000;
+    }
+
+    body[data-theme='dark'] #mode-select{
+        background: #000;
+        color: #fff;
+        border-color: #fff;
+    }
+
+
     .settingsButton i {
         display: inline-block;
         padding: 3px;
@@ -34,7 +61,13 @@
         transform: translateX(100%);
         transition: all 0.5s ease-in-out;
         display: grid;
-        grid-template-columns: 40% 60%;
+        grid-template-columns: 70% 30%;
+    }
+
+    @media(max-width:765px) {
+        .settingsPage {
+            grid-template-columns: 30% 70%;
+        }
     }
 </style>
 <button class="settingsButton">
@@ -47,6 +80,7 @@
             box-shadow: 0 1px 1px rgb(0, 0, 0, 0.2);
             border-radius: 10px;
             border: 1px solid;
+            border-color: #000;
         }
 
         .settingsHeader .p-2 {
@@ -60,7 +94,13 @@
         <div class="settingsHeader">
             <div class="p-2">
                 <h3>Settings</h3>
-                <button id="settings-close-btn" class="btn-close"></button>
+                <style>
+                    .button{
+                        border: none;
+                        background: transparent;
+                    }
+                </style>
+                <button id="settings-close-btn" class="button"><i class="bi bi-x-lg text-danger fw-bold h5"></i></button>
             </div>
         </div>
         <div class="settingsBody">
@@ -79,7 +119,7 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="mode" role="tabpanel" aria-labelledby="mode-tab">
                     <div class="p-3 mt-3">
-                        <select name="mode" id="mode" class="form-select w-50">
+                        <select name="mode" id="mode-select" class="form-select w-50">
                             <option value="light">Light</option>
                             <option value="dark">Dark</option>
                         </select>
@@ -95,7 +135,6 @@
                                 const modeSetting = mode.value;
                                 settings.mode = modeSetting;
                                 localStorage.setItem("settings", JSON.stringify(settings));
-                                console.log(settings)
                                 document.body.setAttribute("data-theme", settings.mode);
                             })
                         </script>
