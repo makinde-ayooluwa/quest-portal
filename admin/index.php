@@ -273,10 +273,10 @@ try {
         }
 
         .quick-actions {
-          background: linear-gradient(135deg, var(--quest-green) 0%, var(--quest-yellow) 100%);
+          background: #fff;
           border-radius: 12px;
           padding: 1.5rem;
-          color: white;
+          color: #000;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
