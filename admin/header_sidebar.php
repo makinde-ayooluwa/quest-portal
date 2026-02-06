@@ -219,7 +219,7 @@
         }
         ?>
         <?php
-        if ($adminData["staff_role"] == "head admin") {
+        if ($adminData["staff_role"] == "head admin" || $adminData["staff_role"] == "admin") {
         ?>
             <li data-bs-toggle="collapse" data-bs-target="#systemManagement"><a href="javascript:;"><i
                         class="fas fa-cogs me-2"></i>System Management</a></li>
