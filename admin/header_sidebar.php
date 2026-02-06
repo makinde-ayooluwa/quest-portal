@@ -1,4 +1,22 @@
 <style>
+    /* Dark Mode */
+    body[data-theme='dark'] {
+        background-color: #000;
+    }
+
+    body[data-theme='dark'] header{
+        box-shadow: 0 1px 1px rgb(255, 255, 255);
+    }
+    body[data-theme='dark'] .navbar{
+        background: #000;
+        color: #fff;
+    }
+
+    body[data-theme='dark'] .admin-header-profile-picture-text{
+        color: #fff;
+    }
+
+    /* Dark Mode Ends */
     * {
         font-family: Montserrat;
     }
@@ -9,10 +27,12 @@
         padding: 0.5rem 1rem;
 
     }
-    header{
-        box-shadow: 0 1px 1px rgb(0, 0, 0,0.2);
+
+    header {
+        box-shadow: 0 1px 1px rgb(0, 0, 0, 0.2);
     }
-    header > *{
+
+    header>* {
         color: #000;
     }
 
@@ -36,7 +56,7 @@
     }
 
     .sidebar {
-        box-shadow: 0 1px 1px rgb(0, 0, 0,0.2);
+        box-shadow: 0 1px 1px rgb(0, 0, 0, 0.2);
         background: #fff;
         color: #000;
         min-width: 220px;
@@ -67,7 +87,7 @@
     }
 
     .sidebar ul li a:hover {
-        background: rgb(0, 0, 0,0.2);
+        background: rgb(0, 0, 0, 0.2);
     }
 
     .sidebar-header {
@@ -85,7 +105,7 @@
     }
 
     .search-container {
-        box-shadow: 0 1px 1px rgb(0, 0, 0,0.2);
+        box-shadow: 0 1px 1px rgb(0, 0, 0, 0.2);
         border-radius: 10px;
         position: relative;
     }
@@ -127,7 +147,7 @@
         border-bottom: 1px solid #dee2e6;
     }
 
-    .admin-header-profile-picture-text{
+    .admin-header-profile-picture-text {
         color: #000;
     }
 

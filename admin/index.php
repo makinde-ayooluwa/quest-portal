@@ -212,8 +212,8 @@ try {
 </head>
 
 <body>
-  <?php include "header_sidebar.php" ?>
   <?php include "settings.php" ?>
+  <?php include "header_sidebar.php" ?>
   <?php
   if (isset($_SESSION["error"])) {
   ?>
