@@ -67,13 +67,18 @@ try {
     }
 
     .stat-card {
-      width: 90%;
       background: #fff;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       padding: 1rem;
       margin-bottom: 1rem;
       text-align: center;
+    }
+
+    body[data-theme='dark'] .stat-card{
+background: #000;
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.6);
+      color: #fff;
     }
 
     /*.dashboard .stats {
@@ -295,6 +300,13 @@ try {
         .col-md {
           grid-template-rows: auto;
         }
+        /* Quick Actions Dark Mode */
+        body[data-theme='dark'] .quick-actions{
+          background: #000;
+          color: #fff;
+          box-shadow: 0 4px 15px rgba(225, 225, 225, 0.6);
+        }
+        /* Quick Actions Dark Mode Enabled */
       </style>
       <!-- Stats Cards with Notifications -->
       <div class="stats row gap-2 justify-content-center mb-4">
