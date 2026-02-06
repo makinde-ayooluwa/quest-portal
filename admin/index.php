@@ -213,6 +213,7 @@ try {
 
 <body>
   <?php include "header_sidebar.php" ?>
+  <?php include "settings.php" ?>
   <?php
   if (isset($_SESSION["error"])) {
   ?>

@@ -4,13 +4,20 @@
     }
 
     .navbar {
-        background: #343a40;
-        color: #fff;
+        background: #fff;
+        color: #000;
         padding: 0.5rem 1rem;
+
+    }
+    header{
+        box-shadow: 0 1px 1px rgb(0, 0, 0,0.2);
+    }
+    header > *{
+        color: #000;
     }
 
     .navbar .logo h1 {
-        color: #fff;
+        color: #000;
         font-size: 1.5rem;
         margin: 0;
     }
@@ -23,14 +30,15 @@
     }
 
     .nav-links li a {
-        color: #fff;
+        color: #000;
         text-decoration: none;
         font-weight: 500;
     }
 
     .sidebar {
-        background: #212529;
-        color: #fff;
+        box-shadow: 0 1px 1px rgb(0, 0, 0,0.2);
+        background: #fff;
+        color: #000;
         min-width: 220px;
         max-width: 220px;
         position: fixed;
@@ -40,6 +48,7 @@
         transition: transform 0.3s ease;
         z-index: 1040;
         overflow-y: scroll;
+        border-top: 1px solid black;
     }
 
     .sidebar ul {
@@ -49,7 +58,7 @@
 
     .sidebar ul li a {
         font-size: 0.95rem;
-        color: #fff;
+        color: #000;
         display: block;
         padding: 0.75rem 1.5rem;
         text-decoration: none;
@@ -58,7 +67,7 @@
     }
 
     .sidebar ul li a:hover {
-        background: #495057;
+        background: rgb(0, 0, 0,0.2);
     }
 
     .sidebar-header {
@@ -70,12 +79,14 @@
         display: none;
         background: none;
         border: none;
-        color: #fff;
+        color: #000;
         font-size: 1.5rem;
         margin-right: 1rem;
     }
 
     .search-container {
+        box-shadow: 0 1px 1px rgb(0, 0, 0,0.2);
+        border-radius: 10px;
         position: relative;
     }
 
@@ -114,6 +125,10 @@
         padding: 0.25rem 1rem;
         background-color: #f8f9fa;
         border-bottom: 1px solid #dee2e6;
+    }
+
+    .admin-header-profile-picture-text{
+        color: #000;
     }
 
     @media (max-width: 1024px) {
@@ -160,7 +175,7 @@
             <div class="input-group">
                 <input type="text" class="form-control" id="globalSearch"
                     placeholder="Search students, classes..." autocomplete="off">
-                <button class="btn btn-outline-light" type="button" id="searchBtn">
+                <button class="btn btn-outline-success" type="button" id="searchBtn">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
@@ -175,7 +190,7 @@
                     <img src="<?php echo htmlspecialchars($adminData["picture"] ?? 'assets/images/quest.jpg'); ?>"
                         alt="Profile Picture" class="rounded-circle" width="25">
                     <span
-                        class="d-none d-md-inline text-white ms-2"><?php echo htmlspecialchars($adminData["fullname"] ?? 'Admin'); ?></span>
+                        class="d-none d-md-inline ms-2 admin-header-profile-picture-text"><?php echo htmlspecialchars($adminData["fullname"] ?? 'Admin'); ?></span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
                     <li><a class="dropdown-item text-primary" href="profile.php"><i
