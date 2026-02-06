@@ -166,18 +166,8 @@ class EmailUtils {
                     <p style=\"font-size: 16px; line-height: 1.6; color: #555;\">
                         Hi " . htmlspecialchars($staffName) . ",<br><br>
                         Congratulations! You have been successfully promoted to the role of <strong>Administrator</strong> at The Quest Schools.<br><br>
-                        As an Administrator, you will have access to enhanced features and responsibilities within the portal. Your new role includes managing staff, students, classes, and overseeing the overall administration of the school system.
+                        As an Administrator, you will have access to enhanced features and responsibilities within the portal.
                     </p>
-                    <div style=\"background-color: #fff; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745; margin: 20px 0;\">
-                        <h5 style=\"margin-top: 0; color: #28a745;\">What You Can Do Now:</h5>
-                        <ul style=\"color: #333; line-height: 1.6;\">
-                            <li>Manage staff members and their roles</li>
-                            <li>Oversee student registrations and profiles</li>
-                            <li>Create and manage classes</li>
-                            <li>Access advanced reporting and analytics</li>
-                            <li>Handle support requests and system administration</li>
-                        </ul>
-                    </div>
                     <p style=\"font-size: 14px; color: #777;\">
                         If you have any questions about your new responsibilities or need assistance getting started, please don't hesitate to reach out to the other administrators.
                     </p>
