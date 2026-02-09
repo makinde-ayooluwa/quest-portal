@@ -224,8 +224,8 @@ $studentResult = fetchResults($pdo, $studentData);
               </div>
             </div>
 
-            <!-- Assignment Performance Section -->
-            <div class="mb-4">
+            
+            <!-- <div class="mb-4">
               <h4 class="mb-3">Assignment Performance</h4>
               <?php
               // Fetch assignment performance data
@@ -285,7 +285,7 @@ $studentResult = fetchResults($pdo, $studentData);
               </div>
             </div>
 
-            <!-- Recent Submissions -->
+            
             <div>
               <h4 class="mb-3">Recent Submissions</h4>
               <?php
@@ -342,7 +342,7 @@ $studentResult = fetchResults($pdo, $studentData);
                   </table>
                 </div>
               <?php endif; ?>
-            </div>
+            </div> -->
           </div>
         </div>
         <script src="bootstrap5/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
