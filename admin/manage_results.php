@@ -190,11 +190,20 @@ $results = $admin->getAllResults($pdo);
     } ?>
 
     <div class="main-content">
+        <style>
+            body[data-theme='dark'] > *{
+                color: #fff;
+            }
+            body[data-theme='dark'] .results-card{
+                background: #000;
+                box-shadow: 0 4px 15px rgb(255, 255, 255,0.2);
+            }
+        </style>
         <div class="results-card">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h2 class="mb-1"><i class="bi bi-clipboard-data me-2"></i>Manage Results</h2>
-                    <p class="text-muted mb-0">View, edit, and manage all uploaded student results</p>
+                    <p class="mb-0">View, edit, and manage all uploaded student results</p>
                 </div>
                 <a href="upload_result.php" class="btn btn-primary">
                     <i class="bi bi-plus-circle me-1"></i>Upload New Result
@@ -203,7 +212,7 @@ $results = $admin->getAllResults($pdo);
 
             <?php if (empty($results)) { ?>
                 <div class="no-results">
-                    <i class="bi bi-clipboard-x display-1 text-muted mb-3"></i>
+                    <i class="bi bi-clipboard-x display-1 mb-3"></i>
                     <h4>No Results Found</h4>
                     <p>Start by uploading student results using the button above.</p>
                     <a href="upload_result.php" class="btn btn-primary">

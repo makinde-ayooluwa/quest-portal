@@ -409,7 +409,7 @@ try {
               <div class="classes-card p-3 mb-3">
                 <div class="d-flex mb-3 align-items-center gap-2">
                   <input id="classSearch" class="form-control form-control-sm"
-                    placeholder="Search classes by name or teacher">
+                    placeholder="Search classes by name">
                   <div class="ms-auto text-danger small">Showing <?php echo count($classes); ?> classes</div>
                 </div>
                 <div class="table-responsive">
@@ -447,10 +447,10 @@ try {
                       <tr>
                         <th style="width:48px">#</th>
                         <th>Class Name</th>
-                        <th style="width:260px">Teacher(s)</th>
+                        <!-- <th style="width:260px">Teacher(s)</th> -->
                         <th style="width:120px">Students</th>
-                        <th style="width:120px">Status</th>
-                        <th style="width:140px">Actions</th>
+                        <!-- <th style="width:120px">Status</th> -->
+                        <!-- <th style="width:140px">Actions</th> -->
                       </tr>
                     </thead>
                     <tbody>
@@ -503,21 +503,21 @@ try {
                             data-mentors="<?php echo htmlspecialchars(implode(',', $mentorNames)); ?>">
                             <td><?php echo $i++; ?></td>
                             <td><?php echo htmlspecialchars($cname); ?></td>
-                            <td><?php echo implode('', $mentorHtml); ?></td>
+                            <!-- <td><?php echo implode('', $mentorHtml); ?></td> -->
                             <td><b class="fs-5"><?php echo $studentCount; ?></b></td>
-                            <td><?php if ($status === 'Active') {
+                            <!-- <td><?php if ($status === 'Active') {
                                   echo '<span class="badge bg-success">Active</span>';
                                 } elseif ($status) {
                                   echo '<span class="badge bg-secondary">' . htmlspecialchars($status) . '</span>';
                                 } else {
                                   echo '<span class="badge bg-light text-dark">-</span>';
-                                } ?></td>
-                            <td>
+                                } ?></td> -->
+                            <!-- <td>
                               <a href="edit_class.php?id=<?php echo $class['id']; ?>" class="btn btn-sm btn-primary"
                                 title="Edit"><i class="bi bi-pencil"></i></a>
                               <a href="view_class.php?id=<?php echo $class['id']; ?>"
                                 class="btn btn-sm btn-outline-secondary ms-1" title="View"><i class="bi bi-eye"></i></a>
-                            </td>
+                            </td> -->
                           </tr>
                       <?php }
                       } ?>
@@ -575,10 +575,10 @@ try {
                             <div>
                               <strong><?php echo htmlspecialchars($activity['action']); ?></strong>
                               <?php if ($activity['details']): ?>
-                                <br><small class="text-muted"><?php echo htmlspecialchars($activity['details']); ?></small>
+                                <br><small class=""><?php echo htmlspecialchars($activity['details']); ?></small>
                               <?php endif; ?>
                             </div>
-                            <small class="text-muted">
+                            <small class="">
                               <?php echo date('M d, H:i', strtotime($activity['timestamp'])); ?>
                             </small>
                           </div>
@@ -612,9 +612,9 @@ try {
                             <div>
                               <strong><?php echo htmlspecialchars($notification['title']); ?></strong>
                               <br><small
-                                class="text-muted"><?php echo htmlspecialchars($notification['message']); ?></small>
+                                class=""><?php echo htmlspecialchars($notification['message']); ?></small>
                             </div>
-                            <small class="text-muted">
+                            <small class="">
                               <?php echo date('M d, H:i', strtotime($notification['created_at'])); ?>
                             </small>
                           </div>
@@ -646,15 +646,15 @@ try {
                             <div>
                               <strong><?php echo htmlspecialchars($event['title']); ?></strong>
                               <?php if ($event['description']): ?>
-                                <br><small class="text-muted"><?php echo htmlspecialchars($event['description']); ?></small>
+                                <br><small class=""><?php echo htmlspecialchars($event['description']); ?></small>
                               <?php endif; ?>
-                              <br><small class="text-muted">
+                              <br><small class="">
                                 <i class="bi bi-geo-alt"></i> <?php echo htmlspecialchars($event['location']); ?> |
                                 <i class="bi bi-clock"></i> <?php echo date('H:i', strtotime($event['start_time'])); ?> -
                                 <?php echo date('H:i', strtotime($event['end_time'])); ?>
                               </small>
                             </div>
-                            <small class="text-muted">
+                            <small class="">
                               <?php echo date('M d, Y', strtotime($event['event_date'])); ?>
                             </small>
                           </div>

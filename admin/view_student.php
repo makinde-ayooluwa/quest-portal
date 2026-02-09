@@ -94,7 +94,7 @@ try {
                             <div class="kvv d-flex align-items-center">
                                 <span class="me-2"><?php echo e($student['class']); ?></span>
                                 <?php if (!empty($class_id)): ?>
-                                    <a href="view_class.php?id=<?php echo e($class_id); ?>" class="btn btn-sm btn-outline-primary">Open class</a>
+                                    <!-- <a href="view_class.php?id=<?php echo e($class_id); ?>" class="btn btn-sm btn-outline-primary">Open class</a> -->
                                 <?php else: ?>
                                     <!-- no class id found, do not render link -->
                                 <?php endif; ?>

@@ -75,9 +75,9 @@
         }
     }
 </style>
-<button class="settingsButton">
+<!-- <button class="settingsButton">
     <i class="bi bi-gear"></i>
-</button>
+</button> -->
 <div class="settingsPage">
     <style>
         .settings {

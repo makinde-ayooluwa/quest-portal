@@ -92,6 +92,25 @@ $classes = $admin->getClasses($pdo);
             <div class="col-lg-9">
                 <div class="students-card">
                     <div class="d-flex align-items-center justify-content-between mb-3">
+                        <style>
+                            body[data-theme='dark']>* {
+                                color: #fff;
+                            }
+
+                            body[data-theme='dark'] .students-card {
+                                background: #000;
+                                box-shadow: 0 4px 15px rgb(255, 255, 255, 0.2);
+                            }
+
+                            body[data-theme='dark'] .students-toolbar form input {
+                                background: #000;
+                                box-shadow: 0 4px 15px rgb(255, 255, 255, 0.2);
+                            }
+
+                            body[data-theme='dark'] .students-toolbar form input::placeholder {
+                                color: #fff;
+                            }
+                        </style>
                         <h3 class="mb-0"><i class="bi bi-people me-2"></i>Student Management</h3>
                         <div>
                             <!-- <a href="add_student.php" class="btn btn-primary btn-sm me-2"><i class="bi bi-person-plus"></i> Add Student</a> -->
@@ -104,7 +123,7 @@ $classes = $admin->getClasses($pdo);
                             <input class="form-control me-2" type="search" placeholder="Search students by name, email or admission number" aria-label="Search" id="studentSearch">
                             <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
                         </form>
-                        <div class="text-end text-muted small">Showing <?php echo count($admin->getStudents($pdo)) ?> students</div>
+                        <div class="text-end small">Showing <?php echo count($admin->getStudents($pdo)) ?> students</div>
                     </div>
 
                     <form id="bulkActionsForm" method="post" action="bulk_student_actions.php">
@@ -122,9 +141,30 @@ $classes = $admin->getClasses($pdo);
                             <button class="btn border btn-outline-success rounded-circle fw-bolder" title="Refresh students table" type="button" onclick="outputStudents()"><i class="bi bi-arrow-clockwise"></i></button>
                         </div>
 
-                        <div class="table-responsive" style="overflow-x:scroll;">
-                            <table class="table table-striped table-bordered table-hover align-middle mb-0">
-                                <thead class="table-light">
+                        <div style="overflow-x:scroll;">
+                            <style>
+                                .students-table {
+                                    width: 100%;
+                                }
+
+                                .students-table thead,
+                                th,
+                                tr,
+                                td {
+                                    border: 1px solid #000;
+                                    border-collapse: collapse;
+                                    padding: 5px;
+                                }
+
+                                body[data-theme='dark'] .students-table thead,
+                                body[data-theme='dark'] .students-table th,
+                                body[data-theme='dark'] .students-table tr,
+                                body[data-theme='dark'] .students-table td {
+                                    border-color: #fff;
+                                }
+                            </style>
+                            <table class="students-table">
+                                <thead>
                                     <tr>
                                         <!--<th style="width:40px"><input type="checkbox" id="selectAll"></th>-->
                                         <th style="width:64px">Photo</th>
@@ -303,7 +343,7 @@ $classes = $admin->getClasses($pdo);
 
         async function addStudents() {
             const sheetId = "17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o";
-            const sheets = ["SSS3","SSS2"];
+            const sheets = ["SSS3", "SSS2"];
             let data = [];
 
             try {
