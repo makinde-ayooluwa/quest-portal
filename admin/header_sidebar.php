@@ -253,7 +253,6 @@
             <?php
             if ($adminData["staff_role"] == "head admin" || $adminData["staff_role"] == "admin") {
             ?>
-
                 <li><a class="text-primary" href="students.php"><i class="bi bi-people me-2"></i>View all students</a></li>
             <?php
             }
