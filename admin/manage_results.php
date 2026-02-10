@@ -238,16 +238,7 @@ $results = $admin->getAllResults($pdo);
                                     <td>
                                         <div class="student-info">
                                             <img src="<?php
-                                                        function getStudentImage($pdo, $admission)
-                                                        {
-                                                            $query = "SELECT picture FROM students WHERE admission_number = :admission";
-                                                            $stmt = $pdo->prepare($query);
-                                                            $stmt->bindParam(":admission", $admission);
-                                                            if ($stmt->execute()) {
-                                                                return "../" . $stmt->fetch(PDO::FETCH_ASSOC)["picture"];
-                                                            }
-                                                        }
-                                                        echo getStudentImage($pdo, $result["student_admission_number"]) ?>"
+                                                        echo $admin->getStudentImage($pdo, $result["student_admission_number"]) ?>"
                                                 alt="Student" class="student-avatar">
                                             <div class="student-details">
                                                 <h6><?php echo htmlspecialchars($result['student_name'] ?? 'Unknown Student'); ?></h6>

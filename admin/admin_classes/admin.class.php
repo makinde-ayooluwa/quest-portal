@@ -594,6 +594,16 @@ class Admin
         return true;
     }
 
+    public function getStudentImage($pdo, $admission)
+    {
+        $query = "SELECT picture FROM students WHERE admission_number = :admission";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":admission", $admission);
+        if ($stmt->execute()) {
+            return "../" . $stmt->fetch(PDO::FETCH_ASSOC)["picture"];
+        }
+    }
+
     public function getAllResults($pdo)
     {
         $query = "SELECT r.*, s.fullname as student_name, s.class as student_class
