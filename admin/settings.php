@@ -1,7 +1,7 @@
 <style>
-    * {
-        /* transition: all 0.5s ease-in-out; */
-    }
+    /* * {
+         transition: all 0.5s ease-in-out; 
+    } */
 
     .settingsButton {
         z-index: 20;
