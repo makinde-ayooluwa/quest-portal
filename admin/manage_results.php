@@ -191,12 +191,13 @@ $results = $admin->getAllResults($pdo);
 
     <div class="main-content">
         <style>
-            body[data-theme='dark'] > *{
+            body[data-theme='dark']>* {
                 color: #fff;
             }
-            body[data-theme='dark'] .results-card{
+
+            body[data-theme='dark'] .results-card {
                 background: #000;
-                box-shadow: 0 4px 15px rgb(255, 255, 255,0.2);
+                box-shadow: 0 4px 15px rgb(255, 255, 255, 0.2);
             }
         </style>
         <div class="results-card">
@@ -236,7 +237,19 @@ $results = $admin->getAllResults($pdo);
                                 <tr>
                                     <td>
                                         <div class="student-info">
-                                            <img src="../<?php echo htmlspecialchars($result['picture'] ?? 'assets/images/quest.jpg'); ?>"
+                                            <img src="<?php
+                                                        function getStudentImage($pdo, $admission)
+                                                        {
+                                                            $query = "SELECT picture FROM students WHERE admission_number = :admission";
+                                                            $stmt = $pdo->prepare($query);
+                                                            $stmt->bindParam(":admission", $admission);
+                                                            if ($stmt->execute()) {
+                                                                return "../" . $stmt->fetch(PDO::FETCH_ASSOC)["picture"];
+                                                            } else {
+                                                                return 'assets/images/quest.jpg';
+                                                            }
+                                                        }
+                                                        echo getStudentImage($pdo, $result["student_admission_number"]) ?>"
                                                 alt="Student" class="student-avatar">
                                             <div class="student-details">
                                                 <h6><?php echo htmlspecialchars($result['student_name'] ?? 'Unknown Student'); ?></h6>
