@@ -4,15 +4,16 @@
         background-color: #000;
     }
 
-    body[data-theme='dark'] header{
+    body[data-theme='dark'] header {
         box-shadow: 0 1px 1px rgb(255, 255, 255);
     }
-    body[data-theme='dark'] .navbar{
+
+    body[data-theme='dark'] .navbar {
         background: #000;
         color: #fff;
     }
 
-    body[data-theme='dark'] .admin-header-profile-picture-text{
+    body[data-theme='dark'] .admin-header-profile-picture-text {
         color: #fff;
     }
 
@@ -73,16 +74,17 @@
     }
 
     /* Dark Mode Sidebar */
-    body[data-theme='dark'] .sidebar{
+    body[data-theme='dark'] .sidebar {
         background: #000;
         color: #fff;
         border-top-color: #fff;
         box-shadow: 0 2px 2px rgb(255, 255, 255);
     }
 
-    body[data-theme='dark'] .sidebar ul li a{
+    body[data-theme='dark'] .sidebar ul li a {
         color: #fff;
     }
+
     /* Sidebar Dark Mode Ends */
 
     .sidebar ul {
@@ -248,14 +250,21 @@
         <li data-bs-toggle="collapse" data-bs-target="#studentManagement"><a href="javascript:;"><i
                     class="fas fa-user-graduate me-2"></i>Students Management</a></li>
         <div class="collapse" id="studentManagement">
-            <li><a class="text-primary" href="students.php"><i class="bi bi-people me-2"></i>View all students</a></li>
+            <?php
+            if ($adminData["staff_role"] == "head admin" || $adminData["staff_role"] == "admin") {
+            ?>
+
+                <li><a class="text-primary" href="students.php"><i class="bi bi-people me-2"></i>View all students</a></li>
+            <?php
+            }
+            ?>
             <li><a class="text-primary" href="manage_results.php"><i class="bi bi-clipboard-check me-2"></i>Manage
                     Results</a></li>
             <li><a class="text-primary" href="support_requests.php"><i class="bi bi-headset me-2"></i>Support
                     Requests</a></li>
         </div>
         <?php
-        if ($adminData["staff_role"] == "head admin") {
+        if ($adminData["staff_role"] == "head admin" || $adminData["staff_role"] == "admin") {
         ?>
             <li data-bs-toggle="collapse" data-bs-target="#staffManagement"><a href="javascript:;"><i
                         class="bi bi-people-fill me-2"></i>Users Management</a></li>
