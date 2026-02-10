@@ -245,8 +245,6 @@ $results = $admin->getAllResults($pdo);
                                                             $stmt->bindParam(":admission", $admission);
                                                             if ($stmt->execute()) {
                                                                 return "../" . $stmt->fetch(PDO::FETCH_ASSOC)["picture"];
-                                                            } else {
-                                                                return 'assets/images/quest.jpg';
                                                             }
                                                         }
                                                         echo getStudentImage($pdo, $result["student_admission_number"]) ?>"
