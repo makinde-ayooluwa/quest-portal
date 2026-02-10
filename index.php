@@ -56,8 +56,8 @@ define("STUDENT_DATA", $studentData);
                                             ?>
                                         </span></p>
                                 </div>
-                                <div class="mt-3 mt-md-0">
-                                    <!--<span class="me-4"><i class="bi bi-people-fill me-2"></i>Students: <b>35</b></span>-->
+                                <!-- <div class="mt-3 mt-md-0">
+                                    <span class="me-4"><i class="bi bi-people-fill me-2"></i>Students: <b>35</b></span>
                                     <span class="me-4"><i class="bi bi-person-badge me-2"></i>Mentors: <b class="fs-5">
                                             <?php
                                             $studentClass = $studentData["class"]; // student's class
@@ -71,7 +71,7 @@ define("STUDENT_DATA", $studentData);
                                             echo count($staffs);
                                             ?>
                                         </b></span>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
