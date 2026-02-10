@@ -593,7 +593,7 @@ class Admin
         // if validation passes, continue (DB insert goes here)
         return true;
     }
-
+// Result
     public function getStudentImage($pdo, $admission)
     {
         $query = "SELECT picture FROM students WHERE admission_number = :admission";
