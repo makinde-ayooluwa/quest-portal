@@ -131,7 +131,7 @@ $studentResult = fetchResults($pdo, $studentData);
                     <div class="no-results">
                         <i class="bi bi-file-earmark-x"></i>
                         <h4>No Results Found</h4>
-                        <p>Your academic results will appear here once they are uploaded by your teachers or administrators.</p>
+                        <p>Your academic results will appear here once they are uploaded by your administrators.</p>
                     </div>
                 <?php else: ?>
                     <div class="row">
