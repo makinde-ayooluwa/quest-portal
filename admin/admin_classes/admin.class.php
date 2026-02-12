@@ -69,7 +69,7 @@ class Admin
 
     public function getClasses($pdo)
     {
-        $query = "SELECT * FROM classes_names_only";
+        $query = "SELECT * FROM classes_names_only ORDER BY class_name ASC";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
