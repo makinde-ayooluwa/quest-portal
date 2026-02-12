@@ -407,9 +407,10 @@ $classes = $admin->getClasses($pdo);
 
                     if (!data || data.length < 1 || data.length == 0) {
                         html = `
-                        <tr>
-                            <td colspan="9" class="text-center py-4">No students found.</td>
-                        </tr>`;
+                            <tr>
+                                <td colspan="9" class="text-center py-4">No students found.</td>
+                            </tr>`
+                        ;
 
                     }
 
@@ -417,81 +418,81 @@ $classes = $admin->getClasses($pdo);
 
                     data.forEach(student => {
                         html += `
-                        <tr>
-                            <!--<td>
-                                <input type="checkbox" name="selected_ids[]" value="${student.id}" class="rowCheckbox">
-                            </td>-->
+                            <tr>
+                                <!--<td>
+                                    <input type="checkbox" name="selected_ids[]" value="${student.id}" class="rowCheckbox">
+                                </td>-->
 
-                            <td>
-                                <img src="../${student.picture}" alt="${student.fullname}" class="student-photo">
-                            </td>
+                                <td>
+                                    <img src="../${student.picture}" alt="${student.fullname}" class="student-photo">
+                                </td>
 
-                            <td>${student.fullname}</td>
-                            <td>${student.class}</td>
-                            <td>${student.email}</td>
-                            <td>${student.phone}</td>
-                            <td>${student.admission_number}</td>
+                                <td>${student.fullname}</td>
+                                <td>${student.class}</td>
+                                <td>${student.email}</td>
+                                <td>${student.phone}</td>
+                                <td>${student.admission_number}</td>
 
-                            <td>
-                                ${
-                                    student.account_verification === "Verified"
-                                        ? '<span class="badge bg-success">Verified</span>'
-                                        : '<span class="badge bg-danger text-white">Not verified</span>'
-                                }
-                            </td>
+                                <td>
+                                    ${
+                                        student.account_verification === "Verified"
+                                            ? '<span class="badge bg-success">Verified</span>'
+                                            : '<span class="badge bg-danger text-white">Not verified</span>'
+                                    }
+                                </td>
 
-                            <td class="text-nowrap">
-                                <a href="view_student.php?id=${student.id}" 
-                                class="btn btn-sm btn-outline-primary p-1 me-1">
-                                    <i class="bi bi-eye"></i>
-                                </a>
+                                <td class="text-nowrap">
+                                    <a href="view_student.php?id=${student.id}" 
+                                    class="btn btn-sm btn-outline-primary p-1 me-1">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
 
-                                <!--<button type="button"
-                                        class="btn btn-sm btn-outline-success p-1 me-1 promote-btn"
-                                        data-id="${student.id}">
-                                    <i class="bi bi-arrow-up-circle"></i>
-                                </button>-->
+                                    <!--<button type="button"
+                                            class="btn btn-sm btn-outline-success p-1 me-1 promote-btn"
+                                            data-id="${student.id}">
+                                        <i class="bi bi-arrow-up-circle"></i>
+                                    </button>-->
 
-                                <!--<button type="button"
-                                 class="btn btn-sm btn-outline-danger p-1"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modal_${student.id}">
-                                    <i class="bi bi-trash"></i>
-                                </button>-->
-                            </td>
-                        </tr>
+                                    <!--<button type="button"
+                                    class="btn btn-sm btn-outline-danger p-1"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modal_${student.id}">
+                                        <i class="bi bi-trash"></i>
+                                    </button>-->
+                                </td>
+                            </tr>
 
-                        <!-- Promote Modal -->
+                            <!-- Promote Modal -->
 
-                        <!-- Delete Modal -->
-                        <!--<div class="modal fade" id="modal_${student.id}" tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Confirm Deletion</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p class="text-danger">
-                                            Are you sure you want to delete 
-                                            <strong>${student.fullname.toUpperCase()}</strong>?
-                                        </p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                        <a href="delete_student.php?id=${student.id}" class="btn btn-danger">
-                                            Delete
-                                        </a>
+                            <!-- Delete Modal -->
+                            <!--<div class="modal fade" id="modal_${student.id}" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Confirm Deletion</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="text-danger">
+                                                Are you sure you want to delete 
+                                                <strong>${student.fullname.toUpperCase()}</strong>?
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <a href="delete_student.php?id=${student.id}" class="btn btn-danger">
+                                                Delete
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>-->
-                    `;
+                            </div>-->
+                        `;
                     });
 
                     studentsTable.innerHTML = html;
                     // console.log(data);
-                })
+                });
         }
         document.addEventListener("DOMContentLoaded", () => {
             addStudents();
