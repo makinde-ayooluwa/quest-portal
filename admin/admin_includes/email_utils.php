@@ -6,11 +6,15 @@ use PHPMailer\PHPMailer\SMTP;
 
 require_once '../vendor/autoload.php';
 
-class EmailUtils {
+class EmailUtils
+{
     private $mail;
+    private $pdo;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->mail = new PHPMailer(true);
+        $this->pdo = new PDO("mysql:host=localhost;dbname=questportal", "root", "");
 
         // SMTP configuration
         $this->mail->isSMTP();
@@ -24,7 +28,16 @@ class EmailUtils {
         $this->mail->isHTML(true);
     }
 
-    public function sendStudentSetupEmail($studentEmail, $studentName, $admissionNumber) {
+    private function addSentIntoDatabase($admission)
+    {
+        $query = "INSERT INTO sent_emails (student_admission_number) VALUES (:admission)";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(":admission", $admission);
+        $stmt->execute();
+    }
+
+    public function sendStudentSetupEmail($studentEmail, $studentName, $admissionNumber)
+    {
         try {
             $this->mail->clearAddresses();
             $this->mail->addAddress($studentEmail, $studentName);
@@ -58,6 +71,7 @@ class EmailUtils {
             $this->mail->AltBody = 'Hi ' . $studentName . ', You have been registered at Quest Schools. Setup your portal here: ' . $setupLink;
 
             $this->mail->send();
+            $this->addSentIntoDatabase($admissionNumber);
             return true;
         } catch (Exception $e) {
             error_log("Student email failed: " . $this->mail->ErrorInfo);
@@ -65,14 +79,15 @@ class EmailUtils {
         }
     }
 
-    public function sendStaffSetupEmail($staffEmail, $staffName, $portalCode, $staffRole) {
+    public function sendStaffSetupEmail($staffEmail, $staffName, $portalCode, $staffRole)
+    {
         try {
             $this->mail->clearAddresses();
             $this->mail->addAddress($staffEmail, $staffName);
 
-                $this->mail->Subject = 'Quest Schools - Admin Portal Setup';
-                $setupLink = "http://localhost/quest-portal/admin/setup.php?portal_code=" . urlencode($portalCode);
-                $roleMessage = 'as ' . $staffRole;
+            $this->mail->Subject = 'Quest Schools - Admin Portal Setup';
+            $setupLink = "http://localhost/quest-portal/admin/setup.php?portal_code=" . urlencode($portalCode);
+            $roleMessage = 'as ' . $staffRole;
 
             $this->mail->Body = "
             <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\">
@@ -107,7 +122,8 @@ class EmailUtils {
         }
     }
 
-    public function sendSupportResponseEmail($studentEmail, $studentName, $requestSubject, $adminResponse) {
+    public function sendSupportResponseEmail($studentEmail, $studentName, $requestSubject, $adminResponse)
+    {
         try {
             $this->mail->clearAddresses();
             $this->mail->addAddress($studentEmail, $studentName);
@@ -151,7 +167,8 @@ class EmailUtils {
         }
     }
 
-    public function sendPromotionEmail($staffEmail, $staffName) {
+    public function sendPromotionEmail($staffEmail, $staffName)
+    {
         try {
             $this->mail->clearAddresses();
             $this->mail->addAddress($staffEmail, $staffName);
