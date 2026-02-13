@@ -70,15 +70,15 @@ include "admin_includes/admin.inc.php"; // sets $adminData and other dashboard v
             }
             ?>
             <div class="d-flex gap-4 align-items-center">
-                <div data-bs-toggle="modal" data-bs-target="#pictureModal">
+                <div>
                     <img src="<?php echo htmlspecialchars($adminData['picture'] ?? 'assets/images/quest.jpg'); ?>" alt="avatar" class="profile-avatar">
-                    <div class="modal fade" id="pictureModal">
+                    <!-- <div class="modal fade" id="pictureModal">
                         <div class="modal-dialog modal-dialog-centered modal-lg">
                             <div class="modal-content">
                                 <img src="<?php echo htmlspecialchars($adminData['picture'] ?? 'assets/images/quest.jpg'); ?>" alt="avatar" class="img-fluid w-100">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="flex-grow-1">
                     <h3 class="mb-1"><?php echo htmlspecialchars($adminData['fullname'] ?? 'Administrator'); ?></h3>
