@@ -62,10 +62,6 @@ include "admin_includes/admin.inc.php";
                     ?>
                 </select>
             </div>
-            <!--<div class="mb-3">
-                <label for="no_of_students" class="form-label">No. of Students</label>
-                <input type="number" class="form-control" id="no_of_students" name="no_of_students" required>
-            </div>-->
             <div class="mb-3">
                 <label for="class_status" class="form-label">Class Status</label>
                 <select name="class_status" id="class_status" class="form-select" required>

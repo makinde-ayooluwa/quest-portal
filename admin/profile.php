@@ -72,29 +72,15 @@ include "admin_includes/admin.inc.php"; // sets $adminData and other dashboard v
             <div class="d-flex gap-4 align-items-center">
                 <div>
                     <img src="<?php echo htmlspecialchars($adminData['picture'] ?? 'assets/images/quest.jpg'); ?>" alt="avatar" class="profile-avatar">
-                    <!-- <div class="modal fade" id="pictureModal">
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
-                            <div class="modal-content">
-                                <img src="<?php echo htmlspecialchars($adminData['picture'] ?? 'assets/images/quest.jpg'); ?>" alt="avatar" class="img-fluid w-100">
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
                 <div class="flex-grow-1">
                     <h3 class="mb-1"><?php echo htmlspecialchars($adminData['fullname'] ?? 'Administrator'); ?></h3>
-                    <!-- <p class="text-muted mb-1"><?php // echo htmlspecialchars($adminData['email'] ?? ''); 
-                                                    ?></p> -->
                     <p class="mb-1"><span class="badge bg-primary"><?php echo strtoupper($adminData['staff_role'] ?? 'Admin'); ?></span></p>
                     <div class="mt-3">
                         <a href="#editProfileModal" data-bs-toggle="modal" class="btn btn-outline-primary me-1"><i class="bi bi-pencil"></i> Edit Profile</a>
                         <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#changePasswordModal"><i class="bi bi-key"></i> Change Password</button>
                     </div>
                 </div>
-                <!--<div class="text-end">
-                    <div class="stat"><?php //echo is_array($students) ? count($students) : 0; 
-                                        ?></div>
-                    <div class="text-muted">Students</div>
-                </div>-->
             </div>
 
             <hr class="my-4">
