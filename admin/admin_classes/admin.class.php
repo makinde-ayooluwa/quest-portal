@@ -21,7 +21,7 @@ class Admin
 
     public function getStudents($pdo)
     {
-        $query = "SELECT * FROM students ORDER BY admission_number ASC";
+        $query = "SELECT * FROM students";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
