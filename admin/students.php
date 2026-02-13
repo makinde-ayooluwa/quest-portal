@@ -137,9 +137,9 @@ $classes = $admin->getClasses($pdo);
                             <button type="submit" class="btn btn-sm btn-primary">Apply</button>
                             <div class="ms-auto text-muted small">Select rows and choose an action</div>
                         </div> -->
-                        <!-- <div class="d-flex align-items-center justify-content-start">
-                            <button class="btn border btn-outline-success rounded-circle fw-bolder" title="Refresh students table" type="button" onclick="outputStudents()"><i class="bi bi-arrow-clockwise"></i></button>
-                        </div> -->
+                        <div class="d-flex align-items-center justify-content-start">
+                            <button class="btn border btn-outline-success rounded-circle fw-bolder" title="Refresh students table" type="button" id="refreshStudentsButton"><i class="bi bi-arrow-clockwise"></i></button>
+                        </div>
                         <div class="d-flex align-items-center justify-content-start gap-2 w-50 p-3">
                             <p>Sort</p>
                             <select name="orderSelector" id="orderSelector" class="form-select">
@@ -475,6 +475,9 @@ $classes = $admin->getClasses($pdo);
             localStorage.setItem("sortingOrder", JSON.stringify(currentOrder));
         })
         document.addEventListener("DOMContentLoaded", () => {
+            fetchData(currentOrder.order, currentOrder.mode);
+        });
+        document.getElementById("refreshStudentsButton").addEventListener("click", function() {
             fetchData(currentOrder.order, currentOrder.mode);
         });
     </script>
