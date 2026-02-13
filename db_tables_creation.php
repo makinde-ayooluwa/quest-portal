@@ -44,7 +44,6 @@ CREATE TABLE `activities` (
 --
 -- Table structure for table `assignment_submissions`
 --
-
 DROP TABLE IF EXISTS `assignment_submissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
