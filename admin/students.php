@@ -141,10 +141,12 @@ $classes = $admin->getClasses($pdo);
                             <button class="btn border btn-outline-success rounded-circle fw-bolder" title="Refresh students table" type="button" onclick="outputStudents()"><i class="bi bi-arrow-clockwise"></i></button>
                         </div> -->
                         <h3 class="text-muted p-0">Sort</h3>
-                        <div class="d-flex align-items-center justify-content-start gap-2 w-50">
+                        <div class="d-flex align-items-center justify-content-start gap-2 w-50 p-3">
                             <select name="orderSelector" id="orderSelector" class="form-select">
                                 <option value="fullname">By Fullname</option>
                                 <option value="class">By Class</option>
+                                <option value="account_verification">By Verification</option>
+                                <option value="admission_number">By Admission Number</option>
                             </select>
                             <select name="modeSelector" id="modeSelector" class="form-select">
                                 <option value="ASC">A - Z</option>
