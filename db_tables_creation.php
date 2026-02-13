@@ -49,10 +49,6 @@ CREATE TABLE sent_emails(
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `student_admission_number` VARCHAR(255) NOT NULL
 );
-CREATE TABLE emails(
-  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `body` VARCHAR(255) NOT NULL
-);
 DROP TABLE IF EXISTS `assignment_submissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
