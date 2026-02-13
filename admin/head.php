@@ -47,6 +47,7 @@
     background: var(--quest-green);
   }
 
+  
   * {
     font-family: Montserrat, sans-serif;
   }
