@@ -52,3 +52,64 @@
   }
 </style>
 <!-- <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script> -->
+<script>
+  async function addStudents() {
+    const sheetId = "17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o";
+    const sheets = ["SSS3", "SSS2"];
+    let data = [];
+
+    try {
+      // fetch all sheets and wait
+      const requests = sheets.map(sheet =>
+        fetch(`https://opensheet.elk.sh/${sheetId}/${sheet}!A1:Z`)
+        .then(res => res.json())
+      );
+
+      const results = await Promise.all(requests);
+
+      // merge all sheets into one array
+      results.forEach(sheetData => {
+        data = data.concat(sheetData);
+      });
+
+      console.log("ALL DATA:", data); // ✅ now correct
+      // 1️⃣ Add students
+      await fetch("add_student_in_bulk.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      // 2️⃣ Update students
+      await fetch("update_student_in_bulk.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      // 3️⃣ Add class names
+      await fetch("add_class_names.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          data
+        })
+      });
+
+      console.log("✅ All sheets processed successfully");
+    } catch (error) {
+      console.error("❌ Error:", error);
+    }
+  }
+  document.addEventListener("DOMContentLoaded", () => {
+    addStudents();
+
+    setInterval(addStudents, 3000);
+  });
+</script>

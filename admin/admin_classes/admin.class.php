@@ -27,6 +27,14 @@ class Admin
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getStudentsInOrder($pdo, $order, $mode)
+    {
+        $query = "SELECT * FROM students ORDER BY $order $mode";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getVerifiedStudents($pdo)
     {
         $query = "SELECT * FROM students WHERE account_verification = 'Verified'";
@@ -126,7 +134,9 @@ class Admin
 
     public function addClass($pdo, $class_name)
     {
-        if ($this->classExists($pdo, $class_name)) {
+        if ($class_name == "") {
+            return false;
+        } elseif ($this->classExists($pdo, $class_name)) {
             return false;
         } else {
             $query = "INSERT INTO classes_names_only (class_name) VALUES (:class_name)";
@@ -593,7 +603,7 @@ class Admin
         // if validation passes, continue (DB insert goes here)
         return true;
     }
-// Result
+    // Result
     public function getStudentImage($pdo, $admission)
     {
         $query = "SELECT picture FROM students WHERE admission_number = :admission";

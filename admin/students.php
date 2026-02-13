@@ -137,8 +137,19 @@ $classes = $admin->getClasses($pdo);
                             <button type="submit" class="btn btn-sm btn-primary">Apply</button>
                             <div class="ms-auto text-muted small">Select rows and choose an action</div>
                         </div> -->
-                        <div class="d-flex align-items-center justify-content-start">
+                        <!-- <div class="d-flex align-items-center justify-content-start">
                             <button class="btn border btn-outline-success rounded-circle fw-bolder" title="Refresh students table" type="button" onclick="outputStudents()"><i class="bi bi-arrow-clockwise"></i></button>
+                        </div> -->
+                        <h3 class="text-muted p-0">Sort</h3>
+                        <div class="d-flex align-items-center justify-content-start gap-2 w-50">
+                            <select name="orderSelector" id="orderSelector" class="form-select">
+                                <option value="fullname">By Fullname</option>
+                                <option value="class">By Class</option>
+                            </select>
+                            <select name="modeSelector" id="modeSelector" class="form-select">
+                                <option value="ASC">A - Z</option>
+                                <option value="DESC">Z - A</option>
+                            </select>
                         </div>
 
                         <div style="overflow-x:scroll;">
@@ -340,65 +351,17 @@ $classes = $admin->getClasses($pdo);
     </script>
     <script>
         // Excel dynamic addition with the following params : [fullname,email,class,admission_number]
-
-        async function addStudents() {
-            const sheetId = "17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o";
-            const sheets = ["SSS3", "SSS2"];
-            let data = [];
-
-            try {
-                // fetch all sheets and wait
-                const requests = sheets.map(sheet =>
-                    fetch(`https://opensheet.elk.sh/${sheetId}/${sheet}!A1:Z`)
-                    .then(res => res.json())
-                );
-
-                const results = await Promise.all(requests);
-
-                // merge all sheets into one array
-                results.forEach(sheetData => {
-                    data = data.concat(sheetData);
-                });
-
-                console.log("ALL DATA:", data); // ✅ now correct
-                // 1️⃣ Add students
-                await fetch("add_student_in_bulk.php", {
+        function fetchData(order = "fullname", mode = "ASC") {
+            fetch("ajax_order_data_for_students.php", {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                // 2️⃣ Update students
-                await fetch("update_student_in_bulk.php", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                // 3️⃣ Add class names
-                await fetch("add_class_names.php", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
+                        "Content-type": "application/json"
                     },
                     body: JSON.stringify({
-                        data
+                        order: order,
+                        mode: mode
                     })
-                });
-
-                console.log("✅ All sheets processed successfully");
-            } catch (error) {
-                console.error("❌ Error:", error);
-            }
-        }
-
-        function outputStudents() {
-
-            fetch("ajax_data_for_students.php")
+                })
                 .then(res => res.json())
                 .then(data => {
                     const studentsTable = document.getElementById("studentsTable");
@@ -409,8 +372,7 @@ $classes = $admin->getClasses($pdo);
                         html = `
                             <tr>
                                 <td colspan="9" class="text-center py-4">No students found.</td>
-                            </tr>`
-                        ;
+                            </tr>`;
 
                     }
 
@@ -489,16 +451,129 @@ $classes = $admin->getClasses($pdo);
                             </div>-->
                         `;
                     });
-
                     studentsTable.innerHTML = html;
-                    // console.log(data);
-                });
+                })
         }
-        document.addEventListener("DOMContentLoaded", () => {
-            addStudents();
-            outputStudents();
+        const orderSelector = document.getElementById("orderSelector");
+        const modeSelector = document.getElementById("modeSelector");
+        const currentOrder = localStorage.getItem("sortingOrder") ? JSON.parse(localStorage.getItem("sortingOrder")) : {
+            "order": "fullname",
+            "mode": "ASC"
+        };
+        orderSelector.value = currentOrder.order;
+        modeSelector.value = currentOrder.mode;
+        orderSelector.addEventListener("change", function() {
+            currentOrder.order = orderSelector.value;
+            fetchData(currentOrder.order, currentOrder.mode);
+            localStorage.setItem("sortingOrder", JSON.stringify(currentOrder));
+        })
+        modeSelector.addEventListener("change", function() {
+            currentOrder.mode = modeSelector.value;
+            fetchData(currentOrder.order, currentOrder.mode);
+            localStorage.setItem("sortingOrder", JSON.stringify(currentOrder));
+        })
 
-            setInterval(addStudents, 3000);
+
+
+        // function outputStudents() {
+
+        //     fetch("ajax_data_for_students.php")
+        //         .then(res => res.json())
+        //         .then(data => {
+        //             const studentsTable = document.getElementById("studentsTable");
+        //             studentsTable.innerHTML = ""; // clear table first
+        //             let html = "";
+
+        //             if (!data || data.length < 1 || data.length == 0) {
+        //                 html = `
+        //                     <tr>
+        //                         <td colspan="9" class="text-center py-4">No students found.</td>
+        //                     </tr>`;
+
+        //             }
+
+
+
+        //             data.forEach(student => {
+        //                 html += `
+        //                     <tr>
+        //                         <!--<td>
+        //                             <input type="checkbox" name="selected_ids[]" value="${student.id}" class="rowCheckbox">
+        //                         </td>-->
+
+        //                         <td>
+        //                             <img src="../${student.picture}" alt="${student.fullname}" class="student-photo">
+        //                         </td>
+
+        //                         <td>${student.fullname}</td>
+        //                         <td>${student.class}</td>
+        //                         <td>${student.email}</td>
+        //                         <td>${student.phone}</td>
+        //                         <td>${student.admission_number}</td>
+
+        //                         <td>
+        //                             ${
+        //                                 student.account_verification === "Verified"
+        //                                     ? '<span class="badge bg-success">Verified</span>'
+        //                                     : '<span class="badge bg-danger text-white">Not verified</span>'
+        //                             }
+        //                         </td>
+
+        //                         <td class="text-nowrap">
+        //                             <a href="view_student.php?id=${student.id}" 
+        //                             class="btn btn-sm btn-outline-primary p-1 me-1">
+        //                                 <i class="bi bi-eye"></i>
+        //                             </a>
+
+        //                             <!--<button type="button"
+        //                                     class="btn btn-sm btn-outline-success p-1 me-1 promote-btn"
+        //                                     data-id="${student.id}">
+        //                                 <i class="bi bi-arrow-up-circle"></i>
+        //                             </button>-->
+
+        //                             <!--<button type="button"
+        //                             class="btn btn-sm btn-outline-danger p-1"
+        //                                     data-bs-toggle="modal"
+        //                                     data-bs-target="#modal_${student.id}">
+        //                                 <i class="bi bi-trash"></i>
+        //                             </button>-->
+        //                         </td>
+        //                     </tr>
+
+        //                     <!-- Promote Modal -->
+
+        //                     <!-- Delete Modal -->
+        //                     <!--<div class="modal fade" id="modal_${student.id}" tabindex="-1">
+        //                         <div class="modal-dialog modal-dialog-centered">
+        //                             <div class="modal-content">
+        //                                 <div class="modal-header">
+        //                                     <h5 class="modal-title">Confirm Deletion</h5>
+        //                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        //                                 </div>
+        //                                 <div class="modal-body">
+        //                                     <p class="text-danger">
+        //                                         Are you sure you want to delete 
+        //                                         <strong>${student.fullname.toUpperCase()}</strong>?
+        //                                     </p>
+        //                                 </div>
+        //                                 <div class="modal-footer">
+        //                                     <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        //                                     <a href="delete_student.php?id=${student.id}" class="btn btn-danger">
+        //                                         Delete
+        //                                     </a>
+        //                                 </div>
+        //                             </div>
+        //                         </div>
+        //                     </div>-->
+        //                 `;
+        //             });
+
+        //             studentsTable.innerHTML = html;
+        //             // console.log(data);
+        //         });
+        // }
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchData("fullname", "ASC");
         });
     </script>
 </body>
