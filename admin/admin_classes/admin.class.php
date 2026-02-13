@@ -19,6 +19,13 @@ class Admin
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getSentEmails($pdo){
+        $query = "SELECT * FROM sent_emails";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getStudents($pdo)
     {
         $query = "SELECT * FROM students";

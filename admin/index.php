@@ -506,12 +506,12 @@ try {
                             <!-- <td><?php echo implode('', $mentorHtml); ?></td> -->
                             <td><b class="fs-5"><?php echo $studentCount; ?></b></td>
                             <!-- <td><?php if ($status === 'Active') {
-                                  echo '<span class="badge bg-success">Active</span>';
-                                } elseif ($status) {
-                                  echo '<span class="badge bg-secondary">' . htmlspecialchars($status) . '</span>';
-                                } else {
-                                  echo '<span class="badge bg-light text-dark">-</span>';
-                                } ?></td> -->
+                                        echo '<span class="badge bg-success">Active</span>';
+                                      } elseif ($status) {
+                                        echo '<span class="badge bg-secondary">' . htmlspecialchars($status) . '</span>';
+                                      } else {
+                                        echo '<span class="badge bg-light text-dark">-</span>';
+                                      } ?></td> -->
                             <!-- <td>
                               <a href="edit_class.php?id=<?php echo $class['id']; ?>" class="btn btn-sm btn-primary"
                                 title="Edit"><i class="bi bi-pencil"></i></a>
