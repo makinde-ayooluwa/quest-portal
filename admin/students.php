@@ -141,6 +141,7 @@ $classes = $admin->getClasses($pdo);
                             <button class="btn border btn-outline-success rounded-circle fw-bolder" title="Refresh students table" type="button" onclick="outputStudents()"><i class="bi bi-arrow-clockwise"></i></button>
                         </div> -->
                         <div class="d-flex align-items-center justify-content-start gap-2 w-50 p-3">
+                            <p>Sort</p>
                             <select name="orderSelector" id="orderSelector" class="form-select">
                                 <option value="fullname">By Fullname</option>
                                 <option value="class">By Class</option>
