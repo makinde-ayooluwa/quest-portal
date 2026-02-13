@@ -465,7 +465,7 @@ $classes = $admin->getClasses($pdo);
         orderSelector.addEventListener("change", function() {
             currentOrder.order = orderSelector.value;
             fetchData(currentOrder.order, currentOrder.mode);
-            localStorage.setItem("sortingOrder", JSON.stringify(currentOrder));
+            localStorage.setItem("sortingOrder", JSON.stringify(currentOrder))
         })
         modeSelector.addEventListener("change", function() {
             currentOrder.mode = modeSelector.value;
