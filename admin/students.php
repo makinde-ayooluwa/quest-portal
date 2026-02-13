@@ -353,7 +353,7 @@ $classes = $admin->getClasses($pdo);
     </script>
     <script>
         // Excel dynamic addition with the following params : [fullname,email,class,admission_number]
-        function fetchData(order = "fullname", mode = "ASC") {
+        function fetchData(order, mode) {
             fetch("ajax_order_data_for_students.php", {
                     method: "POST",
                     headers: {
@@ -575,7 +575,7 @@ $classes = $admin->getClasses($pdo);
         //         });
         // }
         document.addEventListener("DOMContentLoaded", () => {
-            fetchData("fullname", "ASC");
+            fetchData(currentOrder.order, currentOrder.mode);
         });
     </script>
 </body>
