@@ -1,10 +1,7 @@
 <?php
 session_start();
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require 'vendor/autoload.php'; // Adjust path if needed
+include "admin_includes/email_utils.php"; // Adjust path if needed
 
 
 
@@ -63,39 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($insert_stmt->execute()) {
         // Send email
-        $mail = new PHPMailer(true);
-
-        try {
-            // Server settings
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'makindeayooluwa604@gmail.com';
-            $mail->Password = 'lirw zgkb kegs xyat';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
-
-            // Recipients
-            $mail->setFrom('makindeayooluwa604@gmail.com', 'Quest Schools Portal');
-            $mail->addAddress($email);
-
-            // Content
-            $reset_link = "http://localhost/quest-portal/admin/reset_password.php?token=" . $token . "&type=" . $user_type;
-            $mail->isHTML(true);
-            $mail->Subject = 'Password Reset Request - Quest Portal Admin';
-            $mail->Body = "
-                <h2>Password Reset Request</h2>
-                <p>You have requested to reset your admin password for Quest Portal.</p>
-                <p>Click the link below to reset your password:</p>
-                <p><a href='$reset_link'>Reset Password</a></p>
-                <p>This link will expire in 1 hour.</p>
-                <p>If you didn't request this, please ignore this email.</p>
-            ";
-            $mail->AltBody = "Reset your password: $reset_link";
-
-            $mail->send();
+        // $mail = new PHPMailer(true);
+        $mail = new EmailUtils();
+        if ($mail->sendAdminPasswordResetEmail($email, $token, $user_type)) {
             $_SESSION['success'] = "Password reset link has been sent to your email.";
-        } catch (Exception $e) {
+        } else {
             $_SESSION['error'] = "Failed to send email. Please try again.";
         }
     } else {
@@ -112,4 +81,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: forgot_password.php');
     exit();
 }
-?>

@@ -36,6 +36,30 @@ class EmailUtils
         $stmt->execute();
     }
 
+    public function sendAdminPasswordResetEmail($email,$token,$user_type){
+        try{
+            $this->mail->clearAddresses();
+            $this->mail->addAddress($email);
+
+            $this->mail->Subject = "Password Reset Request - Quest Portal Admin";
+            $reset_link = "http://localhost/quest-portal/admin/reset_password.php?token=" . $token . "&type=" . $user_type;
+            $this->mail->Body = "
+                <h2>Password Reset Request</h2>
+                <p>You have requested to reset your admin password for Quest Portal.</p>
+                <p>Click the link below to reset your password:</p>
+                <p><a href='$reset_link'>Reset Password</a></p>
+                <p>This link will expire in 1 hour.</p>
+                <p>If you didn't request this, please ignore this email.</p>
+            ";
+            $this->mail->AltBody = "Reset your password: $reset_link";
+            $this->mail->send();
+            return true;
+        } catch (Exception $e) {
+            error_log("Reset link email failed: " . $this->mail->ErrorInfo);
+            return false;
+        }
+    }
+
     public function sendStudentSetupEmail($studentEmail, $studentName, $admissionNumber)
     {
         try {
