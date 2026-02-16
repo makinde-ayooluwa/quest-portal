@@ -240,7 +240,7 @@ try {
   <main class="main-content">
     <section class="dashboard">
       <!-- Quick Actions Panel -->
-      <div class="quick-actions mb-4">
+      <!-- <div class="quick-actions mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h2 id="greeting" class="h3">Welcome, <span
               class="text-uppercase fw-bolder"><?php echo $adminData["fullname"] ?></span>.</h2>
@@ -262,7 +262,7 @@ try {
             </button>
           </div>
         </div>
-      </div>
+      </div> -->
       <style>
         .shaker {
           animation: shake 2s linear infinite;
