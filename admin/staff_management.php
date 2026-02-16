@@ -79,7 +79,13 @@ include "admin_includes/admin.inc.php";
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <h3 class="mb-0"><i class="bi bi-people-fill me-2"></i>Users Management</h3>
                         <div>
-                            <a href="add_staff.php" class="btn btn-primary btn-sm me-2"><i class="bi bi-person-plus"></i> Add User</a>
+                            <?php
+                            if ($adminData['staff_role'] == "head admin") {
+                            ?>
+                                <a href="add_staff.php" class="btn btn-primary btn-sm me-2"><i class="bi bi-person-plus"></i> Add User</a>
+                            <?php
+                            }
+                            ?>
                             <!-- <a href="upload_material.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-cloud-upload"></i> Upload Material</a> -->
                         </div>
                     </div>

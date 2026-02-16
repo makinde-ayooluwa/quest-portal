@@ -270,7 +270,13 @@
             <div class="collapse" id="staffManagement">
                 <li><a class="text-primary" href="staff_management.php"><i class="bi bi-people me-2"></i>View all users</a>
                 </li>
-                <li><a class="text-primary" href="add_staff.php"><i class="bi bi-plus me-2"></i>CREATE user</a></li>
+                <?php
+                if ($adminData['staff_role'] == "head admin") {
+                ?>
+                    <li><a class="text-primary" href="add_staff.php"><i class="bi bi-plus me-2"></i>CREATE user</a></li>
+                <?php
+                }
+                ?>
             </div>
         <?php
         }

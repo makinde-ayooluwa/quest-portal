@@ -688,7 +688,7 @@ try {
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4">
+        <!-- <div class="col-md-6 col-lg-4">
           <div class="action-card h-100">
             <div class="action-card-body">
               <h5 class="card-title"><i class="bi bi-calendar-check-fill me-2"></i>Attendance & Academic
@@ -701,7 +701,7 @@ try {
               <a class="btn btn-warning btn-sm mt-2" href="manage_results.php"><i class="bi bi-upload"></i> Upload Results</a>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- <div class="col-md-6 col-lg-4">
           <div class="card h-100 shadow-sm">
             <div class="card-body">
