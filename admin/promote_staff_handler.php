@@ -49,17 +49,17 @@ try {
     $emailSent = $emailUtils->sendPromotionEmail($staff['email'], $staff['fullname']);
 
     if (!$emailSent) {
-        error_log('Failed to send promotion email to ' . $staff['email']);
+        error_log('Failed to send email to ' . $staff['email']);
         // Note: We don't set an error session here as the promotion was successful
     }
 
-    $_SESSION['success'] = $staff['fullname'] . ' has been successfully promoted to ' . strtoupper($role) . ".";
+    $_SESSION['success'] = $staff['fullname'] . ' role has been changed to ' . strtoupper($role) . ".";
     header('Location: view_staff.php?id=' . $staff_id);
     exit();
 
 } catch (PDOException $e) {
     error_log('Promote staff DB error: ' . $e->getMessage());
-    $_SESSION['error'] = 'An error occurred while promoting the staff member.';
+    $_SESSION['error'] = 'An error occurred while changing staff role.';
     header('Location: staff_management.php');
     exit();
 }
