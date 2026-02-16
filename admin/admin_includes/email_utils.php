@@ -9,12 +9,12 @@ require_once '../vendor/autoload.php';
 class EmailUtils
 {
     private $mail;
-    private $pdo;
+    // private $pdo;
 
     public function __construct()
     {
         $this->mail = new PHPMailer(true);
-        $this->pdo = new PDO("mysql:host=localhost;dbname=questportal", "root", "");
+        // $this->pdo = new PDO("mysql:host=localhost;dbname=questportal", "root", "");
 
         // SMTP configuration
         $this->mail->isSMTP();
@@ -28,13 +28,13 @@ class EmailUtils
         $this->mail->isHTML(true);
     }
 
-    private function addSentIntoDatabase($admission)
-    {
-        $query = "INSERT INTO sent_emails (student_admission_number) VALUES (:admission)";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(":admission", $admission);
-        $stmt->execute();
-    }
+    // private function addSentIntoDatabase($admission)
+    // {
+    //     $query = "INSERT INTO sent_emails (student_admission_number) VALUES (:admission)";
+    //     $stmt = $this->pdo->prepare($query);
+    //     $stmt->bindParam(":admission", $admission);
+    //     $stmt->execute();
+    // }
 
     public function sendAdminPasswordResetEmail($email,$token,$user_type){
         try{
@@ -95,7 +95,7 @@ class EmailUtils
             $this->mail->AltBody = 'Hi ' . $studentName . ', You have been registered at Quest Schools. Setup your portal here: ' . $setupLink;
 
             $this->mail->send();
-            $this->addSentIntoDatabase($admissionNumber);
+            // $this->addSentIntoDatabase($admissionNumber);
             return true;
         } catch (Exception $e) {
             error_log("Student email failed: " . $this->mail->ErrorInfo);
