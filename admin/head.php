@@ -47,7 +47,7 @@
     background: var(--quest-green);
   }
 
-  
+
   * {
     font-family: Montserrat, sans-serif;
   }
@@ -55,20 +55,23 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script> -->
 <script>
   async function addStudents() {
-    const sheetId = "17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o";
+    const sheetIds = ["17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o"];
     const sheets = ["SSS3", "SSS2"];
     let data = [];
 
     try {
       // fetch all sheets and wait
-      const requests = sheets.map(sheet =>
-        fetch(`https://opensheet.elk.sh/${sheetId}/${sheet}!A1:Z`)
-        .then(res => res.json())
+      const requests = sheets.flatMap(sheet =>
+        sheetIds.map(sheetId =>
+          fetch(`https://opensheet.elk.sh/${sheetId}/${sheet}!A1:Z`)
+          .then(res => res.json())
+        )
       );
 
+      // wait for ALL fetches
       const results = await Promise.all(requests);
 
-      // merge all sheets into one array
+      // merge all results
       results.forEach(sheetData => {
         data = data.concat(sheetData);
       });
