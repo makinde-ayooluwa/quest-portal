@@ -130,7 +130,7 @@
                 <a href="./profile.php"><i class="pe-3 bi bi-person-fill"></i>My Profile</a>
                 <a href="./notifications.php" class="d-lg-none"><i class="pe-3 fa-solid fa-bell"></i>Notifications</a>
                 <a href="./events.php" class="d-lg-none"><i class="pe-3 bi bi-calendar"></i>Events</a>
-                <a href="./result.php"><i class="fa-solid fa-square-poll-vertical"></i>My Results / Reports</a>
+                <a href="./view_result.php"><i class="fa-solid fa-square-poll-vertical"></i>My Results / Reports</a>
                 <!-- <a href="./assignments.php"><i class="pe-3 fa-solid fa-book"></i>Assignments</a> -->
                 <a href="support.php"><i class="pe-3 fa-solid fa-question"></i>Help & Support</a>
                 <!--<a href="javascript:;"><i class="pe-3 fa-solid fa-table-columns"></i>Sign out</a>-->
