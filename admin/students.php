@@ -123,7 +123,6 @@ $classes = $admin->getClasses($pdo);
                             <input class="form-control me-2" type="search" placeholder="Search students by name, email or admission number" aria-label="Search" id="studentSearch">
                             <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
                         </form>
-                        <div class="text-end small">Showing <?php echo count($admin->getStudents($pdo)) ?> students</div>
                     </div>
 
                     <form id="bulkActionsForm" method="post" action="bulk_student_actions.php">
