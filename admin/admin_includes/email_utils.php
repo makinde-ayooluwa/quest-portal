@@ -9,13 +9,11 @@ require_once '../vendor/autoload.php';
 class EmailUtils
 {
     private $mail;
-    // private $pdo;
 
     public function __construct()
     {
         $this->mail = new PHPMailer(true);
-        // $this->pdo = new PDO("mysql:host=localhost;dbname=questportal", "root", "");
-
+        
         // SMTP configuration
         $this->mail->isSMTP();
         $this->mail->Host = 'smtp.gmail.com';
@@ -27,14 +25,6 @@ class EmailUtils
         $this->mail->setFrom('makindeayooluwa604@gmail.com', 'Quest Schools Portal');
         $this->mail->isHTML(true);
     }
-
-    // private function addSentIntoDatabase($admission)
-    // {
-    //     $query = "INSERT INTO sent_emails (student_admission_number) VALUES (:admission)";
-    //     $stmt = $this->pdo->prepare($query);
-    //     $stmt->bindParam(":admission", $admission);
-    //     $stmt->execute();
-    // }
 
     public function sendAdminPasswordResetEmail($email,$token,$user_type){
         try{
