@@ -19,7 +19,8 @@ class Admin
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getSentEmails($pdo){
+    public function getSentEmails($pdo)
+    {
         $query = "SELECT * FROM sent_emails";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
@@ -127,6 +128,28 @@ class Admin
             $stmt->bindParam(":class", $studentData["class"]);
             $stmt->execute();
             return true;
+        }
+    }
+    private function roleExists($pdo, $role_name)
+    {
+        $stmt = $pdo->prepare("SELECT role_name FROM roles WHERE role_name = :role_name");
+        $stmt->bindParam(":role_name", $role_name);
+        if ($stmt->execute()) {
+            return true;
+        }
+    }
+
+    public function addRole($pdo, $role_name)
+    {
+        if ($this->roleExists($pdo, $role_name)) {
+            return false;
+        } else {
+            $query = "INSERT INTO roles (role_name) VALUES (:role_name)";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(":role_name", $role_name);
+            if ($stmt->execute()) {
+                return true;
+            }
         }
     }
 
