@@ -221,11 +221,11 @@
         <ul class="nav-links d-none d-md-flex">
             <li><i class="bi bi-envelope mx-4"></i><?php echo $adminData["email"] ?></li>
             <li class="nav-item">
-                <div class="d-grid" style="grid-template-columns: 50% 50%;">
+                <div class="d-grid" style="grid-template-columns: 10% 90%;">
                     <img src="<?php echo htmlspecialchars($adminData["picture"] ?? 'assets/images/quest.jpg'); ?>"
-                        alt="Profile Picture" class="rounded-circle" width="25">
+                        alt="Profile Picture" class="rounded-circle" width="27.5">
                     <span
-                        class="d-none d-md-grid ms-2 admin-header-profile-picture-text">
+                        class="d-none d-md-grid ms-2 admin-header-profile-picture-text ps-1">
                         <span style="font-size: 15px;text-transform: uppercase; font-weight: bolder;">
                             <?php echo htmlspecialchars($adminData["fullname"] ?? 'Admin'); ?>
                         </span>
