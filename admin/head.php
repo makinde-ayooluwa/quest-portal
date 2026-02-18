@@ -55,26 +55,26 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script> -->
 <script>
   async function addStudents() {
-    const sheetIds = ["17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o"];
-    const sheets = ["SSS3", "SSS2"];
+    const sheets = [{
+      id: "17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o",
+      sheetNames: ["SSS3", "SSS2"]
+    }];
+    // const sheets = ["SSS3", "SSS2"];
     let data = [];
 
     try {
-      // fetch all sheets and wait
-      const requests = sheets.flatMap(sheet =>
-        sheetIds.map(sheetId =>
-          fetch(`https://opensheet.elk.sh/${sheetId}/${sheet}!A1:Z`)
-          .then(res => res.json())
-        )
-      );
-
-      // wait for ALL fetches
-      const results = await Promise.all(requests);
-
-      // merge all results
-      results.forEach(sheetData => {
-        data = data.concat(sheetData);
-      });
+      sheets.flatMap(sheet => {
+        const sheetId = sheet.id;
+        sheet.sheetNames.forEach(sheetName => {
+          fetch(`https://opensheet.elk.sh/${sheetId}/${sheetName}!A1:Z`)
+            .then(res => res.json())
+            .then(info => {
+              info.map(oneInfo => {
+                data.push(info);
+              })
+            })
+        })
+      })
 
       console.log("ALL DATA:", data); // ✅ now correct
       // 1️⃣ Add students
