@@ -63,18 +63,20 @@
     let data = [];
 
     try {
-      sheets.flatMap(sheet => {
+      const requests = sheets.flatMap(sheet => {
         const sheetId = sheet.id;
-        sheet.sheetNames.forEach(sheetName => {
+
+        return sheet.sheetNames.map(sheetName =>
           fetch(`https://opensheet.elk.sh/${sheetId}/${sheetName}!A1:Z`)
-            .then(res => res.json())
-            .then(info => {
-              info.map(oneInfo => {
-                data.push(info);
-              })
-            })
-        })
-      })
+          .then(res => res.json())
+        );
+      });
+
+      // Wait for all fetches
+      const results = await Promise.all(requests);
+
+      // Flatten all sheet data into one array
+      data = results.flat();
 
       console.log("ALL DATA:", data); // ✅ now correct
       // 1️⃣ Add students
