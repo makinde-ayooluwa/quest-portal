@@ -96,7 +96,6 @@ include "admin_includes/admin.inc.php";
                                 <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
                             </form>
                         </div>
-                        <div class="col-md-4 text-end text-muted small align-self-center">Showing <?php echo count($admin->getStaffs($pdo) ?? []); ?> staff members</div>
                     </div>
                     <?php
                     if (isset($_SESSION["success"])) {
