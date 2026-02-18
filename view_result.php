@@ -19,6 +19,7 @@ $studentResult = fetchResults($pdo, $studentData);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>View Results | Quest Portal</title>
     <?php include "head.php"; ?>
@@ -94,6 +95,7 @@ $studentResult = fetchResults($pdo, $studentData);
                 padding-left: 1rem !important;
                 padding-right: 1rem !important;
             }
+
             .result-iframe {
                 height: 400px;
             }
@@ -103,18 +105,22 @@ $studentResult = fetchResults($pdo, $studentData);
             .result-iframe {
                 height: 300px;
             }
+
             .result-header {
                 padding: 0.75rem;
             }
+
             .result-header h5 {
                 font-size: 1rem;
             }
+
             .result-header small {
                 font-size: 0.75rem;
             }
         }
     </style>
 </head>
+
 <body>
     <?php include "header.php"; ?>
     <?php include "sidebar.php"; ?>
@@ -161,4 +167,5 @@ $studentResult = fetchResults($pdo, $studentData);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
 </body>
+
 </html>
