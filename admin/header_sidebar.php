@@ -230,7 +230,7 @@
                         <span>
                             <?php echo htmlspecialchars($adminData["fullname"] ?? 'Admin'); ?>
                         </span>
-                        <span style="font-size: 10px;">
+                        <span style="font-size: 10px;font-weight: bolder;">
                             <?php echo strtoupper(htmlspecialchars($adminData["staff_role"])) ?>
                         </span>
                     </span>
