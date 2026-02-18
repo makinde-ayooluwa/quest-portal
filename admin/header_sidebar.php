@@ -221,19 +221,21 @@
         <ul class="nav-links d-none d-md-flex">
             <li><i class="bi bi-envelope mx-4"></i><?php echo $adminData["email"] ?></li>
             <li class="nav-item">
-                <div class="d-grid" style="grid-template-columns: 10% 90%;">
-                    <img src="<?php echo htmlspecialchars($adminData["picture"] ?? 'assets/images/quest.jpg'); ?>"
-                        alt="Profile Picture" class="rounded-circle" width="27.5">
-                    <span
-                        class="d-none d-md-grid ms-2 admin-header-profile-picture-text ps-1">
-                        <span style="font-size: 15px;text-transform: uppercase; font-weight: bolder;">
-                            <?php echo htmlspecialchars($adminData["fullname"] ?? 'Admin'); ?>
+                <a href="profile.php">
+                    <div class="d-grid" style="grid-template-columns: 10% 90%;">
+                        <img src="<?php echo htmlspecialchars($adminData["picture"] ?? 'assets/images/quest.jpg'); ?>"
+                            alt="Profile Picture" class="rounded-circle" width="27.5">
+                        <span
+                            class="d-none d-md-grid ms-2 admin-header-profile-picture-text ps-1">
+                            <span style="font-size: 15px;text-transform: uppercase; font-weight: bolder;">
+                                <?php echo htmlspecialchars($adminData["fullname"] ?? 'Admin'); ?>
+                            </span>
+                            <span style="font-size: 10px;font-weight: bolder;">
+                                <?php echo strtoupper(htmlspecialchars($adminData["staff_role"])) ?>
+                            </span>
                         </span>
-                        <span style="font-size: 10px;font-weight: bolder;">
-                            <?php echo strtoupper(htmlspecialchars($adminData["staff_role"])) ?>
-                        </span>
-                    </span>
-                </div>
+                    </div>
+                </a>
             </li>
         </ul>
     </nav>
