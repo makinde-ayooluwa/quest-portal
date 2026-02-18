@@ -226,7 +226,14 @@
                     <img src="<?php echo htmlspecialchars($adminData["picture"] ?? 'assets/images/quest.jpg'); ?>"
                         alt="Profile Picture" class="rounded-circle" width="25">
                     <span
-                        class="d-none d-md-inline ms-2 admin-header-profile-picture-text"><?php echo htmlspecialchars($adminData["fullname"] ?? 'Admin'); ?></span>
+                        class="d-none d-md-grid ms-2 admin-header-profile-picture-text">
+                        <span>
+                            <?php echo htmlspecialchars($adminData["fullname"] ?? 'Admin'); ?>
+                        </span>
+                        <span style="font-size: 10px;">
+                            <?php echo htmlspecialchars($adminData["staff_role"]) ?>
+                        </span>
+                    </span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
                     <li><a class="dropdown-item text-primary" href="profile.php"><i
