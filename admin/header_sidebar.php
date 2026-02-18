@@ -227,7 +227,7 @@
                         alt="Profile Picture" class="rounded-circle" width="25">
                     <span
                         class="d-none d-md-grid ms-2 admin-header-profile-picture-text">
-                        <span>
+                        <span style="font-size: 15px;text-transform: uppercase; font-weight: bolder;">
                             <?php echo htmlspecialchars($adminData["fullname"] ?? 'Admin'); ?>
                         </span>
                         <span style="font-size: 10px;font-weight: bolder;">
