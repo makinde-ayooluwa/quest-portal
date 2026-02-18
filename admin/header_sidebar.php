@@ -220,9 +220,8 @@
         </div>
         <ul class="nav-links d-none d-md-flex">
             <li><i class="bi bi-envelope mx-4"></i><?php echo $adminData["email"] ?></li>
-            <li class="nav-item dropdown">
-                <button class="btn nav-link dropdown-toggle d-flex align-items-center gap-2 p-0" id="adminDropdown"
-                    data-bs-toggle="dropdown" aria-expanded="false" type="button">
+            <li class="nav-item">
+                <div class="d-grid" style="grid-template-columns: 50% 50%;">
                     <img src="<?php echo htmlspecialchars($adminData["picture"] ?? 'assets/images/quest.jpg'); ?>"
                         alt="Profile Picture" class="rounded-circle" width="25">
                     <span
@@ -234,16 +233,7 @@
                             <?php echo strtoupper(htmlspecialchars($adminData["staff_role"])) ?>
                         </span>
                     </span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
-                    <li><a class="dropdown-item text-primary" href="profile.php"><i
-                                class="bi bi-person me-2"></i>Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item text-primary" href="logout.php"><i
-                                class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
-                </ul>
+                </div>
             </li>
         </ul>
     </nav>
