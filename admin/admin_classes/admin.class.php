@@ -130,28 +130,6 @@ class Admin
             return true;
         }
     }
-    private function roleExists($pdo, $role_name)
-    {
-        $stmt = $pdo->prepare("SELECT role_name FROM roles WHERE role_name = :role_name");
-        $stmt->bindParam(":role_name", $role_name);
-        if ($stmt->execute()) {
-            return true;
-        }
-    }
-
-    public function addRole($pdo, $role_name)
-    {
-        if ($this->roleExists($pdo, $role_name)) {
-            return false;
-        } else {
-            $query = "INSERT INTO roles (role_name) VALUES (:role_name)";
-            $stmt = $pdo->prepare($query);
-            $stmt->bindParam(":role_name", $role_name);
-            if ($stmt->execute()) {
-                return true;
-            }
-        }
-    }
 
     private function classExists($pdo, $class_name)
     {

@@ -79,41 +79,6 @@ include "admin_includes/admin.inc.php";
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <h3 class="mb-0"><i class="bi bi-people-fill me-2"></i>Users Management</h3>
                         <div>
-                            <div class="d-flex" id="roleAddForm">
-                                <input class="form-control me-2" type="search" placeholder="Add New Role" id="roleAddInput">
-                                <button class="btn btn-outline-success" type="button">ADD</button>
-                            </div>
-                            <script>
-                                const roleForm = document.querySelector("#roleAddForm");
-                                const roleFormBtn = document.querySelector("#roleAddForm button");
-                                const input = roleForm.querySelector("input");
-                                roleFormBtn.addEventListener("click", function() {
-                                    if (input.value == "") {
-                                        toastr.error("Input a role", "Error!");
-                                    } else {
-                                        fetch("add_role.php", {
-                                                method: "POST",
-                                                headers: {
-                                                    "Content-type": "application/json"
-                                                },
-                                                body: JSON.stringify({
-                                                    role_name: input.value
-                                                })
-                                            })
-                                            .then(res => res.json())
-                                            .then(data => {
-                                                if (data.status == "success") {
-                                                    toastr.success(`${data.message}`, "Success!");
-                                                } else if (data.status == "error") {
-                                                    toastr.error(`${data.message}`, "Error!");
-                                                }
-                                            })
-
-                                    }
-                                })
-                            </script>
-                        </div>
-                        <div>
                             <?php
                             if ($adminData['staff_role'] == "head admin") {
                             ?>
