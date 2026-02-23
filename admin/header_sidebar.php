@@ -227,10 +227,10 @@
                             alt="Profile Picture" class="rounded-circle" width="27.5">
                         <span
                             class="d-none d-md-grid ms-2 admin-header-profile-picture-text ps-1">
-                            <span style="font-size: 15px;text-transform: uppercase; font-weight: bolder;">
+                            <span style="font-size: 15px;text-transform: capitalize; font-weight: bolder;">
                                 <?php echo htmlspecialchars($adminData["fullname"] ?? 'Admin'); ?>
                             </span>
-                            <span class="text-primary" style="font-size: 10px;font-weight: bolder;">
+                            <span class="text-primary text-end" style="font-size: 10px;font-weight: bolder;">
                                 <?php echo strtoupper(htmlspecialchars($adminData["staff_role"])) ?>
                             </span>
                         </span>
