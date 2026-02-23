@@ -736,7 +736,6 @@ try {
       </div>
     </section>
   </main>
-  <?php include "footer.php" ?>
   <script>
     // Prevent right-click context menu
     document.addEventListener('contextmenu', function(e) {
