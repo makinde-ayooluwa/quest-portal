@@ -4,6 +4,8 @@ include "admin_includes/autoloader.inc.php";
 include "admin_includes/db.inc.php";
 include "admin_includes/admin.inc.php";
 include "admin_includes/email_utils.php";
+
+
 $id = $_GET["id"];
 
 $dbData = $admin->getSpecificStudent($pdo, $id);
@@ -16,7 +18,8 @@ $emailSent = $emailUtils->sendStudentSetupEmail(
 );
 $query = "SELECT * FROM sent_emails WHERE admission_number = :admission_number";
 $stmt = $pdo->prepare($query);
-$stmt->execute([$dbData["admission_number"]]);
+$stmt->bindParam(":admission_number", $dbData["admission_number"]);
+$stmt->execute();
 if (!$stmt->fetchAll(PDO::FETCH_ASSOC) > 0) {
     if ($emailSent) {
         $_SESSION["success"] = "Setup email sent successfully";

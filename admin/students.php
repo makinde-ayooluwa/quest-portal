@@ -412,7 +412,7 @@ $classes = $admin->getClasses($pdo);
 
                                     <a href="send_mail.php?id=${student.id}"
                                     class="btn btn-sm btn-outline-danger p-1">
-                                        <i class="bi bi-envelope"></i>
+                                        <span>Send Setup Mail</span>
                                     </a>
                                 </td>
                             </tr>
