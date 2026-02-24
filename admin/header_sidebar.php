@@ -218,11 +218,11 @@
             <div id="searchResults" class="search-results position-absolute bg-white border rounded shadow-sm"
                 style="display: none; z-index: 1050; max-height: 300px; overflow-y: auto; width: 100%;"></div>
         </div>
-        <ul class="nav-links d-none d-md-flex">
+        <ul class="nav-links d-none d-md-flex align-items-center">
             <li><i class="bi bi-envelope mx-4"></i><?php echo $adminData["email"] ?></li>
             <li class="nav-item">
                 <a href="profile.php">
-                    <div class="d-grid" style="grid-template-columns: 10% 90%;">
+                    <div class="d-grid align-items-center" style="grid-template-columns: 10% 90%;">
                         <img src="<?php echo htmlspecialchars($adminData["picture"] ?? 'assets/images/quest.jpg'); ?>"
                             alt="Profile Picture" class="rounded-circle" width="27.5">
                         <span
