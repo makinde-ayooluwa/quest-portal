@@ -35,6 +35,15 @@ class Admin
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getSpecificStudent($pdo, $id)
+    {
+        $query = "SELECT * FROM students WHERE id = :id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":id",$id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getStudentsInOrder($pdo, $order, $mode)
     {
         $query = "SELECT * FROM students ORDER BY $order $mode";

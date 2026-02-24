@@ -410,18 +410,10 @@ $classes = $admin->getClasses($pdo);
                                         <i class="bi bi-eye"></i>
                                     </a>
 
-                                    <!--<button type="button"
-                                            class="btn btn-sm btn-outline-success p-1 me-1 promote-btn"
-                                            data-id="${student.id}">
-                                        <i class="bi bi-arrow-up-circle"></i>
-                                    </button>-->
-
-                                    <!--<button type="button"
-                                    class="btn btn-sm btn-outline-danger p-1"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#modal_${student.id}">
-                                        <i class="bi bi-trash"></i>
-                                    </button>-->
+                                    <a href="send_mail.php?id=${student.id}"
+                                    class="btn btn-sm btn-outline-danger p-1">
+                                        <i class="bi bi-envelope"></i>
+                                    </a>
                                 </td>
                             </tr>
 
