@@ -5,12 +5,13 @@ require_once 'student_includes/db.inc.php';
 
 include "student_includes/student.inc.php";
 
-// Google Sheet Configuration - Using your spreadsheet ID
+// Google Sheet Configuration - Using export format
 // File → Share → Publish to web → Entire document → Comma-separated values (.csv)
-define('GOOGLE_SHEETS_CSV_URL', 'https://docs.google.com/spreadsheets/d/e/17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o/Primary One/pub?output=csv');
+define('GOOGLE_SHEETS_CSV_URL', 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQhnc2GxWB6dsOPZmYOGlW0L-CMVmcZU7LXe_Myw1O2jW_LtB5kvjk7oqikcvyui7PsribzDKGNIXoU/pub?gid=1394646375&single=true&output=csv');
 
 /**
  * Fetch and parse Google Sheets data as CSV
+ * Returns raw lines to preserve structure for custom parsing
  */
 function fetchGoogleSheetData($sheetUrl) {
     $context = stream_context_create([
@@ -23,52 +24,91 @@ function fetchGoogleSheetData($sheetUrl) {
     $csvData = @file_get_contents($sheetUrl, false, $context);
     
     if ($csvData === false) {
-        return [];
+        return ['headers' => [], 'data' => [], 'raw' => []];
+    }
+    
+    // Remove BOM if present
+    if (substr($csvData, 0, 3) === "\xEF\xBB\xBF") {
+        $csvData = substr($csvData, 3);
     }
     
     $lines = explode("\n", trim($csvData));
-    $data = [];
     
-    foreach ($lines as $lineIndex => $line) {
-        if ($lineIndex === 0) continue; // Skip header row
-        $row = str_getcsv($line);
-        if (!empty($row[0])) {
-            $data[] = $row;
-        }
-    }
-    
-    return $data;
+    return ['headers' => [], 'data' => [], 'raw' => $lines];
 }
 
 /**
- * Get results for a specific student by name
+ * Parse the specific multi-row header format and extract student results
+ * CSV Structure:
+ * Row 0: Subjects,,Maths,,,,English,,,
+ * Row 1: Names,,1st,2nd,Exam,Total,1st,2nd,Exam,Total
+ * Row 2+: Student data like: Makinde Ayooluwa,,10,45,1065,30,30,36,42,48
  */
 function getStudentResultsFromSheet($sheetUrl, $studentName) {
-    $allData = fetchGoogleSheetData($sheetUrl);
-    $results = [];
+    $sheetData = fetchGoogleSheetData($sheetUrl);
+    $rawLines = $sheetData['raw'];
     
-    // Normalize student name for comparison
-    $searchName = strtolower(trim($studentName));
+    if (empty($rawLines)) {
+        return ['headers' => [], 'results' => []];
+    }
     
-    foreach ($allData as $row) {
-        // Assuming column 0 is the student name - adjust index as needed
-        $rowName = strtolower(trim($row[0] ?? ''));
-        
-        // Check if student name matches (partial match)
-        if (strpos($rowName, $searchName) !== false || $searchName === $rowName) {
-            $results[] = [
-                'name' => $row[0] ?? '',
-                'term' => $row[1] ?? '',
-                'subject' => $row[2] ?? '',
-                'score' => $row[3] ?? '',
-                'grade' => $row[4] ?? '',
-                'remarks' => $row[5] ?? '',
-                'teacher' => $row[6] ?? ''
-            ];
+    // Parse header rows to get subjects and assessment types
+    $subjects = [];
+    $assessments = [];
+    
+    // First line has subjects
+    $headerLine1 = str_getcsv($rawLines[0] ?? '');
+    // Second line has assessment types
+    $headerLine2 = str_getcsv($rawLines[1] ?? '');
+    
+    // Extract subjects from header line 1
+    $currentSubject = '';
+    for ($i = 0; $i < count($headerLine1); $i++) {
+        $cell = trim($headerLine1[$i] ?? '');
+        if (!empty($cell) && strtolower($cell) !== 'subjects' && strtolower($cell) !== 'names') {
+            $currentSubject = $cell;
+        }
+        if (!empty($currentSubject) && $i >= 2) {
+            $subjects[$i] = $currentSubject;
+            $assessments[$i] = isset($headerLine2[$i]) ? trim($headerLine2[$i]) : '';
         }
     }
     
-    return $results;
+    // Find student by name in data rows (starting from row 2)
+    $searchName = strtolower(trim($studentName));
+    $results = [];
+    
+    for ($i = 2; $i < count($rawLines); $i++) {
+        $row = str_getcsv($rawLines[$i]);
+        
+        if (empty($row[0])) continue;
+        
+        $rowName = strtolower(trim($row[0]));
+        
+        // Check if student name matches (partial match)
+        if (strpos($rowName, $searchName) !== false || $searchName === $rowName) {
+            $result = [];
+            $result['name'] = trim($row[0] ?? '');
+            
+            // Add each assessment score from the CSV columns
+            for ($col = 2; $col < count($row); $col++) {
+                $subject = $subjects[$col] ?? 'Unknown';
+                $assessment = $assessments[$col] ?? '';
+                $key = $subject . '_' . $assessment;
+                $result[$key] = trim($row[$col] ?? '');
+            }
+            
+            $results[] = $result;
+            break;
+        }
+    }
+    
+    // Build header structure for display
+    $headerStructure = [];
+    $headerStructure['subjects'] = array_values(array_unique($subjects));
+    $headerStructure['assessments'] = array_values(array_unique(array_filter($assessments)));
+    
+    return ['headers' => $headerStructure, 'results' => $results];
 }
 
 // Fetch results from database (original method)
@@ -84,18 +124,18 @@ function fetchResultsFromDB($pdo, $studentData)
 // Get student's full name from database
 $studentFullName = $studentData['fullname'] ?? '';
 
-// Try to fetch from Google Sheet (if URL is configured)
-$googleSheetResults = [];
-if (defined('GOOGLE_SHEETS_CSV_URL') && GOOGLE_SHEETS_CSV_URL !== '' && strpos(GOOGLE_SHEETS_CSV_URL, 'YOUR_PUBLISHED_SHEET_ID') === false) {
-    $googleSheetResults = getStudentResultsFromSheet(GOOGLE_SHEETS_CSV_URL, $studentFullName);
+// Try to fetch from Google Sheet
+$sheetData = ['headers' => [], 'results' => []];
+if (defined('GOOGLE_SHEETS_CSV_URL') && GOOGLE_SHEETS_CSV_URL !== '') {
+    $sheetData = getStudentResultsFromSheet(GOOGLE_SHEETS_CSV_URL, $studentFullName);
 }
 
 // Also fetch from database as fallback
 $dbResults = fetchResultsFromDB($pdo, $studentData);
 
-// Combine results (Google Sheet takes priority)
-$studentResult = $dbResults;
-$hasGoogleSheetData = !empty($googleSheetResults);
+// Determine what to display
+$hasGoogleSheetData = !empty($sheetData['results']);
+$hasDbResults = !empty($dbResults);
 ?>
 
 <!DOCTYPE html>
@@ -214,45 +254,50 @@ $hasGoogleSheetData = !empty($googleSheetResults);
                     <small class="text-muted">View all your uploaded results</small>
                 </div>
 
-                <?php if (empty($studentResult) && empty($googleSheetResults)): ?>
+                <?php if (!$hasGoogleSheetData && !$hasDbResults): ?>
                     <div class="no-results">
                         <i class="bi bi-file-earmark-x"></i>
                         <h4>No Results Found</h4>
                         <p>Your academic results will appear here once they are uploaded by your administrators.</p>
                     </div>
                 <?php else: ?>
-                    <!-- Display Google Sheet Results (Table Format) -->
+                    
+                    <!-- Display Google Sheet Results (Table Format matching CSV structure) -->
                     <?php if ($hasGoogleSheetData): ?>
+                        <?php 
+                        $subjects = $sheetData['headers']['subjects'] ?? [];
+                        $assessments = $sheetData['headers']['assessments'] ?? [];
+                        $studentResult = $sheetData['results'][0] ?? [];
+                        ?>
                         <div class="result-card mb-4">
                             <div class="result-header">
                                 <h5 class="mb-0">
                                     <i class="bi bi-table me-2"></i>
-                                    Academic Results from Google Sheets
+                                    Academic Results
                                 </h5>
                                 <small>Student: <?php echo htmlspecialchars($studentFullName); ?></small>
                             </div>
                             <div class="p-3">
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-bordered">
-                                        <thead class="table-light">
+                                    <table class="table table-bordered">
+                                        <thead>
                                             <tr>
-                                                <th>Term</th>
                                                 <th>Subject</th>
-                                                <th>Score</th>
-                                                <th>Grade</th>
-                                                <th>Remarks</th>
-                                                <th>Teacher</th>
+                                                <?php foreach ($assessments as $assessment): ?>
+                                                    <th><?php echo htmlspecialchars($assessment); ?></th>
+                                                <?php endforeach; ?>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($googleSheetResults as $sheetResult): ?>
+                                            <?php foreach ($subjects as $subject): ?>
                                                 <tr>
-                                                    <td><?php echo htmlspecialchars($sheetResult['term']); ?></td>
-                                                    <td><?php echo htmlspecialchars($sheetResult['subject']); ?></td>
-                                                    <td><?php echo htmlspecialchars($sheetResult['score']); ?></td>
-                                                    <td><?php echo htmlspecialchars($sheetResult['grade']); ?></td>
-                                                    <td><?php echo htmlspecialchars($sheetResult['remarks']); ?></td>
-                                                    <td><?php echo htmlspecialchars($sheetResult['teacher']); ?></td>
+                                                    <td><strong><?php echo htmlspecialchars($subject); ?></strong></td>
+                                                    <?php foreach ($assessments as $assessment): 
+                                                        $key = $subject . '_' . $assessment;
+                                                        $value = $studentResult[$key] ?? '-';
+                                                    ?>
+                                                        <td><?php echo htmlspecialchars($value); ?></td>
+                                                    <?php endforeach; ?>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -263,9 +308,9 @@ $hasGoogleSheetData = !empty($googleSheetResults);
                     <?php endif; ?>
 
                     <!-- Display Database Results (Iframe Format) -->
-                    <?php if (!empty($studentResult)): ?>
+                    <?php if ($hasDbResults): ?>
                         <div class="row">
-                            <?php foreach ($studentResult as $result): ?>
+                            <?php foreach ($dbResults as $result): ?>
                                 <div class="col-12">
                                     <div class="result-card">
                                         <div class="result-header">
