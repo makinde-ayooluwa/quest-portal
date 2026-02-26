@@ -162,7 +162,7 @@ $hasDbResults = !empty($dbResults);
             border-radius: 12px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
             margin-bottom: 1.5rem;
-            overflow: hidden;
+            overflow-x: scroll;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -246,9 +246,10 @@ $hasDbResults = !empty($dbResults);
     <?php include "header.php"; ?>
     <?php include "sidebar.php"; ?>
 
-    <div class="container-fluid px-2 px-md-4 py-4 main-content">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0"><i class="bi bi-file-earmark-text me-2"></i>My Academic Results</h1>
                     <small class="text-muted">View all your uploaded results</small>
@@ -277,7 +278,7 @@ $hasDbResults = !empty($dbResults);
                                 </h5>
                                 <small>Student: <?php echo htmlspecialchars($studentFullName); ?></small>
                             </div>
-                            <div class="p-3">
+                            <div class="">
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <thead>
