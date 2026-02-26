@@ -44,11 +44,10 @@ function fetchGoogleSheetData($sheetUrl) {
 }
 
 /**
- * Parse the specific multi-row header format and extract student results
- * CSV Structure:
- * Row 0: Subjects,,Maths,,,,English,,,
- * Row 1: Names,,1st,2nd,Exam,Total,1st,2nd,Exam,Total
- * Row 2+: Student data like: Makinde Ayooluwa,,10,45,1065,30,30,36,42,48
+ * Parse CSV with flexible header format
+ * Supports both:
+ * 1. Multi-row format: Row 0=Subjects, Row 1=Names/Assessments
+ * 2. Simple format: Headers like name, subject, score, etc.
  */
 function getStudentResultsFromSheet($sheetUrl, $studentName) {
     $sheetData = fetchGoogleSheetData($sheetUrl);
@@ -58,14 +57,72 @@ function getStudentResultsFromSheet($sheetUrl, $studentName) {
         return ['headers' => [], 'results' => []];
     }
     
-    // Parse header rows to get subjects and assessment types
+    // Parse header row(s)
+    $headerLine1 = str_getcsv($rawLines[0] ?? '');
+    $headerLine2 = isset($rawLines[1]) ? str_getcsv($rawLines[1]) : [];
+    
+    // Check if it's a simple format (name, subject, score columns)
+    $simpleFormat = false;
+    $nameColIndex = -1;
+    $subjectColIndex = -1;
+    $scoreColIndex = -1;
+    
+    // Look for "name" and "subject" in headers (case insensitive)
+    foreach ($headerLine1 as $index => $header) {
+        $headerLower = strtolower(trim($header));
+        if ($headerLower === 'name' || $headerLower === 'names' || $headerLower === 'student name' || $headerLower === 'student') {
+            $nameColIndex = $index;
+        }
+        if ($headerLower === 'subject' || $headerLower === 'subjects') {
+            $subjectColIndex = $index;
+        }
+        if ($headerLower === 'score' || $headerLower === 'scores' || $headerLower === 'mark' || $headerLower === 'marks' || $headerLower === 'result') {
+            $scoreColIndex = $index;
+        }
+    }
+    
+    // If we found name + subject columns, it's simple format
+    if ($nameColIndex >= 0 && $subjectColIndex >= 0) {
+        $simpleFormat = true;
+    }
+    
+    // Handle simple format: name, subject, score
+    if ($simpleFormat && $scoreColIndex >= 0) {
+        $results = [];
+        
+        // Find student by name in data rows
+        $searchName = strtolower(trim($studentName));
+        
+        for ($i = 1; $i < count($rawLines); $i++) {
+            $row = str_getcsv($rawLines[$i]);
+            
+            if (empty($row[$nameColIndex])) continue;
+            
+            $rowName = strtolower(trim($row[$nameColIndex]));
+            
+            // Check if student name matches (partial match)
+            if (strpos($rowName, $searchName) !== false || $searchName === $rowName) {
+                $result = [];
+                $result['name'] = trim($row[$nameColIndex] ?? '');
+                $subject = trim($row[$subjectColIndex] ?? 'Unknown');
+                $score = trim($row[$scoreColIndex] ?? '');
+                $result[$subject . '_score'] = $score;
+                
+                $results[] = $result;
+            }
+        }
+        
+        // Build header structure for simple format
+        $headerStructure = [];
+        $headerStructure['subjects'] = ['Score'];
+        $headerStructure['assessments'] = ['Score'];
+        
+        return ['headers' => $headerStructure, 'results' => $results];
+    }
+    
+    // Original multi-row format parsing
     $subjects = [];
     $assessments = [];
-    
-    // First line has subjects
-    $headerLine1 = str_getcsv($rawLines[0] ?? '');
-    // Second line has assessment types
-    $headerLine2 = str_getcsv($rawLines[1] ?? '');
     
     // Extract subjects from header line 1
     $currentSubject = '';
