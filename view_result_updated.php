@@ -10,7 +10,6 @@ include "student_includes/student.inc.php";
 // Add more CSV URLs as needed (each URL represents a different sheet/term)
 define('GOOGLE_SHEETS_CSV_URLS', [
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS3QijuC2RMrWqFWOKR8QWGpuqDkfpYuHTdCYLcjpD0Bx04bgq5rKaldUd-QXnPcA/pub?gid=1035578848&single=true&output=csv',
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRKR6dapkGMWTywaDgES1REry4ZJbjf8xY9Wq4AMA6nZ2zfsU6MmDS-MdANqk4GKA/pub?gid=1966355600&single=true&output=csv'
     // Add more URLs here, for example:
     // 'https://docs.google.com/spreadsheets/d/e/2PACX-1vXXXXX/pub?gid=XXXXX&single=true&output=csv',
 ]);

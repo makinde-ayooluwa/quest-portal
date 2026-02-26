@@ -1,17 +1,16 @@
-# TODO: Admin Results Management System
+# TODO - Convert CSV URL to Array
 
-## Tasks
-- [x] Update HTML structure to centered card-based design similar to add_student.php
-- [x] Improve student selection UI with better styling, loading states, and visual feedback
-- [x] Enhance form styling with labels, placeholders, and validation hints
-- [x] Add responsiveness and accessibility improvements
-- [x] Ensure all input names remain unchanged for backend compatibility
-- [x] Test functionality and responsiveness
+## Task: Make the CSV URL an array to allow multiple Google Sheets to be fetched for student results
 
-## New Tasks: Results Management
-- [x] Add CRUD methods to admin.class.php (getAllResults, updateResult, deleteResult)
-- [x] Create admin/manage_results.php with table display, edit/delete modals
-- [x] Create update_result_handler.php for handling result updates
-- [x] Create delete_result_handler.php for handling result deletions
-- [x] Update admin/header_sidebar.php to add "Manage Results" navigation link
-- [x] Test CRUD operations and responsive design
+### Steps:
+- [x] 1. Analyze the current code in view_result.php
+- [ ] 2. Convert the single GOOGLE_SHEETS_CSV_URL constant to an array GOOGLE_SHEETS_CSV_URLS
+- [ ] 3. Modify the code to iterate through all URLs and fetch results for each student
+- [ ] 4. Merge/combine results from all sheets
+- [ ] 5. Update the display logic to show results from all sheets
+
+### Implementation Details:
+- Replace single URL constant with array of URLs
+- Update getStudentResultsFromSheet to handle multiple sheets
+- Aggregate results from all sheets
+- Display combined results in the view
