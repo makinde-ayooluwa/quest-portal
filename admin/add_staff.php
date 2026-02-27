@@ -183,8 +183,6 @@ unset($_SESSION['success']);
                 </form>
             </div>
         </div>
-
-        <?php include "footer.php" ?>
     </main>
 
     <script src="bootstrap5/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>

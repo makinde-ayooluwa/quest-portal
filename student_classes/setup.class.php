@@ -32,7 +32,7 @@ class Setup
             picture = :picture, phone = :phone, home_address = :home_address,
             father_name = :father_name, father_email = :father_email, father_phone = :father_phone,
             mother_name = :mother_name, mother_email = :mother_email, mother_phone = :mother_phone,
-            pwd = :pwd, account_verification = 'Verified' WHERE admission_number = :admission_number AND email = :email;";
+            pwd = :pwd, account_verification = 'Verified' WHERE admission_number = :admission_number;";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(":dob", $data["dob"]);
             $stmt->bindParam(":gender", $data["gender"]);

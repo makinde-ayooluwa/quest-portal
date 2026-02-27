@@ -70,7 +70,7 @@ if (isset($_SESSION['user'])) {
     </style>
 </head>
 
-<body class="bg-green">
+<body class="">
     <!--<div class="preloader">
         <div class="loader"></div>
     </div>
@@ -106,7 +106,7 @@ if (isset($_SESSION['user'])) {
     }
     ?>
     <div id="main-content" class="justify-content-center align-items-center">
-        <div class="container form-container">
+        <div class="container form-container shadow-lg">
             <div class="d-flex justify-content-center">
                 <img src="assets/images/quest.jpg" width="50" alt="">
             </div>

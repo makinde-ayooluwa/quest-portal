@@ -161,7 +161,7 @@ try {
     </style>
 </head>
 
-<body class="bg-green">
+<body class="">
     <!--<nav class="px-3 py-0 navbar navbar-expand border-bottom">
         <a href="./" class="navbar-brand">
             <img width="50" src="assets/images/quest.jpg" alt="">
@@ -186,116 +186,6 @@ try {
         echo "";
     }
     ?>
-    <!--<div class="container shadow-sm form-container card">
-        <div class="d-flex justify-content-center">
-            <img width="50" src="assets/images/quest.jpg" alt="">
-        </div>
-        <div class="py-2">
-            <h3 class="fs-3 fw-bolder text-center">Quest Portal</h3>
-            <p class="fs-6 text-center fw-bold text-success">Access your portal securely</p>
-            <div class="py-3">
-                <form action="./login_handler.inc.php" method="post">
-                    <div class="mb-3">
-                        <label for="email" class="mb-2 form-label">Email</label>
-                        <input type="email" placeholder="Email address" id="email" name="email" class="form-control form-control-lg">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="mb-2 form-label">Password</label>
-                        <div class="input-group">
-                            <input type="password" placeholder="Password" id="password" name="password" class="form-control form-control-lg">
-                            <button class="text-success fs-5 password-toggle input-group-text" type="button" id="passwordToggle"><i class="bi bi-eye"></i></button>
-                        </div>
-                        <script>
-                            const password = document.querySelector("#password");
-                            const passwordToggle = document.querySelector("#passwordToggle");
-                            passwordToggle.addEventListener("click", function() {
-                                if (password.type == "password") {
-                                    password.type = "text";
-                                    passwordToggle.innerHTML = "<i class='bi bi-eye-slash'></i>";
-                                } else {
-                                    password.type = "password";
-                                    passwordToggle.innerHTML = "<i class='bi bi-eye'></i>";
-                                }
-                            })
-                        </script>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <div class="pb-3">
-                            <a href="login.php" class="text-decoration-none text-green">Forgot password?</a>
-                        </div>
-                    </div>
-                    <style>
-                        .submit-btn {
-                            position: relative;
-                            background: var(--quest-green);
-                            color: white;
-                            font-weight: bold;
-                            bottom: 0px;
-                            border: none;
-                            padding: 10px;
-                            font-size: 1.1rem;
-                            border-radius: 5px;
-                            transition: all 0.4s ease;
-                            display: flex;
-                            justify-content: center;
-                        }
-
-                        .submit-btn:disabled {
-                            background: #525151ff;
-                        }
-
-                        .submit-btn:disabled:hover {
-                            bottom: 0px;
-                            box-shadow: none;
-                            background: #525151ff;
-                            color: white;
-                        }
-
-                        .submit-btn:hover {
-                            bottom: 3px;
-                            box-shadow: 0px 5px 5px 0px #5aac7b96;
-                            background: var(--quest-yellow);
-                            color: white;
-                        }
-
-                        .spinner {
-                            margin-right: 10px;
-                            width: 30px;
-                            height: 30px;
-                            border-radius: 50%;
-                            border: 5px solid transparent;
-                            border-top-color: #0c00adff;
-                            background: transparent;
-                            animation: spin 0.75s linear infinite;
-                        }
-
-                        @keyframes spin {
-                            to {
-                                transform: rotate(360deg)
-                            }
-                        }
-                    </style>
-                    <button type="submit" onclick="load(this)" class="submit-btn form-control">Login</button>
-                    <script>
-                        const form = document.querySelector('form');
-                        const emailInput = form.querySelector("#email");
-                        const pwdInput = form.querySelector("#password");
-                        const btn = form.querySelector(".submit-btn");
-                        form.addEventListener("submit", function(e) {
-                            if (emailInput.value == "" || pwdInput.value == "") {} else {
-                                e.preventDefault();
-                                btn.innerHTML = "<div class='spinner'></div> Logging in...";
-                                btn.setAttribute("disabled", true);
-                                setTimeout(() => {
-                                    form.submit();
-                                }, 2000);
-                            }
-                        })
-                    </script>
-                </form>
-            </div>
-        </div>
-    </div>-->
     <style>
         .logo-header {
             display: grid;
@@ -331,7 +221,7 @@ try {
     <div class="real-header">
         <img src="assets/images/quest.jpg" alt="Quest Portal Logo" style="width: 80px; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
     </div>
-    <div class="container form-container card rounded-3">
+    <div class="container form-container card shadow-lg rounded-3">
         <div class="my-2">
             <div class="logo-header">
                 <span class="header">

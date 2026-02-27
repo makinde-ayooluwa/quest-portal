@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_SESSION['student']) || isset($_SESSION['teacher']) || isset($_SESSION['admin'])) {
+if (isset($_SESSION['student'])) {
     header('Location: ./');
     exit();
 }
@@ -48,7 +48,7 @@ if (empty($token) || empty($user_type)) {
     </style>
 </head>
 
-<body class="bg-green">
+<body class="">
     <?php
     if (isset($_SESSION['error'])) {
     ?>
@@ -69,7 +69,7 @@ if (empty($token) || empty($user_type)) {
     }
     ?>
     <div class="justify-content-center align-items-center">
-        <div class="container form-container">
+        <div class="container form-container shadow-lg">
             <div class="d-flex justify-content-center">
                 <img src="assets/images/quest.jpg" width="50" alt="">
             </div>

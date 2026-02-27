@@ -474,14 +474,30 @@ try {
                                 <i class="fas fa-id-card"></i>
                                 Admission number / ID
                             </label>
-                            <input readonly class="form-control" placeholder="Admission number" value="<?php echo isset($_GET["admission_number"]) ? $_GET["admission_number"] : "" ?>" id="admission_number" name="admission_number">
+                            <input <?php if (!empty($result["admission_number"])) {
+                                    ?>
+                                readonly
+                                <?php
+                                    } else {
+                                ?>
+                                text
+                                <?php
+                                    }  ?> class="form-control" placeholder="Admission number" value="<?php echo isset($_GET["admission_number"]) ? $_GET["admission_number"] : "" ?>" id="admission_number" name="admission_number">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">
                                 <i class="fas fa-envelope"></i>
                                 Email
                             </label>
-                            <input readonly class="form-control" placeholder="Email address" value="<?php echo $result["email"] ?>" id="email" name="email">
+                            <input <?php if(!empty($result["email"])) {
+                                    ?>
+                                readonly
+                                <?php
+                                    } else {
+                                ?>
+                                text
+                                <?php
+                                    }  ?> class="form-control" placeholder="Email address" value="<?php echo $result["email"] ?>" id="email" name="email">
                         </div>
                         <div class="mb-3">
                             <label for="fullname" class="form-label">
