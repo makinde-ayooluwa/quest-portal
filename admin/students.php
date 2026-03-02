@@ -410,10 +410,10 @@ $classes = $admin->getClasses($pdo);
                                         <i class="bi bi-eye"></i>
                                     </a>
 
-                                    <a onclick="this.innerHTML = '<span>Sending...</span>'; this.setAttribute('disabled','')" href="send_mail.php?id=${student.id}"
+                                    <!--<a onclick="this.innerHTML = '<span>Sending...</span>'; this.setAttribute('disabled','')" href="send_mail.php?id=${student.id}"
                                     class="btn btn-sm btn-outline-danger p-1">
                                         <span>Send Setup Mail</span>
-                                    </a>
+                                    </a>-->
                                 </td>
                             </tr>
 
