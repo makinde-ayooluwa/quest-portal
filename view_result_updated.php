@@ -18,27 +18,28 @@ define('GOOGLE_SHEETS_CSV_URLS', [
  * Fetch and parse Google Sheets data as CSV
  * Returns raw lines to preserve structure for custom parsing
  */
-function fetchGoogleSheetData($sheetUrl) {
+function fetchGoogleSheetData($sheetUrl)
+{
     $context = stream_context_create([
         'http' => [
             'timeout' => 30,
             'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         ]
     ]);
-    
+
     $csvData = @file_get_contents($sheetUrl, false, $context);
-    
+
     if ($csvData === false) {
         return ['headers' => [], 'data' => [], 'raw' => []];
     }
-    
+
     // Remove BOM if present
     if (substr($csvData, 0, 3) === "\xEF\xBB\xBF") {
         $csvData = substr($csvData, 3);
     }
-    
+
     $lines = explode("\n", trim($csvData));
-    
+
     return ['headers' => [], 'data' => [], 'raw' => $lines];
 }
 
@@ -49,23 +50,24 @@ function fetchGoogleSheetData($sheetUrl) {
  * Row 1: Names,,1st,2nd,Exam,Total,1st,2nd,Exam,Total
  * Row 2+: Student data like: Makinde Ayooluwa,,10,45,1065,30,30,36,42,48
  */
-function getStudentResultsFromSheet($sheetUrl, $studentName) {
+function getStudentResultsFromSheet($sheetUrl, $studentName)
+{
     $sheetData = fetchGoogleSheetData($sheetUrl);
     $rawLines = $sheetData['raw'];
-    
+
     if (empty($rawLines)) {
         return ['headers' => [], 'results' => []];
     }
-    
+
     // Parse header rows to get subjects and assessment types
     $subjects = [];
     $assessments = [];
-    
+
     // First line has subjects
     $headerLine1 = str_getcsv($rawLines[0] ?? '');
     // Second line has assessment types
     $headerLine2 = str_getcsv($rawLines[1] ?? '');
-    
+
     // Extract subjects from header line 1
     $currentSubject = '';
     for ($i = 0; $i < count($headerLine1); $i++) {
@@ -78,23 +80,23 @@ function getStudentResultsFromSheet($sheetUrl, $studentName) {
             $assessments[$i] = isset($headerLine2[$i]) ? trim($headerLine2[$i]) : '';
         }
     }
-    
+
     // Find student by name in data rows (starting from row 2)
     $searchName = strtolower(trim($studentName));
     $results = [];
-    
+
     for ($i = 2; $i < count($rawLines); $i++) {
         $row = str_getcsv($rawLines[$i]);
-        
+
         if (empty($row[0])) continue;
-        
+
         $rowName = strtolower(trim($row[0]));
-        
+
         // Check if student name matches (partial match)
         if (strpos($rowName, $searchName) !== false || $searchName === $rowName) {
             $result = [];
             $result['name'] = trim($row[0] ?? '');
-            
+
             // Add each assessment score from the CSV columns
             for ($col = 2; $col < count($row); $col++) {
                 $subject = $subjects[$col] ?? 'Unknown';
@@ -102,17 +104,17 @@ function getStudentResultsFromSheet($sheetUrl, $studentName) {
                 $key = $subject . '_' . $assessment;
                 $result[$key] = trim($row[$col] ?? '');
             }
-            
+
             $results[] = $result;
             break;
         }
     }
-    
+
     // Build header structure for display
     $headerStructure = [];
     $headerStructure['subjects'] = array_values(array_unique($subjects));
     $headerStructure['assessments'] = array_values(array_unique(array_filter($assessments)));
-    
+
     return ['headers' => $headerStructure, 'results' => $results];
 }
 
@@ -135,17 +137,17 @@ if (defined('GOOGLE_SHEETS_CSV_URLS') && is_array(GOOGLE_SHEETS_CSV_URLS) && !em
     $allResults = [];
     $allSubjects = [];
     $allAssessments = [];
-    
+
     // Iterate through all CSV URLs and fetch results
     foreach (GOOGLE_SHEETS_CSV_URLS as $csvUrl) {
         if (!empty($csvUrl)) {
             $result = getStudentResultsFromSheet($csvUrl, $studentFullName);
-            
+
             // Merge results from each sheet
             if (!empty($result['results'])) {
                 $allResults = array_merge($allResults, $result['results']);
             }
-            
+
             // Merge subjects and assessments
             if (!empty($result['headers']['subjects'])) {
                 $allSubjects = array_merge($allSubjects, $result['headers']['subjects']);
@@ -155,7 +157,7 @@ if (defined('GOOGLE_SHEETS_CSV_URLS') && is_array(GOOGLE_SHEETS_CSV_URLS) && !em
             }
         }
     }
-    
+
     // Build final sheet data structure
     $sheetData = [
         'headers' => [
@@ -298,10 +300,10 @@ $hasDbResults = !empty($dbResults);
                         <p>Your academic results will appear here once they are uploaded by your administrators.</p>
                     </div>
                 <?php else: ?>
-                    
+
                     <!-- Display Google Sheet Results (Table Format matching CSV structure) -->
                     <?php if ($hasGoogleSheetData): ?>
-                        <?php 
+                        <?php
                         $subjects = $sheetData['headers']['subjects'] ?? [];
                         $assessments = $sheetData['headers']['assessments'] ?? [];
                         $studentResult = $sheetData['results'][0] ?? [];
@@ -329,7 +331,7 @@ $hasDbResults = !empty($dbResults);
                                             <?php foreach ($subjects as $subject): ?>
                                                 <tr>
                                                     <td><strong><?php echo htmlspecialchars($subject); ?></strong></td>
-                                                    <?php foreach ($assessments as $assessment): 
+                                                    <?php foreach ($assessments as $assessment):
                                                         $key = $subject . '_' . $assessment;
                                                         $value = $studentResult[$key] ?? '-';
                                                     ?>
