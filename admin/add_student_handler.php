@@ -18,13 +18,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'class' => $class
     ];
 
-    if (empty($fullname) ||empty($email) || empty($admission_number) || empty($class)) {
+    if (empty($fullname) || empty($email) || empty($admission_number) || empty($class)) {
         unset($_SESSION["success"]);
         $_SESSION["error"] = "Fill out all required fields";
         header("Location: add_student.php");
     } else {
         if (!$admin->addStudent($pdo, $studentData)) {
             unset($_SESSION["success"]);
+            $emailUtils = new EmailUtils();
+            $emailSent = $emailUtils->sendStudentSetupEmail(
+                $studentData['email'],
+                $studentData['fullname'],
+                $studentData['admission_number']
+            );
             $_SESSION["error"] = "Error occured while adding student. Student may exist before";
             header("Location: add_student.php");
         } else {
