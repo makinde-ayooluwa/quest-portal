@@ -10,7 +10,7 @@ $id = $_GET["id"];
 
 $dbData = $admin->getSpecificStudent($pdo, $id);
 
-$emailUtils = new EmailUtils();
+$emailUtils = new EmailUtils($host);
 $emailSent = $emailUtils->sendStudentSetupEmail(
     $dbData['email'],
     $dbData['fullname'],

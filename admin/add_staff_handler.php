@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     } else {
         // Send setup email to staff
-        $emailUtils = new EmailUtils();
+        $emailUtils = new EmailUtils($host);
         $emailSent = $emailUtils->sendStaffSetupEmail(
             $email,
             $fullname,

@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Database connection
-    $conn = new mysqli("localhost", "root", "", "questportal");
+    $conn = new mysqli("$host", "root", "", "questportal");
     if ($conn->connect_error) {
         $_SESSION['error'] = "Database connection failed.";
         header('Location: reset_password.php?token=' . urlencode($token) . '&type=' . urlencode($user_type));

@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             "class" => $data["class"]
         ])) {
             try {
-                $emailUtils = new EmailUtils();
+                $emailUtils = new EmailUtils($host);
                 $emailUtils->sendStudentSetupEmail($data['email'], $data['fullname'], $admission);
                 $result['status'] = "success";
                 $result['message'] = "Email sent successfully";

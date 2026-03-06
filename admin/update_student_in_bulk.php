@@ -19,7 +19,7 @@ switch ($requestMethod) {
         $success = [];
         $failed  = [];
 
-        $emailUtils = new EmailUtils(); // create once
+        $emailUtils = new EmailUtils($host); // create once
 
         foreach ($studentsFromSheet as $student) {
 

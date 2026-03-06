@@ -5,14 +5,15 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 require_once '../vendor/autoload.php';
-
 class EmailUtils
 {
     private $mail;
+    private $host;
 
-    public function __construct()
+    public function __construct($host)
     {
         $this->mail = new PHPMailer(true);
+        $this->host = $host;
         
         // SMTP configuration
         $this->mail->isSMTP();
@@ -32,7 +33,7 @@ class EmailUtils
             $this->mail->addAddress($email);
 
             $this->mail->Subject = "Password Reset Request - Quest Portal Admin";
-            $reset_link = "http://localhost/quest-portal/admin/reset_password.php?token=" . $token . "&type=" . $user_type;
+            $reset_link = "http://$this->host/quest-portal/admin/reset_password.php?token=" . $token . "&type=" . $user_type;
             $this->mail->Body = "
                 <h2>Password Reset Request</h2>
                 <p>You have requested to reset your admin password for Quest Portal.</p>
@@ -57,11 +58,11 @@ class EmailUtils
             $this->mail->addAddress($studentEmail, $studentName);
 
             $this->mail->Subject = 'Quest Schools - Student Portal Setup';
-            $setupLink = "http://localhost/quest-portal/setup.php?admission_number=" . urlencode($admissionNumber);
+            $setupLink = "http://$this->host/quest-portal/setup.php?admission_number=" . urlencode($admissionNumber);
 
             $this->mail->Body = "
             <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\">
-                <img src=\"http://localhost/quest-portal/assets/images/quest.jpg\" alt=\"Quest Schools Logo\" style=\"width: 100%; max-width: 200px; margin: 20px auto; display: block;\">
+                <img src=\"http://$this->host/quest-portal/assets/images/quest.jpg\" alt=\"Quest Schools Logo\" style=\"width: 100%; max-width: 200px; margin: 20px auto; display: block;\">
                 <div style=\"background-color: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;\">
                     <h2 style=\"color: #333; text-align: center;\">Welcome to Quest Schools!</h2>
                     <p style=\"font-size: 16px; line-height: 1.6; color: #555;\">
@@ -100,12 +101,12 @@ class EmailUtils
             $this->mail->addAddress($staffEmail, $staffName);
 
             $this->mail->Subject = 'Quest Schools - Admin Portal Setup';
-            $setupLink = "http://localhost/quest-portal/admin/setup.php?portal_code=" . urlencode($portalCode);
+            $setupLink = "http://$this->host/quest-portal/admin/setup.php?portal_code=" . urlencode($portalCode);
             $roleMessage = 'as ' . $staffRole;
 
             $this->mail->Body = "
             <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\">
-                <img src=\"http://localhost/quest-portal/assets/images/quest.jpg\" alt=\"Quest Schools Logo\" style=\"width: 100%; max-width: 200px; margin: 20px auto; display: block;\">
+                <img src=\"http://$this->host/quest-portal/assets/images/quest.jpg\" alt=\"Quest Schools Logo\" style=\"width: 100%; max-width: 200px; margin: 20px auto; display: block;\">
                 <div style=\"background-color: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;\">
                     <h2 style=\"color: #333; text-align: center;\">Welcome to Quest Schools!</h2>
                     <p style=\"font-size: 16px; line-height: 1.6; color: #555;\">
@@ -146,7 +147,7 @@ class EmailUtils
 
             $this->mail->Body = "
             <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\">
-                <img src=\"http://localhost/quest-portal/assets/images/quest.jpg\" alt=\"Quest Schools Logo\" style=\"width: 100%; max-width: 200px; margin: 20px auto; display: block;\">
+                <img src=\"http://$this->host/quest-portal/assets/images/quest.jpg\" alt=\"Quest Schools Logo\" style=\"width: 100%; max-width: 200px; margin: 20px auto; display: block;\">
                 <div style=\"background-color: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;\">
                     <h2 style=\"color: #333; text-align: center;\">Support Request Response</h2>
                     <p style=\"font-size: 16px; line-height: 1.6; color: #555;\">
@@ -163,7 +164,7 @@ class EmailUtils
                         If you have any further questions or need additional assistance, please don't hesitate to submit another support request.
                     </p>
                     <div style=\"text-align: center; margin: 30px 0;\">
-                        <a href=\"http://localhost/quest-portal/support.php\" style=\"background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;\">Submit New Request</a>
+                        <a href=\"http://$this->host/quest-portal/support.php\" style=\"background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;\">Submit New Request</a>
                     </div>
                 </div>
                 <div style=\"text-align: center; margin-top: 20px; font-size: 12px; color: #999;\">
@@ -191,7 +192,7 @@ class EmailUtils
 
             $this->mail->Body = "
             <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\">
-                <img src=\"http://localhost/quest-portal/assets/images/quest.jpg\" alt=\"Quest Schools Logo\" style=\"width: 100%; max-width: 200px; margin: 20px auto; display: block;\">
+                <img src=\"http://$this->host/quest-portal/assets/images/quest.jpg\" alt=\"Quest Schools Logo\" style=\"width: 100%; max-width: 200px; margin: 20px auto; display: block;\">
                 <div style=\"background-color: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;\">
                     <h2 style=\"color: #333; text-align: center;\">Congratulations on Your Promotion!</h2>
                     <p style=\"font-size: 16px; line-height: 1.6; color: #555;\">
@@ -206,7 +207,7 @@ class EmailUtils
                         Login to your new admin portal with your previous staff credentials.
                     </p>
                     <div style=\"text-align: center; margin: 30px 0;\">
-                        <a href=\"http://localhost/quest-portal/admin/\" style=\"background-color: #28a745; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;\">Access Admin Portal</a>
+                        <a href=\"http://$this->host/quest-portal/admin/\" style=\"background-color: #28a745; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;\">Access Admin Portal</a>
                     </div>
                 </div>
                 <div style=\"text-align: center; margin-top: 20px; font-size: 12px; color: #999;\">

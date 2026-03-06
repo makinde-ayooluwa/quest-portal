@@ -45,7 +45,7 @@ try {
 
     // Send promotion email
     require_once 'admin_includes/email_utils.php';
-    $emailUtils = new EmailUtils();
+    $emailUtils = new EmailUtils($host);
     $emailSent = $emailUtils->sendPromotionEmail($staff['email'], $staff['fullname']);
 
     if (!$emailSent) {

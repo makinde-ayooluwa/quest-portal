@@ -1,7 +1,7 @@
 <?php
 // Script to add password_resets table to the database
-
-$servername = "localhost";
+$host = $_SERVER["HTTP_HOST"];
+$servername = "$host";
 $username = "root";
 $password = "";
 $dbname = "questportal";

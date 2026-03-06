@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php'; // Adjust path if needed
-
+$host = $_SERVER["HTTP_HOST"];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
     $user_type = 'student';
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Database connection
-    $conn = new mysqli("localhost", "root", "", "questportal");
+    $conn = new mysqli("$host", "root", "", "questportal");
     if ($conn->connect_error) {
         $_SESSION['error'] = "Database connection failed.";
         header('Location: forgot_password.php');
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->addAddress($email);
 
             // Content
-            $reset_link = "http://localhost/quest-portal/reset_password.php?token=" . $token . "&type=" . $user_type;
+            $reset_link = "http://$host/quest-portal/reset_password.php?token=" . $token . "&type=" . $user_type;
             $mail->isHTML(true);
             $mail->Subject = 'Password Reset Request - Quest Portal';
             $mail->Body = "

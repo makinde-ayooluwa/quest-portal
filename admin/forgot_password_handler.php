@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Database connection
-    $conn = new mysqli("localhost", "root", "", "questportal");
+    $conn = new mysqli("$host", "root", "", "questportal");
     if ($conn->connect_error) {
         $_SESSION['error'] = "Database connection failed.";
         header('Location: forgot_password.php');
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($insert_stmt->execute()) {
         // Send email
         // $mail = new PHPMailer(true);
-        $mail = new EmailUtils();
+        $mail = new EmailUtils($host);
         if ($mail->sendAdminPasswordResetEmail($email, $token, $user_type)) {
             $_SESSION['success'] = "Password reset link has been sent to your email.";
         } else {

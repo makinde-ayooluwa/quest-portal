@@ -85,7 +85,7 @@ try {
                 "Responded to request #$request_id");
 
             // Send email notification to student
-            $emailUtils = new EmailUtils();
+            $emailUtils = new EmailUtils($host);
             $studentName = $support_request['student_name'] ?? 'Student';
             $emailSent = $emailUtils->sendSupportResponseEmail(
                 $support_request['email'],
