@@ -1,6 +1,6 @@
 <?php
-
-$dsn = 'mysql:host=localhost;dbname=questportal';
+$host = $_SERVER["HTTP_HOST"];
+$dsn = "mysql:host=$host;dbname=questportal";
 $username = 'root';
 $password = '';
 

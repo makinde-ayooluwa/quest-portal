@@ -1,5 +1,5 @@
 <?php
-
+$host = $_SERVER["HTTP_HOST"];
 $email = isset($_SESSION["admin"]) ? $_SESSION["admin"] : "";
 
 // auth.php
