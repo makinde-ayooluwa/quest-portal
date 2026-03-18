@@ -631,12 +631,12 @@ if ($id && getId($pdo, $id)) {
 
     <?php if (isset($_SESSION["error"])): ?>
         <script>
-            toastr.error("<?php echo $_SESSION["error"] ?>", "Error!");
+            toastr.error("<?php echo htmlspecialchars($_SESSION["error"], ENT_QUOTES, 'UTF-8') ?>", "Error!");
         </script>
         <?php unset($_SESSION["error"]); ?>
     <?php elseif (isset($_SESSION["success"])): ?>
         <script>
-            toastr.success("<?php echo $_SESSION["success"] ?>", "Success!")
+            toastr.success("<?php echo htmlspecialchars($_SESSION["success"], ENT_QUOTES, 'UTF-8') ?>", "Success!")
         </script>
         <?php unset($_SESSION["success"]); ?>
     <?php endif; ?>

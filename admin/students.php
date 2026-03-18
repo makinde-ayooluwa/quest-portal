@@ -80,7 +80,7 @@ $classes = $admin->getClasses($pdo);
     if (isset($_SESSION["success"])) {
     ?>
         <script>
-            toastr.success("<?php echo $_SESSION["success"] ?>", "Success!")
+            toastr.success("<?php echo htmlspecialchars($_SESSION["success"], ENT_QUOTES, 'UTF-8') ?>", "Success!")
         </script>
     <?php
         unset($_SESSION["success"]);

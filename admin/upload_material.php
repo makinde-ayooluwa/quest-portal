@@ -107,13 +107,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <h4 class="mb-3">Upload Material</h4>
                 <?php if (isset($_SESSION['upload_error'])) { ?>
                     <script>
-                        toastr.error("<?php echo $_SESSION['upload_error'] ?>", "Error!");
+                        toastr.error("<?php echo htmlspecialchars($_SESSION['upload_error'], ENT_QUOTES, 'UTF-8') ?>", "Error!");
                     </script>
                 <?php unset($_SESSION['upload_error']);
                 } ?>
                 <?php if (isset($_SESSION['upload_success'])) { ?>
                     <script>
-                        toastr.success("<?php echo $_SESSION['upload_success'] ?>", "Success!");
+                        toastr.success("<?php echo htmlspecialchars($_SESSION['upload_success'], ENT_QUOTES, 'UTF-8') ?>", "Success!");
                     </script>
                 <?php unset($_SESSION['upload_success']);
                 } ?>
