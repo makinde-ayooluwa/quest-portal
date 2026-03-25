@@ -28,6 +28,12 @@
 </script>
 <style>
     * {
+        scrollbar-width: none;
         font-family: Montserrat, sans-serif;
+    }
+
+    body,
+    html {
+        scrollbar-width: none
     }
 </style>
