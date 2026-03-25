@@ -9,38 +9,18 @@ if (!isset($_SESSION["admin"])) {
   exit();
 }
 
-//PHPMailer
-/*require 'vendor/autoload.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
-
-require 'vendor/phpmailer/phpmailer/src/Exception.php';
-require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require 'vendor/phpmailer/phpmailer/src/SMTP.php';
-$mail = new PHPMailer(true); // true enables exceptions for error handling
-$mail->isSMTP();
-$mail->Host       = 'smtp.gmail.com'; // Or your SMTP server host
-$mail->SMTPAuth   = true;
-$mail->Username   = 'makindeayooluwa604@gmail.com';
-$mail->Password   = 'lirw zgkb kegs xyat'; // Use an app password for Gmail
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // or PHPMailer::ENCRYPTION_SMTPS
-$mail->Port       = 587; // or 465 for SMTPS
-$mail->setFrom('makindeayooluwa604@gmail.com', 'Makinde Ayooluwa');
-$mail->addAddress('makindeayooluwa42@gmail.com', 'Makinde Ayooluwa');
-// Optional: addReplyTo, addCC, addBCC
-$mail->isHTML(true); // Set email format to HTML
-$mail->Subject = 'Subject of your email';
-$mail->Body    = 'This is the <b>HTML body</b> of the email.';
-$mail->AltBody = 'This is the plain text body for non-HTML mail clients.';
-//$mail->addAttachment('/vendor/phpmailer/docs/README.md', 'document.pdf');
-try {
-    $mail->send();
-    echo 'Message has been sent';
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}*/
+$quick_actions = [
+  [
+    "icon" => "bi bi-people-fill",
+    "title" => "Students Management",
+    "subtitles" => [
+      "View student profiles and academic history.",
+      "Search and filter by class, school, or status."
+    ],
+    "link" => "students.php",
+    "link_title" => "View Students"
+  ]
+]
 
 ?>
 
@@ -675,19 +655,29 @@ try {
     <section class="mt-4">
       <h2 class="text-danger">Quick Actions</h2>
       <div class="row g-4" id="quick-actions">
-        <div class="col-md-6 col-lg-4">
-          <div class="action-card h-100">
-            <div class="action-card-body">
-              <h5 class="card-title"><i class="bi bi-person-lines-fill me-2"></i>Student Management</h5>
-              <ul class="mb-0">
-                <!-- <li>Add, edit, and track student records across schools.</li> -->
-                <li>View student profiles and academic history.</li>
-                <li>Search and filter by class, school, or status.</li>
-              </ul>
-              <a href="students.php" class="btn btn-primary btn-sm mt-2"><i class="bi bi-people"></i> View Students</a>
+        <?php
+        foreach ($quick_actions as $quick_action) {
+        ?>
+          <div class="col-md-6 col-lg-4">
+            <div class="action-card h-100">
+              <div class="action-card-body">
+                <h5 class="card-title"><i class="<?php echo $quick_action['icon'] ?> me-2"></i><?php echo $quick_action['title'] ?></h5>
+                <ul class="mb-0">
+                  <?php
+                  foreach($quick_action['subtitles'] as $subtitle){
+                    ?>
+                    <li><?php echo $subtitle ?></li>
+                    <?php
+                  }
+                  ?>
+                </ul>
+                <a href="<?php echo $quick_action['link'] ?>" class="btn btn-primary btn-sm mt-2"><i class="<?php echo $quick_action['icon'] ?>"></i> <?php echo $quick_action['link_title'] ?></a>
+              </div>
             </div>
           </div>
-        </div>
+        <?php
+        }
+        ?>
       </div>
     </section>
   </main>
