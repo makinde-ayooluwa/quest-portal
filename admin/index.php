@@ -688,51 +688,6 @@ try {
             </div>
           </div>
         </div>
-        <!-- <div class="col-md-6 col-lg-4">
-          <div class="action-card h-100">
-            <div class="action-card-body">
-              <h5 class="card-title"><i class="bi bi-calendar-check-fill me-2"></i>Attendance & Academic
-                Monitoring</h5>
-              <ul class="mb-0">
-                <li>Upload results and attendance records.</li>
-                <li>Generate assessment and attendance reports.</li>
-                <li>Track academic progress and trends.</li>
-              </ul>
-              <a class="btn btn-warning btn-sm mt-2" href="manage_results.php"><i class="bi bi-upload"></i> Upload Results</a>
-            </div>
-          </div>
-        </div> -->
-        <!-- <div class="col-md-6 col-lg-4">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-journal-richtext me-2"></i>Content & Resource Distribution
-              </h5>
-              <ul class="mb-0">
-                <li>Upload study materials, guides, and LEMA resources.</li>
-                <li>Share resources with students and staff.</li>
-                <li>Manage downloadable content and access.</li>
-              </ul>
-              <button class="btn btn-info btn-sm mt-2" disabled>
-                <a href="upload_material.php"><i class="bi bi-cloud-upload"></i> Upload
-                  Material</a>
-              </button>
-            </div>
-          </div>
-        </div> -->
-        <!-- <div class="col-md-6 col-lg-4">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-award-fill me-2"></i>Scholarship Tracking</h5>
-              <ul class="mb-0">
-                <li>Manage scholarship applications and approvals.</li>
-                <li>Track awardees and scholarship status.</li>
-                <li>Generate reports for scholarship distribution.</li>
-              </ul>
-              <button class="btn btn-secondary btn-sm mt-2" disabled><i class="bi bi-search"></i> View
-                Applications</button>
-            </div>
-          </div>
-        </div> -->
       </div>
     </section>
   </main>
