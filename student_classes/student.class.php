@@ -152,4 +152,12 @@ class Student
             return true;
         }
     }
+    public function getResults($pdo,$admission_number){
+        $query = "SELECT * FROM results WHERE student_admission_number = :admission_number";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":admission_number",$admission_number);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    }
 }
