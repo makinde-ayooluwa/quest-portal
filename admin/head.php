@@ -53,6 +53,7 @@
 
 
   * {
+    scrollbar-width: none;
     font-family: Montserrat, sans-serif;
   }
 </style>
