@@ -256,8 +256,8 @@
             <?php
             }
             ?>
-            <!-- <li><a class="text-primary" href="manage_results.php"><i class="bi bi-clipboard-check me-2"></i>Manage
-                    Results</a></li> -->
+            <li><a class="text-primary" href="manage_results.php"><i class="bi bi-clipboard-check me-2"></i>Manage
+                    Results</a></li>
             <li><a class="text-primary" href="support_requests.php"><i class="bi bi-headset me-2"></i>Support
                     Requests</a></li>
         </div>
