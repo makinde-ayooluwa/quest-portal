@@ -1,3 +1,7 @@
+DELETE FROM admin_features;
+DELETE FROM admin_features_accessors;
+DELETE FROM admin_features_sublinks;
+DELETE FROM admin_features_sublinks_accessors;
 INSERT INTO
     admin_features(title, unique_id, collapseId)
 VALUES

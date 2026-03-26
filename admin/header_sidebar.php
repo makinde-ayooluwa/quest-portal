@@ -241,7 +241,49 @@
     </nav>
 </header>
 <?php
-$db_features = "";
+$db_features = $admin->getFeaturesAndFolks($pdo);
+$db_admin_features = $db_features['admin_features'];
+$db_admin_features_accessors = $db_features['admin_features_accessors'];
+$db_admin_features_sublinks = $db_features['admin_features_sublinks'];
+$db_admin_features_sublinks_accessors = $db_features['admin_features_sublinks_accessors'];
+
+$allFeatures = [];
+
+foreach ($db_admin_features as $db_feature) {
+    // Sub-links array
+    $subLinks = [];
+    foreach ($db_admin_features_sublinks as $db_sublink) {
+        if ($db_sublink['parent_unique_id'] == $db_feature['unique_id']) {
+            // Attach sublink accessors
+            $sublink_accessors = [];
+            foreach ($db_admin_features_sublinks_accessors as $db_sublinks_accessor) {
+                if ($db_sublinks_accessor['feature_sublink_unique_id'] == $db_sublink['unique_id']) {
+                    $sublink_accessors[] = $db_sublinks_accessor['accessor'];
+                }
+            }
+            $db_sublink['accessors'] = $sublink_accessors;
+            $subLinks[] = $db_sublink;
+        }
+    }
+    $db_feature['subLinks'] = $subLinks;
+
+    // Feature accessors
+    $feature_accessors = [];
+    foreach ($db_admin_features_accessors as $db_accessors) {
+        if ($db_accessors['feature_unique_id'] == $db_feature['unique_id']) {
+            $feature_accessors[] = $db_accessors['accessor'];
+        }
+    }
+    $db_feature['accessors'] = $feature_accessors;
+
+    $allFeatures[] = $db_feature;
+}
+
+
+
+
+
+
 $admin_features = [
     [
         "unique_id" => "studentsManagement",
@@ -354,7 +396,7 @@ $admin_features = [
                     Requests</a></li>
         </div> -->
         <?php
-        foreach ($admin_features as $feature) {
+        foreach ($allFeatures as $feature) {
             if ($feature) {
                 foreach ($feature['accessors'] as $accessor) {
                     if ($adminData['staff_role'] == $accessor) {

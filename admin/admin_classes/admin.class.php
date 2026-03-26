@@ -39,7 +39,7 @@ class Admin
     {
         $query = "SELECT * FROM students WHERE id = :id";
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(":id",$id);
+        $stmt->bindParam(":id", $id);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -664,8 +664,39 @@ class Admin
         return $stmt->execute();
     }
 
-    public function getFeaturesAndFolks(){
-        $query = "SELECT * FROM admin_features; SELECT * FROM admin_features_accessors;SELECT * FROM admin_features_sublinks; SELECT * FROM admin_features_sublinks_accessors;";
+    public function getFeaturesAndFolks($pdo)
+    {
+        $queries = [
+            [
+                "type" => "admin_features",
+                "query" => "SELECT * FROM admin_features;"
+            ],
+            [
+                "type" => "admin_features_accessors",
+                "query" => "SELECT * FROM admin_features_accessors;"
+            ],
+            [
+                "type" => "admin_features_sublinks",
+                "query" => "SELECT * FROM admin_features_sublinks;"
+            ],
+            [
+                "type" => "admin_features_sublinks_accessors",
+                "query" => "SELECT * FROM admin_features_sublinks_accessors;"
+            ],
+        ];
+        $data = [
+            "admin_features" => [],
+            "admin_features_accessors" => [],
+            "admin_features_sublinks" => [],
+            "admin_features_sublinks_accessors" => [],
+        ];
+        foreach ($queries as $query) {
+            $stmt = $pdo->prepare($query['query']);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $data[$query['type']] = $result;
+        }
+        return $data;
     }
 }
 
