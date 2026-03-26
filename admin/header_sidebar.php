@@ -243,7 +243,7 @@
 <?php
 $features = [
     [
-        "unique_id"=>"studentsManagement",
+        "unique_id" => "studentsManagement",
         "title" => "Students Management",
         "accessors" => [
             "head admin"
@@ -277,7 +277,7 @@ $features = [
         ]
     ],
     [
-        "unique_id"=>"usersManagement",
+        "unique_id" => "usersManagement",
         "title" => "Users Management",
         "accessors" => [
             "head admin"
@@ -303,7 +303,7 @@ $features = [
         ]
     ],
     [
-        "unique_id"=>"systemManagement",
+        "unique_id" => "systemManagement",
         "title" => "System Management",
         "accessors" => [
             "head admin"
