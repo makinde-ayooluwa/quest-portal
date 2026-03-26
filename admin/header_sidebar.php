@@ -264,6 +264,14 @@ $features = [
                 ],
                 "link" => "manage_results.php",
                 "icon" => "bi bi-clipboard-check"
+            ],
+            [
+                "title" => "Support Requests",
+                "accessors" => [
+                    "head admin"
+                ],
+                "link" => "support_requests.php",
+                "icon" => "bi bi-person-raised-hand"
             ]
         ]
     ],
@@ -276,19 +284,44 @@ $features = [
         "subLinks" => [
             [
                 "title" => "View all users",
-                "accessors"=>[
+                "accessors" => [
                     "head admin"
                 ],
-                "link"=>"staff_management.php",
-                "icon"=>"bi bi-people"
+                "link" => "staff_management.php",
+                "icon" => "bi bi-people"
             ],
             [
                 "title" => "CREATE user",
-                "accessors"=>[
+                "accessors" => [
                     "head admin"
                 ],
-                "link"=>"add_staff.php",
-                "icon"=>"bi bi-plus"
+                "link" => "add_staff.php",
+                "icon" => "bi bi-plus"
+            ]
+        ]
+    ],
+    [
+        "title" => "System Management",
+        "accessors" => [
+            "head admin"
+        ],
+        "collapseId" => "systemManagement",
+        "subLinks" => [
+            [
+                "title" => "Add Notification",
+                "accessors" => [
+                    "head admin"
+                ],
+                "link" => "add_notifiation.php",
+                "icon" => "bi bi-bell"
+            ],
+            [
+                "title" => "Add Event",
+                "accessors" => [
+                    "head admin"
+                ],
+                "link" => "add_event.php",
+                "icon" => "bi bi-calendar-event"
             ]
         ]
     ]
@@ -347,21 +380,6 @@ $features = [
                 }
             }
         }
-            ?>
-            <?php
-            if ($adminData["staff_role"] == "head admin" || $adminData["staff_role"] == "admin") {
-            ?>
-                <li data-bs-toggle="collapse" data-bs-target="#systemManagement"><a href="javascript:;"><i
-                            class="fas fa-cogs me-2"></i>System Management</a></li>
-                <div class="collapse" id="systemManagement">
-                    <li><a class="text-primary" href="add_notification.php"><i class="bi bi-bell me-2"></i>Add Notification</a>
-                    </li>
-                    <!-- <li><a class="text-primary" href="upload_material.php"><i class="bi bi-upload me-2"></i>Upload Materials</a>
-            </li> -->
-                    <li><a class="text-primary" href="add_event.php"><i class="bi bi-calendar-event me-2"></i>Add Event</a></li>
-                </div>
-            <?php
-            }
             ?>
     </ul>
     <div class="sidebar-header">
