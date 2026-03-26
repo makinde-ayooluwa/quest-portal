@@ -240,61 +240,129 @@
         </ul>
     </nav>
 </header>
+<?php
+$features = [
+    [
+        "title" => "Students Management",
+        "accessors" => [
+            "head admin"
+        ],
+        "collapseId" => "studentManagement",
+        "subLinks" => [
+            [
+                "title" => "View all students",
+                "accessors" => [
+                    "head admin"
+                ],
+                "link" => "students.php",
+                "icon" => "bi bi-people"
+            ],
+            [
+                "title" => "Manage Results",
+                "accessors" => [
+                    "head admin"
+                ],
+                "link" => "manage_results.php",
+                "icon" => "bi bi-clipboard-check"
+            ]
+        ]
+    ],
+    [
+        "title" => "Users Management",
+        "accessors" => [
+            "head admin"
+        ],
+        "collapseId" => "staffManagement",
+        "subLinks" => [
+            [
+                "title" => "View all users",
+                "accessors"=>[
+                    "head admin"
+                ],
+                "link"=>"staff_management.php",
+                "icon"=>"bi bi-people"
+            ],
+            [
+                "title" => "CREATE user",
+                "accessors"=>[
+                    "head admin"
+                ],
+                "link"=>"add_staff.php",
+                "icon"=>"bi bi-plus"
+            ]
+        ]
+    ]
+];
+?>
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
         <h3 class="text-uppercase text-start fs-5">DASHBOARD</h3>
     </div>
     <ul>
         <li><a href="./"><i class="fas fa-home me-2"></i>Overview</a></li>
-        <li data-bs-toggle="collapse" data-bs-target="#studentManagement"><a href="javascript:;"><i
+        <!-- <li data-bs-toggle="collapse" data-bs-target="#studentManagement"><a href="javascript:;"><i
                     class="fas fa-user-graduate me-2"></i>Students Management</a></li>
         <div class="collapse" id="studentManagement">
-            <?php
-            if ($adminData["staff_role"] == "head admin" || $adminData["staff_role"] == "admin") {
-            ?>
                 <li><a class="text-primary" href="students.php"><i class="bi bi-people me-2"></i>View all students</a></li>
-            <?php
-            }
-            ?>
             <li><a class="text-primary" href="manage_results.php"><i class="bi bi-clipboard-check me-2"></i>Manage
                     Results</a></li>
             <li><a class="text-primary" href="support_requests.php"><i class="bi bi-headset me-2"></i>Support
                     Requests</a></li>
-        </div>
+        </div> -->
         <?php
-        if ($adminData["staff_role"] == "head admin" || $adminData["staff_role"] == "admin") {
+        foreach ($features as $feature) {
+            if ($feature) {
+                foreach ($feature['accessors'] as $accessor) {
+                    if ($adminData['staff_role'] == $accessor) {
         ?>
-            <li data-bs-toggle="collapse" data-bs-target="#staffManagement"><a href="javascript:;"><i
-                        class="bi bi-people-fill me-2"></i>Users Management</a></li>
-            <div class="collapse" id="staffManagement">
-                <li><a class="text-primary" href="staff_management.php"><i class="bi bi-people me-2"></i>View all users</a>
-                </li>
-                <?php
-                if ($adminData['staff_role'] == "head admin") {
-                ?>
-                    <li><a class="text-primary" href="add_staff.php"><i class="bi bi-plus me-2"></i>CREATE user</a></li>
-                <?php
+                        <li data-bs-toggle="collapse" data-bs-target="#<?php echo $feature['collapseId'] ?>">
+                            <a href="javascript:;"><i
+                                    class="fas fa-user-graduate me-2"></i>
+                                <?php echo $feature['title'] ?>
+                            </a>
+                        </li>
+                        <div class="collapse" id="<?php echo $feature['collapseId'] ?>">
+                            <?php
+                            foreach ($feature['subLinks'] as $subLink) {
+                                if ($subLink) {
+                                    foreach ($subLink['accessors'] as $subAssessors) {
+                                        if ($adminData['staff_role'] == $subAssessors) {
+                            ?>
+                                            <li>
+                                                <a class="text-primary" href="<?php echo $subLink['link'] ?>">
+                                                    <i class="<?php echo $subLink['icon'] ?> me-2"></i>
+                                                    <?php echo $subLink['title'] ?>
+                                                </a>
+                                            </li>
+                        <?php
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        ?>
+                        </div>
+
+            <?php
                 }
-                ?>
-            </div>
-        <?php
+            }
         }
-        ?>
-        <?php
-        if ($adminData["staff_role"] == "head admin" || $adminData["staff_role"] == "admin") {
-        ?>
-            <li data-bs-toggle="collapse" data-bs-target="#systemManagement"><a href="javascript:;"><i
-                        class="fas fa-cogs me-2"></i>System Management</a></li>
-            <div class="collapse" id="systemManagement">
-                <li><a class="text-primary" href="add_notification.php"><i class="bi bi-bell me-2"></i>Add Notification</a>
-                </li>
-                <!-- <li><a class="text-primary" href="upload_material.php"><i class="bi bi-upload me-2"></i>Upload Materials</a>
+            ?>
+            <?php
+            if ($adminData["staff_role"] == "head admin" || $adminData["staff_role"] == "admin") {
+            ?>
+                <li data-bs-toggle="collapse" data-bs-target="#systemManagement"><a href="javascript:;"><i
+                            class="fas fa-cogs me-2"></i>System Management</a></li>
+                <div class="collapse" id="systemManagement">
+                    <li><a class="text-primary" href="add_notification.php"><i class="bi bi-bell me-2"></i>Add Notification</a>
+                    </li>
+                    <!-- <li><a class="text-primary" href="upload_material.php"><i class="bi bi-upload me-2"></i>Upload Materials</a>
             </li> -->
-                <li><a class="text-primary" href="add_event.php"><i class="bi bi-calendar-event me-2"></i>Add Event</a></li>
-            </div>
-        <?php
-        }
-        ?>
+                    <li><a class="text-primary" href="add_event.php"><i class="bi bi-calendar-event me-2"></i>Add Event</a></li>
+                </div>
+            <?php
+            }
+            ?>
     </ul>
     <div class="sidebar-header">
         <h3 class="text-uppercase text-start fs-5">PROFILE</h3>
