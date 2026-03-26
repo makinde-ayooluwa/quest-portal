@@ -663,6 +663,10 @@ class Admin
         $stmt->bindParam(":id", $id);
         return $stmt->execute();
     }
+
+    public function getFeaturesAndFolks(){
+        $query = "SELECT * FROM admin_features; SELECT * FROM admin_features_accessors;SELECT * FROM admin_features_sublinks; SELECT * FROM admin_features_sublinks_accessors;";
+    }
 }
 
 

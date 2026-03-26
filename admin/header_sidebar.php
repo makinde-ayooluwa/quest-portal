@@ -241,6 +241,7 @@
     </nav>
 </header>
 <?php
+$db_features = "";
 $admin_features = [
     [
         "unique_id" => "studentsManagement",

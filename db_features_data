@@ -1,0 +1,5 @@
+<?php
+include "student_includes/db.inc.php";
+$query = file_get_contents("./database/features.sql");
+$pdo->exec($query);
+echo "Features added successfully";
