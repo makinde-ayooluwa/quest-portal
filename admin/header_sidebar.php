@@ -251,6 +251,7 @@ $admin_features = [
         "collapseId" => "studentManagement",
         "subLinks" => [
             [
+                "unique_id" => "viewAllStudents",
                 "title" => "View all students",
                 "accessors" => [
                     "head admin"
@@ -259,6 +260,7 @@ $admin_features = [
                 "icon" => "bi bi-people"
             ],
             [
+                "unique_id" => "manageResults",
                 "title" => "Manage Results",
                 "accessors" => [
                     "head admin"
@@ -267,6 +269,7 @@ $admin_features = [
                 "icon" => "bi bi-clipboard-check"
             ],
             [
+                "unique_id" => "supportRequests",
                 "title" => "Support Requests",
                 "accessors" => [
                     "head admin"
@@ -285,6 +288,7 @@ $admin_features = [
         "collapseId" => "staffManagement",
         "subLinks" => [
             [
+                "unique_id" => "viewAllUsers",
                 "title" => "View all users",
                 "accessors" => [
                     "head admin"
@@ -293,6 +297,7 @@ $admin_features = [
                 "icon" => "bi bi-people"
             ],
             [
+                "unique_id" => "createUser",
                 "title" => "CREATE user",
                 "accessors" => [
                     "head admin"
@@ -311,6 +316,7 @@ $admin_features = [
         "collapseId" => "systemManagement",
         "subLinks" => [
             [
+                "unique_id" => "addNotification",
                 "title" => "Add Notification",
                 "accessors" => [
                     "head admin"
@@ -319,6 +325,7 @@ $admin_features = [
                 "icon" => "bi bi-bell"
             ],
             [
+                "unique_id" => "addEvent",
                 "title" => "Add Event",
                 "accessors" => [
                     "head admin"
