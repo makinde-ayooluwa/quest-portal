@@ -241,7 +241,7 @@
     </nav>
 </header>
 <?php
-$features = [
+$admin_features = [
     [
         "unique_id" => "studentsManagement",
         "title" => "Students Management",
@@ -346,7 +346,7 @@ $features = [
                     Requests</a></li>
         </div> -->
         <?php
-        foreach ($features as $feature) {
+        foreach ($admin_features as $feature) {
             if ($feature) {
                 foreach ($feature['accessors'] as $accessor) {
                     if ($adminData['staff_role'] == $accessor) {
