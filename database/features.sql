@@ -99,6 +99,17 @@ VALUES
         "usersManagement"
     );
 
+    INSERT INTO
+    admin_features_sublinks(unique_id, title, link, icon, parent_unique_id)
+VALUES
+    (
+        "manageRoles",
+        "Manage Roles",
+        "role_management.php",
+        "bi bi-person-workspace",
+        "usersManagement"
+    );
+
 INSERT INTO
     admin_features_sublinks(unique_id, title, link, icon, parent_unique_id)
 VALUES
@@ -120,6 +131,8 @@ VALUES
         "bi bi-calender-event",
         "systemManagement"
     );
+
+    
 
 INSERT INTO
     admin_features_sublinks_accessors(feature_sublink_unique_id, accessor)
@@ -146,6 +159,11 @@ INSERT INTO
 VALUES
     ("createUser", "head admin");
 
+    INSERT INTO
+    admin_features_sublinks_accessors(feature_sublink_unique_id, accessor)
+VALUES
+    ("manageRoles", "head admin");
+
 INSERT INTO
     admin_features_sublinks_accessors(feature_sublink_unique_id, accessor)
 VALUES
@@ -155,3 +173,25 @@ INSERT INTO
     admin_features_sublinks_accessors(feature_sublink_unique_id, accessor)
 VALUES
     ("addEvent", "head admin");
+
+-- NEW ROLES TABLE
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(50) NOT NULL UNIQUE,
+  `description` TEXT,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- SEED INITIAL ROLES
+INSERT INTO `roles` (`name`, `description`) VALUES
+('super admin', 'Full system access - manages all roles and permissions'),
+('head admin', 'Head administrator - full feature access'),
+('teacher', 'Classroom teacher - limited student/results access'),
+('support officer', 'Handles student support requests'),
+('assessment officer', 'Manages results and assessments'),
+('retention officer', 'Student retention and attendance tracking');
+
+-- Grant role_management.php access to super admin and head admin
+INSERT INTO admin_features_sublinks_accessors(feature_sublink_unique_id, accessor) VALUES
+('manageRoles', 'super admin'),
+('manageRoles', 'head admin');

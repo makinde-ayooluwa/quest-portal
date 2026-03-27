@@ -79,13 +79,10 @@ include "admin_includes/admin.inc.php";
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <h3 class="mb-0"><i class="bi bi-people-fill me-2"></i>Users Management</h3>
                         <div>
-                            <?php
-                            if ($adminData['staff_role'] == "head admin") {
-                            ?>
+                            <?php if (in_array($adminData['staff_role'], ['head admin', 'super admin'])): ?>
                                 <a href="add_staff.php" class="btn btn-primary btn-sm me-2"><i class="bi bi-person-plus"></i> Add User</a>
-                            <?php
-                            }
-                            ?>
+                            <?php endif; ?>
+
                             <!-- <a href="upload_material.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-cloud-upload"></i> Upload Material</a> -->
                         </div>
                     </div>
@@ -129,19 +126,39 @@ include "admin_includes/admin.inc.php";
                             </thead>
                             <tbody>
                                 <?php
+                                // Load roles for dropdown
+                                $roles = $admin->getAllRoles($pdo);
+
                                 $query = "SELECT * FROM staffs;";
                                 $stmt = $pdo->prepare($query);
                                 $stmt->execute();
                                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                                 foreach ($result as $row) {
+                                    // Get role details
+                                    $roleDetails = null;
+                                    foreach ($roles as $role) {
+                                        if ($role['name'] == $row['staff_role']) {
+                                            $roleDetails = $role;
+                                            break;
+                                        }
+                                    }
+
                                 ?>
                                     <tr>
                                         <td>
                                             <img width="48" class="rounded-circle border border-1" src="<?php echo $row["picture"]; ?>" alt="">
                                         </td>
                                         <td><?php echo $row["fullname"] ?>
-                                            <span class="badge bg-primary ms-2"><?php echo strtoupper($row["staff_role"]) ?></span>
+                                            <?php if ($roleDetails): ?>
+                                                <span class="badge bg-<?= $roleDetails['name'] == 'super admin' ? 'secondary' : ($roleDetails['name'] == 'head admin' ? 'primary' : 'success') ?> ms-2">
+                                                    <?= strtoupper($roleDetails['name']) ?>
+                                                    <small class="ms-1"><?= htmlspecialchars(substr($roleDetails['description'], 0, 30)) ?>...</small>
+                                                </span>
+                                            <?php else: ?>
+                                                <span class="badge bg-secondary ms-2"><?= strtoupper($row["staff_role"]) ?></span>
+                                            <?php endif; ?>
+
                                         </td>
                                         <td>
                                             <?php echo $row["email"]  ?>
@@ -169,14 +186,12 @@ include "admin_includes/admin.inc.php";
                                             <?php
                                             if ($row["staff_role"] == "head admin") {
                                             ?>
-                                                <?php
-                                            } elseif ($adminData["staff_role"] == "head admin") {
-                                                if ($row["staff_role"] == "admin" || $row["staff_role"] == "retention officer" || $row["staff_role"] == "assessment officer" || $row["staff_role"] == "teacher") {
-                                                ?>
-                                                    <a title="View Staff" href="view_staff.php?id=<?php echo $row["id"] ?>" class="btn btn-sm btn-outline-info me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="bi bi-eye"></i></a>
-                                                    <button title="Delete Staff" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal_for_staff_<?php echo $row["id"] ?>" aria-label="Delete"><i class="bi bi-trash"></i></button>
                                             <?php
-                                                }
+                                            } elseif ($adminData["staff_role"] == "head admin") {
+                                            ?>
+                                                <a title="View Staff" href="view_staff.php?id=<?php echo $row["id"] ?>" class="btn btn-sm btn-outline-info me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="bi bi-eye"></i></a>
+                                                <button title="Delete Staff" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal_for_staff_<?php echo $row["id"] ?>" aria-label="Delete"><i class="bi bi-trash"></i></button>
+                                            <?php
                                             }
                                             ?>
 

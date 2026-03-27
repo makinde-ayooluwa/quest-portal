@@ -172,10 +172,21 @@ function e($v)
                         <p>Are you sure you want to change <strong><?php echo e($staff['fullname']); ?>'s</strong> role?</p>
                         <p class="text-muted small">This action may affect their access permissions.</p>
                         <select name="role" id="" class="form-select">
-                            <option value="teacher">Teacher</option>
-                            <option value="admin">Admin</option>
-                            <option value="retention officer">Retention Officer</option>
-                            <option value="assessment officer">Assessment Officer</option>
+                            <?php
+                            if (count($admin->getAllRoles($pdo)) < 1) {
+                            ?>
+                                <option value="" disabled>No roles available</option>
+                                <?php
+                            } else {
+                                foreach ($admin->getAllRoles($pdo) as $role) {
+                                    if ($role['name'] !== "head admin") {
+                                ?>
+                                        <option value="<?php echo $role['name'] ?>"><?php echo $role['name'] ?></option>
+                            <?php
+                                    }
+                                }
+                            }
+                            ?>
                         </select>
                     </div>
                     <div class="modal-footer">

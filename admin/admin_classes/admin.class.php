@@ -698,6 +698,128 @@ class Admin
         }
         return $data;
     }
+
+    // ROLE MANAGEMENT METHODS
+    public function getAllRoles($pdo) {
+        $query = "SELECT * FROM roles ORDER BY name";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getRole($pdo, $roleId) {
+        $query = "SELECT * FROM roles WHERE id = :id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':id', $roleId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function createRole($pdo, $name, $description = '') {
+        $query = "INSERT INTO roles (name, description) VALUES (:name, :description)";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':description', $description);
+        return $stmt->execute();
+    }
+
+    public function updateRole($pdo, $roleId, $name, $description = '') {
+        $query = "UPDATE roles SET name = :name, description = :description WHERE id = :id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':id', $roleId, PDO::PARAM_INT);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':description', $description);
+        return $stmt->execute();
+    }
+
+    public function deleteRole($pdo, $roleId) {
+        // First delete all permissions for this role
+        $deleteAccessors = "DELETE FROM admin_features_accessors WHERE accessor = (SELECT name FROM roles WHERE id = :id)";
+        $stmt = $pdo->prepare($deleteAccessors);
+        $stmt->bindParam(':id', $roleId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $deleteSublinkAccessors = "DELETE FROM admin_features_sublinks_accessors WHERE accessor = (SELECT name FROM roles WHERE id = :id)";
+        $stmt = $pdo->prepare($deleteSublinkAccessors);
+        $stmt->bindParam(':id', $roleId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Then delete role
+        $query = "DELETE FROM roles WHERE id = :id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':id', $roleId, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    public function getRolePermissions($pdo, $roleName) {
+        $features = $this->getFeaturesAndFolks($pdo);
+        
+        $permissions = [
+            'features' => [],
+            'sublinks' => []
+        ];
+
+        // Feature permissions
+        foreach ($features['admin_features'] as $feature) {
+            $hasAccess = false;
+            foreach ($features['admin_features_accessors'] as $accessor) {
+                if ($accessor['feature_unique_id'] === $feature['unique_id'] && $accessor['accessor'] === $roleName) {
+                    $hasAccess = true;
+                    break;
+                }
+            }
+            $feature['has_access'] = $hasAccess;
+            $permissions['features'][] = $feature;
+        }
+
+        // Sublink permissions
+        foreach ($features['admin_features_sublinks'] as $sublink) {
+            $hasAccess = false;
+            foreach ($features['admin_features_sublinks_accessors'] as $accessor) {
+                if ($accessor['feature_sublink_unique_id'] === $sublink['unique_id'] && $accessor['accessor'] === $roleName) {
+                    $hasAccess = true;
+                    break;
+                }
+            }
+            $sublink['has_access'] = $hasAccess;
+            $permissions['sublinks'][] = $sublink;
+        }
+
+        return $permissions;
+    }
+
+    public function updateRolePermissions($pdo, $roleName, $featurePermissions, $sublinkPermissions) {
+        // Delete existing permissions for this role
+        $deleteQuery = "DELETE FROM admin_features_accessors WHERE accessor = :role";
+        $stmt = $pdo->prepare($deleteQuery);
+        $stmt->bindParam(':role', $roleName);
+        $stmt->execute();
+
+        $deleteQuery = "DELETE FROM admin_features_sublinks_accessors WHERE accessor = :role";
+        $stmt = $pdo->prepare($deleteQuery);
+        $stmt->bindParam(':role', $roleName);
+        $stmt->execute();
+
+        // Insert new feature permissions
+        foreach ($featurePermissions as $featureId) {
+            $query = "INSERT INTO admin_features_accessors (feature_unique_id, accessor) VALUES (:feature_id, :role)";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(':feature_id', $featureId);
+            $stmt->bindParam(':role', $roleName);
+            $stmt->execute();
+        }
+
+        // Insert new sublink permissions
+        foreach ($sublinkPermissions as $sublinkId) {
+            $query = "INSERT INTO admin_features_sublinks_accessors (feature_sublink_unique_id, accessor) VALUES (:sublink_id, :role)";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(':sublink_id', $sublinkId);
+            $stmt->bindParam(':role', $roleName);
+            $stmt->execute();
+        }
+
+        return true;
+    }
 }
 
 

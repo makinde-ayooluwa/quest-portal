@@ -148,10 +148,21 @@ unset($_SESSION['success']);
                             <label class="form-label">Role</label>
                             <select class="form-select" name="role" required>
                                 <option value="">Select</option>
-                                <option value="teacher">Teacher</option>
-                                <option value="retention officer">Retention Officer</option>
-                                <option value="assessment officer">Assessment Officer</option>
-                                <option value="admin">Admin</option>
+                                <?php
+                                if (count($admin->getAllRoles($pdo)) < 1) {
+                                ?>
+                                    <option value="" disabled>No roles available</option>
+                                    <?php
+                                } else {
+                                    foreach ($admin->getAllRoles($pdo) as $role) {
+                                        if ($role['name'] !== "head admin") {
+                                    ?>
+                                            <option value="<?php echo $role['name'] ?>"><?php echo $role['name'] ?></option>
+                                <?php
+                                        }
+                                    }
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>
