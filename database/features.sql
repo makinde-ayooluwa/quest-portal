@@ -174,24 +174,12 @@ INSERT INTO
 VALUES
     ("addEvent", "head admin");
 
--- NEW ROLES TABLE
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `name` VARCHAR(50) NOT NULL,
-  `description` TEXT,
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Grant role_management.php access to super admin and head admin
+INSERT INTO admin_features_sublinks_accessors(feature_sublink_unique_id, accessor) VALUES
+('manageRoles', 'head admin');
 
 -- SEED INITIAL ROLES
 INSERT IGNORE INTO `roles` (`name`, `description`) VALUES
-('super admin', 'Full system access - manages all roles and permissions'),
-('head admin', 'Head administrator - full feature access'),
-('teacher', 'Classroom teacher - limited student/results access'),
-('support officer', 'Handles student support requests'),
-('assessment officer', 'Manages results and assessments'),
-('retention officer', 'Student retention and attendance tracking');
+('head admin', 'Head administrator - full feature access');
 
--- Grant role_management.php access to super admin and head admin
-INSERT INTO admin_features_sublinks_accessors(feature_sublink_unique_id, accessor) VALUES
-('manageRoles', 'super admin'),
-('manageRoles', 'head admin');
+

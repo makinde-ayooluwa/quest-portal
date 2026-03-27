@@ -417,3 +417,12 @@ CREATE TABLE `admin_features_sublinks_accessors` (
   `feature_sublink_unique_id` varchar(255) not null,
   `accessor` varchar(255) not null
 );
+
+-- NEW ROLE TABLE
+
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(50) NOT NULL,
+  `description` TEXT,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
