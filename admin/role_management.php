@@ -128,7 +128,6 @@ if (isset($_GET['edit_role'])) {
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Role Name</th>
                                     <th>Description</th>
                                     <th>Created</th>
@@ -136,30 +135,33 @@ if (isset($_GET['edit_role'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($roles as $role): ?>
-                                    <tr>
-                                        <td><?= $role['id'] ?></td>
-                                        <td>
-                                            <span class="badge bg-primary role-badge"><?= htmlspecialchars($role['name']) ?></span>
-                                        </td>
-                                        <td><?= htmlspecialchars($role['description'] ?: 'No description') ?></td>
-                                        <td><?= date('M j, Y', strtotime($role['created_at'])) ?></td>
-                                        <td>
-                                            <a href="?edit_role=<?= $role['id'] ?>" class="btn btn-sm btn-outline-primary me-1">
-                                                <i class="bi bi-pencil"></i> Permissions
-                                            </a>
-                                            <?php if ($role['name'] !== 'head admin'): ?>
-                                                <form method="POST" action="role_management_handler.php" style="display: inline;" onsubmit="return confirm('Delete this role? All permissions will be removed.');">
-                                                    <input type="hidden" name="action" value="delete_role">
-                                                    <input type="hidden" name="role_id" value="<?= $role['id'] ?>">
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
-                                                </form>
-                                            <?php endif; ?>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
+                                <?php foreach ($roles as $role):
+                                    if ($role['name'] !== 'head admin') {
+                                ?>
+                                        <tr>
+                                            <td>
+                                                <span class="badge bg-primary role-badge"><?= htmlspecialchars($role['name']) ?></span>
+                                            </td>
+                                            <td><?= htmlspecialchars($role['description'] ?: 'No description') ?></td>
+                                            <td><?= date('M j, Y', strtotime($role['created_at'])) ?></td>
+                                            <td>
+                                                <a href="?edit_role=<?= $role['id'] ?>" class="btn btn-sm btn-outline-primary me-1">
+                                                    <i class="bi bi-pencil"></i> Permissions
+                                                </a>
+                                                <?php if ($role['name'] !== 'head admin'): ?>
+                                                    <form method="POST" action="role_management_handler.php" style="display: inline;" onsubmit="return confirm('Delete this role? All permissions will be removed.');">
+                                                        <input type="hidden" name="action" value="delete_role">
+                                                        <input type="hidden" name="role_id" value="<?= $role['id'] ?>">
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                <?php
+                                    }
+                                endforeach; ?>
                                 <?php if (empty($roles)): ?>
                                     <tr>
                                         <td colspan="5" class="text-center text-muted py-4">No roles found. Create your first role!</td>
