@@ -148,7 +148,7 @@ if (isset($_GET['edit_role'])) {
                                             <a href="?edit_role=<?= $role['id'] ?>" class="btn btn-sm btn-outline-primary me-1">
                                                 <i class="bi bi-pencil"></i> Permissions
                                             </a>
-                                            <?php if ($role['name'] !== 'super admin'): ?>
+                                            <?php if ($role['name'] !== 'head admin'): ?>
                                                 <form method="POST" action="role_management_handler.php" style="display: inline;" onsubmit="return confirm('Delete this role? All permissions will be removed.');">
                                                     <input type="hidden" name="action" value="delete_role">
                                                     <input type="hidden" name="role_id" value="<?= $role['id'] ?>">

@@ -177,13 +177,13 @@ VALUES
 -- NEW ROLES TABLE
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `name` VARCHAR(50) NOT NULL UNIQUE,
+  `name` VARCHAR(50) NOT NULL,
   `description` TEXT,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- SEED INITIAL ROLES
-INSERT INTO `roles` (`name`, `description`) VALUES
+INSERT IGNORE INTO `roles` (`name`, `description`) VALUES
 ('super admin', 'Full system access - manages all roles and permissions'),
 ('head admin', 'Head administrator - full feature access'),
 ('teacher', 'Classroom teacher - limited student/results access'),
