@@ -1,9 +1,11 @@
 <?php
 
-class Login {
+class Login
+{
     public $email;
 
-    public function __construct($email) {
+    public function __construct($email)
+    {
         $this->email = $email;
     }
     public function getAdmin($pdo, $email, $password)

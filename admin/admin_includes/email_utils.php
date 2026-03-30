@@ -14,7 +14,7 @@ class EmailUtils
     {
         $this->mail = new PHPMailer(true);
         $this->host = $host;
-        
+
         // SMTP configuration
         $this->mail->isSMTP();
         $this->mail->Host = 'smtp.gmail.com';
@@ -27,8 +27,9 @@ class EmailUtils
         $this->mail->isHTML(true);
     }
 
-    public function sendAdminPasswordResetEmail($email,$token,$user_type){
-        try{
+    public function sendAdminPasswordResetEmail($email, $token, $user_type)
+    {
+        try {
             $this->mail->clearAddresses();
             $this->mail->addAddress($email);
 

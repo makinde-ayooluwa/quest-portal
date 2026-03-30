@@ -700,14 +700,16 @@ class Admin
     }
 
     // ROLE MANAGEMENT METHODS
-    public function getAllRoles($pdo) {
+    public function getAllRoles($pdo)
+    {
         $query = "SELECT * FROM roles ORDER BY name";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getRole($pdo, $roleId) {
+    public function getRole($pdo, $roleId)
+    {
         $query = "SELECT * FROM roles WHERE id = :id";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':id', $roleId, PDO::PARAM_INT);
@@ -715,7 +717,8 @@ class Admin
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function createRole($pdo, $name, $description = '') {
+    public function createRole($pdo, $name, $description = '')
+    {
         $query = "INSERT INTO roles (name, description) VALUES (:name, :description)";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':name', $name);
@@ -723,7 +726,8 @@ class Admin
         return $stmt->execute();
     }
 
-    public function updateRole($pdo, $roleId, $name, $description = '') {
+    public function updateRole($pdo, $roleId, $name, $description = '')
+    {
         $query = "UPDATE roles SET name = :name, description = :description WHERE id = :id";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':id', $roleId, PDO::PARAM_INT);
@@ -732,7 +736,8 @@ class Admin
         return $stmt->execute();
     }
 
-    public function deleteRole($pdo, $roleId) {
+    public function deleteRole($pdo, $roleId)
+    {
         // First delete all permissions for this role
         $deleteAccessors = "DELETE FROM admin_features_accessors WHERE accessor = (SELECT name FROM roles WHERE id = :id)";
         $stmt = $pdo->prepare($deleteAccessors);
@@ -751,9 +756,10 @@ class Admin
         return $stmt->execute();
     }
 
-    public function getRolePermissions($pdo, $roleName) {
+    public function getRolePermissions($pdo, $roleName)
+    {
         $features = $this->getFeaturesAndFolks($pdo);
-        
+
         $permissions = [
             'features' => [],
             'sublinks' => []
@@ -788,7 +794,8 @@ class Admin
         return $permissions;
     }
 
-    public function updateRolePermissions($pdo, $roleName, $featurePermissions, $sublinkPermissions) {
+    public function updateRolePermissions($pdo, $roleName, $featurePermissions, $sublinkPermissions)
+    {
         // Delete existing permissions for this role
         $deleteQuery = "DELETE FROM admin_features_accessors WHERE accessor = :role";
         $stmt = $pdo->prepare($deleteQuery);
