@@ -26,7 +26,7 @@ function checkAdmin()
 
 checkAdmin();
 
-require_once 'admin_classes/admin.class.php';
+require_once 'admin_classes/Admin.class.php';
 $admin = new Admin($email);
 $adminData = $admin->adminData($pdo, $email);
 $students = $admin->getStudents($pdo);
