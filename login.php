@@ -1,298 +1,217 @@
 <?php
-
 session_start();
-
-/*require 'vendor/autoload.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
-
-require 'vendor/phpmailer/phpmailer/src/Exception.php';
-require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require 'vendor/phpmailer/phpmailer/src/SMTP.php';
-$mail = new PHPMailer(true); // true enables exceptions for error handling
-$mail->isSMTP();
-$mail->Host       = 'smtp.gmail.com'; // Or your SMTP server host
-$mail->SMTPAuth   = true;
-$mail->Username   = 'makindeayooluwa604@gmail.com';
-$mail->Password   = 'lirw zgkb kegs xyat'; // Use an app password for Gmail
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // or PHPMailer::ENCRYPTION_SMTPS
-$mail->Port       = 587; // or 465 for SMTPS
-$mail->setFrom('makindeayooluwa604@gmail.com', 'Makinde Ayooluwa');
-$mail->addAddress('makindeayooluwa42@gmail.com', 'Makinde Ayooluwa');
-// Optional: addReplyTo, addCC, addBCC
-$mail->isHTML(true); // Set email format to HTML
-$mail->Subject = 'Subject of your email';
-$mail->Body    = 'This is the <b>HTML body</b> of the email.';
-$mail->AltBody = 'This is the plain text body for non-HTML mail clients.';
-//$mail->addAttachment('/vendor/phpmailer/docs/README.md', 'document.pdf');
-try {
-    $mail->send();
-    echo 'Message has been sent';
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}*/
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>LOGIN</title>
+    <title>Login | Quest Schools - Student Portal</title>
     <?php include "head.php" ?>
     <style>
         :root {
             --quest-yellow: #fec511;
             --quest-green: #5aac7b;
+            --quest-green-50: #f0faf4;
+            --quest-green-100: #d4f0df;
+            --quest-green-600: #3d8b5e;
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-400: #94a3b8;
+            --slate-500: #64748b;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-800: #1e293b;
         }
-
-        .text-green {
-            color: var(--quest-green);
+        * { font-family: 'Montserrat', 'Segoe UI', system-ui, sans-serif; }
+        body {
+            margin: 0; padding: 0; min-height: 100vh;
+            background: linear-gradient(135deg, var(--quest-green) 0%, var(--quest-green-600) 50%, var(--quest-yellow) 100%);
+            position: relative; overflow-x: hidden;
         }
-
-        .text-yellow {
-            color: var(--quest-yellow);
+        .bg-shapes {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; z-index: 0; pointer-events: none;
         }
-
-        .bg-grad {
-            background: linear-gradient(90deg, var(--quest-green), var(--quest-yellow));
+        .shape {
+            position: absolute; border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            animation: float-shape 20s infinite ease-in-out;
         }
-
-        .btn-grad {
-            background: linear-gradient(90deg, var(--quest-green), var(--quest-yellow));
+        .shape:nth-child(1) { width: 400px; height: 400px; top: -100px; left: -100px; animation-delay: 0s; }
+        .shape:nth-child(2) { width: 300px; height: 300px; top: 50%; right: -80px; animation-delay: -5s; animation-duration: 25s; }
+        .shape:nth-child(3) { width: 200px; height: 200px; bottom: -50px; left: 30%; animation-delay: -10s; animation-duration: 18s; }
+        .shape:nth-child(4) { width: 150px; height: 150px; top: 20%; left: 60%; animation-delay: -15s; animation-duration: 22s; }
+        @keyframes float-shape {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -30px) rotate(5deg); }
+            50% { transform: translate(-20px, 20px) rotate(-5deg); }
+            75% { transform: translate(20px, 10px) rotate(3deg); }
         }
-
-        .btn-grad:hover {
-            background: linear-gradient(90deg, var(--quest-yellow), var(--quest-green));
+        .login-wrapper {
+            position: relative; z-index: 1; min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            padding: 2rem 1rem;
         }
-
-        .bg-yellow {
-            background: var(--quest-yellow);
+        .login-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 24px; padding: 2.5rem; width: 100%; max-width: 440px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            animation: scaleIn 0.6s ease forwards;
         }
-
-        .bg-green {
-            background: var(--quest-green);
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
-
-        .form-container {
-            background: #ffffffbe;
-            width: 410px;
-            border-radius: 15px;
-            margin-top: 50px;
+        .login-header { text-align: center; margin-bottom: 2rem; }
+        .login-logo {
+            width: 80px; height: 80px; border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(90, 172, 123, 0.3);
+            margin-bottom: 1.5rem; animation: float 3s ease-in-out infinite;
         }
-
-        * {
-            font-family: Montserrat;
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
-
-        label {
-            font-weight: 900;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
+        .login-title { font-size: 1.75rem; font-weight: 800; color: var(--slate-800); margin-bottom: 0.5rem; }
+        .login-subtitle { color: var(--slate-500); font-size: 0.9375rem; }
         .form-section {
-            background: rgba(255,255,255,0.8);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.6); border-radius: 16px;
+            padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.4);
         }
-
         .section-title {
-            color: var(--quest-green);
-            font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            color: var(--quest-green-600); font-weight: 700; margin-bottom: 1.25rem;
+            font-size: 0.9375rem; display: flex; align-items: center; gap: 0.5rem;
         }
-
-        .form-control, .form-select {
-            border-radius: 8px;
-            border: 2px solid #e9ecef;
-            transition: all 0.3s ease;
+        .form-label {
+            font-weight: 600; color: var(--slate-700); font-size: 0.875rem;
+            margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;
         }
-
-        .form-control:focus, .form-select:focus {
-            border-color: var(--quest-green);
-            box-shadow: 0 0 0 0.2rem rgba(90, 172, 123, 0.25);
+        .form-control-custom {
+            background: #fff; border: 2px solid var(--slate-200); border-radius: 12px;
+            padding: 0.875rem 1rem; font-size: 0.9375rem; transition: all 0.25s ease; width: 100%;
         }
-
-        .submit-btn {
-            text-transform: uppercase;
-            text-align: center;
-            text-size-adjust: auto;
-            font-display: block;
-            color: #fff;
-            font-weight: bolder;
-            font-size: 15px;
-            padding: 12px 30px;
-            background: linear-gradient(45deg, var(--quest-green), var(--quest-yellow));
-            border: none;
-            outline: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        .form-control-custom:focus {
+            outline: none; border-color: var(--quest-green);
+            box-shadow: 0 0 0 4px rgba(90, 172, 123, 0.15);
         }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, var(--quest-yellow), var(--quest-green));
+        .input-group-custom {
+            display: flex; border: 2px solid var(--slate-200); border-radius: 12px;
+            overflow: hidden; transition: all 0.25s ease;
         }
-
-        .mb-3 {
-            margin-bottom: 1.5rem !important;
+        .input-group-custom:focus-within {
+            border-color: var(--quest-green); box-shadow: 0 0 0 4px rgba(90, 172, 123, 0.15);
         }
-
+        .input-group-custom .form-control-custom { border: none; border-radius: 0; box-shadow: none; }
+        .input-group-custom .form-control-custom:focus { box-shadow: none; }
         .password-toggle {
-            border-left: none;
+            background: transparent; border: none; padding: 0 1rem;
+            color: var(--slate-400); cursor: pointer; transition: color 0.2s;
         }
-
-        .password-toggle:focus {
-            box-shadow: none;
+        .password-toggle:hover { color: var(--quest-green-600); }
+        .submit-btn {
+            width: 100%; padding: 1rem;
+            background: linear-gradient(135deg, var(--quest-green), var(--quest-yellow));
+            color: #fff; font-weight: 700; font-size: 1rem; border: none;
+            border-radius: 12px; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(90, 172, 123, 0.4);
+            position: relative; overflow: hidden;
         }
+        .submit-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px); box-shadow: 0 8px 25px rgba(90, 172, 123, 0.5);
+        }
+        .submit-btn:hover::before { left: 100%; }
+        .submit-btn:active { transform: translateY(0); }
+        .forgot-link {
+            color: var(--quest-green-600); text-decoration: none;
+            font-weight: 600; font-size: 0.875rem; transition: color 0.2s;
+        }
+        .forgot-link:hover { color: var(--quest-green); text-decoration: underline; }
+        .divider {
+            display: flex; align-items: center; gap: 1rem;
+            margin: 1.5rem 0; color: var(--slate-400); font-size: 0.875rem;
+        }
+        .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--slate-200); }
+        .back-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: var(--slate-500); text-decoration: none;
+            font-size: 0.875rem; font-weight: 500; transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--slate-700); }
+        .mb-3 { margin-bottom: 1.25rem !important; }
     </style>
 </head>
-
-<body class="">
-    <!--<nav class="px-3 py-0 navbar navbar-expand border-bottom">
-        <a href="./" class="navbar-brand">
-            <img width="50" src="assets/images/quest.jpg" alt="">
-        </a>
-    </nav>-->
+<body>
+    <div class="bg-shapes">
+        <div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div>
+    </div>
     <?php
     if (isset($_SESSION['error'])) {
-    ?>
-        <script>
-            toastr.error("<?php echo htmlspecialchars($_SESSION["error"], ENT_QUOTES, 'UTF-8') ?>", "Error!");
-        </script>
-    <?php
+    ?><script>toastr.error("<?php echo htmlspecialchars($_SESSION["error"], ENT_QUOTES, 'UTF-8') ?>", "Error!");</script><?php
         unset($_SESSION['error']);
     } else if (isset($_SESSION["success"])) {
-    ?>
-        <script>
-            toastr.success("<?php echo htmlspecialchars($_SESSION["success"], ENT_QUOTES, 'UTF-8') ?>", "Success!");
-        </script>
-    <?php
+    ?><script>toastr.success("<?php echo htmlspecialchars($_SESSION["success"], ENT_QUOTES, 'UTF-8') ?>", "Success!");</script><?php
         unset($_SESSION["success"]);
-    } else {
-        echo "";
     }
     ?>
-    <style>
-        .logo-header {
-            display: grid;
-            justify-content: center;
-        }
-
-        .logo-header .header {
-            text-align: center;
-            color: var(--quest-green);
-            font-size: 40px;
-        }
-
-        .logo-header .header-text {
-            color: var(--quest-yellow);
-            font-size: 20px;
-        }
-
-
-        form {
-            padding: 10px;
-        }
-
-        .real-header {
-            margin-top: 50px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .real-header img {
-            width: 50px;
-        }
-    </style>
-    <div class="real-header">
-        <img src="assets/images/quest.jpg" alt="Quest Portal Logo" style="width: 80px; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-    </div>
-    <div class="container form-container card shadow-lg rounded-3">
-        <div class="my-2">
-            <div class="logo-header">
-                <span class="header">
-                    <i class="bi bi-door-open-fill"></i>
-                </span>
-                <p class="header-text">Login to access your portal</p>
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="assets/images/quest.jpg" alt="Quest Portal Logo" class="login-logo">
+                <h1 class="login-title">Welcome Back!</h1>
+                <p class="login-subtitle">Sign in to access your student portal</p>
             </div>
-        </div>
-        <div class="form p-4">
             <form action="login_handler.inc.php" id="loginForm" method="post" enctype="multipart/form-data">
-                <!-- Login Credentials Section -->
                 <div class="form-section">
                     <div class="section-title">
-                        <i class="fas fa-sign-in-alt"></i>
-                        Login Credentials
+                        <i class="fas fa-sign-in-alt"></i> Login Credentials
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">
-                            <i class="fas fa-envelope"></i>
-                            Email Address
+                            <i class="fas fa-envelope" style="color: var(--quest-green);"></i> Email Address
                         </label>
-                        <input type="email" class="form-control" placeholder="Enter your email address" id="email" name="email">
+                        <input type="email" class="form-control-custom" placeholder="Enter your email address" id="email" name="email">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">
-                            <i class="fas fa-lock"></i>
-                            Password
+                            <i class="fas fa-lock" style="color: var(--quest-green);"></i> Password
                         </label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" placeholder="Enter your password" id="password" name="password">
-                            <button class="btn btn-outline-secondary password-toggle" type="button" id="passwordToggle">
-                                <i class="fas fa-eye"></i>
-                            </button>
+                        <div class="input-group-custom">
+                            <input type="password" class="form-control-custom" placeholder="Enter your password" id="password" name="password" style="border: none;">
+                            <button class="password-toggle" type="button" id="passwordToggle"><i class="fas fa-eye"></i></button>
                         </div>
                     </div>
                 </div>
-
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="text-danger">
-                        <a href="forgot_password.php" class="text-decoration-none">
-                            <i class="fas fa-key"></i>
-                            Forgot password?
-                        </a>
-                    </div>
-                    <button type="submit" class="submit-btn">
-                        <i class="fas fa-sign-in-alt me-2"></i>
-                        Log In
-                    </button>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <a href="forgot_password.php" class="forgot-link"><i class="fas fa-key me-1"></i> Forgot password?</a>
                 </div>
+                <button type="submit" class="submit-btn"><i class="fas fa-sign-in-alt me-2"></i> Log In</button>
             </form>
+            <div class="divider">or</div>
+            <div class="text-center">
+                <a href="./" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            </div>
         </div>
     </div>
     <script>
-        // Password toggle functionality
         const password = document.querySelector("#password");
         const passwordToggle = document.querySelector("#passwordToggle");
         passwordToggle.addEventListener("click", function() {
             if (password.type == "password") {
-                password.type = "text";
-                passwordToggle.innerHTML = "<i class='fas fa-eye-slash'></i>";
+                password.type = "text"; passwordToggle.innerHTML = "<i class='fas fa-eye-slash'></i>";
             } else {
-                password.type = "password";
-                passwordToggle.innerHTML = "<i class='fas fa-eye'></i>";
+                password.type = "password"; passwordToggle.innerHTML = "<i class='fas fa-eye'></i>";
             }
         });
-
-        // Prevent right-click context menu
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
     </script>
 </body>
-
 </html>
+

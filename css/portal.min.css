@@ -1,39 +1,715 @@
+/* ============================================
+   QUEST PORTAL — MODERN DESIGN SYSTEM
+   Version: 2.0
+   ============================================ */
+
+/* ============================================
+   1. CSS VARIABLES / DESIGN TOKENS
+   ============================================ */
 :root {
-  --quest-yellow: #fec511;
+  /* Primary Brand Colors */
   --quest-green: #5aac7b;
+  --quest-green-50: #f0faf4;
+  --quest-green-100: #d4f0df;
+  --quest-green-200: #a8e1bf;
+  --quest-green-300: #7dd29f;
+  --quest-green-400: #5aac7b;
+  --quest-green-500: #3d8b5e;
+  --quest-green-600: #2d6b48;
+  --quest-green-700: #1e4b32;
+  --quest-green-800: #0f2b1c;
+  --quest-green-900: #05140d;
+
+  /* Secondary Brand Colors */
+  --quest-yellow: #fec511;
+  --quest-yellow-50: #fffbea;
+  --quest-yellow-100: #fef3c7;
+  --quest-yellow-200: #fde68a;
+  --quest-yellow-300: #fcd34d;
+  --quest-yellow-400: #fbbf24;
+  --quest-yellow-500: #f59e0b;
+  --quest-yellow-600: #d97706;
+
+  /* Neutral Scale */
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+
+  /* Accent Colors */
+  --sky-400: #38bdf8;
+  --sky-500: #0ea5e9;
+  --violet-500: #8b5cf6;
+  --rose-500: #f43f5e;
+  --emerald-500: #10b981;
+  --amber-500: #f59e0b;
+
+  /* Semantic Colors */
+  --success: var(--quest-green);
+  --warning: var(--quest-yellow-500);
+  --danger: var(--rose-500);
+  --info: var(--sky-500);
+  --primary: var(--quest-green);
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-glow-green: 0 0 20px rgba(90, 172, 123, 0.3);
+  --shadow-glow-yellow: 0 0 20px rgba(254, 197, 17, 0.3);
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+  --transition-bounce: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
 }
 
+/* ============================================
+   2. RESET & BASE
+   ============================================ */
 html {
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-.text-green {
-  color: var(--quest-green);
+body {
+  font-family: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--slate-50);
+  color: var(--slate-800);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.text-yellow {
-  color: var(--quest-yellow);
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--slate-300) transparent;
 }
 
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--slate-300);
+  border-radius: var(--radius-full);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--slate-400);
+}
+
+/* ============================================
+   3. TYPOGRAPHY
+   ============================================ */
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-base { font-size: 1rem; line-height: 1.5rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+.text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+.text-5xl { font-size: 3rem; line-height: 1; }
+
+.font-light { font-weight: 300; }
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+
+.tracking-tight { letter-spacing: -0.025em; }
+.tracking-wide { letter-spacing: 0.025em; }
+
+/* ============================================
+   4. COLOR UTILITIES
+   ============================================ */
+.text-green { color: var(--quest-green); }
+.text-green-600 { color: var(--quest-green-600); }
+.text-green-700 { color: var(--quest-green-700); }
+.text-yellow { color: var(--quest-yellow); }
+.text-yellow-600 { color: var(--quest-yellow-600); }
+.text-slate-400 { color: var(--slate-400); }
+.text-slate-500 { color: var(--slate-500); }
+.text-slate-600 { color: var(--slate-600); }
+.text-slate-700 { color: var(--slate-700); }
+.text-slate-800 { color: var(--slate-800); }
+.text-slate-900 { color: var(--slate-900); }
+
+.bg-green { background: var(--quest-green); }
+.bg-green-50 { background: var(--quest-green-50); }
+.bg-green-100 { background: var(--quest-green-100); }
+.bg-green-600 { background: var(--quest-green-600); }
+.bg-yellow { background: var(--quest-yellow); }
+.bg-yellow-50 { background: var(--quest-yellow-50); }
+.bg-yellow-100 { background: var(--quest-yellow-100); }
+.bg-slate-50 { background: var(--slate-50); }
+.bg-slate-100 { background: var(--slate-100); }
+.bg-slate-200 { background: var(--slate-200); }
+
+/* ============================================
+   5. GRADIENTS
+   ============================================ */
 .bg-grad {
-  background: linear-gradient(90deg, var(--quest-green), var(--quest-yellow));
+  background: linear-gradient(135deg, var(--quest-green) 0%, var(--quest-green-400) 50%, var(--quest-yellow) 100%);
 }
 
+.bg-grad-reverse {
+  background: linear-gradient(135deg, var(--quest-yellow) 0%, var(--quest-green-400) 50%, var(--quest-green) 100%);
+}
+
+.bg-grad-dark {
+  background: linear-gradient(135deg, var(--quest-green-700) 0%, var(--quest-green-600) 100%);
+}
+
+.bg-grad-subtle {
+  background: linear-gradient(135deg, var(--quest-green-50) 0%, var(--slate-50) 100%);
+}
+
+.text-grad {
+  background: linear-gradient(135deg, var(--quest-green), var(--quest-yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   6. GLASSMORPHISM
+   ============================================ */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-green {
+  background: rgba(90, 172, 123, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(90, 172, 123, 0.2);
+}
+
+/* ============================================
+   7. BUTTONS
+   ============================================ */
 .btn-grad {
-  background: linear-gradient(90deg, var(--quest-green), var(--quest-yellow));
+  background: linear-gradient(135deg, var(--quest-green), var(--quest-yellow));
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  padding: 0.625rem 1.5rem;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-grad::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s ease;
 }
 
 .btn-grad:hover {
-  background: linear-gradient(90deg, var(--quest-yellow), var(--quest-green));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow-green);
 }
 
-.bg-yellow {
-  background: var(--quest-yellow);
+.btn-grad:hover::before {
+  left: 100%;
 }
 
-.bg-green {
+.btn-grad:active {
+  transform: translateY(0);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.625rem 1.5rem;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-modern {
+  background: #fff;
+  color: var(--slate-700);
+  border: 1px solid var(--slate-200);
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-modern:hover {
+  background: var(--slate-50);
+  border-color: var(--slate-300);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   8. CARDS
+   ============================================ */
+.card-modern {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--slate-100);
+  transition: all var(--transition-base);
+  overflow: hidden;
+}
+
+.card-modern:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.card-glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base);
+}
+
+.card-glass:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.card-accent {
+  border-left: 4px solid var(--quest-green);
+}
+
+.card-accent-yellow {
+  border-left: 4px solid var(--quest-yellow);
+}
+
+.card-accent-blue {
+  border-left: 4px solid var(--sky-500);
+}
+
+.card-accent-purple {
+  border-left: 4px solid var(--violet-500);
+}
+
+/* ============================================
+   9. BADGES & PILLS
+   ============================================ */
+.badge-modern {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+.badge-success {
+  background: var(--quest-green-100);
+  color: var(--quest-green-700);
+}
+
+.badge-warning {
+  background: var(--quest-yellow-100);
+  color: var(--quest-yellow-600);
+}
+
+.badge-danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.badge-info {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.badge-secondary {
+  background: var(--slate-100);
+  color: var(--slate-600);
+}
+
+/* ============================================
+   10. FORMS & INPUTS
+   ============================================ */
+.input-modern {
+  background: #fff;
+  border: 2px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  transition: all var(--transition-base);
+  width: 100%;
+}
+
+.input-modern:focus {
+  outline: none;
+  border-color: var(--quest-green);
+  box-shadow: 0 0 0 4px rgba(90, 172, 123, 0.15);
+}
+
+.input-glass {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  color: #fff;
+  font-size: 0.9375rem;
+  transition: all var(--transition-base);
+  width: 100%;
+}
+
+.input-glass::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.input-glass:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   11. ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(90, 172, 123, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(90, 172, 123, 0.6); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-fadeIn { animation: fadeIn 0.5s ease forwards; }
+.animate-fadeInUp { animation: fadeInUp 0.5s ease forwards; }
+.animate-fadeInDown { animation: fadeInDown 0.5s ease forwards; }
+.animate-slideInLeft { animation: slideInLeft 0.5s ease forwards; }
+.animate-slideInRight { animation: slideInRight 0.5s ease forwards; }
+.animate-scaleIn { animation: scaleIn 0.4s ease forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-bounce-subtle { animation: bounce-subtle 2s ease-in-out infinite; }
+
+/* Stagger delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* ============================================
+   12. LOADING & SKELETON
+   ============================================ */
+.skeleton {
+  background: linear-gradient(90deg, var(--slate-200) 25%, var(--slate-100) 50%, var(--slate-200) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--slate-200);
+  border-top-color: var(--quest-green);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ============================================
+   13. HERO & BANNER
+   ============================================ */
+.hero-gradient {
+  background: linear-gradient(135deg, var(--quest-green) 0%, var(--quest-green-400) 40%, var(--quest-yellow) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-gradient::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.5;
+}
+
+.hero-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+}
+
+/* ============================================
+   14. SIDEBAR MODERN
+   ============================================ */
+.sidebar-modern {
+  background: #fff;
+  border-right: 1px solid var(--slate-100);
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin: 0.25rem 0.75rem;
+  border-radius: var(--radius-md);
+  color: var(--slate-600);
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.sidebar-link:hover {
+  background: var(--quest-green-50);
+  color: var(--quest-green-600);
+  transform: translateX(4px);
+}
+
+.sidebar-link.active {
+  background: linear-gradient(135deg, var(--quest-green-50), var(--quest-yellow-50));
+  color: var(--quest-green-700);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar-link.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 3px;
+  height: 100%;
   background: var(--quest-green);
+  border-radius: 0 3px 3px 0;
 }
-* {
-  font-family: Montserrat;
+
+/* ============================================
+   15. HEADER MODERN
+   ============================================ */
+.header-glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  transition: all var(--transition-base);
 }
+
+.header-glass.scrolled {
+  box-shadow: var(--shadow-md);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* ============================================
+   16. STAT CARDS
+   ============================================ */
+.stat-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--slate-100);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: var(--shadow-xl);
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, transparent 50%, rgba(90, 172, 123, 0.05) 50%);
+  border-radius: 0 0 0 100%;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+/* ============================================
+   17. UTILITY CLASSES
+   ============================================ */
+.shadow-glow-green { box-shadow: var(--shadow-glow-green); }
+.shadow-glow-yellow { box-shadow: var(--shadow-glow-yellow); }
+
+.hover-lift {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.hover-scale {
+  transition: transform var(--transition-base);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.grayscale-hover {
+  filter: grayscale(100%);
+  transition: filter var(--transition-base);
+}
+
+.grayscale-hover:hover {
+  filter: grayscale(0%);
+}
+
+/* ============================================
+   18. RESPONSIVE HELPERS
+   ============================================ */
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
+  .text-center-mobile { text-align: center !important; }
+}
+
+@media (min-width: 769px) {
+  .hide-desktop { display: none !important; }
+}
+
+/* ============================================
+   19. LEGACY COMPATIBILITY
+   ============================================ */
+.text-green { color: var(--quest-green); }
+.text-yellow { color: var(--quest-yellow); }
+.bg-green { background: var(--quest-green); }
+.bg-yellow { background: var(--quest-yellow); }
+.btn-grad { background: linear-gradient(135deg, var(--quest-green), var(--quest-yellow)); }
+

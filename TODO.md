@@ -1,30 +1,28 @@
-# Role Management - COMPLETE ✅
+# Quest Portal Redesign TODO
 
-## All steps implemented:
+## Phase 1: Core Design System
+- [x] Create TODO.md
+- [ ] Update `css/portal.min.css` — Modern design system with glassmorphism, animations, expanded palette
 
-### 1. [x] Create TODO.md ✅
-### 2. [x] Update database/features.sql (roles table + seed data) ✅
-### 3. [x] Update admin/admin_classes/admin.class.php (new role methods) ✅
-### 4. [x] Implement admin/role_management.php (full CRUD + permissions UI) ✅
-### 5. [x] Update admin/staff_management.php (role dropdown, edit) ✅
-### 6. [x] Update admin/add_staff.php (role selection) ✅
-### 7. [x] Test & Update admin/header_sidebar.php if needed ✅
-### 8. [x] Final testing & completion ✅
+## Phase 2: Dashboard
+- [ ] Update `index.php` — Hero banner, animated stat cards, quick action grid
 
-## Key Features Delivered:
-- **roles table** with seed data (super admin, head admin, teacher, etc.)
-- **Full CRUD** for roles in role_management.php
-- **Permissions matrix** for features & sidebar sublinks
-- **Dynamic role badges** in staff_management.php with descriptions
-- **Dynamic role dropdowns** in add_staff.php & edit_staff.php
-- **Handler files** for all operations
-- **Security**: Only super admin/head admin can manage roles
-- **Full integration** with existing sidebar permission system
+## Phase 3: Authentication Pages
+- [ ] Update `login.php` — Animated gradient bg, glassmorphism card
+- [ ] Update `forgot_password.php` — Match login aesthetic
+- [ ] Update `reset_password.php` — Match login aesthetic
 
-## To Deploy:
-1. Execute `database/features.sql`
-2. Update existing staff_role values to match new roles (optional migration)
-3. Test role creation → staff assignment → sidebar restrictions
+## Phase 4: Profile & Content Pages
+- [ ] Update `profile.php` — Hero avatar section, modern info cards
+- [ ] Update `assignments.php` — Modern data table with hover effects
+- [ ] Update `notifications.php` — Card-based layout with accent borders
+- [ ] Update `events.php` — Card-based layout with accent borders
 
-**Role management platform is production-ready! 🚀**
+## Phase 5: Navigation
+- [ ] Update `sidebar.php` — Active states, hover transitions
+- [ ] Update `header.php` — Glassmorphism on scroll, better dropdowns
+
+## Phase 6: Minor Pages
+- [ ] Update `support.php` — Consistent card styling
+- [ ] Update `result.php` / `view_result.php` — Consistent styling
 

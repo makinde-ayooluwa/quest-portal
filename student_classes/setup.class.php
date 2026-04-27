@@ -46,7 +46,6 @@ class Setup
             $stmt->bindParam(":mother_email", $data["mother_email"]);
             $stmt->bindParam(":mother_phone", $data["mother_phone"]);
             $stmt->bindParam(":admission_number", $data["admission_number"]);
-            $stmt->bindParam(":email", $data["email"]);
             $stmt->bindParam(":pwd", $data["hashedPwd"]);
             $stmt->execute();
         }
