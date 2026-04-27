@@ -20,6 +20,15 @@ VALUES
         "staffManagement"
     );
 
+--     INSERT INTO
+--     admin_features(title, unique_id, collapseId)
+-- VALUES
+--     (
+--         "Mail Management",
+--         "mailManagement",
+--         "mailManagement"
+--     );
+
 INSERT INTO
     admin_features(title, unique_id, collapseId)
 VALUES
@@ -38,6 +47,11 @@ INSERT INTO
     admin_features_accessors(feature_unique_id, accessor)
 VALUES
     ("usersManagement", "head admin");
+
+--     INSERT INTO
+--     admin_features_accessors(feature_unique_id, accessor)
+-- VALUES
+--     ("mailManagement", "head admin");
 
 INSERT INTO
     admin_features_accessors(feature_unique_id, accessor)
@@ -110,6 +124,17 @@ VALUES
         "usersManagement"
     );
 
+--     INSERT INTO
+--     admin_features_sublinks(unique_id, title, link, icon, parent_unique_id)
+-- VALUES
+--     (
+--         "viewAllMails",
+--         "View all mail",
+--         "mail_management.php",
+--         "bi bi-person-workspace",
+--         "mailManagement"
+--     );
+
 INSERT INTO
     admin_features_sublinks(unique_id, title, link, icon, parent_unique_id)
 VALUES
@@ -163,6 +188,11 @@ VALUES
     admin_features_sublinks_accessors(feature_sublink_unique_id, accessor)
 VALUES
     ("manageRoles", "head admin");
+
+--     INSERT INTO
+--     admin_features_sublinks_accessors(feature_sublink_unique_id, accessor)
+-- VALUES
+--     ("viewAllMails", "head admin");
 
 INSERT INTO
     admin_features_sublinks_accessors(feature_sublink_unique_id, accessor)

@@ -182,6 +182,7 @@
 
         .main-content {
             margin-left: 0;
+            width: 100%;
         }
 
         .sidebar-toggler {
