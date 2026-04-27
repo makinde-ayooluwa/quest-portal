@@ -431,7 +431,7 @@ CREATE TABLE `admin_features_sublinks_accessors` (
 );
 
 -- NEW ROLE TABLE
-
+DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(50) NOT NULL,
