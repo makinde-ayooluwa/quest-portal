@@ -21,6 +21,7 @@ elseif (/*$admin->getSpecificAdmin($pdo, $_GET["id"]) && */$admin->getSpecificAd
 } elseif ($admin->getSpecificAdmin($pdo, $_GET["portal_code"])["account_verification"] == "Verified") {
 ?>
     Admin is verified
+    <a href="login.php">Click to login</a>
 <?php
 } else {
     $data = $admin->getSpecificAdmin($pdo, $_GET["portal_code"]);
@@ -72,7 +73,7 @@ elseif (/*$admin->getSpecificAdmin($pdo, $_GET["id"]) && */$admin->getSpecificAd
                     </div>
                     <div class="mb-2">
                         <label for="Ppicture" class="from-label">Profile picture</label>
-                        <input type="file" name="picture" id="Ppicture" class="form-control">
+                        <input type="file" accept=".jpeg,.jpg,.webp" name="picture" id="Ppicture" class="form-control">
                     </div>
                     <div class="mb-2">
                         <label for="password" class="form-label">Password</label>
@@ -80,9 +81,6 @@ elseif (/*$admin->getSpecificAdmin($pdo, $_GET["id"]) && */$admin->getSpecificAd
                     </div>
                     <div class="mb-3" id="password_requirement">
                         <ul>
-                            <li id="digit">Must have at least one digit</li>
-                            <li id="upper">Must have at least one uppercase letter</li>
-                            <li id="lower">Must have at least one lowercase letter</li>
                             <li id="length">Must be a minimum of 8 length</li>
                         </ul>
                     </div>
@@ -90,24 +88,6 @@ elseif (/*$admin->getSpecificAdmin($pdo, $_GET["id"]) && */$admin->getSpecificAd
                         const password = document.querySelector("form input#password");
                         const requirements = document.querySelector("form #password_requirement ul");
                         password.addEventListener("input", function() {
-                            if (!(/[0-9]/.test(password.value))) {
-                                requirements.querySelector("li#digit").style.color = "red";
-                                //password_error = "No digit";
-                            } else {
-                                requirements.querySelector("li#digit").style.color = "green";
-                            }
-                            if (!(/[A-Z]/.test(password.value))) {
-                                requirements.querySelector("li#upper").style.color = "red";
-                                //password_error = "No uppercase";
-                            } else {
-                                requirements.querySelector("li#upper").style.color = "green";
-                            }
-                            if (!(/[a-z]/.test(password.value))) {
-                                requirements.querySelector("li#lower").style.color = "red";
-                                //password_error = "No lowercase";
-                            } else {
-                                requirements.querySelector("li#lower").style.color = "green";
-                            }
                             if (!(password.value.length >= 8)) {
                                 requirements.querySelector("li#length").style.color = "red";
                                 //password_error = "Not more than 8";
