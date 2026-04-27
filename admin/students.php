@@ -163,7 +163,8 @@ $classes = $admin->getClasses($pdo);
                                 th,
                                 tr,
                                 td {
-                                    border: 1px solid #000;
+                                    border-top: 1px solid #000;
+                                    border-right: 1px solid #000;
                                     border-collapse: collapse;
                                     padding: 5px;
                                 }
@@ -410,7 +411,7 @@ $classes = $admin->getClasses($pdo);
                                         <i class="bi bi-eye"></i>
                                     </a>
 
-                                    <a onclick="this.innerHTML = '<span>Sending...</span>'; this.disabled = 'true'" href="send_mail.php?id=${student.id}"
+                                    <a onclick="this.innerHTML = '<span>Sending...</span>'; this.disabled" href="send_mail.php?id=${student.id}"
                                     class="btn btn-sm btn-outline-danger p-1">
                                         <span>Send Setup Mail</span>
                                     </a>
