@@ -191,12 +191,7 @@ tailwind.min.css">-->
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="javascript:;" id="profileDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="
-                            <?php
-                            echo $studentData['picture'];
-                            // Example: echo "SS2A";
-                            ?>
-                            " alt="Profile" width="32"
+                            <img src="<?php echo $studentData['picture']; ?>" alt="Profile" width="32"
                                 class="rounded-circle me-2 border">
                             <!-- <span>
                                 <?php
@@ -278,7 +273,7 @@ tailwind.min.css">-->
         {
             id: "events",
             title: "Events",
-            keywords: ["events", "event", "upcoming events",],
+            keywords: ["events", "event", "upcoming events", ],
             href: "events.php" // Replace with support/help page link
         }
     ];

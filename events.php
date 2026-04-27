@@ -23,47 +23,40 @@ $insertStmt->execute();
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events - Quest Schools</title>
-    <!-- Bootstrap CSS -->
-    <!--Fonts-->
-    <link rel="stylesheet" href="css/fonts.min.css">
-    <!--Favicon-->
-    <link rel="shortcut icon" href="assets/images/quest.jpg" type="image/x-icon">
-    <!--Styles-->
-    <link rel="stylesheet" href="bootstrap5/bootstrap-5.3.8-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <!--Scripts-->
-    <script src="bootstrap5/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery.min.js"></script>
+    <?php include "head.php" ?>
     <style>
-        * {
-            font-family: Montserrat;
-        }
-
-        body {
-            background: #f8f9fa;
-        }
-
         .event-card {
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
             margin-bottom: 1rem;
             padding: 1.5rem;
-            border-left: 4px solid #0d6efd;
+            border-left: 4px solid var(--sky-500);
+            transition: all var(--transition-base);
+            animation: fadeInUp 0.4s ease forwards;
+            position: relative;
+        }
+
+        .event-card:nth-child(1) { animation-delay: 0.05s; }
+        .event-card:nth-child(2) { animation-delay: 0.1s; }
+        .event-card:nth-child(3) { animation-delay: 0.15s; }
+        .event-card:nth-child(4) { animation-delay: 0.2s; }
+        .event-card:nth-child(5) { animation-delay: 0.25s; }
+
+        .event-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
         }
 
         .event-card.upcoming {
-            border-left-color: #198754;
-            background: #f8fff9;
+            border-left-color: var(--quest-green);
+            background: var(--quest-green-50);
         }
 
         .event-card.past {
-            border-left-color: #6c757d;
-            opacity: 0.7;
+            border-left-color: var(--slate-400);
+            opacity: 0.75;
         }
 
         .event-icon {
@@ -74,30 +67,36 @@ $insertStmt->execute();
             align-items: center;
             justify-content: center;
             margin-right: 1rem;
-            background: #e7f3ff;
-            color: #0d6efd;
+            background: #e0f2fe;
+            color: var(--sky-500);
+            font-size: 1.25rem;
+        }
+
+        .event-card.upcoming .event-icon {
+            background: var(--quest-green-100);
+            color: var(--quest-green-600);
         }
 
         .event-date {
             font-size: 0.875rem;
-            color: #6c757d;
+            color: var(--slate-500);
             margin-bottom: 0.5rem;
         }
 
         .event-time {
             font-size: 0.875rem;
-            color: #6c757d;
+            color: var(--slate-500);
         }
 
         .event-location {
             font-size: 0.875rem;
-            color: #6c757d;
+            color: var(--slate-500);
         }
 
         .no-events {
             text-align: center;
             padding: 3rem;
-            color: #6c757d;
+            color: var(--slate-500);
         }
 
         .event-status {
@@ -105,18 +104,26 @@ $insertStmt->execute();
             top: 1rem;
             right: 1rem;
             font-size: 0.75rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
         }
 
         .event-status.upcoming {
-            background: #d1ecf1;
-            color: #0c5460;
+            background: #d1fae5;
+            color: var(--quest-green-700);
         }
 
         .event-status.past {
-            background: #f8f9fa;
-            color: #6c757d;
+            background: var(--slate-100);
+            color: var(--slate-600);
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
         }
     </style>
 </head>
@@ -125,29 +132,14 @@ $insertStmt->execute();
     <?php include "header.php" ?>
     <?php include "sidebar.php" ?>
 
-    <div class="container-fluid px-4 py-4" style="margin-left: 250px;">
-    <style>
-        @media (max-width: 768px) {
-            .container-fluid {
-                margin-left: 0 !important;
-                padding-left: 1rem !important;
-                padding-right: 1rem !important;
-            }
-        }
-        @media (max-width: 576px) {
-            .event-card {
-                padding: 1rem !important;
-            }
-            .event-icon {
-                width: 40px !important;
-                height: 40px !important;
-            }
-        }
-    </style>
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Events</h2>
-            <span class="badge bg-primary"><?php echo count($events); ?> total</span>
-        </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-9 py-4">
+                <div class="page-header">
+                    <h2 class="mb-0 fw-bold"><i class="bi bi-calendar-event-fill text-green me-2"></i>Events</h2>
+                    <span class="badge badge-modern badge-secondary"><?php echo count($events); ?> total</span>
+                </div>
 
         <?php if (empty($events)): ?>
             <div class="no-events">
@@ -199,6 +191,8 @@ $insertStmt->execute();
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
+            </div>
+        </div>
     </div>
 
     <script>

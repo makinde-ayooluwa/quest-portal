@@ -28,88 +28,81 @@ $assignments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assignments - Quest Schools</title>
-    <!-- Bootstrap CSS -->
-    <!--Fonts-->
-    <link rel="stylesheet" href="css/fonts.min.css">
-    <!--Favicon-->
-    <link rel="shortcut icon" href="assets/images/quest.jpg" type="image/x-icon">
-    <!--Styles-->
-    <link rel="stylesheet" href="bootstrap5/bootstrap-5.3.8-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <!--Scripts-->
-    <script src="bootstrap5/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery.min.js"></script>
+    <?php include "head.php" ?>
     <style>
-        * {
-            font-family: Montserrat;
-        }
-
-        body {
-            background: #f8f9fa;
-        }
-
         .assign-card {
-            max-width: 1200px;
-            margin: 2rem auto;
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
             padding: 2rem;
+            animation: fadeInUp 0.4s ease forwards;
         }
 
         .assignment-row {
-            transition: all 0.3s ease;
+            transition: all var(--transition-base);
         }
 
         .assignment-row:hover {
-            background-color: #f8f9fa;
+            background-color: var(--slate-50);
         }
 
         .download-btn {
-            background: linear-gradient(90deg, #0d6efd 60%, #198754 100%);
+            background: linear-gradient(135deg, var(--sky-500), var(--quest-green));
             color: #fff;
             border: none;
+            transition: all var(--transition-base);
         }
 
         .download-btn:hover {
-            background: linear-gradient(90deg, #198754 60%, #0d6efd 100%);
-            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .upload-btn {
-            background: linear-gradient(90deg, #5aac7b, #fec511);
+            background: linear-gradient(135deg, var(--quest-green), var(--quest-yellow));
             color: #fff;
             border: none;
+            transition: all var(--transition-base);
         }
 
         .upload-btn:hover {
-            background: linear-gradient(90deg, #fec511, #5aac7b);
-            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow-green);
         }
 
         .status-badge {
             font-size: 0.8rem;
+            padding: 0.375rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
         }
 
         .overdue {
-            background-color: #dc3545 !important;
+            background: #fee2e2 !important;
+            color: #991b1b !important;
         }
 
         .submitted {
-            background-color: #198754 !important;
+            background: #d1fae5 !important;
+            color: #065f46 !important;
         }
 
         .pending {
-            background-color: #ffc107 !important;
-            color: #000 !important;
+            background: var(--quest-yellow-100) !important;
+            color: var(--quest-yellow-600) !important;
         }
 
         .graded {
-            background-color: #6f42c1 !important;
+            background: #ede9fe !important;
+            color: #6d28d9 !important;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
         }
     </style>
 </head>

@@ -1,28 +1,30 @@
-# Quest Portal Redesign TODO
+# Design Overhaul TODO
 
-## Phase 1: Core Design System
-- [x] Create TODO.md
-- [ ] Update `css/portal.min.css` — Modern design system with glassmorphism, animations, expanded palette
+## Phase 1 — Foundation Fixes
+- [ ] notifications.php — replace manual header tags with `include "head.php"`
+- [ ] events.php — replace manual header tags with `include "head.php"`
+- [ ] assignments.php — replace manual header tags with `include "head.php"`
+- [ ] assignment_upload.php — replace manual header tags with `include "head.php"`
 
-## Phase 2: Dashboard
-- [ ] Update `index.php` — Hero banner, animated stat cards, quick action grid
+## Phase 2 — Auth Pages (Glassmorphism Theme)
+- [ ] forgot_password.php — glassmorphism redesign matching login.php
+- [ ] reset_password.php — glassmorphism redesign matching login.php
+- [ ] admin/login.php — glassmorphism redesign matching student login
+- [ ] admin/forgot_password.php — glassmorphism redesign
+- [ ] admin/reset_password.php — glassmorphism redesign
 
-## Phase 3: Authentication Pages
-- [ ] Update `login.php` — Animated gradient bg, glassmorphism card
-- [ ] Update `forgot_password.php` — Match login aesthetic
-- [ ] Update `reset_password.php` — Match login aesthetic
+## Phase 3 — Student Content Pages (Modern Card + Animation Theme)
+- [ ] result.php — hero gradient, stat cards, modern table, remove redundant CSS
+- [ ] view_result.php — modern result cards with gradient headers, animations
+- [ ] view_result_updated.php — modern result cards with gradient headers, animations
+- [ ] profile.php — modern profile card with hover-lift, animated sections
+- [ ] profile_edit.php — modern form sections with icon headers, smooth transitions
+- [ ] notifications.php — fix grid layout, modern notification cards with badges
+- [ ] events.php — fix grid layout, modern event cards with timeline styling
+- [ ] assignments.php — modern assignment table with status badges
 
-## Phase 4: Profile & Content Pages
-- [ ] Update `profile.php` — Hero avatar section, modern info cards
-- [ ] Update `assignments.php` — Modern data table with hover effects
-- [ ] Update `notifications.php` — Card-based layout with accent borders
-- [ ] Update `events.php` — Card-based layout with accent borders
-
-## Phase 5: Navigation
-- [ ] Update `sidebar.php` — Active states, hover transitions
-- [ ] Update `header.php` — Glassmorphism on scroll, better dropdowns
-
-## Phase 6: Minor Pages
-- [ ] Update `support.php` — Consistent card styling
-- [ ] Update `result.php` / `view_result.php` — Consistent styling
+## Phase 4 — Admin Content Pages
+- [ ] admin/head.php — add portal.min.css link
+- [ ] admin/add_student.php — modern card with section headers, hover effects
+- [ ] admin/add_staff.php — modern card with section headers, hover effects
 

@@ -22,76 +22,57 @@ $availableAssignments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Assignment - Quest Schools</title>
-    <!-- Bootstrap CSS -->
-    <!--Fonts-->
-    <link rel="stylesheet" href="css/fonts.min.css">
-    <!--Favicon-->
-    <link rel="shortcut icon" href="assets/images/quest.jpg" type="image/x-icon">
-    <!--Styles-->
-    <link rel="stylesheet" href="bootstrap5/bootstrap-5.3.8-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <!--Scripts-->
-    <script src="bootstrap5/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery.min.js"></script>
+    <?php include "head.php" ?>
     <style>
-        * {
-            font-family: Montserrat;
-        }
-
-        body {
-            background: #f8f9fa;
-        }
-
         .upload-card {
             max-width: 600px;
             margin: 3rem auto;
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
             padding: 2rem;
+            animation: fadeInUp 0.4s ease forwards;
         }
 
         .btn-grad {
-            background: linear-gradient(90deg, #5aac7b, #fec511);
+            background: linear-gradient(135deg, var(--quest-green), var(--quest-yellow));
             color: #fff;
             border: none;
+            transition: all var(--transition-base);
         }
 
         .btn-grad:hover {
-            background: linear-gradient(90deg, #fec511, #5aac7b);
-            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow-green);
         }
 
         .assignment-option {
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
+            border: 2px solid var(--slate-200);
+            border-radius: var(--radius-md);
             padding: 1rem;
             margin-bottom: 0.5rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all var(--transition-base);
         }
 
         .assignment-option:hover {
-            background-color: #f8f9fa;
-            border-color: #0d6efd;
+            background-color: var(--slate-50);
+            border-color: var(--quest-green);
         }
 
         .assignment-option.selected {
-            background-color: #e7f3ff;
-            border-color: #0d6efd;
+            background-color: var(--quest-green-50);
+            border-color: var(--quest-green);
         }
 
         .due-date-warning {
-            color: #dc3545;
+            color: var(--rose-500);
             font-weight: bold;
         }
 
         .due-date-normal {
-            color: #6c757d;
+            color: var(--slate-500);
         }
     </style>
 </head>

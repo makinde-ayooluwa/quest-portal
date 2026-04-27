@@ -23,83 +23,83 @@ $insertStmt->execute();
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notifications - Quest Schools</title>
-    <!-- Bootstrap CSS -->
-    <!--Fonts-->
-    <link rel="stylesheet" href="css/fonts.min.css">
-    <!--Favicon-->
-    <link rel="shortcut icon" href="assets/images/quest.jpg" type="image/x-icon">
-    <!--Styles-->
-    <link rel="stylesheet" href="bootstrap5/bootstrap-5.3.8-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <!--Scripts-->
-    <script src="bootstrap5/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery.min.js"></script>
+    <?php include "head.php" ?>
     <style>
-        * {
-            font-family: Montserrat;
-        }
-
-        body {
-            background: #f8f9fa;
-        }
-
         .notification-card {
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
             margin-bottom: 1rem;
             padding: 1.5rem;
-            border-left: 4px solid #0d6efd;
+            border-left: 4px solid var(--sky-500);
+            transition: all var(--transition-base);
+            animation: fadeInUp 0.4s ease forwards;
+        }
+
+        .notification-card:nth-child(1) { animation-delay: 0.05s; }
+        .notification-card:nth-child(2) { animation-delay: 0.1s; }
+        .notification-card:nth-child(3) { animation-delay: 0.15s; }
+        .notification-card:nth-child(4) { animation-delay: 0.2s; }
+        .notification-card:nth-child(5) { animation-delay: 0.25s; }
+
+        .notification-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
         }
 
         .notification-card.unread {
-            border-left-color: #198754;
-            background: #f8fff9;
+            border-left-color: var(--quest-green);
+            background: var(--quest-green-50);
         }
 
         .notification-icon {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 1rem;
+            font-size: 1.1rem;
         }
 
         .notification-icon.info {
-            background: #e7f3ff;
-            color: #0d6efd;
+            background: #e0f2fe;
+            color: var(--sky-500);
         }
 
         .notification-icon.success {
-            background: #e8f5e8;
-            color: #198754;
+            background: #d1fae5;
+            color: var(--emerald-500);
         }
 
         .notification-icon.warning {
-            background: #fff3cd;
-            color: #ffc107;
+            background: var(--quest-yellow-100);
+            color: var(--quest-yellow-600);
         }
 
         .notification-icon.error {
-            background: #f8d7da;
-            color: #dc3545;
+            background: #fee2e2;
+            color: var(--rose-500);
         }
 
         .notification-time {
             font-size: 0.875rem;
-            color: #6c757d;
+            color: var(--slate-500);
         }
 
         .no-notifications {
             text-align: center;
             padding: 3rem;
-            color: #6c757d;
+            color: var(--slate-500);
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
         }
     </style>
 </head>
@@ -108,32 +108,14 @@ $insertStmt->execute();
     <?php include "header.php" ?>
     <?php include "sidebar.php" ?>
 
-    <div class="container-fluid px-4 py-4" style="margin-left: 250px;">
-    <style>
-        @media (max-width: 768px) {
-            .container-fluid {
-                margin-left: 0 !important;
-                padding-left: 1rem !important;
-                padding-right: 1rem !important;
-            }
-        }
-        @media (max-width: 576px) {
-            .notification-card {
-                padding: 1rem !important;
-            }
-            .notification-icon {
-                width: 35px !important;
-                height: 35px !important;
-            }
-            .notification-time {
-                font-size: 0.8rem !important;
-            }
-        }
-    </style>
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Notifications</h2>
-            <span class="badge bg-primary"><?php echo count($notifications); ?> total</span>
-        </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-9 py-4">
+                <div class="page-header">
+                    <h2 class="mb-0 fw-bold"><i class="bi bi-bell-fill text-green me-2"></i>Notifications</h2>
+                    <span class="badge badge-modern badge-secondary"><?php echo count($notifications); ?> total</span>
+                </div>
 
         <?php if (empty($notifications)): ?>
             <div class="no-notifications">
@@ -176,6 +158,8 @@ $insertStmt->execute();
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
+            </div>
+        </div>
     </div>
 
     <script>

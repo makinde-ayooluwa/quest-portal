@@ -348,7 +348,7 @@ $assignmentStats = $assignmentStmt->fetch(PDO::FETCH_ASSOC);
                             <div class="stat-label text-sm text-slate-500">Upcoming Events</div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3 mb-3">
+                    <!-- <div class="col-md-6 col-lg-3 mb-3">
                         <div class="stat-card-dashboard">
                             <div class="stat-icon-wrap blue">
                                 <i class="bi bi-journal-check"></i>
@@ -365,7 +365,7 @@ $assignmentStats = $assignmentStmt->fetch(PDO::FETCH_ASSOC);
                             <div class="stat-value text-2xl font-bold text-slate-800"><?php echo $assignmentStats['pending'] ?? 0; ?></div>
                             <div class="stat-label text-sm text-slate-500">Pending Tasks</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- Quick Actions -->
