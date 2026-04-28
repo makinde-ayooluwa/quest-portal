@@ -190,16 +190,6 @@ $results = $admin->getAllResults($pdo);
     } ?>
 
     <div class="main-content">
-        <style>
-            body[data-theme='dark']>* {
-                color: #fff;
-            }
-
-            body[data-theme='dark'] .results-card {
-                background: #000;
-                box-shadow: 0 4px 15px rgb(255, 255, 255, 0.2);
-            }
-        </style>
         <div class="results-card">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>

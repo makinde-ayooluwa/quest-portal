@@ -1,23 +1,5 @@
+
 <style>
-    /* Dark Mode */
-    body[data-theme='dark'] {
-        background-color: #000;
-    }
-
-    body[data-theme='dark'] header {
-        box-shadow: 0 1px 1px rgb(255, 255, 255);
-    }
-
-    body[data-theme='dark'] .navbar {
-        background: #000;
-        color: #fff;
-    }
-
-    body[data-theme='dark'] .admin-header-profile-picture-text {
-        color: #fff;
-    }
-
-    /* Dark Mode Ends */
     * {
         font-family: Montserrat;
     }
@@ -72,20 +54,6 @@
         border-top: 1px solid;
         border-top-color: #000;
     }
-
-    /* Dark Mode Sidebar */
-    body[data-theme='dark'] .sidebar {
-        background: #000;
-        color: #fff;
-        border-top-color: #fff;
-        box-shadow: 0 2px 2px rgb(255, 255, 255);
-    }
-
-    body[data-theme='dark'] .sidebar ul li a {
-        color: #fff;
-    }
-
-    /* Sidebar Dark Mode Ends */
 
     .sidebar ul {
         list-style: none;

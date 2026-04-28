@@ -1,5 +1,11 @@
 <!--<link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/
 tailwind.min.css">-->
+<?php
+require_once 'student_includes/autoloader.inc.php';
+require_once 'student_includes/db.inc.php';
+
+include "student_includes/student.inc.php";
+?>
 <style>
     #searchSuggestions {
         background-color: #fff;
@@ -187,6 +193,11 @@ tailwind.min.css">-->
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item me-3">
+                    <a class="nav-link" href="javascript:;" id="studentSettingsBtn" title="Settings">
+                        <i class="bi bi-gear fs-5"></i>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="javascript:;" id="profileDropdown"
@@ -226,6 +237,7 @@ tailwind.min.css">-->
         </div>
     </nav>
 </div>
+<?php include "settings.php" ?>
 <ul id="searchSuggestions" class="rounded-2 shadow-sm list-group"></ul>
 <script>
     const portalSections = [{

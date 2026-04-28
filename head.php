@@ -1,5 +1,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Anti-FOUC: apply saved theme before any CSS renders -->
+<script>
+  (function() {
+    try {
+      var s = JSON.parse(localStorage.getItem('settings') || '{}');
+      if (s.mode === 'dark') {
+        var st = document.createElement('style');
+        st.textContent = 'html{background:#0f172a}body{background:#0f172a!important;color:#e2e8f0!important}';
+        document.head.appendChild(st);
+      }
+    } catch(e) {}
+  })();
+</script>
 <!--Fonts-->
 <link rel="stylesheet" href="css/fonts.min.css">
 <!--Favicon-->

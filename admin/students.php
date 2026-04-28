@@ -133,13 +133,6 @@ $classes = $admin->getClasses($pdo);
                                     border-collapse: collapse;
                                     padding: 5px;
                                 }
-
-                                body[data-theme='dark'] .students-table thead,
-                                body[data-theme='dark'] .students-table th,
-                                body[data-theme='dark'] .students-table tr,
-                                body[data-theme='dark'] .students-table td {
-                                    border-color: #fff;
-                                }
                             </style>
                             <table class="students-table table-responsive">
                                 <thead>

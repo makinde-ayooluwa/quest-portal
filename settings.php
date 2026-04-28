@@ -1,32 +1,4 @@
 <style>
-    .settingsButton {
-        z-index: 1045;
-        position: fixed;
-        right: 1.5rem;
-        bottom: 1.5rem;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        border: none;
-        background: linear-gradient(135deg, var(--quest-green), var(--quest-yellow));
-        color: #fff;
-        box-shadow: var(--shadow-md);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .settingsButton:hover {
-        transform: scale(1.1) rotate(15deg);
-        box-shadow: var(--shadow-lg), var(--shadow-glow-green);
-    }
-
-    .settingsButton i {
-        font-size: 1.25rem;
-    }
-
     .settingsPage {
         position: fixed;
         top: 56px;
@@ -100,10 +72,6 @@
     }
 </style>
 
-<button class="settingsButton" id="settings-opener" title="Settings">
-    <i class="bi bi-gear"></i>
-</button>
-
 <div class="settingsPage" id="settingsPage">
     <div class="settingsCloser" id="settings-closer-bg"></div>
     <div class="settings">
@@ -159,15 +127,15 @@
 
         // Panel controls
         const settingsPage = document.getElementById("settingsPage");
-        const opener = document.getElementById("settings-opener");
+        const opener = document.getElementById("studentSettingsBtn");
         const closerBg = document.getElementById("settings-closer-bg");
         const closerBtn = document.getElementById("settings-close-btn");
 
         function openSettings() {
-            settingsPage.style.transform = "translateX(0%)";
+            if (settingsPage) settingsPage.style.transform = "translateX(0%)";
         }
         function closeSettings() {
-            settingsPage.style.transform = "translateX(100%)";
+            if (settingsPage) settingsPage.style.transform = "translateX(100%)";
         }
 
         if (opener) opener.addEventListener("click", openSettings);
@@ -181,9 +149,9 @@
                 settings.mode = modeSelect.value;
                 localStorage.setItem("settings", JSON.stringify(settings));
                 document.body.setAttribute("data-theme", settings.mode);
-                // Optional: close panel after apply
                 closeSettings();
             });
         }
     })();
 </script>
+

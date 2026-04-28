@@ -55,13 +55,6 @@ $quick_actions = [
       text-align: center;
     }
 
-    body[data-theme='dark'] .stat-card,
-    #quick-actions .card {
-      background: #000;
-      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.6);
-      color: #fff;
-    }
-
     /*.dashboard .stats {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -220,29 +213,7 @@ $quick_actions = [
   <main class="main-content">
     <section class="dashboard">
       <!-- Quick Actions Panel -->
-      <!-- <div class="quick-actions mb-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h2 id="greeting" class="h3">Welcome, <span
-              class="text-uppercase fw-bolder"><?php echo $adminData["fullname"] ?></span>.</h2>
-          <div class="d-flex flex-column flex-sm-row gap-2">
-            <?php
-            if ($adminData["staff_role"] == "head admin") {
-            ?>
-              <button class="btn btn-primary btn-sm" onclick="window.location.href='add_staff.php'">
-                <i class="bi bi-person-badge"></i> Add User
-              </button>
-            <?php
-            }
-            ?>
-            <button class="btn btn-warning text-white btn-sm" onclick="window.location.href='add_notification.php'">
-              <i class="bi bi-bell"></i> Add Notification
-            </button>
-            <button class="btn btn-info text-white btn-sm" onclick="window.location.href='add_event.php'">
-              <i class="bi bi-calendar-event"></i> Add Event
-            </button>
-          </div>
-        </div>
-      </div> -->
+      
       <style>
         .shaker {
           animation: shake 2s linear infinite;
@@ -283,15 +254,7 @@ $quick_actions = [
           grid-template-rows: auto;
         }
 
-        /* Quick Actions Dark Mode */
-        body[data-theme='dark'] .quick-actions,
-        body[data-theme='dark'] #quick-actions .action-card {
-          background: #000;
-          color: #fff;
-          box-shadow: 0 4px 15px rgba(225, 225, 225, 0.6);
-        }
-
-        /* Quick Actions Dark Mode Enabled */
+        /* Quick Actions Dark Mode - handled by portal.min.css */
       </style>
       <!-- Stats Cards with Notifications -->
       <div class="stats row gap-2 justify-content-center mb-4">
@@ -326,16 +289,6 @@ $quick_actions = [
         <?php
         }
         ?>
-        <!-- <div class="stat-card col-md-6 col-lg">
-          <h3><i class="bi bi-house-door-fill px-3"></i>Total Classes</h3>
-          <h1 class="fs-2">
-            <?php echo count($classes); ?>
-          </h1>
-          <div class="progress mt-3">
-            <div class="progress-bar bg-warning" style="width: <?php echo min((count($classes)) * 100, 100); ?>%;">
-            </div>
-          </div>
-        </div> -->
         <!-- System Health Card -->
         <div class="stat-card col-md">
           <h3><i class="bi bi-shield-check px-3"></i>System Health</h3>
@@ -368,22 +321,9 @@ $quick_actions = [
                   border-color: #000;
                 }
 
-                body[data-theme='dark'] .classes-card {
-                  border-color: #fff;
-                }
-
                 #classSearch {
                   background: transparent;
                   border-color: #000;
-                }
-
-                body[data-theme='dark'] #classSearch {
-                  color: #fff;
-                  border-color: #fff;
-                }
-
-                body[data-theme='dark'] #classSearch::placeholder {
-                  color: white;
                 }
               </style>
               <div class="classes-card p-3 mb-3">
@@ -412,16 +352,7 @@ $quick_actions = [
                         border-color: #000;
                       }
 
-                      body[data-theme='dark'] #classesTable,
-                      body[data-theme='dark'] #classesTable thead,
-                      body[data-theme='dark'] #classesTable tbody,
-                      body[data-theme='dark'] #classesTable tr,
-                      body[data-theme='dark'] #classesTable th,
-                      body[data-theme='dark'] #classesTable td {
-                        border-color: #fff;
-                        background: #000;
-                        color: #fff;
-                      }
+
                     </style>
                     <thead>
                       <tr>
@@ -532,12 +463,7 @@ $quick_actions = [
                 padding: 10px;
               }
 
-              body[data-theme='dark'] .activities-card,
-              body[data-theme='dark'] .notifications-card,
-              body[data-theme='dark'] .events-card {
-                box-shadow: 0 2px 2px rgb(255, 255, 255, 0.6);
-                color: #fff;
-              }
+
             </style>
             <div class="activities-card">
               <div class="activities-card-body">
