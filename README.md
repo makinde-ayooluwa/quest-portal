@@ -2,7 +2,6 @@
 
 A modern, full-featured **School Management System** built with PHP and MySQL, designed to streamline student activities, academic tracking, and communication.
 
----
 
 
 
