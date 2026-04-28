@@ -4,14 +4,7 @@ A modern, full-featured **School Management System** built with PHP and MySQL, d
 
 ---
 
-## 🚀 Live Demo
 
-👉 (Add your demo link here — VERY IMPORTANT)
-
----
-
-
----
 
 ## ✨ Features
 
