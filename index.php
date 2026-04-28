@@ -61,7 +61,7 @@ $assignmentStats = $assignmentStmt->fetch(PDO::FETCH_ASSOC);
             right: -20%;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
             border-radius: 50%;
         }
 
@@ -72,7 +72,7 @@ $assignmentStats = $assignmentStmt->fetch(PDO::FETCH_ASSOC);
             left: -10%;
             width: 300px;
             height: 300px;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
             border-radius: 50%;
         }
 
@@ -108,10 +108,21 @@ $assignmentStats = $assignmentStmt->fetch(PDO::FETCH_ASSOC);
             animation: fadeInUp 0.5s ease forwards;
         }
 
-        .stat-card-dashboard:nth-child(1) { animation-delay: 0.1s; }
-        .stat-card-dashboard:nth-child(2) { animation-delay: 0.2s; }
-        .stat-card-dashboard:nth-child(3) { animation-delay: 0.3s; }
-        .stat-card-dashboard:nth-child(4) { animation-delay: 0.4s; }
+        .stat-card-dashboard:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .stat-card-dashboard:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .stat-card-dashboard:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .stat-card-dashboard:nth-child(4) {
+            animation-delay: 0.4s;
+        }
 
         .stat-card-dashboard:hover {
             transform: translateY(-6px);
@@ -173,11 +184,25 @@ $assignmentStats = $assignmentStmt->fetch(PDO::FETCH_ASSOC);
             animation: fadeInUp 0.5s ease forwards;
         }
 
-        .action-card:nth-child(1) { animation-delay: 0.1s; }
-        .action-card:nth-child(2) { animation-delay: 0.2s; }
-        .action-card:nth-child(3) { animation-delay: 0.3s; }
-        .action-card:nth-child(4) { animation-delay: 0.4s; }
-        .action-card:nth-child(5) { animation-delay: 0.5s; }
+        .action-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .action-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .action-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .action-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .action-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
 
         .action-card:hover {
             transform: translateY(-6px);
@@ -218,11 +243,30 @@ $assignmentStats = $assignmentStmt->fetch(PDO::FETCH_ASSOC);
             transform: scale(1.1) rotate(-5deg);
         }
 
-        .action-icon.primary { background: var(--quest-green-100); color: var(--quest-green-600); }
-        .action-icon.success { background: #d1fae5; color: #059669; }
-        .action-icon.info { background: #e0f2fe; color: #0284c7; }
-        .action-icon.warning { background: var(--quest-yellow-100); color: var(--quest-yellow-600); }
-        .action-icon.dark { background: var(--slate-100); color: var(--slate-700); }
+        .action-icon.primary {
+            background: var(--quest-green-100);
+            color: var(--quest-green-600);
+        }
+
+        .action-icon.success {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .action-icon.info {
+            background: #e0f2fe;
+            color: #0284c7;
+        }
+
+        .action-icon.warning {
+            background: var(--quest-yellow-100);
+            color: var(--quest-yellow-600);
+        }
+
+        .action-icon.dark {
+            background: var(--slate-100);
+            color: var(--slate-700);
+        }
 
         .action-btn {
             display: inline-flex;
@@ -289,18 +333,43 @@ $assignmentStats = $assignmentStmt->fetch(PDO::FETCH_ASSOC);
             flex-shrink: 0;
         }
 
-        .activity-dot.green { background: var(--quest-green); box-shadow: 0 0 0 4px var(--quest-green-100); }
-        .activity-dot.yellow { background: var(--quest-yellow); box-shadow: 0 0 0 4px var(--quest-yellow-100); }
-        .activity-dot.blue { background: var(--sky-500); box-shadow: 0 0 0 4px #e0f2fe; }
+        .activity-dot.green {
+            background: var(--quest-green);
+            box-shadow: 0 0 0 4px var(--quest-green-100);
+        }
+
+        .activity-dot.yellow {
+            background: var(--quest-yellow);
+            box-shadow: 0 0 0 4px var(--quest-yellow-100);
+        }
+
+        .activity-dot.blue {
+            background: var(--sky-500);
+            box-shadow: 0 0 0 4px #e0f2fe;
+        }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -428,7 +497,7 @@ $assignmentStats = $assignmentStmt->fetch(PDO::FETCH_ASSOC);
                                 <i class="bi bi-question-circle-fill"></i>
                             </div>
                             <h5 class="card-title fw-bold mb-2">Support / Help Desk</h5>
-                            <p class="text-slate-500 text-sm mb-0">Raise requests or concerns to admin and mentors. We're here to help!</p>
+                            <p class="text-slate-500 text-sm mb-0">Raise requests or concerns to admin. We're here to help!</p>
                             <a href="support.php" class="action-btn" style="background: var(--slate-100); color: var(--slate-700);">
                                 <i class="bi bi-envelope"></i> Get Support
                             </a>
@@ -447,4 +516,3 @@ $assignmentStats = $assignmentStmt->fetch(PDO::FETCH_ASSOC);
 </body>
 
 </html>
-
