@@ -16,6 +16,7 @@ if (empty($token) || empty($user_type)) {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -153,16 +154,25 @@ if (empty($token) || empty($user_type)) {
 
 <body>
     <div class="bg-shapes">
-        <div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+
     <?php
     if (isset($_SESSION['error'])) {
-    ?><script>toastr.error("<?php echo htmlspecialchars($_SESSION["error"], ENT_QUOTES, 'UTF-8') ?>", "Error!");</script><?php
+    ?>
+    <script>toastr.error("<?php echo htmlspecialchars($_SESSION["error"], ENT_QUOTES, 'UTF-8') ?>", "Error!");</script>
+    <?php
         unset($_SESSION['error']);
     } elseif (isset($_SESSION["success"])) {
-    ?><script>toastr.success("<?php echo htmlspecialchars($_SESSION["success"], ENT_QUOTES, 'UTF-8') ?>","Success!");</script><?php
-    unset($_SESSION['success']);
+    ?>
+    <script>toastr.success("<?php echo htmlspecialchars($_SESSION["success"], ENT_QUOTES, 'UTF-8') ?>","Success!");</script>
+    <?php
+        unset($_SESSION['success']);
     }
     ?>
+
     <div class="auth-wrapper">
         <div class="auth-card">
             <div class="auth-header">
@@ -170,9 +180,11 @@ if (empty($token) || empty($user_type)) {
                 <h1 class="auth-title">New Password<span class="badge-admin">Admin</span></h1>
                 <p class="auth-subtitle">Create a secure password for your account</p>
             </div>
+
             <form action="reset_password_handler.php" method="post">
                 <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
                 <input type="hidden" name="user_type" value="<?php echo htmlspecialchars($user_type); ?>">
+
                 <div class="form-section">
                     <div class="mb-3">
                         <label for="password" class="form-label">
@@ -180,42 +192,58 @@ if (empty($token) || empty($user_type)) {
                         </label>
                         <div class="input-group-custom">
                             <input type="password" placeholder="Enter new password" id="password" name="password" class="form-control-custom" required minlength="6">
-                            <button class="password-toggle" type="button" id="passwordToggle"><i class="fas fa-eye"></i></button>
+                            <button class="password-toggle" type="button" id="passwordToggle" tabindex="-1"><i id="toggleIcon1" class="fas fa-eye"></i></button>
                         </div>
+
                     <div class="mb-3">
                         <label for="confirm_password" class="form-label">
                             <i class="fas fa-lock" style="color: var(--quest-green);"></i> Confirm Password
                         </label>
                         <div class="input-group-custom">
                             <input type="password" placeholder="Confirm new password" id="confirm_password" name="confirm_password" class="form-control-custom" required minlength="6">
-                            <button class="password-toggle" type="button" id="confirmToggle"><i class="fas fa-eye"></i></button>
+                            <button class="password-toggle" type="button" id="confirmToggle" tabindex="-1"><i id="toggleIcon2" class="fas fa-eye"></i></button>
                         </div>
                 </div>
+
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <a href="login.php" class="back-link"><i class="fas fa-arrow-left me-1"></i> Back to Login</a>
                 </div>
+
                 <button type="submit" class="submit-btn"><i class="fas fa-key me-2"></i> Reset Password</button>
             </form>
         </div>
+
     <script>
-        const pwd = document.querySelector("#password");
-        const pwdToggle = document.querySelector("#passwordToggle");
-        pwdToggle.addEventListener("click", function() {
-            if (pwd.type == "password") {
-                pwd.type = "text"; pwdToggle.innerHTML = "<i class='fas fa-eye-slash'></i>";
+        // --- Password toggle ---
+        const pwd = document.getElementById("password");
+        const pwdToggle = document.getElementById("passwordToggle");
+        const toggleIcon1 = document.getElementById("toggleIcon1");
+        pwdToggle.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (pwd.type === "password") {
+                pwd.type = "text";
+                toggleIcon1.classList.replace("fa-eye", "fa-eye-slash");
             } else {
-                pwd.type = "password"; pwdToggle.innerHTML = "<i class='fas fa-eye'></i>";
+                pwd.type = "password";
+                toggleIcon1.classList.replace("fa-eye-slash", "fa-eye");
             }
         });
-        const confirmPwd = document.querySelector("#confirm_password");
-        const confirmToggle = document.querySelector("#confirmToggle");
-        confirmToggle.addEventListener("click", function() {
-            if (confirmPwd.type == "password") {
-                confirmPwd.type = "text"; confirmToggle.innerHTML = "<i class='fas fa-eye-slash'></i>";
+
+        // --- Confirm password toggle ---
+        const confirmPwd = document.getElementById("confirm_password");
+        const confirmToggle = document.getElementById("confirmToggle");
+        const toggleIcon2 = document.getElementById("toggleIcon2");
+        confirmToggle.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (confirmPwd.type === "password") {
+                confirmPwd.type = "text";
+                toggleIcon2.classList.replace("fa-eye", "fa-eye-slash");
             } else {
-                confirmPwd.type = "password"; confirmToggle.innerHTML = "<i class='fas fa-eye'></i>";
+                confirmPwd.type = "password";
+                toggleIcon2.classList.replace("fa-eye-slash", "fa-eye");
             }
         });
+
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
     </script>
 </body>

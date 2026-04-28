@@ -52,6 +52,10 @@
     scrollbar-width: none;
   }
 
+  .auth-wrapper, .auth-wrapper > *{
+        z-index: 200;
+    }
+
 
   * {
     scrollbar-width: none;

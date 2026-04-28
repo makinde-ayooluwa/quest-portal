@@ -129,16 +129,25 @@ if(isset($_SESSION["admin"])){
 
 <body>
     <div class="bg-shapes">
-        <div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+
     <?php
     if (isset($_SESSION['error'])) {
-    ?><script>toastr.error("<?php echo htmlspecialchars($_SESSION["error"], ENT_QUOTES, 'UTF-8') ?>", "Error!");</script><?php
+    ?>
+    <script>toastr.error("<?php echo htmlspecialchars($_SESSION["error"], ENT_QUOTES, 'UTF-8') ?>", "Error!");</script>
+    <?php
         unset($_SESSION['error']);
     } elseif (isset($_SESSION["success"])) {
-    ?><script>toastr.success("<?php echo htmlspecialchars($_SESSION["success"], ENT_QUOTES, 'UTF-8') ?>","Success!");</script><?php
-    unset($_SESSION['success']);
+    ?>
+    <script>toastr.success("<?php echo htmlspecialchars($_SESSION["success"], ENT_QUOTES, 'UTF-8') ?>","Success!");</script>
+    <?php
+        unset($_SESSION['success']);
     }
     ?>
+
     <div class="auth-wrapper">
         <div class="auth-card">
             <div class="auth-header">
@@ -146,6 +155,7 @@ if(isset($_SESSION["admin"])){
                 <h1 class="auth-title">Reset Password<span class="badge-admin">Admin</span></h1>
                 <p class="auth-subtitle">Enter your email to receive a reset link</p>
             </div>
+
             <form action="forgot_password_handler.php" method="post">
                 <div class="form-section">
                     <div class="mb-3">
@@ -154,13 +164,18 @@ if(isset($_SESSION["admin"])){
                         </label>
                         <input type="email" placeholder="Enter your email" id="email" name="email" class="form-control-custom" required>
                     </div>
-                <input type="hidden" name="user_type" value="admin">
+
+                    <input type="hidden" name="user_type" value="admin">
+                </div>
+
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <a href="login.php" class="back-link"><i class="fas fa-arrow-left me-1"></i> Back to Login</a>
                 </div>
+
                 <button type="submit" class="submit-btn"><i class="fas fa-paper-plane me-2"></i> Send Reset Link</button>
             </form>
         </div>
+
     <script>
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
     </script>

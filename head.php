@@ -32,6 +32,10 @@
         font-family: Montserrat, sans-serif;
     }
 
+    .auth-wrapper, .auth-wrapper > *{
+        z-index: 200;
+    }
+
     body,
     html {
         scrollbar-width: none

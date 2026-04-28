@@ -16,7 +16,7 @@ $classes = $admin->getClasses($pdo);
             margin-left: 220px; padding: 2rem 1rem;
         }
         .students-card {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
             background: #fff;
             border-radius: var(--radius-lg);
@@ -51,7 +51,7 @@ $classes = $admin->getClasses($pdo);
 
         .table-responsive {
             border-radius: 8px;
-            overflow: hidden;
+            overflow-x: scroll;
         }
 
         .table thead th {
@@ -141,7 +141,7 @@ $classes = $admin->getClasses($pdo);
                                     border-color: #fff;
                                 }
                             </style>
-                            <table class="students-table">
+                            <table class="students-table table-responsive">
                                 <thead>
                                     <tr>
                                         <th style="width:64px">Photo</th>

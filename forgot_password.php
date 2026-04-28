@@ -121,16 +121,25 @@ if (isset($_SESSION['user'])) {
 
 <body>
     <div class="bg-shapes">
-        <div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+
     <?php
     if (isset($_SESSION['error'])) {
-    ?><script>toastr.error("<?php echo htmlspecialchars($_SESSION["error"], ENT_QUOTES, 'UTF-8') ?>", "Error!");</script><?php
+    ?>
+    <script>toastr.error("<?php echo htmlspecialchars($_SESSION["error"], ENT_QUOTES, 'UTF-8') ?>", "Error!");</script>
+    <?php
         unset($_SESSION['error']);
     } else if (isset($_SESSION["success"])) {
-    ?><script>toastr.success("<?php echo htmlspecialchars($_SESSION["success"], ENT_QUOTES, 'UTF-8') ?>", "Success!");</script><?php
+    ?>
+    <script>toastr.success("<?php echo htmlspecialchars($_SESSION["success"], ENT_QUOTES, 'UTF-8') ?>", "Success!");</script>
+    <?php
         unset($_SESSION["success"]);
     }
     ?>
+
     <div class="auth-wrapper">
         <div class="auth-card">
             <div class="auth-header">
@@ -146,12 +155,15 @@ if (isset($_SESSION['user'])) {
                         </label>
                         <input type="email" class="form-control-custom" placeholder="Enter your email address" id="email" name="email" required>
                     </div>
+
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <a href="login.php" class="back-link"><i class="fas fa-arrow-left me-1"></i> Back to Login</a>
                 </div>
+
                 <button type="submit" name="submit" class="submit-btn"><i class="fas fa-paper-plane me-2"></i> Send Reset Link</button>
             </form>
         </div>
+
     <script>
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
     </script>

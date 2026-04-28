@@ -26,12 +26,20 @@
 - [x] admin/add_staff.php — modern card, section titles, gradient btn
 - [x] admin/students.php — CSS vars, fadeInUp, responsive grid
 
+## Bug Fix — Auth page input disabling (CRITICAL FIX)
+- [x] admin/login.php — Fixed `.bg-shapes` div nesting that caused `pointer-events: none` to cascade to form inputs
+- [x] admin/forgot_password.php — Fixed same `.bg-shapes` nesting bug
+- [x] admin/reset_password.php — Fixed same `.bg-shapes` nesting bug
+- [x] forgot_password.php (student) — Fixed same `.bg-shapes` nesting bug
+- [x] reset_password.php (student) — Fixed same `.bg-shapes` nesting bug
+
 ## Summary
-All major "boring" pages have been redesigned to match the modern Quest design system defined in `css/portal.min.css`:
+All major "boring" pages redesigned to match modern Quest design system (`css/portal.min.css`):
 - Glassmorphism auth experience (student + admin)
-- Modern card-based layouts with CSS variables (`--radius-lg`, `--shadow-md`, `--quest-green`, etc.)
+- Modern card layouts with CSS variables, gradient accents, hover-lift
 - `fadeInUp` entrance animations
-- Gradient accent bars and hover-lift effects
 - Consistent form section headers with icon accents
 - Password visibility toggles on all auth pages
-- Quest-branded green/yellow gradient result headers replacing Bootstrap blue
+- Quest green/yellow gradient result headers
+- All PHP logic and form handlers preserved
+- **CRITICAL FIX**: All auth pages now have properly closed `.bg-shapes` containers so inputs are fully interactive

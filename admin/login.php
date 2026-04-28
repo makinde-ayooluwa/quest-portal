@@ -4,36 +4,6 @@ session_start();
 if(isset($_SESSION["admin"])){
     header("Location: ./");
 }
-
-/*require 'vendor/autoload.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
-
-require 'vendor/phpmailer/phpmailer/src/Exception.php';
-require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require 'vendor/phpmailer/phpmailer/src/SMTP.php';
-$mail = new PHPMailer(true);
-$mail->isSMTP();
-$mail->Host       = 'smtp.gmail.com';
-$mail->SMTPAuth   = true;
-$mail->Username   = 'makindeayooluwa604@gmail.com';
-$mail->Password   = 'lirw zgkb kegs xyat';
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-$mail->Port       = 587;
-$mail->setFrom('makindeayooluwa604@gmail.com', 'Makinde Ayooluwa');
-$mail->addAddress('makindeayooluwa42@gmail.com', 'Makinde Ayooluwa');
-$mail->isHTML(true);
-$mail->Subject = 'Subject of your email';
-$mail->Body    = 'This is the <b>HTML body</b> of the email.';
-$mail->AltBody = 'This is the plain text body for non-HTML mail clients.';
-try {
-    $mail->send();
-    echo 'Message has been sent';
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}*/
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +31,7 @@ try {
         }
         .bg-shapes {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden; z-index: 0; pointer-events: none;
+            overflow: hidden; z-index: 0; 
         }
         .shape {
             position: absolute; border-radius: 50%;
@@ -159,6 +129,7 @@ try {
         .submit-btn:disabled {
             background: #8a8a8a;
             box-shadow: none;
+            cursor: not-allowed;
         }
         .forgot-link {
             color: var(--quest-green-600); text-decoration: none;
@@ -185,16 +156,25 @@ try {
 
 <body>
     <div class="bg-shapes">
-        <div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+
     <?php
     if (isset($_SESSION['error'])) {
-    ?><script>toastr.error("<?php echo htmlspecialchars($_SESSION["error"], ENT_QUOTES, 'UTF-8') ?>", "Error!");</script><?php
+    ?>
+    <script>toastr.error("<?php echo htmlspecialchars($_SESSION["error"], ENT_QUOTES, 'UTF-8') ?>", "Error!");</script>
+    <?php
         unset($_SESSION['error']);
     } elseif (isset($_SESSION["success"])) {
-    ?><script>toastr.success("<?php echo htmlspecialchars($_SESSION["success"], ENT_QUOTES, 'UTF-8') ?>","Success!");</script><?php
-    unset($_SESSION['success']);
+    ?>
+    <script>toastr.success("<?php echo htmlspecialchars($_SESSION["success"], ENT_QUOTES, 'UTF-8') ?>","Success!");</script>
+    <?php
+        unset($_SESSION['success']);
     }
     ?>
+
     <div class="auth-wrapper">
         <div class="auth-card">
             <div class="auth-header">
@@ -202,6 +182,7 @@ try {
                 <h1 class="auth-title">Quest Portal<span class="badge-admin">Admin</span></h1>
                 <p class="auth-subtitle">Sign in to access your admin dashboard</p>
             </div>
+
             <form action="./login_handler.php" method="post">
                 <div class="form-section">
                     <div class="mb-3">
@@ -210,44 +191,56 @@ try {
                         </label>
                         <input type="email" placeholder="Enter your email" id="email" name="email" class="form-control-custom" required>
                     </div>
+
                     <div class="mb-3">
                         <label for="password" class="form-label">
                             <i class="fas fa-lock" style="color: var(--quest-green);"></i> Password
                         </label>
                         <div class="input-group-custom">
                             <input type="password" placeholder="Enter your password" id="password" name="password" class="form-control-custom" required>
-                            <button class="password-toggle" type="button" id="passwordToggle"><i class="fas fa-eye"></i></button>
+                            <button class="password-toggle" type="button" id="passwordToggle" tabindex="-1"><i id="toggleIcon" class="fas fa-eye"></i></button>
                         </div>
-                    <div class="d-flex justify-content-end">
+
+                    <div class="d-flex justify-content-end mb-3">
                         <a href="forgot_password.php" class="forgot-link">Forgot password?</a>
                     </div>
+
                 <button type="submit" id="loginBtn" class="submit-btn"><i class="fas fa-sign-in-alt me-2"></i> Login</button>
             </form>
         </div>
+
     <script>
-        const password = document.querySelector("#password");
-        const passwordToggle = document.querySelector("#passwordToggle");
-        passwordToggle.addEventListener("click", function() {
-            if (password.type == "password") {
-                password.type = "text";
-                passwordToggle.innerHTML = "<i class='fas fa-eye-slash'></i>";
+        // --- Password visibility toggle ---
+        const passwordEl = document.getElementById("password");
+        const passwordToggle = document.getElementById("passwordToggle");
+        const toggleIcon = document.getElementById("toggleIcon");
+        passwordToggle.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (passwordEl.type === "password") {
+                passwordEl.type = "text";
+                toggleIcon.classList.replace("fa-eye", "fa-eye-slash");
             } else {
-                password.type = "password";
-                passwordToggle.innerHTML = "<i class='fas fa-eye'></i>";
+                passwordEl.type = "password";
+                toggleIcon.classList.replace("fa-eye-slash", "fa-eye");
             }
         });
+
+        // --- Login spinner ---
         const form = document.querySelector('form');
         const btn = document.getElementById('loginBtn');
+        const originalBtnText = btn.innerHTML;
         form.addEventListener("submit", function(e) {
-            const email = document.getElementById('email').value;
-            const pwd = document.getElementById('password').value;
+            const email = document.getElementById('email').value.trim();
+            const pwd = document.getElementById('password').value.trim();
             if (email && pwd) {
                 e.preventDefault();
                 btn.innerHTML = "<div class='spinner'></div> Logging in...";
                 btn.disabled = true;
-                setTimeout(() => { form.submit(); }, 2000);
+                setTimeout(function() { form.submit(); }, 1500);
             }
         });
+
+        // --- Prevent right-click ---
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
     </script>
 </body>
