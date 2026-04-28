@@ -15,38 +15,42 @@ $results = $student->getResults($pdo, $studentData["admission_number"]);
     <title>View Results | Quest Portal</title>
     <?php include "head.php"; ?>
     <style>
-        * {
-            font-family: Montserrat;
-        }
-
-        html {
-            overflow-x: hidden;
-        }
-
         body {
             background: #f8f9fa;
         }
 
         .result-card {
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
             margin-bottom: 1.5rem;
             overflow-x: scroll;
             scrollbar-width: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            height: 100vh;
+            transition: all var(--transition-base);
+            animation: fadeInUp 0.5s ease forwards;
         }
 
         .result-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
         }
 
         .result-header {
-            background: linear-gradient(90deg, #0d6efd 0%, #198754 100%);
+            background: linear-gradient(135deg, var(--quest-green) 0%, var(--quest-green-400) 50%, var(--quest-yellow) 100%);
             color: #fff;
             padding: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .result-header::before {
+            content: '';
+            position: absolute; top: -50%; right: -20%;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .result-header h5, .result-header small {
+            position: relative; z-index: 1;
         }
 
         .iframe-container {
@@ -64,17 +68,14 @@ $results = $student->getResults($pdo, $studentData["admission_number"]);
         .no-results {
             text-align: center;
             padding: 3rem;
-            color: #6c757d;
+            color: var(--slate-500);
+            animation: fadeInUp 0.5s ease forwards;
         }
 
         .no-results i {
             font-size: 4rem;
             margin-bottom: 1rem;
             opacity: 0.5;
-        }
-
-        .main-content {
-            margin-left: 0;
         }
 
         @media (min-width: 992px) {
@@ -129,8 +130,7 @@ $results = $student->getResults($pdo, $studentData["admission_number"]);
             <div class="col-md-3"></div>
             <div class="col-md-9">
                 <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0"><i class="bi bi-file-earmark-text me-2"></i>My Academic Results</h1>
-                    <small class="text-muted">View all your uploaded results</small>
+                    <h1 class="h3 mb-0 fw-bold"><i class="bi bi-file-earmark-text text-green me-2"></i>My Academic Results</h1>
                 </div>
                 <?php
                 if (count($results) < 1) {
@@ -155,19 +155,20 @@ $results = $student->getResults($pdo, $studentData["admission_number"]);
                             <div class="iframe-container">
                                 <iframe src="<?php echo $result['result_file'] ?>" class="result-iframe" style="height: 100%;" frameborder="0"></iframe>
                             </div>
-                        </div>
                 <?php
                     }
                 }
                 ?>
 
             </div>
-        </div>
     </div>
 
     <script src="js/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
+    <script>
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    </script>
 </body>
 
 </html>

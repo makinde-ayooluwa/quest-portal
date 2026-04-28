@@ -12,21 +12,20 @@ $classes = $admin->getClasses($pdo);
     <?php include "head.php" ?>
     <title>Students - Quest Schools Admin</title>
     <style>
-        * {
-            font-family: Montserrat;
+        .main-content {
+            margin-left: 220px; padding: 2rem 1rem;
         }
-
-        body {
-            background: #f8f9fa;
-        }
-
         .students-card {
             max-width: 1200px;
-            margin: 2.5rem auto;
+            margin: 0 auto;
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 6px 18px rgba(24, 24, 24, 0.06);
-            padding: 1.25rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        @media (max-width: 1024px) {
+            .main-content { margin-left: 0; }
         }
 
         .students-toolbar {
@@ -86,36 +85,12 @@ $classes = $admin->getClasses($pdo);
         unset($_SESSION["success"]);
     }
     ?>
-    <div class="container-fluid">
+    <div class="container-fluid main-content">
         <div class="row">
-            <div class="col-lg-3"></div>
-            <div class="col-lg-9">
+            <div class="col-lg-12">
                 <div class="students-card">
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                        <style>
-                            body[data-theme='dark']>* {
-                                color: #fff;
-                            }
-
-                            body[data-theme='dark'] .students-card {
-                                background: #000;
-                                box-shadow: 0 4px 15px rgb(255, 255, 255, 0.2);
-                            }
-
-                            body[data-theme='dark'] .students-toolbar form input {
-                                background: #000;
-                                box-shadow: 0 4px 15px rgb(255, 255, 255, 0.2);
-                            }
-
-                            body[data-theme='dark'] .students-toolbar form input::placeholder {
-                                color: #fff;
-                            }
-                        </style>
-                        <h3 class="mb-0"><i class="bi bi-people me-2"></i>Student Management</h3>
-                        <div>
-                            <!-- <a href="add_student.php" class="btn btn-primary btn-sm me-2"><i class="bi bi-person-plus"></i> Add Student</a> -->
-                            <!-- <a href="upload_material.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-cloud-upload"></i> Upload Material</a> -->
-                        </div>
+                        <h3 class="mb-0 fw-bold"><i class="bi bi-people text-green me-2"></i>Student Management</h3>
                     </div>
 
                     <div class="students-toolbar">
@@ -126,16 +101,6 @@ $classes = $admin->getClasses($pdo);
                     </div>
 
                     <form id="bulkActionsForm" method="post" action="bulk_student_actions.php">
-                        <!-- <div class="d-flex align-items-center gap-2 mb-2">
-                            <select name="action" id="bulkActionSelect" class="form-select form-select-sm" style="width:220px">
-                                <option value="">Bulk actions</option>
-                                <option value="delete">Delete selected</option>
-                                <option value="promote">Promote / Demote selected</option>
-                            </select>
-                            <input type="hidden" name="promote_to" id="promoteToInput" value="">
-                            <button type="submit" class="btn btn-sm btn-primary">Apply</button>
-                            <div class="ms-auto text-muted small">Select rows and choose an action</div>
-                        </div> -->
                         <div class="d-flex align-items-center justify-content-start">
                             <button class="btn border btn-outline-success rounded-circle fw-bolder" title="Refresh students table" type="button" id="refreshStudentsButton"><i class="bi bi-arrow-clockwise"></i></button>
                         </div>
@@ -179,7 +144,6 @@ $classes = $admin->getClasses($pdo);
                             <table class="students-table">
                                 <thead>
                                     <tr>
-                                        <!--<th style="width:40px"><input type="checkbox" id="selectAll"></th>-->
                                         <th style="width:64px">Photo</th>
                                         <th>Name</th>
                                         <th>Class</th>
@@ -197,143 +161,7 @@ $classes = $admin->getClasses($pdo);
                         </div>
                     </form>
                 </div>
-                <!-- Promote Modal -->
-                <!-- <div class="modal fade" id="promoteModal" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-sm modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Promote / Demote selected students</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="mb-2">Select destination class:</div>
-                                <select id="promoteClassSelect" class="form-select">
-                                    <?php /*foreach ($classes as $c) {
-                                        echo '<option value="' . htmlspecialchars($c["class_name"]) . '">' . htmlspecialchars($c["class_name"]) . '</option>';
-                                    }*/ ?>
-                                </select>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" id="confirmPromoteBtn" class="btn btn-primary btn-sm">Promote / Demote</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <script>
-                    // Simple search/filter for students table
-                    document.querySelector('.students-card form').addEventListener('input', function(e) {
-                        if (document.querySelector('.students-card form input').value == "") {
-                            $("#selectAll").removeClass("d-none");
-                        } else {
-                            $("#selectAll").addClass("d-none");
-                        }
-                        e.preventDefault();
-                        const query = document.getElementById('studentSearch').value.toLowerCase();
-                        const rows = document.querySelectorAll('#studentsTable tr');
-                        rows.forEach(row => {
-                            const text = row.textContent.toLowerCase();
-                            row.style.display = text.includes(query) ? '' : 'none';
-                        });
-                    });
-                    document.querySelector('.students-card form').addEventListener("submit", function(e) {
-                        e.preventDefault();
-                    });
-
-                    // Select-all checkbox
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const selectAll = document.getElementById('selectAll');
-                        const rowCheckboxes = document.querySelectorAll('.rowCheckbox');
-                        if (selectAll) {
-                            selectAll.addEventListener('change', function() {
-                                rowCheckboxes.forEach(cb => cb.checked = selectAll.checked);
-                            });
-                        }
-
-                        // Bulk actions form validation
-                        const bulkForm = document.getElementById('bulkActionsForm');
-                        if (bulkForm) {
-                            bulkForm.addEventListener('submit', function(e) {
-                                const action = document.getElementById('bulkActionSelect').value;
-                                const checked = Array.from(document.querySelectorAll('.rowCheckbox')).filter(c => c.checked);
-                                if (!action) {
-                                    e.preventDefault();
-                                    toastr.info("Please select a bulk action.");
-                                    return;
-                                }
-                                if (checked.length === 0) {
-                                    e.preventDefault();
-                                    toastr.info("Please select at least one student.");
-                                    return;
-                                }
-                                if (action === 'delete') {
-                                    if (!confirm('Delete selected students? This cannot be undone.')) {
-                                        e.preventDefault();
-                                        return;
-                                    }
-                                }
-
-                                // If Promote selected, open the promote modal instead of submitting
-                                if (action === 'promote') {
-                                    e.preventDefault();
-                                    // show modal
-                                    const promoteModalEl = document.getElementById('promoteModal');
-                                    if (window.bootstrap && promoteModalEl) {
-                                        const modal = new bootstrap.Modal(promoteModalEl);
-                                        modal.show();
-                                    } else {
-                                        alert('Promote / Demote modal unavailable.');
-                                    }
-                                }
-                            });
-                        }
-
-                        // Per-row promote buttons
-                        document.querySelectorAll('.promote-btn').forEach(function(btn) {
-                            btn.addEventListener('click', function() {
-                                const id = this.getAttribute('data-id');
-                                if (!id) return;
-                                // uncheck all checkboxes
-                                document.querySelectorAll('.rowCheckbox').forEach(cb => cb.checked = false);
-                                // check this row's checkbox if present
-                                const target = document.querySelector('.rowCheckbox[value="' + id + '"]');
-                                if (target) target.checked = true;
-                                // set action to promote and open modal
-                                document.getElementById('bulkActionSelect').value = 'promote';
-                                const promoteModalEl = document.getElementById('promoteModal');
-                                if (window.bootstrap && promoteModalEl) {
-                                    const modal = new bootstrap.Modal(promoteModalEl);
-                                    modal.show();
-                                }
-                            });
-                        });
-                    });
-
-                    // Wire up confirm button in promote modal
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const confirmBtn = document.getElementById('confirmPromoteBtn');
-                        if (confirmBtn) {
-                            confirmBtn.addEventListener('click', function() {
-                                const selectedClass = document.getElementById('promoteClassSelect').value;
-                                if (!selectedClass) {
-                                    alert('Please pick a destination class.');
-                                    return;
-                                }
-                                // set hidden input and submit form
-                                document.getElementById('promoteToInput').value = selectedClass;
-                                // hide modal first
-                                const modalEl = document.getElementById('promoteModal');
-                                if (window.bootstrap && modalEl) {
-                                    bootstrap.Modal.getInstance(modalEl)?.hide();
-                                }
-                                document.getElementById('bulkActionsForm').submit();
-                            });
-                        }
-                    });
-                </script>
-            </div>
         </div>
-    </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
@@ -346,13 +174,11 @@ $classes = $admin->getClasses($pdo);
     <script src="js/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
     <script>
-        // Prevent right-click context menu
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
         });
     </script>
     <script>
-        // Excel dynamic addition with the following params : [fullname,email,class,admission_number]
         function fetchData(order, mode) {
             fetch("ajax_order_data_for_students.php", {
                     method: "POST",
@@ -367,7 +193,7 @@ $classes = $admin->getClasses($pdo);
                 .then(res => res.json())
                 .then(data => {
                     const studentsTable = document.getElementById("studentsTable");
-                    studentsTable.innerHTML = ""; // clear table first
+                    studentsTable.innerHTML = "";
                     let html = "";
 
                     if (!data || data.length < 1 || data.length == 0) {
@@ -375,28 +201,19 @@ $classes = $admin->getClasses($pdo);
                             <tr>
                                 <td colspan="9" class="text-center py-4">No students found.</td>
                             </tr>`;
-
                     }
-
-
 
                     data.forEach(student => {
                         html += `
                             <tr>
-                                <!--<td>
-                                    <input type="checkbox" name="selected_ids[]" value="${student.id}" class="rowCheckbox">
-                                </td>-->
-
                                 <td>
                                     <img src="../${student.picture}" alt="${student.fullname}" class="student-photo">
                                 </td>
-
                                 <td>${student.fullname}</td>
                                 <td>${student.class}</td>
                                 <td>${student.email}</td>
                                 <td>${student.phone}</td>
                                 <td>${student.admission_number}</td>
-
                                 <td>
                                     ${
                                         student.account_verification === "Verified"
@@ -404,45 +221,17 @@ $classes = $admin->getClasses($pdo);
                                             : '<span class="badge bg-danger text-white">Not verified</span>'
                                     }
                                 </td>
-
                                 <td class="text-nowrap">
                                     <a href="view_student.php?id=${student.id}" 
                                     class="btn btn-sm btn-outline-primary p-1 me-1">
                                         <i class="bi bi-eye"></i>
                                     </a>
-
                                     <a onclick="this.innerHTML = '<span>Sending...</span>'; this.disabled" href="send_mail.php?id=${student.id}"
                                     class="btn btn-sm btn-outline-danger p-1">
                                         <span>Send Setup Mail</span>
                                     </a>
                                 </td>
                             </tr>
-
-                            <!-- Promote Modal -->
-
-                            <!-- Delete Modal -->
-                            <!--<div class="modal fade" id="modal_${student.id}" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirm Deletion</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p class="text-danger">
-                                                Are you sure you want to delete 
-                                                <strong>${student.fullname.toUpperCase()}</strong>?
-                                            </p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                            <a href="delete_student.php?id=${student.id}" class="btn btn-danger">
-                                                Delete
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>-->
                         `;
                     });
                     studentsTable.innerHTML = html;
