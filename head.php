@@ -5,9 +5,22 @@
   (function() {
     try {
       var s = JSON.parse(localStorage.getItem('settings') || '{}');
-      if (s.mode === 'dark') {
+      var theme = s.theme || 'light';
+      if (theme === 'dark') {
         var st = document.createElement('style');
-        st.textContent = 'html{background:#0f172a}body{background:#0f172a!important;color:#e2e8f0!important}';
+        st.textContent = 'html{background:var(--slate-900)}body{--bg-primary:var(--slate-900);--bg-card:var(--slate-800);--text-primary:var(--slate-100);color:var(--text-primary)!important}';
+        document.head.appendChild(st);
+      } else if (theme === 'green') {
+        var st = document.createElement('style');
+        st.textContent = 'html{background:#f4f9f7}body{--bg-primary:#f4f9f7;--text-primary:#1a3c2e;color:var(--text-primary)!important}';
+        document.head.appendChild(st);
+      } else if (theme === 'blue') {
+        var st = document.createElement('style');
+        st.textContent = 'html{background:#f3f8fc}body{--bg-primary:#f3f8fc;--text-primary:#0f3d5e;color:var(--text-primary)!important}';
+        document.head.appendChild(st);
+      } else if (theme === 'sepia') {
+        var st = document.createElement('style');
+        st.textContent = 'html{background:#fdf8f2}body{--bg-primary:#fdf8f2;--text-primary:#4a3c31;color:var(--text-primary)!important}';
         document.head.appendChild(st);
       }
     } catch(e) {}
@@ -17,7 +30,7 @@
 <link rel="stylesheet" href="css/fonts.min.css">
 <!--Favicon-->
 <link rel="shortcut icon" href="assets/images/quest.jpg" type="image/x-icon">
-<link rel="stylesheet" href="css/portal.min.css">
+<link rel="stylesheet" href="css/portal.css">
 <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">

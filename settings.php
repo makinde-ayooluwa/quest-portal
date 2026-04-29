@@ -90,10 +90,13 @@
             <div class="tab-content mt-3" id="settingsTabContent">
                 <div class="tab-pane fade show active" id="mode-panel" role="tabpanel">
                     <div class="mb-4">
-                        <label for="mode-select" class="form-label fw-semibold">Theme Mode</label>
-                        <select id="mode-select" class="form-select">
+                        <label for="theme-select" class="form-label fw-semibold">Theme Skin</label>
+                        <select id="theme-select" class="form-select">
                             <option value="light">Light</option>
                             <option value="dark">Dark</option>
+                            <option value="green">Green</option>
+                            <option value="blue">Blue</option>
+                            <option value="sepia">Sepia (Warm)</option>
                         </select>
                         <div class="form-text mt-2">Choose your preferred theme for the portal.</div>
                     </div>
@@ -111,19 +114,16 @@
 <script>
     (function() {
         // Initialize settings storage
-        let settings = JSON.parse(localStorage.getItem("settings"));
-        if (!settings || typeof settings !== "object") {
-            settings = { mode: "light" };
-            localStorage.setItem("settings", JSON.stringify(settings));
-        }
-        if (!settings.mode) settings.mode = "light";
+        let settings = JSON.parse(localStorage.getItem("settings") || '{}');
+        if (!settings.theme) settings.theme = "light";
+        localStorage.setItem("settings", JSON.stringify(settings));
 
         // Apply saved theme immediately
-        document.body.setAttribute("data-theme", settings.mode);
+        document.body.setAttribute("data-theme", settings.theme);
 
         // Setup select value
-        const modeSelect = document.getElementById("mode-select");
-        if (modeSelect) modeSelect.value = settings.mode;
+        const themeSelect = document.getElementById("theme-select");
+        if (themeSelect) themeSelect.value = settings.theme;
 
         // Panel controls
         const settingsPage = document.getElementById("settingsPage");
@@ -144,12 +144,14 @@
 
         // Apply button
         const applyBtn = document.getElementById("apply-btn");
-        if (applyBtn && modeSelect) {
+        if (applyBtn && themeSelect) {
             applyBtn.addEventListener("click", function() {
-                settings.mode = modeSelect.value;
+                settings.theme = themeSelect.value;
                 localStorage.setItem("settings", JSON.stringify(settings));
-                document.body.setAttribute("data-theme", settings.mode);
+                document.body.setAttribute("data-theme", settings.theme);
                 closeSettings();
+                // Show confirmation
+                toastr.success(`Switched to ${themeSelect.value} theme!`);
             });
         }
     })();

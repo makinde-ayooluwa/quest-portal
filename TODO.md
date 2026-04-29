@@ -1,14 +1,13 @@
-# Dark Mode & Settings Implementation Plan
+# Theme Enhancement & Skin System Implementation
 
-## Steps
+## Status: ✅ In Progress
 
-- [x] 1. Add comprehensive dark mode CSS to `css/portal.min.css`
-- [x] 2. Refactor `admin/settings.php` with polished UI and fixed theme script
-- [x] 3. Update `admin/head.php` with anti-FOUC theme script
-- [x] 4. Update `admin/header_sidebar.php` — cleaned conflicting inline styles; settings gear button is self-contained in `admin/settings.php`
-- [x] 5. Create `settings.php` in root for students
-- [x] 6. Update `head.php` (student) with anti-FOUC theme script
-- [x] 7. Update `header.php` (student) with settings gear button (`studentSettingsBtn`)
-- [x] 8. Clean conflicting inline dark mode from `admin/index.php`, `admin/manage_results.php`, `admin/students.php`, `admin/header_sidebar.php`
-- [x] 9. Verify zero remaining inline `body[data-theme='dark']` styles across all PHP files
+### Approved Plan Breakdown:
+1. **✅** Create `css/portal.css` (unminified base with theme vars/skins)
+2. **✅** Edit `head.php` (link portal.css, update anti-FOUC)
+3. **✅** Edit `settings.php` (add skin options, JS updates)
+4. **[ ]** Complete CSS (copy all original portal.min.css styles + full theme overrides for Bootstrap/custom)
+5. **[ ]** Test all 5 themes toggle/persist/readability
+6. **[ ]** **attempt_completion**
 
+**Current Step**: 4/6 - Finalizing comprehensive CSS
