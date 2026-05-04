@@ -160,7 +160,15 @@ body {
 /* Enhanced text utilities for better light mode contrast */
 .text-primary { color: var(--text-primary); }
 .text-secondary { color: var(--text-secondary); }
-.text-muted { color: var(--text-muted) !important; } /* Darker than before */
+.text-muted { color: var(--text-muted) !important; }
+
+body[data-theme="dark"] .text-muted,
+body[data-theme="dark"] .text-secondary,
+body[data-theme="dark"] .text-slate-400,
+body[data-theme="dark"] .text-slate-500,
+body[data-theme="dark"] .text-slate-600 { 
+  color: var(--text-primary) !important; 
+}
 
 /* ============================================
    4. SKINS / THEMES - Multi-Skin System
@@ -184,12 +192,25 @@ body[data-theme="dark"] {
   --bg-primary: var(--slate-900);
   --bg-secondary: var(--slate-800);
   --bg-card: var(--slate-800);
-  --text-primary: var(--slate-100);
-  --text-secondary: var(--slate-200);
-  --text-muted: var(--slate-400);
+  --text-primary: var(--slate-50);
+  --text-secondary: var(--slate-50);
+  --text-muted: var(--slate-200);
   --border: var(--slate-700);
   --accent-primary: var(--quest-green-400);
   --accent-secondary: var(--quest-yellow-400);
+}
+
+body[data-theme="dark"] p,
+body[data-theme="dark"] h1,
+body[data-theme="dark"] h2,
+body[data-theme="dark"] h3,
+body[data-theme="dark"] h4,
+body[data-theme="dark"] h5,
+body[data-theme="dark"] h6,
+body[data-theme="dark"] span:not(.text-muted):not(.text-secondary),
+body[data-theme="dark"] label:not(.text-muted):not(.text-secondary),
+body[data-theme="dark"] td:not(.text-muted):not(.text-secondary) { 
+  color: var(--text-primary) !important; 
 }
 
 /* GREEN SKIN */
@@ -302,10 +323,31 @@ body[data-theme="sepia"] {
   transition: all var(--transition-base);
 }
 
-.input-modern:focus, .form-control:focus {
+.form-control:focus {
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 4px rgba(0,0,0,0.1);
   background: var(--bg-secondary);
+}
+
+body[data-theme="dark"] .form-control::placeholder,
+body[data-theme="dark"] .input-modern::placeholder,
+body[data-theme="dark"] input::placeholder { 
+  color: var(--text-secondary) !important;
+  opacity: 1;
+}
+
+body[data-theme="dark"] .sidebar-link { 
+  color: var(--text-secondary) !important; 
+}
+body[data-theme="dark"] .sidebar-link:hover,
+body[data-theme="dark"] .nav-link:hover { 
+  color: var(--text-primary) !important; 
+}
+
+body[data-theme="dark"] .table,
+body[data-theme="dark"] .table th,
+body[data-theme="dark"] .table td { 
+  color: var(--text-primary) !important; 
 }
 
 /* Navbar/Header */

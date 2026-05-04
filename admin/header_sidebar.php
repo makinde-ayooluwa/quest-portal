@@ -5,8 +5,8 @@
     }
 
     .navbar {
-        background: #fff;
-        color: #000;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
         padding: 0.5rem 1rem;
 
     }
@@ -16,11 +16,11 @@
     }
 
     header>* {
-        color: #000;
+        color: var(--text-primary);
     }
 
     .navbar .logo h1 {
-        color: #000;
+        color: var(--text-primary);
         font-size: 1.5rem;
         margin: 0;
     }
@@ -33,15 +33,15 @@
     }
 
     .nav-links li a {
-        color: #000;
+        color: var(--text-secondary);
         text-decoration: none;
         font-weight: 500;
     }
 
     .sidebar {
         box-shadow: 0 1px 1px rgb(0, 0, 0, 0.2);
-        background: #fff;
-        color: #000;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
         min-width: 220px;
         max-width: 220px;
         position: fixed;
@@ -51,8 +51,7 @@
         transition: transform 0.3s ease;
         z-index: 1040;
         overflow-y: scroll;
-        border-top: 1px solid;
-        border-top-color: #000;
+        border-top: 1px solid var(--border);
     }
 
     .sidebar ul {
@@ -62,7 +61,7 @@
 
     .sidebar ul li a {
         font-size: 0.95rem;
-        color: #000;
+        color: var(--text-primary);
         display: block;
         padding: 0.75rem 1.5rem;
         text-decoration: none;

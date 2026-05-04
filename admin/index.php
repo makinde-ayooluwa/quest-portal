@@ -232,10 +232,10 @@ $quick_actions = [
 
         .quick-actions,
         #quick-actions .action-card {
-          background: #fff;
+          background: var(--bg-card);
           border-radius: 12px;
           padding: 1.5rem;
-          color: #000;
+          color: var(--text-primary);
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
@@ -316,14 +316,13 @@ $quick_actions = [
               <h2>Classes</h2>
               <style>
                 .classes-card {
-                  border: 1px solid;
+                  border: 1px solid var(--border);
                   border-radius: 5px;
-                  border-color: #000;
                 }
 
                 #classSearch {
                   background: transparent;
-                  border-color: #000;
+                  border-color: var(--border);
                 }
               </style>
               <div class="classes-card p-3 mb-3">
@@ -346,10 +345,9 @@ $quick_actions = [
                       #classesTable tr,
                       #classesTable th,
                       #classesTable td {
-                        border: 1px solid;
+                        border: 1px solid var(--border);
                         border-collapse: collapse;
                         padding: 7.5px;
-                        border-color: #000;
                       }
 
 

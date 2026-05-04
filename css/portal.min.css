@@ -720,7 +720,20 @@ body {
 /* Base */
 body[data-theme='dark'] {
   background-color: var(--slate-900);
-  color: var(--slate-200);
+  color: var(--slate-50);
+}
+
+body[data-theme='dark'] p,
+body[data-theme='dark'] h1,
+body[data-theme='dark'] h2,
+body[data-theme='dark'] h3,
+body[data-theme='dark'] h4,
+body[data-theme='dark'] h5,
+body[data-theme='dark'] h6,
+body[data-theme='dark'] span:not(.text-muted):not(.text-secondary),
+body[data-theme='dark'] label:not(.text-muted):not(.text-secondary),
+body[data-theme='dark'] td:not(.text-muted):not(.text-secondary) { 
+  color: var(--slate-50) !important; 
 }
 
 body[data-theme='dark'] * {
@@ -740,7 +753,7 @@ body[data-theme='dark'] .text-slate-800 { color: var(--slate-200); }
 body[data-theme='dark'] .text-slate-700 { color: var(--slate-300); }
 body[data-theme='dark'] .text-slate-600 { color: var(--slate-400); }
 body[data-theme='dark'] .text-slate-500 { color: var(--slate-400); }
-body[data-theme='dark'] .text-muted { color: var(--slate-400) !important; }
+body[data-theme='dark'] .text-muted { color: var(--slate-50) !important; }
 
 /* Bootstrap Navbar */
 body[data-theme='dark'] .navbar {
@@ -837,7 +850,7 @@ body[data-theme='dark'] .form-select:focus {
 
 body[data-theme='dark'] .form-control::placeholder,
 body[data-theme='dark'] input::placeholder {
-  color: var(--slate-500);
+  color: var(--slate-50);
 }
 
 body[data-theme='dark'] .form-label,
@@ -1037,7 +1050,7 @@ body[data-theme='dark'] .sidebar-modern {
 }
 
 body[data-theme='dark'] .sidebar-link {
-  color: var(--slate-400);
+  color: var(--slate-50);
 }
 
 body[data-theme='dark'] .sidebar-link:hover {

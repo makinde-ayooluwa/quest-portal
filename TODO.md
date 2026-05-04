@@ -1,13 +1,14 @@
-# Theme Enhancement & Skin System Implementation
+# Fix Admin/Student Text Styling (Missing/Conflicting Classes & Inline Overrides)
 
-## Status: ✅ In Progress
+## Steps from Approved Plan:
 
-### Approved Plan Breakdown:
-1. **✅** Create `css/portal.css` (unminified base with theme vars/skins)
-2. **✅** Edit `head.php` (link portal.css, update anti-FOUC)
-3. **✅** Edit `settings.php` (add skin options, JS updates)
-4. **[ ]** Complete CSS (copy all original portal.min.css styles + full theme overrides for Bootstrap/custom)
-5. **[ ]** Test all 5 themes toggle/persist/readability
-6. **[ ]** **attempt_completion**
+- [ ] 1. Create TODO.md ✅
+- [x] 2. Edit admin/header_sidebar.php: Replace inline color: #000 → var(--text-primary), backgrounds → var(--bg-secondary), borders → var(--border)
+- [x] 3. Edit admin/index.php: Update #classesTable styles to use CSS vars; replace border-color: #000
+- [x] 4. Edit admin/students.php: Update .students-table borders → var(--border); add .text-primary to texts
+- [x] 5. Verify admin/head.php CSS loads (../css/portal.min.css)
+- [ ] 6. Test theme toggle: Check sidebar/tables contrast in light/dark modes
+- [ ] 6. Test theme toggle: Check sidebar/tables contrast in light/dark modes
+- [ ] 7. Update TODO.md & attempt_completion
 
-**Current Step**: 4/6 - Finalizing comprehensive CSS
+**Current status:** Starting edits. Progress tracked here.

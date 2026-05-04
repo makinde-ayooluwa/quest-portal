@@ -128,8 +128,8 @@ $classes = $admin->getClasses($pdo);
                                 th,
                                 tr,
                                 td {
-                                    border-top: 1px solid #000;
-                                    border-right: 1px solid #000;
+                                    border-top: 1px solid var(--border);
+                                    border-right: 1px solid var(--border);
                                     border-collapse: collapse;
                                     padding: 5px;
                                 }
