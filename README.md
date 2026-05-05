@@ -40,7 +40,7 @@ A modern, full-featured **School Management System** built with PHP and MySQL, d
 
 * **Backend:** PHP (PDO)
 * **Database:** MySQL
-* **Frontend:** HTML, CSS, Bootstrap
+* **Frontend:** HTML, CSS,JAVASCRIPT, Bootstrap
 * **Architecture:** Modular PHP structure
 
 ## 🎯 Use Cases
@@ -68,6 +68,9 @@ I can customize this system for your organization:
 
 * Email: [makindeayooluwa604@gmail.com](mailto:makindeayooluwa604@gmail.com)
 * Github: [makinde-ayooluwa](https://github.com/makinde-ayooluwa)
+* Portfolio: [AyExpertDev](https://ayexpertdev-portfolio.vercel.app)
+* Whatsapp: [AyExpertDev](+2347047618656)
+* Phone: [AyExpertDev](+2347047618656)
 
 ---
 
