@@ -58,7 +58,7 @@ include "admin_includes/admin.inc.php";
             unset($_SESSION['success']);
     } ?>
 
-    <div class="add-card">
+    <div class="add-card card-modern">
         <h2 class="mb-4 text-center"><i class="bi bi-bell me-2"></i>Add New Notification</h2>
         <form action="add_notification_handler.php" method="post">
             <div class="row mb-3">

@@ -51,7 +51,8 @@ $classes = $admin->getClasses($pdo);
 
         .table-responsive {
             border-radius: 8px;
-            overflow-x: scroll;
+            overflow: scroll;
+            padding: 0px
         }
 
         .table thead th {
@@ -88,9 +89,9 @@ $classes = $admin->getClasses($pdo);
     <div class="container-fluid main-content">
         <div class="row">
             <div class="col-lg-12">
-                <div class="students-card">
+                <div class="card-modern students-card">
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                        <h3 class="mb-0 fw-bold"><i class="bi bi-people text-green me-2"></i>Student Management</h3>
+                        <h3 class="mb-0 fw-bold text-primary"><i class="bi bi-people text-green me-2"></i>Student Management</h3>
                     </div>
 
                     <div class="students-toolbar">

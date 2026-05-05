@@ -80,7 +80,7 @@ unset($_SESSION['success']);
     <?php include "header_sidebar.php" ?>
 
     <main class="main-content">
-        <div class="add-card" role="region" aria-labelledby="addStaffHeading">
+        <div class="add-card card-modern" role="region" aria-labelledby="addStaffHeading">
             <div class="d-flex align-items-start justify-content-between mb-4">
                 <div>
                     <h2 id="addStaffHeading" class="mb-1 fw-bold"><i class="bi bi-person-plus text-green me-2"></i>Add User</h2>

@@ -75,7 +75,7 @@ include "admin_includes/admin.inc.php";
         <div class="row">
             <div class="col-lg-3"></div>
             <div class="col-lg-9">
-                <div class="staff-card container">
+                <div class="staff-card card-modern container">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <h3 class="mb-0"><i class="bi bi-people-fill me-2"></i>Users Management</h3>
                         <div>

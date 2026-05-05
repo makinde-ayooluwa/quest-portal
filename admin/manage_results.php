@@ -190,7 +190,7 @@ $results = $admin->getAllResults($pdo);
     } ?>
 
     <div class="main-content">
-        <div class="results-card">
+        <div class="card-modern results-card">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h2 class="mb-1"><i class="bi bi-clipboard-data me-2"></i>Manage Results</h2>

@@ -59,7 +59,7 @@ include "admin_includes/admin.inc.php";
         unset($_SESSION['success']);
          } ?>
 
-    <div class="add-card">
+    <div class="add-card card-modern">
         <h2 class="mb-4 text-center"><i class="bi bi-calendar-event me-2"></i>Add New Event</h2>
         <form action="add_event_handler.php" method="post">
             <div class="row mb-3">

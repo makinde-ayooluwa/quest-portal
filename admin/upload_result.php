@@ -98,7 +98,7 @@ if (!isset($_SESSION["admin"])) {
         unset($_SESSION['success']);
     } ?>
 
-    <div class="upload-card">
+    <div class="upload-card card-modern">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h2 class="mb-0"><i class="bi bi-upload me-2"></i>Upload Student Result</h2>
             <small class="text-muted">Select student, enter term, and provide result URL</small>
@@ -114,7 +114,7 @@ if (!isset($_SESSION["admin"])) {
                     <div class="loading" id="loadingIndicator">
                         <i class="bi bi-arrow-repeat spin me-2"></i>Loading students...
                     </div>
-                    <div class="student-results d-none" id="studentResults"></div>
+                    <div class="student-results d-none card-modern" id="studentResults"></div>
                 </div>
                 <div class="form-text">Click on a student card to select them.</div>
             </div>

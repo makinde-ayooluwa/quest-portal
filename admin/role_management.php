@@ -106,7 +106,7 @@ $rolePermissions = null;
                     </script>
                 <?php endif; ?>
 
-                <div class="role-card">
+                <div class="role-card card-modern">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2><i class="bi bi-person-workspace me-2"></i>Role Management</h2>
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRoleModal">
