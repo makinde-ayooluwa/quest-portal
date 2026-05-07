@@ -94,12 +94,12 @@ $classes = $admin->getClasses($pdo);
                         <h3 class="mb-0 fw-bold text-primary"><i class="bi bi-people text-green me-2"></i>Student Management</h3>
                     </div>
 
-                    <div class="students-toolbar">
+                    <!-- <div class="students-toolbar">
                         <form class="d-flex students-search" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search students by name, email or admission number" aria-label="Search" id="studentSearch">
                             <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
                         </form>
-                    </div>
+                    </div> -->
 
                     <form id="bulkActionsForm" method="post" action="bulk_student_actions.php">
                         <div class="d-flex align-items-center justify-content-start">
