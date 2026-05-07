@@ -25,16 +25,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         if (!$admin->addStudent($pdo, $studentData)) {
             unset($_SESSION["success"]);
+            $_SESSION["error"] = "Error occured while adding student. Student may exist before";
+            header("Location: add_student.php");
+        } else {
+            unset($_SESSION["error"]);
             $emailUtils = new EmailUtils($host);
             $emailSent = $emailUtils->sendStudentSetupEmail(
                 $studentData['email'],
                 $studentData['fullname'],
                 $studentData['admission_number']
             );
-            $_SESSION["error"] = "Error occured while adding student. Student may exist before";
-            header("Location: add_student.php");
-        } else {
-            unset($_SESSION["error"]);
+            if ($emailSent) {
+                $_SESSION["success"] = $studentData['fullname'] . " added successfully";
+                unset($_SESSION['success']);
+            }
         }
     }
 }

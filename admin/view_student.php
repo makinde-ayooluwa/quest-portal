@@ -60,8 +60,8 @@ try {
     <style>
         .profile-card { max-width: 900px; margin: 2.5rem auto; background:#fff; border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,0.06); padding:1.25rem }
         .profile-photo { width:120px; height:120px; object-fit:cover; border-radius:8px; border:3px solid #f1f5ff }
-        .kv { font-weight:600; color:#333 }
-        .kvv { color:#555 }
+        .kv { font-weight:600; color:var(--sky-500) }
+        .kvv { color:var(--rose-500) }
     </style>
 </head>
 
@@ -75,9 +75,6 @@ try {
                 <h4 class="mb-0">Student Profile</h4>
                 <div>
                     <a href="students.php" class="btn btn-sm btn-outline-secondary">&larr; Back</a>
-                    <!--<a href="edit_student.php?id=<?php //echo e($student['id']); ?>" class="btn btn-sm btn-primary ms-2">Edit</a>-->
-                        <!-- <button type="button" class="btn btn-sm btn-success ms-2" data-bs-toggle="modal" data-bs-target="#promoteModal">Promote / Demote</button>
-                    <button type="button" class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button> -->
                 </div>
             </div>
 
@@ -93,11 +90,6 @@ try {
                             <div class="kv">Class</div>
                             <div class="kvv d-flex align-items-center">
                                 <span class="me-2"><?php echo e($student['class']); ?></span>
-                                <?php if (!empty($class_id)): ?>
-                                    <!-- <a href="view_class.php?id=<?php echo e($class_id); ?>" class="btn btn-sm btn-outline-primary">Open class</a> -->
-                                <?php else: ?>
-                                    <!-- no class id found, do not render link -->
-                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="col-sm-6"><div class="kv">Email</div><div class="kvv"><?php echo e($student['email']); ?></div></div>

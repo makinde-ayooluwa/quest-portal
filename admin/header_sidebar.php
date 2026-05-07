@@ -309,9 +309,9 @@ foreach ($db_admin_features as $db_feature) {
         <li data-bs-toggle="collapse" data-bs-target="#profileSettings"><a href="javascript:;"><i
                     class="bi bi-person-fill me-2"></i>Profile</a></li>
         <div class="collapse" id="profileSettings">
-            <li><a class="text-primary" href="profile.php"><i class="bi bi-person-circle"></i>View profile</a></li>
-            <li><a class="text-primary" href="login.php"><i class="bi bi-box-arrow-left"></i>Login</a></li>
-            <li><a class="text-primary" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a></li>
+            <li><a class="text-primary" href="profile.php"><i class="bi bi-person-circle me-3"></i>View profile</a></li>
+            <li><a class="text-primary" href="login.php"><i class="bi bi-box-arrow-left me-3"></i>Login</a></li>
+            <li><a class="text-primary" href="logout.php"><i class="bi bi-box-arrow-right me-3"></i>Sign Out</a></li>
         </div>
     </ul>
 </aside>

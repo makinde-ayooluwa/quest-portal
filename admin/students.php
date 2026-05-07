@@ -16,7 +16,7 @@ $classes = $admin->getClasses($pdo);
             margin-left: 220px; padding: 2rem 1rem;
         }
         .students-card {
-            max-width: 100%;
+            max-width:1250px;
             margin: 0 auto;
             background: #fff;
             border-radius: var(--radius-lg);
@@ -220,10 +220,10 @@ $classes = $admin->getClasses($pdo);
                                     class="btn btn-sm btn-outline-primary p-1 me-1">
                                         <i class="bi bi-eye"></i>
                                     </a>
-                                    <a onclick="this.innerHTML = '<span>Sending...</span>'; this.disabled" href="send_mail.php?id=${student.id}"
+                                    <!--<a onclick="this.innerHTML = '<span>Sending...</span>'; this.disabled" href="send_mail.php?id=${student.id}"
                                     class="btn btn-sm btn-outline-danger p-1">
                                         <span>Send Setup Mail</span>
-                                    </a>
+                                    </a>-->
                                 </td>
                             </tr>
                         `;

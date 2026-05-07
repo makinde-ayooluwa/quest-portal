@@ -130,17 +130,17 @@ include "student_includes/student.inc.php";
                 <div class="profile-card">
                     <div class="profile-header d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center">
-                            <img data-bs-toggle="modal" data-bs-target="#profile-image"
+                            <img data-bs-toggle="modal" data-bs-target="#pictureChange"
                                 src="<?php echo $studentData['picture']; ?>" alt="Student Avatar" class="profile-avatar me-4">
-                            <div id="profile-image" class="modal fade" tabindex="-1">
+                            <!-- <div id="profile-image" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content bg-transparent border-0">
                                         <img src="<?php echo $studentData['picture']; ?>" alt="Student Avatar" class="rounded-4 shadow-xl">
                                     </div>
                             </div>
-                            <div>
+                            <div> -->
                                 <h2 class="mb-1 fw-bold"><?php echo $studentData['fullname']; ?></h2>
-                                <p class="mb-0 text-muted">Class: <span class="badge badge-modern badge-secondary"><?php echo $studentData['class']; ?></span></p>
+                                <p class="mb-0 text-muted">Class: <span class="badge badge-modern text-primary badge-secondary"><?php echo $studentData['class']; ?></span></p>
                             </div>
                         <a href="./profile_edit.php" class="edit-profile-btn" title="Edit Profile">
                             <i class="bi bi-pencil-fill fs-5"></i>
