@@ -145,8 +145,9 @@ include "student_includes/student.inc.php";
                         <a href="./profile_edit.php" class="edit-profile-btn" title="Edit Profile">
                             <i class="bi bi-pencil-fill fs-5"></i>
                         </a>
+                        
                     </div>
-
+<button data-bs-toggle="modal" data-bs-target="#passwordChange" class="btn btn-primary">Change password</button>
                     <div class="section-title-profile"><i class="bi bi-person text-green"></i>Personal Details</div>
                     <div class="row mb-4">
                         <div class="col-md-6">
