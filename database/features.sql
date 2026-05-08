@@ -3,21 +3,23 @@ DELETE FROM admin_features_accessors;
 DELETE FROM admin_features_sublinks;
 DELETE FROM admin_features_sublinks_accessors;
 INSERT INTO
-    admin_features(title, unique_id, collapseId)
+    admin_features(title, unique_id, collapseId,icon)
 VALUES
     (
         "Students Management",
         "studentsManagement",
-        "studentManagement"
+        "studentManagement",
+        "fas fa-user-graduate"
     );
 
 INSERT INTO
-    admin_features(title, unique_id, collapseId)
+    admin_features(title, unique_id, collapseId,icon)
 VALUES
     (
         "Users Management",
         "usersManagement",
-        "staffManagement"
+        "staffManagement",
+        "bi bi-people"
     );
 
 --     INSERT INTO
@@ -30,12 +32,13 @@ VALUES
 --     );
 
 INSERT INTO
-    admin_features(title, unique_id, collapseId)
+    admin_features(title, unique_id, collapseId,icon)
 VALUES
     (
         "System Management",
         "systemManagement",
-        "systemManagement"
+        "systemManagement",
+        "bi bi-laptop"
     );
 
 INSERT INTO

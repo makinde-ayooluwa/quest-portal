@@ -400,7 +400,8 @@ CREATE TABLE `admin_features` (
   `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `title` varchar(255) NOT NULL,
   `unique_id` varchar(255) not null,
-  `collapseId` varchar(255) not null
+  `collapseId` varchar(255) not null,
+  `icon` varchar(255) not null DEFAULT ""
 );
 
 DROP TABLE IF EXISTS `admin_features_accessors`;

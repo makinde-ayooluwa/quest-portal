@@ -145,7 +145,7 @@ $classes = $admin->getClasses($pdo);
                                         <th>Phone</th>
                                         <th>Admission #</th>
                                         <th>Verification</th>
-                                        <th style="width:120px">Actions</th>
+                                        <th style="width:120px"></th>
                                     </tr>
                                 </thead>
                                 <tbody style="overflow-y: scroll;" id="studentsTable">

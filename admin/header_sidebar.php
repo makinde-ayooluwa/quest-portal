@@ -1,4 +1,3 @@
-
 <style>
     * {
         font-family: Montserrat;
@@ -177,8 +176,8 @@
         </div>
         <div class="search-container flex-grow-1 mx-3" style="max-width: 400px;">
             <div class="input-group">
-                <input type="text" class="form-control" id="globalSearch"
-                    placeholder="Search students, classes..." autocomplete="off">
+                <input type="text" class="form-control" id="globalSearch" placeholder="Search students"
+                    autocomplete="off">
                 <button class="btn btn-outline-success" type="button" id="searchBtn">
                     <i class="fas fa-search"></i>
                 </button>
@@ -193,8 +192,7 @@
                     <div class="d-grid align-items-center" style="grid-template-columns: 10% 90%;">
                         <img src="<?php echo htmlspecialchars($adminData["picture"] ?? 'assets/images/quest.jpg'); ?>"
                             alt="Profile Picture" class="rounded-circle" width="27.5">
-                        <span
-                            class="d-none d-md-grid ms-2 admin-header-profile-picture-text ps-1">
+                        <span class="d-none d-md-grid ms-2 admin-header-profile-picture-text ps-1">
                             <span style="font-size: 15px;text-transform: capitalize; font-weight: bolder;">
                                 <?php echo htmlspecialchars($adminData["fullname"] ?? 'Admin'); ?>
                             </span>
@@ -267,10 +265,9 @@ foreach ($db_admin_features as $db_feature) {
             if ($feature) {
                 foreach ($feature['accessors'] as $accessor) {
                     if ($adminData['staff_role'] == $accessor) {
-        ?>
+                        ?>
                         <li data-bs-toggle="collapse" data-bs-target="#<?php echo $feature['collapseId'] ?>">
-                            <a href="javascript:;"><i
-                                    class="fas fa-user-graduate me-2"></i>
+                            <a href="javascript:;"><i class="<?php echo $feature['icon'] ?> me-2"></i>
                                 <?php echo $feature['title'] ?>
                             </a>
                         </li>
@@ -280,27 +277,27 @@ foreach ($db_admin_features as $db_feature) {
                                 if ($subLink) {
                                     foreach ($subLink['accessors'] as $subAssessors) {
                                         if ($adminData['staff_role'] == $subAssessors) {
-                            ?>
+                                            ?>
                                             <li>
                                                 <a class="text-primary" href="<?php echo $subLink['link'] ?>">
                                                     <i class="<?php echo $subLink['icon'] ?> me-2"></i>
                                                     <?php echo $subLink['title'] ?>
                                                 </a>
                                             </li>
-                        <?php
+                                            <?php
                                         }
                                     }
                                 }
                             }
-                        }
-                        ?>
-                        </div>
+                    }
+                    ?>
+                    </div>
 
-            <?php
+                    <?php
                 }
             }
         }
-            ?>
+        ?>
     </ul>
     <div class="sidebar-header">
         <h3 class="text-uppercase text-start fs-5">PROFILE</h3>
@@ -326,7 +323,7 @@ foreach ($db_admin_features as $db_feature) {
     });
 
     // Optional: Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         if (window.innerWidth <= 1024) {
             if (!sidebar.contains(event.target) && !sidebarToggle.contains(event.target)) {
                 sidebar.classList.remove('active');
@@ -363,15 +360,15 @@ foreach ($db_admin_features as $db_feature) {
             });
         }*/
 
-        if (data.classes && data.classes.length > 0) {
-            searchResults.innerHTML += '<div class="search-category">Classes</div>';
-            data.classes.forEach(cls => {
-                const item = document.createElement('div');
-                item.className = 'search-item';
-                item.innerHTML = `<a href="view_class.php?id=${cls.id}"><i class="bi bi-journal-bookmark me-2"></i>${highlightText(cls.class_name, query)}</a>`;
-                searchResults.appendChild(item);
-            });
-        }
+        // if (data.classes && data.classes.length > 0) {
+        //     searchResults.innerHTML += '<div class="search-category">Classes</div>';
+        //     data.classes.forEach(cls => {
+        //         const item = document.createElement('div');
+        //         item.className = 'search-item';
+        //         item.innerHTML = `<a href="view_class.php?id=${cls.id}"><i class="bi bi-journal-bookmark me-2"></i>${highlightText(cls.class_name, query)}</a>`;
+        //         searchResults.appendChild(item);
+        //     });
+        // }
 
         searchResults.style.display = searchResults.innerHTML ? 'block' : 'none';
     }
@@ -384,13 +381,13 @@ foreach ($db_admin_features as $db_feature) {
         }
 
         fetch('search_handler.php', {
-                method: 'POST',
-                credentials: 'same-origin', // send cookies so PHP session is available
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'query=' + encodeURIComponent(query)
-            })
+            method: 'POST',
+            credentials: 'same-origin', // send cookies so PHP session is available
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'query=' + encodeURIComponent(query)
+        })
             .then(response => {
                 if (!response.ok) {
                     if (response.status === 401) {
@@ -422,32 +419,32 @@ foreach ($db_admin_features as $db_feature) {
 
 
     // Search input event listeners
-    globalSearch.addEventListener('input', function() {
+    globalSearch.addEventListener('input', function () {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
             performSearch(this.value);
         }, 300);
     });
 
-    globalSearch.addEventListener('focus', function() {
+    globalSearch.addEventListener('focus', function () {
         if (this.value.length >= 2) {
             performSearch(this.value);
         }
     });
 
-    searchBtn.addEventListener('click', function() {
+    searchBtn.addEventListener('click', function () {
         performSearch(globalSearch.value);
     });
 
     // Close search results when clicking outside
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         if (!globalSearch.contains(event.target) && !searchResults.contains(event.target) && !searchBtn.contains(event.target)) {
             searchResults.style.display = 'none';
         }
     });
 
     // Handle Enter key
-    globalSearch.addEventListener('keypress', function(event) {
+    globalSearch.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             event.preventDefault();
             performSearch(this.value);
@@ -457,8 +454,8 @@ foreach ($db_admin_features as $db_feature) {
     // Programmatic fallback for dropdown toggles
     // In some environments the data-api may not initialize (or JS errors stop it). This ensures dropdowns still work.
     try {
-        document.querySelectorAll('[data-bs-toggle="dropdown"]').forEach(function(toggle) {
-            toggle.addEventListener('click', function(e) {
+        document.querySelectorAll('[data-bs-toggle="dropdown"]').forEach(function (toggle) {
+            toggle.addEventListener('click', function (e) {
                 // Prevent default anchor behavior
                 if (e) e.preventDefault();
                 // Use Bootstrap's Dropdown API if available
