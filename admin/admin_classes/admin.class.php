@@ -163,10 +163,7 @@ class Admin
             return true;
         }
     }
-
-    public function addStaff($pdo, $fullname, $email, $phone, $gender, $portal_code, $staff_role, $employment_date, $staff_status)
-    {
-        function staffExists($pdo, $email, $portal_code)
+        public function staffExists($pdo, $email, $portal_code)
         {
             $query = "SELECT * FROM staffs WHERE email = :email OR portal_code = :portal_code";
             $stmt = $pdo->prepare($query);
@@ -175,7 +172,10 @@ class Admin
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
-        if (staffExists($pdo, $email, $portal_code)) {
+
+    public function addStaff($pdo, $fullname, $email, $phone, $gender, $portal_code, $staff_role, $employment_date, $staff_status)
+    {
+        if ($this->staffExists($pdo, $email, $portal_code)) {
             $_SESSION['error'] = "Staff with this email / portal code already exists.";
             header("Location: add_staff.php");
             exit();
