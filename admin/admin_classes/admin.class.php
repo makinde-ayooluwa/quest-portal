@@ -163,15 +163,15 @@ class Admin
             return true;
         }
     }
-        public function staffExists($pdo, $email, $portal_code)
-        {
-            $query = "SELECT * FROM staffs WHERE email = :email OR portal_code = :portal_code";
-            $stmt = $pdo->prepare($query);
-            $stmt->bindParam(':portal_code', $portal_code);
-            $stmt->bindParam(':email', $email);
-            $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
+    public function staffExists($pdo, $email, $portal_code)
+    {
+        $query = "SELECT * FROM staffs WHERE email = :email OR portal_code = :portal_code";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':portal_code', $portal_code);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     public function addStaff($pdo, $fullname, $email, $phone, $gender, $portal_code, $staff_role, $employment_date, $staff_status)
     {
