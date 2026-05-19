@@ -52,6 +52,9 @@
         overflow-y: scroll;
         border-top: 1px solid var(--border);
     }
+    body[data-theme='light']>.sidebar{
+        background: #fff;
+    }
 
     .sidebar ul {
         list-style: none;
