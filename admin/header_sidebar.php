@@ -54,7 +54,6 @@
     }
     body[data-theme='light']>.sidebar{
         background: #fff;
-        
     }
 
     .sidebar ul {
