@@ -35,6 +35,10 @@ $insertStmt->execute();
             border-left: 4px solid var(--sky-500);
             transition: all var(--transition-base);
             animation: fadeInUp 0.4s ease forwards;
+            color: #000;
+        }
+        .notification-card > *{
+            color: #000;
         }
 
         .notification-card:nth-child(1) { animation-delay: 0.05s; }
@@ -146,7 +150,7 @@ $insertStmt->execute();
                         </div>
                         <div class="flex-grow-1">
                             <h6 class="mb-1"><?php echo htmlspecialchars($notification['title']); ?></h6>
-                            <p class="mb-2 text-muted"><?php echo htmlspecialchars($notification['message']); ?></p>
+                            <p class="mb-2"><?php echo htmlspecialchars($notification['message']); ?></p>
                             <div class="notification-time">
                                 <?php
                                 $createdAt = new DateTime($notification['created_at']);

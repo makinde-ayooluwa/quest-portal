@@ -86,6 +86,10 @@
         background: rgba(115, 115, 115, 0.1);
     }
 
+    body[data-theme='dark'] .side-links a{
+        color: #fff
+    }
+
     @media(min-width:992px) {
         .toggler-parent {
             display: none;
