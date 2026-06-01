@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->addAddress($email);
 
             // Content
-            $reset_link = "http://$host/quest-portal/reset_password.php?token=" . $token . "&type=" . $user_type;
+            $reset_link = "http://$host/reset_password.php?token=" . $token . "&type=" . $user_type;
             $mail->isHTML(true);
             $mail->Subject = 'Password Reset Request - Quest Portal';
             $mail->Body = "
