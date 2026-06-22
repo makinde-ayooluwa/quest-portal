@@ -1,28 +1,5 @@
--- MariaDB dump 10.19  Distrib 10.4.32-MariaDB, for Win64 (AMD64)
---
--- Host: localhost    Database: questportal
--- ------------------------------------------------------
--- Server version	10.4.32-MariaDB
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `activities`
---
-
-DROP TABLE IF EXISTS `activities`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `activities` (
+CREATE TABLE IF NOT EXISTS `activities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_type` varchar(50) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -34,15 +11,8 @@ CREATE TABLE `activities` (
   KEY `idx_activities_timestamp` (`timestamp`),
   KEY `idx_activities_user` (`user_type`,`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `assignment_submissions`
---
-DROP TABLE IF EXISTS `assignment_submissions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `assignment_submissions` (
+CREATE TABLE IF NOT EXISTS `assignment_submissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `assignment_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
@@ -59,16 +29,8 @@ CREATE TABLE `assignment_submissions` (
   CONSTRAINT `assignment_submissions_ibfk_1` FOREIGN KEY (`assignment_id`) REFERENCES `assignments` (`id`) ON DELETE CASCADE,
   CONSTRAINT `assignment_submissions_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `assignments`
---
-
-DROP TABLE IF EXISTS `assignments`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `assignments` (
+CREATE TABLE IF NOT EXISTS `assignments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
@@ -83,16 +45,8 @@ CREATE TABLE `assignments` (
   KEY `idx_assignments_class` (`class_name`),
   KEY `idx_assignments_due_date` (`due_date`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `classes`
---
-
-DROP TABLE IF EXISTS `classes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `classes` (
+CREATE TABLE IF NOT EXISTS `classes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `class_name` varchar(255) NOT NULL,
   `mentor_name` varchar(255) NOT NULL,
@@ -101,57 +55,27 @@ CREATE TABLE `classes` (
   `added_on` datetime NOT NULL DEFAULT curtime(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `classes_names_only`
---
-
-DROP TABLE IF EXISTS `classes_names_only`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `classes_names_only` (
+CREATE TABLE IF NOT EXISTS `classes_names_only` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `class_name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `sent_emails`
---
-
-DROP TABLE IF EXISTS `sent_emails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sent_emails` (
+CREATE TABLE IF NOT EXISTS `sent_emails` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `admission_number` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
-DROP TABLE IF EXISTS `mails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mails` (
+CREATE TABLE IF NOT EXISTS `mails` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mail_for` varchar(255) NOT NULL,
   `mail_note` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
-
-
---
--- Table structure for table `events`
---
-
-DROP TABLE IF EXISTS `events`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `events` (
+CREATE TABLE IF NOT EXISTS `events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
@@ -165,16 +89,8 @@ CREATE TABLE `events` (
   PRIMARY KEY (`id`),
   KEY `idx_events_date` (`event_date`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `events_read`
---
-
-DROP TABLE IF EXISTS `events_read`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `events_read` (
+CREATE TABLE IF NOT EXISTS `events_read` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `event_id` int(11) NOT NULL,
   `user_type` varchar(50) NOT NULL,
@@ -185,16 +101,8 @@ CREATE TABLE `events_read` (
   KEY `idx_events_read_user` (`user_type`,`user_id`,`event_id`),
   CONSTRAINT `events_read_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `materials`
---
-
-DROP TABLE IF EXISTS `materials`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `materials` (
+CREATE TABLE IF NOT EXISTS `materials` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `materialTitle` varchar(255) NOT NULL,
   `materialType` varchar(255) NOT NULL,
@@ -203,36 +111,18 @@ CREATE TABLE `materials` (
   `uploaded_on` datetime NOT NULL DEFAULT curtime(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `notification_reads`
---
-
-DROP TABLE IF EXISTS `notification_reads`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `notification_reads` (
+CREATE TABLE IF NOT EXISTS `notification_reads` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `notification_id` int(11) NOT NULL,
   `user_type` varchar(50) NOT NULL,
   `user_id` int(11) NOT NULL,
   `read_at` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `unique_read` (`notification_id`,`user_type`,`user_id`),
-  KEY `idx_notification_reads_user` (`user_type`,`user_id`,`notification_id`),
-  CONSTRAINT `notification_reads_ibfk_1` FOREIGN KEY (`notification_id`) REFERENCES `notifications` (`id`) ON DELETE CASCADE
+  PRIMARY KEY (`id`)
+  
 ) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `notifications`
---
-
-DROP TABLE IF EXISTS `notifications`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `notifications` (
+CREATE TABLE IF NOT EXISTS `notifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_type` varchar(50) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -246,16 +136,8 @@ CREATE TABLE `notifications` (
   KEY `idx_notifications_user` (`user_type`,`user_id`,`is_read`),
   KEY `idx_notifications_created` (`created_at`)
 ) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `results`
---
-
-DROP TABLE IF EXISTS `results`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `results` (
+CREATE TABLE IF NOT EXISTS `results` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `academic_term` varchar(255) NOT NULL,
   `student_admission_number` varchar(255) NOT NULL,
@@ -263,16 +145,8 @@ CREATE TABLE `results` (
   `added_on` datetime NOT NULL DEFAULT curtime(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `staffs`
---
-
-DROP TABLE IF EXISTS `staffs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `staffs` (
+CREATE TABLE IF NOT EXISTS `staffs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fullname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -289,16 +163,8 @@ CREATE TABLE `staffs` (
   `picture` varchar(255) NOT NULL DEFAULT 'assets/images/no-picture.jpg',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `students`
---
-
-DROP TABLE IF EXISTS `students`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `students` (
+CREATE TABLE IF NOT EXISTS `students` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fullname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -321,16 +187,8 @@ CREATE TABLE `students` (
   `picture` varchar(255) NOT NULL DEFAULT 'assets/images/no-picture.jpg',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `supports`
---
-
-DROP TABLE IF EXISTS `supports`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `supports` (
+CREATE TABLE IF NOT EXISTS `supports` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `support_topic` varchar(255) NOT NULL,
   `support_priority` varchar(255) NOT NULL,
@@ -345,16 +203,8 @@ CREATE TABLE `supports` (
   `responded_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `system_logs`
---
-
-DROP TABLE IF EXISTS `system_logs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `system_logs` (
+CREATE TABLE IF NOT EXISTS `system_logs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `log_type` varchar(50) NOT NULL,
   `message` text NOT NULL,
@@ -367,16 +217,7 @@ CREATE TABLE `system_logs` (
   KEY `idx_system_logs_type` (`log_type`),
   KEY `idx_system_logs_created` (`created_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 CREATE TABLE IF NOT EXISTS `password_resets` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -385,18 +226,11 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
     `token` varchar(255) NOT NULL,
     `expires_at` datetime NOT NULL,
     `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `unique_reset` (`email`, `user_type`, `token`),
-    KEY `idx_password_resets_expires` (`expires_at`)
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
--- Dump completed on 2025-11-10 11:30:01
-
--- NEW TABLES CREATIONS FOR ROLE MANAGEMENT
 
 
-DROP TABLE IF EXISTS `admin_features`;
-
-CREATE TABLE `admin_features` (
+CREATE TABLE IF NOT EXISTS `admin_features` (
   `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `title` varchar(255) NOT NULL,
   `unique_id` varchar(255) not null,
@@ -404,17 +238,17 @@ CREATE TABLE `admin_features` (
   `icon` varchar(255) not null DEFAULT ""
 );
 
-DROP TABLE IF EXISTS `admin_features_accessors`;
 
-CREATE TABLE `admin_features_accessors` (
+
+CREATE TABLE IF NOT EXISTS `admin_features_accessors` (
   `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `feature_unique_id` varchar(255) not null,
   `accessor` varchar(255) not null
 );
 
-DROP TABLE IF EXISTS `admin_features_sublinks`;
 
-CREATE TABLE `admin_features_sublinks` (
+
+CREATE TABLE IF NOT EXISTS `admin_features_sublinks` (
   `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `title` varchar(255) NOT NULL,
   `unique_id` varchar(255) not null,
@@ -423,16 +257,13 @@ CREATE TABLE `admin_features_sublinks` (
   `parent_unique_id` varchar(255) not null
 );
 
-DROP TABLE IF EXISTS `admin_features_sublinks_accessors`;
 
-CREATE TABLE `admin_features_sublinks_accessors` (
+
+CREATE TABLE IF NOT EXISTS `admin_features_sublinks_accessors` (
   `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `feature_sublink_unique_id` varchar(255) not null,
   `accessor` varchar(255) not null
 );
-
--- NEW ROLE TABLE
-DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(50) NOT NULL,
