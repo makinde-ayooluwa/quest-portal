@@ -9,7 +9,7 @@
 
 spl_autoload_register(function ($className) {
 
-    $baseDir = __DIR__ . '/../admin_classes/';
+    $baseDir = dirname(__DIR__) . '/admin_classes/';
 
     /*
      =========================
