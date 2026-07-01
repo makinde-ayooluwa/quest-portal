@@ -20,7 +20,7 @@ class EmailUtils
         $this->mail->Host = 'smtp.gmail.com';
         $this->mail->SMTPAuth = true;
         $this->mail->Username = 'makindeayooluwa604@gmail.com';
-        $this->mail->Password = 'hqfl eyyp mduk gsmw'; // App password
+        $this->mail->Password = 'ouxw ttjf mnxe gwf'; // App password
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $this->mail->Port = 587;
         $this->mail->setFrom('makindeayooluwa604@gmail.com', 'Quest Schools Portal');
