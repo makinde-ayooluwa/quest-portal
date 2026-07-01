@@ -9,10 +9,10 @@ if ($_SERVER["HTTP_HOST"] == "localhost") {
     $username = 'root';
     $password = '';
 } else {
-    $host = 'sql205.infinityfree.com';
-    $database = "if0_40847405_questportal";
-    $username = 'if0_40847405';
-    $password = '1edwGZFqVAm3e';
+    $host = 'ftpupload.net';
+    $database = "questportal";
+    $username = 'ezyro_42312822';
+    $password = '75516cbdf2c78';
 }
 $dsn = "mysql:host=$host;dbname=$database";
 
