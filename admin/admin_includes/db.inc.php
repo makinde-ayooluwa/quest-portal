@@ -10,7 +10,7 @@ if ($_SERVER["HTTP_HOST"] == "localhost") {
     $password = '';
 } else {
     $host = 'ftpupload.net';
-    $database = "questportal";
+    $database = "ezyro_42312822_questportal";
     $username = 'ezyro_42312822';
     $password = '75516cbdf2c78';
 }

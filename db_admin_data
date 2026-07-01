@@ -3,7 +3,7 @@ include "student_includes/db.inc.php";
 
 $password = password_hash("victorvictor",PASSWORD_BCRYPT,['cost'=>10]);
 // Password: $2y$10$f5zNQDBKr04.zUkrcm7A7O9/kPh96G/mSs37a0H3xril95G3w8wM6
-$sql = " INSERT INTO staffs (fullname,email,gender,phone,pwd,staff_role,staff_status,account_verification) VALUES ('Makinde Ayooluwa','makindeayooluwa604@gmail.com','Male','07047618656','$password','head admin','Active','Verified')";
+$sql = "INSERT INTO staffs (fullname,email,gender,phone,pwd,staff_role,staff_status,account_verification) VALUES ('Makinde Ayooluwa','makindeayooluwa604@gmail.com','Male','07047618656','$password','head admin','Active','Verified')";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 echo "Admin data successfully added";

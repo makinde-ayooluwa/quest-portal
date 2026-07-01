@@ -22,12 +22,7 @@ CREATE TABLE IF NOT EXISTS `assignment_submissions` (
   `status` enum('submitted','graded','late') DEFAULT 'submitted',
   `grade` varchar(10) DEFAULT NULL,
   `feedback` text DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `unique_submission` (`assignment_id`,`student_id`),
-  KEY `idx_submissions_student` (`student_id`),
-  KEY `idx_submissions_assignment` (`assignment_id`),
-  CONSTRAINT `assignment_submissions_ibfk_1` FOREIGN KEY (`assignment_id`) REFERENCES `assignments` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `assignment_submissions_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE IF NOT EXISTS `assignments` (
@@ -86,8 +81,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `created_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`),
-  KEY `idx_events_date` (`event_date`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE IF NOT EXISTS `events_read` (
@@ -96,10 +90,8 @@ CREATE TABLE IF NOT EXISTS `events_read` (
   `user_type` varchar(50) NOT NULL,
   `user_id` int(11) NOT NULL,
   `read_at` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `unique_read` (`event_id`,`user_type`,`user_id`),
-  KEY `idx_events_read_user` (`user_type`,`user_id`,`event_id`),
-  CONSTRAINT `events_read_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE
+  PRIMARY KEY (`id`)
+
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE IF NOT EXISTS `materials` (
