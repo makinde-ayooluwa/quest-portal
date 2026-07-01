@@ -45,7 +45,7 @@
         max-width: 220px;
         position: fixed;
         top: 56px;
-        left: 0;
+        left: 0px;
         padding-top: 1rem;
         transition: transform 0.3s ease;
         z-index: 1040;

@@ -1,5 +1,6 @@
 <?php
 session_start();
+echo password_hash("victorvictor",PASSWORD_BCRYPT,['cost'=>10])
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -58,7 +58,7 @@ try {
     <?php include "head.php"; ?>
     <title>View Student - <?php echo e($student['fullname']); ?></title>
     <style>
-        .profile-card { max-width: 900px; margin: 2.5rem auto; background:#fff; border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,0.06); padding:1.25rem }
+        .profile-card { max-width: 900px; margin: 2.5rem auto; background:#fff; border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,0.06); padding:1.25rem;  }
         .profile-photo { width:120px; height:120px; object-fit:cover; border-radius:8px; border:3px solid #f1f5ff }
         .kv { font-weight:600; color:var(--sky-500) }
         .kvv { color:var(--rose-500) }
@@ -70,9 +70,9 @@ try {
     <?php include 'header_sidebar.php'; ?>
 
     <div class="container-fluid">
-        <div class="profile-card">
+        <div class="profile-card card-modern">
             <div class="d-flex align-items-center justify-content-between mb-3">
-                <h4 class="mb-0">Student Profile</h4>
+                <h4 class="mb-0 ms-3">Student Profile</h4>
                 <div>
                     <a href="students.php" class="btn btn-sm btn-outline-secondary">&larr; Back</a>
                 </div>

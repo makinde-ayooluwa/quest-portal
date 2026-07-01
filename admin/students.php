@@ -122,7 +122,7 @@ $classes = $admin->getClasses($pdo);
                         <div style="overflow-x:scroll;">
                             <style>
                                 .students-table {
-                                    width: 100%;
+                                    width: 80%;
                                 }
 
                                 .students-table thead,
@@ -138,11 +138,11 @@ $classes = $admin->getClasses($pdo);
                             <table class="students-table table-responsive">
                                 <thead>
                                     <tr>
-                                        <th style="width:64px">Photo</th>
+                                        <th style="width:">Photo</th>
                                         <th>Name</th>
                                         <th>Class</th>
                                         <th>Email</th>
-                                        <th>Phone</th>
+                                        <!-- <th>Phone</th> -->
                                         <th>Admission #</th>
                                         <th>Verification</th>
                                         <th style="width:120px"></th>
