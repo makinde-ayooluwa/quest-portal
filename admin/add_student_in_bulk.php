@@ -1,40 +1,7 @@
 <?php
 session_start();
-/*require 'vendor/autoload.php';
+set_time_limit(300); // Gives your script up to 5 minutes to finish sending all emails
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
-
-require 'vendor/phpmailer/phpmailer/src/Exception.php';
-require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require 'vendor/phpmailer/phpmailer/src/SMTP.php';
-$mail = new PHPMailer(true); // true enables exceptions for error handling
-$mail->isSMTP();
-$mail->Host       = 'smtp.gmail.com'; // Or your SMTP server host
-$mail->SMTPAuth   = true;
-$mail->Username   = 'makindeayooluwa604@gmail.com';
-$mail->Password   = 'lirw zgkb kegs xyat'; // Use an app password for Gmail
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // or PHPMailer::ENCRYPTION_SMTPS
-$mail->Port       = 587; // or 465 for SMTPS
-$mail->setFrom('makindeayooluwa604@gmail.com', 'Makinde Ayooluwa');
-$mail->addAddress('makindeayooluwa42@gmail.com', 'Makinde Ayooluwa');
-// Optional: addReplyTo, addCC, addBCC
-$mail->isHTML(true); // Set email format to HTML
-$mail->Subject = 'Subject of your email';
-$mail->Body    = 'This is the <b>HTML body</b> of the email.';
-$mail->AltBody = 'This is the plain text body for non-HTML mail clients.';
-//$mail->addAttachment('/vendor/phpmailer/docs/README.md', 'document.pdf');
-try {
-    $mail->send();
-    echo 'Message has been sent';
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}*/
-
-/* 
-This page covers both the addition and deletion of students
-*/
 include "admin_includes/autoloader.inc.php";
 include "admin_includes/db.inc.php";
 include "admin_includes/admin.inc.php";
@@ -45,79 +12,111 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $studentsFromSheet = json_decode(file_get_contents("php://input"), true);
 
     if (!is_array($studentsFromSheet)) {
-        echo json_encode(["status" => "error", "message" => "Invalid data"]);
+        header('Content-Type: application/json');
+        echo json_encode(["status" => "error", "message" => "Invalid data received"]);
         exit;
     }
 
     // 1️⃣ Fetch current admission_numbers from DB
     $currentStudents = $pdo->query("SELECT admission_number FROM students")->fetchAll(PDO::FETCH_COLUMN);
 
-    // Normalize current students as strings
-    $currentStudents = array_map('trim', $currentStudents);
+    // Normalize current students (trim spaces and strip any escaped slashes)
+    $currentStudents = array_map(function($val) {
+        return trim(stripslashes($val));
+    }, $currentStudents);
 
-    // Normalize new admissions from sheet as strings
+    // Normalize new admissions from sheet cleanly
     $newAdmissionNumbers = array_map(function ($s) {
-        return trim($s['admission_number']);
+        $adm = $s['admission_number'] ?? '';
+        return trim(stripslashes($adm));
     }, $studentsFromSheet);
 
-    // Now compute deletions
+    // Compute actual deletions safely
     $toDelete = array_diff($currentStudents, $newAdmissionNumbers);
-    // 3️⃣ Delete students removed from spreadsheet
 
+    // 3️⃣ Delete students removed from spreadsheet
     if (!empty($toDelete)) {
         $placeholders = rtrim(str_repeat('?,', count($toDelete)), ',');
         $stmt = $pdo->prepare("DELETE FROM students WHERE admission_number IN ($placeholders)");
-        $stmt->execute(array_values($toDelete)); // Use array_values to avoid issues with keys
+        $stmt->execute(array_values($toDelete)); 
+        
+        // Refresh our memory list since records were removed from the database disk
+        $currentStudents = array_diff($currentStudents, $toDelete);
     }
-
 
     // 4️⃣ Add new students and send emails
     $results = [];
+    $emailUtils = new EmailUtils($host); 
 
     foreach ($studentsFromSheet as $data) {
 
-        $admission = $data['admission_number'];
+        // Normalize data key maps using stripslashes to handle the "/" safely
+        $admission     = trim(stripslashes($data['admission_number'] ?? ''));
+        $fullNameField = trim($data["fullname"] ?? '');
+        $emailField    = trim($data["email"] ?? '');
+        $classField    = trim($data["class"] ?? '');
 
-        // Skip if already exists
-        if (in_array($admission, $currentStudents)) continue;
+        if (empty($admission)) {
+            continue; // Skip blank spacer lines safely
+        }
+
+        // Skip if already exists in our active database tracking array
+        if (in_array($admission, $currentStudents)) {
+            $results[] = [
+                "email" => $emailField,
+                "status" => "skipped",
+                "message" => "Student already exists in database."
+            ];
+            continue;
+        }
 
         $result = [
-            "email" => $data['email'] ?? null,
+            "email" => $emailField,
             "status" => "pending",
             "message" => ""
         ];
 
+        // Write student record
         if ($admin->addStudent($pdo, [
-            "fullname" => $data["fullname"],
-            "email" => $data["email"],
+            "fullname" => $fullNameField,
+            "email" => $emailField,
             "admission_number" => $admission,
-            "class" => $data["class"]
+            "class" => $classField
         ])) {
             try {
-                $emailUtils = new EmailUtils($host);
-                $emailUtils->sendStudentSetupEmail($data['email'], $data['fullname'], $admission);
+                // Execute mailing transaction
+                $send = $emailUtils->sendStudentSetupEmail($emailField, $fullNameField, $admission);
+                
+                if ($send === false) {
+                     throw new Exception("Local mail delivery handler rejected distribution request.");
+                }
+
                 $result['status'] = "success";
                 $result['message'] = "Email sent successfully";
-            } catch (Exception $e) {
+
+            } catch (\Throwable $t) {
                 $result['status'] = "error";
-                $result['message'] = $e->getMessage();
+                $result['message'] = "Student added, but email failed: " . $t->getMessage();
             }
         } else {
             $result['status'] = "error";
-            $result['message'] = "Failed to add student";
+            $result['message'] = "Failed to add student record to database.";
         }
 
         $results[] = $result;
+        
+        // Minor pacing delay to protect connection limits on free hosting platforms
+        usleep(200000); 
     }
 
-    // Return results and summary
-    echo json_encode([
-        "status" => "completed",
-        "added" => count($results),
-        "deleted" => count($toDelete),
-        "results" => $results
-    ]);
+    // Clear output payload buffers and output clean validation logs
+    ob_clean();
+    header('Content-Type: application/json');
+    echo json_encode($results);
+    exit();
+
 } else {
-    echo json_encode(["status" => "error", "message" => "Invalid request"]);
-    exit;
+    header('Content-Type: application/json');
+    echo json_encode(["status" => "error", "message" => "Invalid request method"]);
+    exit();
 }

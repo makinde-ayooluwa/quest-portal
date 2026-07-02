@@ -21,50 +21,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($fullname) || empty($email) || empty($admission_number) || empty($class)) {
         unset($_SESSION["success"]);
         $_SESSION["error"] = "Fill out all required fields";
-        header("Location: add_student.php");
+        // header("Location: add_student.php");
+        // exit();
+    } 
+
+    // 1. FIRST: Check if an email has already been sent to this admission number
+    $alreadySent = $admin->checkIfEmailExists($pdo, $studentData['admission_number']);
+
+    if ($alreadySent) {
+        unset($_SESSION["success"]);
+        $_SESSION['error'] = "An account setup email has already been sent to " . htmlspecialchars($studentData['fullname']);
+        //header("Location: add_student.php");
+        //exit();
+    }
+
+    // 2. SECOND: Attempt to add the student record to the database
+    if (!$admin->addStudent($pdo, $studentData)) {
+        unset($_SESSION["success"]);
+        $_SESSION["error"] = "Error occurred while adding student. Student may exist already.";
+        //header("Location: add_student.php");
+        //exit();
+    } 
+    
+    // 3. THIRD: If student is added and no email was sent before, fire the email utility
+    unset($_SESSION["error"]);
+    
+    // NOTE: Verify your 'EmailUtils' constructor arguments. 
+    // If it requires your PDO database reference, use $pdo instead of $host.
+    $emailUtils = new EmailUtils($host); 
+    
+    $emailSent = $emailUtils->sendStudentSetupEmail(
+        $studentData['email'],
+        $studentData['fullname'],
+        $studentData['admission_number']
+    );
+
+    if ($emailSent) {
+        // 4. Log the email transaction to prevent future duplication
+        $admin->logSentEmail($pdo, $studentData['admission_number']);
+
+        $_SESSION["success"] = htmlspecialchars($studentData['fullname']) . " added and setup email sent successfully!";
+        //header("Location: add_student.php");
+        //exit();
     } else {
-        if (!$admin->addStudent($pdo, $studentData)) {
-            unset($_SESSION["success"]);
-            $_SESSION["error"] = "Error occured while adding student. Student may exist before";
-            header("Location: add_student.php");
-        } else {
-            unset($_SESSION["error"]);
-            $emailUtils = new EmailUtils($host);
-            $emailSent = $emailUtils->sendStudentSetupEmail(
-                $studentData['email'],
-                $studentData['fullname'],
-                $studentData['admission_number']
-            );
-            // 1. Check if an email has already been sent to this specific student
-            // Assuming your method takes the student's email or ID as an argument
-            $alreadySent = $admin->checkIfEmailExists($pdo, $studentData['admission_number']);
-
-            if ($alreadySent) {
-                // Stop here and set a warning message
-                $_SESSION['error'] = "An email has already been sent to " . $studentData['fullname'];
-                //header("Location: your_page.php");
-                exit();
-            } else {
-                // 2. If NOT already sent, proceed to send the email
-                // (Insert your PHPMailer or mail() logic here to set $emailSent)
-
-                if ($emailSent) {
-                    // 3. Log the email in your database so it can't be sent again next time
-                    $admin->logSentEmail($pdo, $studentData['admission_number']);
-
-                    // 4. Set your success message
-                    $_SESSION["success"] = $studentData['fullname'] . " added and email sent successfully";
-
-                    /* CRITICAL FIX: 
-          Do NOT run unset($_SESSION['success']) immediately here! 
-          If you unset it now, it will be deleted before your next page (HTML) can display it. 
-          Unset it at the very top of your HTML view page after rendering it.
-        */
-
-                    //header("Location: your_page.php");
-                    //exit();
-                }
-            }
-        }
+        // Handle network/SMTP connection failure visibility
+        $_SESSION["error"] = "Student record created, but the Email delivery failed. Check your SMTP configurations.";
+        //header("Location: add_student.php");
+        //exit();
     }
 }

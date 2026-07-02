@@ -103,6 +103,28 @@ class EmailUtils
         }
     }
 
+    /*public function sendStudentSetupEmail($toEmail, $fullName, $admissionNumber) {
+    $subject = "Quest Portal - Account Activation";
+    
+    // Set headers for HTML email delivery
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers .= "From: admin@quest-portal-free-test.42web.io" . "\r\n"; // Must match your domain area
+
+    $message = "
+    <html>
+    <body>
+        <h2>Welcome to Quest Portal, " . htmlspecialchars($fullName) . "!</h2>
+        <p>Your institutional admission profile has been verified successfully.</p>
+        <p><strong>Admission Number:</strong> " . htmlspecialchars($admissionNumber) . "</p>
+    </body>
+    </html>
+    ";
+
+    // Use native server utility tracking
+    return mail($toEmail, $subject, $message, $headers);
+}*/
+
     public function sendStaffSetupEmail($staffEmail, $staffName, $portalCode, $staffRole)
     {
         try {

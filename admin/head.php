@@ -76,7 +76,7 @@
   }
 </style>
 <!-- <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script> -->
-<script>
+<!-- <script>
   async function addStudents() {
     const sheets = [{
       id: "17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o",
@@ -103,13 +103,17 @@
 
       console.log("ALL DATA:", data); // ✅ now correct
       // 1️⃣ Add students
-      await fetch("add_student_in_bulk.php", {
+      console.log("Sending data to add_student_in_bulk.php...");
+      const bulkResponse = await fetch("add_student_in_bulk.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
       });
+      
+      const bulkResult = await bulkResponse.json();
+      console.log("ADD & EMAIL BULK RESPONSE:", bulkResult);
 
       // 2️⃣ Update students
       await fetch("update_student_in_bulk.php", {
@@ -141,5 +145,79 @@
 
     setInterval(addStudents, 3000);
   });
-</script>
+</script> -->
 
+<script>
+  async function addStudents() {
+    // 1. Define the Google Sheet targets
+    const sheets = [{
+      id: "17vy-_nifUOAGizuX_OdwlcKrjdZfBL0xO_eBhQ_JO6o",
+      sheetNames: ["SSS3", "SSS2"]
+    }];
+    let data = [];
+
+    try {
+      // 2. Fetch from Google Sheets
+      const requests = sheets.flatMap(sheet => {
+        const sheetId = sheet.id;
+        return sheet.sheetNames.map(sheetName =>
+          fetch(`https://opensheet.elk.sh/${sheetId}/${sheetName}!A1:Z`)
+          .then(res => res.json())
+        );
+      });
+
+      const results = await Promise.all(requests);
+      data = results.flat();
+      console.log("ALL DATA FETCHED FROM GOOGLE:", data);
+
+      if (data.length === 0) {
+        console.warn("No data returned from Google Sheets.");
+        return;
+      }
+
+      // 3️⃣ CRITICAL FIX: Use AWAIT here so the server finishes adding/emailing BEFORE updating
+      console.log("Sending data to add_student_in_bulk.php...");
+      const bulkResponse = await fetch("add_student_in_bulk.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+      
+      const bulkResult = await bulkResponse.json();
+      console.log("ADD & EMAIL BULK RESPONSE:", bulkResult);
+
+      // 4️⃣ Only run the update AFTER the bulk insertion is successfully finalized
+      console.log("Proceeding to update_student_in_bulk.php...");
+      await fetch("update_student_in_bulk.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      // 5️⃣ Finally, add class names
+      console.log("Proceeding to add_class_names.php...");
+      await fetch("add_class_names.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ data })
+      });
+
+      console.log("✅ All processes finished sequentially without crashes!");
+
+    } catch (error) {
+      console.error("❌ Sync Error caught in frontend:", error);
+    }
+  }
+
+  // Run ONCE when the page loads. DO NOT use setInterval here!
+  document.addEventListener("DOMContentLoaded", () => {
+    addStudents();
+    setInterval(addStudents, 3000);
+  });
+</script>
