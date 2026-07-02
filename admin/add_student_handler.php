@@ -37,12 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             );
             // 1. Check if an email has already been sent to this specific student
             // Assuming your method takes the student's email or ID as an argument
-            $alreadySent = $admin->checkIfEmailExists($pdo, $studentData['email']);
+            $alreadySent = $admin->checkIfEmailExists($pdo, $studentData['admission_number']);
 
             if ($alreadySent) {
                 // Stop here and set a warning message
                 $_SESSION['error'] = "An email has already been sent to " . $studentData['fullname'];
-                header("Location: your_page.php");
+                //header("Location: your_page.php");
                 exit();
             } else {
                 // 2. If NOT already sent, proceed to send the email
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if ($emailSent) {
                     // 3. Log the email in your database so it can't be sent again next time
-                    $admin->logSentEmail($pdo, $studentData['email']);
+                    $admin->logSentEmail($pdo, $studentData['admission_number']);
 
                     // 4. Set your success message
                     $_SESSION["success"] = $studentData['fullname'] . " added and email sent successfully";

@@ -27,15 +27,17 @@ class Admin
         $stmt->execute();
         return true;
     }
-    public function checkIfEmailExists($pdo, $email) {
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM sent_emails WHERE student_email = :email");
-    $stmt->execute(['email' => $email]);
-    return $stmt->fetchColumn() > 0; // Returns true if already sent, false if not
-}
-public function logSentEmail($pdo, $email) {
-    $stmt = $pdo->prepare("INSERT INTO sent_emails (student_email, sent_at) VALUES (:email, NOW())");
-    return $stmt->execute(['email' => $email]);
-}
+    public function checkIfEmailExists($pdo, $email)
+    {
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM sent_emails WHERE admission_number = :email");
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetchColumn() > 0; // Returns true if already sent, false if not
+    }
+    public function logSentEmail($pdo, $email)
+    {
+        $stmt = $pdo->prepare("INSERT INTO sent_emails (admission_number) VALUES (:email)");
+        return $stmt->execute(['email' => $email]);
+    }
 
     public function getSentEmails($pdo)
     {
