@@ -206,7 +206,7 @@ $classes = $admin->getClasses($pdo);
                                 <td>${student.fullname}</td>
                                 <td>${student.class}</td>
                                 <td>${student.email}</td>
-                                <td>${student.phone}</td>
+                                <!--<td>${student.phone}</td>-->
                                 <td>${student.admission_number}</td>
                                 <td>
                                     ${
