@@ -20,11 +20,19 @@ class EmailUtils
         $this->mail->Host = 'smtp.gmail.com';
         $this->mail->SMTPAuth = true;
         $this->mail->Username = 'makindeayooluwa604@gmail.com';
-        $this->mail->Password = 'ouxw ttjf mnxe gwf'; // App password
-        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $this->mail->Password = 'elqw cxbc cbxv pvdv'; // App password
+        //$this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $this->mail->Port = 587;
         $this->mail->setFrom('makindeayooluwa604@gmail.com', 'Quest Schools Portal');
         $this->mail->isHTML(true);
+        $this->mail->SMTPOptions = [
+            'ssl' => [
+                'verify_peer'       => false,
+                'verify_peer_name'  => false,
+                'allow_self_signed' => true
+            ]
+        ];
     }
 
     public function sendAdminPasswordResetEmail($email, $token, $user_type)
