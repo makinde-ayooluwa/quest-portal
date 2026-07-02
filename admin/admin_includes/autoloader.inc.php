@@ -1,45 +1,23 @@
 <?php
 
-/**
- * Universal autoloader
- * - Supports your existing .class.php files
- * - Supports PHPMailer namespace
- * - Does NOT affect other classes
- */
-
 spl_autoload_register(function ($className) {
-
+    // 1. Calculate the base directory
     $baseDir = dirname(__DIR__) . '/admin_classes/';
 
-    /*
-     =========================
-     PHPMailer (namespaced)
-     =========================
-     Class example:
-     PHPMailer\PHPMailer\PHPMailer
-     File:
-     admin_classes/PHPMailer/src/PHPMailer.php
-    */
-    if (strpos($className, 'PHPMailer\\PHPMailer\\') === 0) {
-        $relativeClass = str_replace('PHPMailer\\PHPMailer\\', '', $className);
-        $file = $baseDir . 'PHPMailer/src/' . $relativeClass . '.php';
+    // 2. Build the targeted file path
+    $file = $baseDir . $className . '.class.php';
+    $lowercaseFile = $baseDir . strtolower($className) . '.class.php';
 
-        if (file_exists($file)) {
-            require_once $file;
-        }
+    // 3. Check if the files exist. If found, require them.
+    if (file_exists($file)) {
+        require_once $file;
+        return;
+    } elseif (file_exists($lowercaseFile)) {
+        require_once $lowercaseFile;
         return;
     }
 
-    /*
-     =========================
-     Your normal classes
-     =========================
-     Example:
-     Student → admin_classes/Student.class.php
-    */
-    $file = $baseDir . $className . '.class.php';
+    // 4. If neither exists, print a clear diagnostic report before the crash
 
-    if (file_exists($file)) {
-        require_once $file;
-    }
+    exit();
 });
