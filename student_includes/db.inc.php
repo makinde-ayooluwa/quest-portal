@@ -9,11 +9,10 @@ if ($_SERVER["HTTP_HOST"] == "localhost") {
     $username = 'root';
     $password = '';
 } else {
-    $host = 'sql108.ezyro.com';
-    $database = "ezyro_42312822_questportal";
-    $username = 'ezyro_42312822';
-    $password = '75516cbdf2c78';
-    
+    $host = 'sql208.infinityfree.com';
+    $database = "if0_42312347_questportal";
+    $username = 'if0_42312347';
+    $password = 'ck7CW7SqPb';
 }
 $dsn = "mysql:host=$host;dbname=$database";
 
