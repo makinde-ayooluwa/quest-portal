@@ -114,7 +114,7 @@ include "student_includes/student.inc.php";
                 <?php
                 }
                 ?>
-                <div class="edit-card">
+                <div class="edit-card card-modern">
                     <div class="d-flex align-items-center mb-4">
                         <img src="<?php echo $studentData['picture']; ?>" alt="Student Avatar" class="profile-avatar me-3">
                         <div>
